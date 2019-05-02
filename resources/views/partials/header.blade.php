@@ -1,4 +1,4 @@
-<div class="app-header header-shadow bg-danger header-text-light">
+<div class="app-header header-shadow bg-asteroid header-text-light">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -27,6 +27,10 @@
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                     <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" tabindex="0" class="dropdown-item">Logout</button>
+                                    </form>
 
                                 </div>
                             </div>

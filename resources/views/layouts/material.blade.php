@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('material/assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!-- Custom CSS -->

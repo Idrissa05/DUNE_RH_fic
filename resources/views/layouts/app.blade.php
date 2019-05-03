@@ -10,18 +10,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('material/assets/images/favicon.png') }}">
     <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('material/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('material/assets/plugins/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('material/lite/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{ asset('material/lite/css/colors/blue-gray.css') }}" id="theme" rel="stylesheet">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
     </head>
 
 <body>
@@ -44,24 +38,9 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="{{ asset('material/assets/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap tether Core JavaScript -->
 
-
-<script src="{{ asset('material/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('material/assets/plugins/popper/popper.min.js') }}"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="{{ asset('material/lite/js/jquery.slimscroll.js') }}"></script>
-<!--Wave Effects -->
-<script src="{{ asset('material/lite/js/waves.js') }}"></script>
-<!--Menu sidebar -->
-<script src="{{ asset('material/lite/js/sidebarmenu.js') }}"></script>
-<!--stickey kit -->
-<script src="{{ asset('material/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
 <!--Custom JavaScript -->
-<script src="{{ asset('material/lite/js/custom.min.js') }}"></script>
-<script src="{{ asset('js/fileinput.min.js') }}"></script>
-<script src="{{ asset('material/assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 @if(Session::has('success'))
     <script>
         $(function () {

@@ -41339,101 +41339,100 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-/*
-Template Name: Material Pro Admin
-Author: Themedesigner
-Email: niravjoshi87@gmail.com
-File: js
-*/
 $(function () {
   "use strict";
 
   $(function () {
     $(".preloader").fadeOut();
-  }); // ============================================================== 
-  // This is for the top header part and sidebar part
-  // ==============================================================  
+  }), jQuery(document).on("click", ".mega-dropdown", function (i) {
+    i.stopPropagation();
+  });
 
-  var set = function set() {
-    var width = window.innerWidth > 0 ? window.innerWidth : this.screen.width;
-    var topOffset = 70;
-
-    if (width < 1170) {
-      $("body").addClass("mini-sidebar");
-      $('.navbar-brand span').hide();
-      $(".scroll-sidebar, .slimScrollDiv").css("overflow-x", "visible").parent().css("overflow", "visible");
-      $(".sidebartoggler i").addClass("ti-menu");
-    } else {
-      $("body").removeClass("mini-sidebar");
-      $('.navbar-brand span').show(); //$(".sidebartoggler i").removeClass("ti-menu");
-    }
-
-    var height = (window.innerHeight > 0 ? window.innerHeight : this.screen.height) - 1;
-    height = height - topOffset;
-    if (height < 1) height = 1;
-
-    if (height > topOffset) {
-      $(".page-wrapper").css("min-height", height + "px");
-    }
+  var i = function i() {
+    (window.innerWidth > 0 ? window.innerWidth : this.screen.width) < 1170 ? ($("body").addClass("mini-sidebar"), $(".navbar-brand span").hide(), $(".scroll-sidebar, .slimScrollDiv").css("overflow-x", "visible").parent().css("overflow", "visible"), $(".sidebartoggler i").addClass("ti-menu")) : ($("body").removeClass("mini-sidebar"), $(".navbar-brand span").show());
+    var i = (window.innerHeight > 0 ? window.innerHeight : this.screen.height) - 1;
+    (i -= 70) < 1 && (i = 1), i > 70 && $(".page-wrapper").css("min-height", i + "px");
   };
 
-  $(window).ready(set);
-  $(window).on("resize", set); // topbar stickey on scroll
-
-  $(".fix-header .topbar").stick_in_parent({}); // this is for close icon when navigation open in mobile view
-
-  $(".nav-toggler").click(function () {
-    $("body").toggleClass("show-sidebar");
-    $(".nav-toggler i").toggleClass("ti-menu");
-    $(".nav-toggler i").addClass("ti-close");
-  });
-  $(".sidebartoggler").on('click', function () {//$(".sidebartoggler i").toggleClass("ti-menu");
-  });
-  $(".search-box a, .search-box .app-search .srh-btn").on('click', function () {
+  $(window).ready(i), $(window).on("resize", i), $(".sidebartoggler").on("click", function () {
+    $("body").hasClass("mini-sidebar") ? ($("body").trigger("resize"), $(".scroll-sidebar, .slimScrollDiv").css("overflow", "hidden").parent().css("overflow", "visible"), $("body").removeClass("mini-sidebar"), $(".navbar-brand span").show()) : ($("body").trigger("resize"), $(".scroll-sidebar, .slimScrollDiv").css("overflow-x", "visible").parent().css("overflow", "visible"), $("body").addClass("mini-sidebar"), $(".navbar-brand span").hide());
+  }), $(".fix-header .topbar").stick_in_parent({}), $(".nav-toggler").click(function () {
+    $("body").toggleClass("show-sidebar"), $(".nav-toggler i").toggleClass("ti-menu"), $(".nav-toggler i").addClass("ti-close");
+  }), $(".sidebartoggler").on("click", function () {}), $(".search-box a, .search-box .app-search .srh-btn").on("click", function () {
     $(".app-search").toggle(200);
-  }); // ============================================================== 
-  // Auto select left navbar
-  // ============================================================== 
-
-  $(function () {
-    var url = window.location;
-    var element = $('ul#sidebarnav a').filter(function () {
-      return this.href == url;
-    }).addClass('active').parent().addClass('active');
-
-    while (true) {
-      if (element.is('li')) {
-        element = element.parent().addClass('in').parent().addClass('active');
-      } else {
-        break;
-      }
+  }), $(".right-side-toggle").click(function () {
+    $(".right-sidebar").slideDown(50), $(".right-sidebar").toggleClass("shw-rside");
+  }), $(".floating-labels .form-control").on("focus blur", function (i) {
+    $(this).parents(".form-group").toggleClass("focused", "focus" === i.type || this.value.length > 0);
+  }).trigger("blur"), $(function () {
+    for (var i = window.location, e = $("ul#sidebarnav a").filter(function () {
+      return this.href == i;
+    }).addClass("active").parent().addClass("active"); e.is("li");) {
+      e = e.parent().addClass("in").parent().addClass("active");
     }
-  }); // ============================================================== 
-  //tooltip
-  // ============================================================== 
-
-  $(function () {
+  }), $(function () {
     $('[data-toggle="tooltip"]').tooltip();
-  }); // ============================================================== 
-  // Sidebarmenu
-  // ============================================================== 
-
-  $(function () {
-    $('#sidebarnav').metisMenu();
-  }); // ============================================================== 
-  // Slimscrollbars
-  // ============================================================== 
-
-  $('.scroll-sidebar').slimScroll({
-    position: 'left',
+  }), $(function () {
+    $('[data-toggle="popover"]').popover();
+  }), $(function () {
+    $("#sidebarnav").metisMenu();
+  }), $(".scroll-sidebar").slimScroll({
+    position: "left",
     size: "5px",
-    height: '100%',
-    color: '#dcdcdc'
-  }); // ============================================================== 
-  // Resize all elements
-  // ============================================================== 
-
-  $("body").trigger("resize");
+    height: "100%",
+    color: "#dcdcdc"
+  }), $(".message-center").slimScroll({
+    position: "right",
+    size: "5px",
+    color: "#dcdcdc"
+  }), $(".aboutscroll").slimScroll({
+    position: "right",
+    size: "5px",
+    height: "80",
+    color: "#dcdcdc"
+  }), $(".message-scroll").slimScroll({
+    position: "right",
+    size: "5px",
+    height: "570",
+    color: "#dcdcdc"
+  }), $(".chat-box").slimScroll({
+    position: "right",
+    size: "5px",
+    height: "470",
+    color: "#dcdcdc"
+  }), $(".slimscrollright").slimScroll({
+    height: "100%",
+    position: "right",
+    size: "5px",
+    color: "#dcdcdc"
+  }), $("body").trigger("resize"), $(".list-task li label").click(function () {
+    $(this).toggleClass("task-done");
+  }), $("#to-recover").on("click", function () {
+    $("#loginform").slideUp(), $("#recoverform").fadeIn();
+  }), $('a[data-action="collapse"]').on("click", function (i) {
+    i.preventDefault(), $(this).closest(".card").find('[data-action="collapse"] i').toggleClass("ti-minus ti-plus"), $(this).closest(".card").children(".card-body").collapse("toggle");
+  }), $('a[data-action="expand"]').on("click", function (i) {
+    i.preventDefault(), $(this).closest(".card").find('[data-action="expand"] i').toggleClass("mdi-arrow-expand mdi-arrow-compress"), $(this).closest(".card").toggleClass("card-fullscreen");
+  }), $('a[data-action="close"]').on("click", function () {
+    $(this).closest(".card").removeClass().slideUp("fast");
+  }), $("#monthchart").sparkline([5, 6, 2, 9, 4, 7, 10, 12], {
+    type: "bar",
+    height: "35",
+    barWidth: "4",
+    resize: !0,
+    barSpacing: "4",
+    barColor: "#1e88e5"
+  }), $("#lastmonthchart").sparkline([5, 6, 2, 9, 4, 7, 10, 12], {
+    type: "bar",
+    height: "35",
+    barWidth: "4",
+    resize: !0,
+    barSpacing: "4",
+    barColor: "#7460ee"
+  }), $(".custom-file-input").on("change", function () {
+    var i = $(this).val();
+    $(this).next(".custom-file-label").html(i);
+  });
 });
 
 /***/ }),

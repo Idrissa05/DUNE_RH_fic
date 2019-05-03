@@ -9,143 +9,143 @@ class CreateForeignKeys extends Migration {
 	{
 		Schema::table('affectations', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('affectations', function(Blueprint $table) {
 			$table->foreign('etablissement_id')->references('id')->on('etablissements')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('etablissements', function(Blueprint $table) {
 			$table->foreign('inspection_id')->references('id')->on('inspections')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('etablissements', function(Blueprint $table) {
 			$table->foreign('localite_id')->references('id')->on('localites')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('etablissements', function(Blueprint $table) {
 			$table->foreign('type_etablissement_id')->references('id')->on('type_etablissements')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('classes', function(Blueprint $table) {
 			$table->foreign('category_id')->references('id')->on('categories')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('echelons', function(Blueprint $table) {
 			$table->foreign('classe_id')->references('id')->on('classes')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('conges', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('conjoints', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('deces', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('enfants', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('departements', function(Blueprint $table) {
 			$table->foreign('region_id')->references('id')->on('regions')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('inspections', function(Blueprint $table) {
 			$table->foreign('departement_id')->references('id')->on('departements')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('experiences', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('formations', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('formations', function(Blueprint $table) {
 			$table->foreign('ecole_formation_id')->references('id')->on('ecole_formations')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('formations', function(Blueprint $table) {
 			$table->foreign('diplome_id')->references('id')->on('diplomes')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('formations', function(Blueprint $table) {
 			$table->foreign('niveau_etude_id')->references('id')->on('niveau_etudes')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('formations', function(Blueprint $table) {
 			$table->foreign('equivalence_diplome_id')->references('id')->on('equivalence_diplomes')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('notations', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('reclassements', function(Blueprint $table) {
 			$table->foreign('angent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('retraites', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_matrimoniales', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_matrimoniales', function(Blueprint $table) {
 			$table->foreign('matrimoniale_id')->references('id')->on('matrimoniales')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_maladies', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_maladies', function(Blueprint $table) {
 			$table->foreign('maladie_id')->references('id')->on('maladies')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_echelons', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 		Schema::table('agent_echelons', function(Blueprint $table) {
 			$table->foreign('echelon_id')->references('id')->on('echelons')
-						->onDelete('restrict')
-						->onUpdate('restrict');
+						->onDelete('NO ACTION')
+						->onUpdate('NO ACTION');
 		});
 	}
 

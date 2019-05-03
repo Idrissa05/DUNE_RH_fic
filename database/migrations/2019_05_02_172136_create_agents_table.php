@@ -21,6 +21,7 @@ class CreateAgentsTable extends Migration {
 			$table->date('date_engagement')->nullable();
 			$table->string('type', 15);
 			$table->integer('nb_fille')->default('0');
+            $table->integer('nb_garcon')->default('0');
 			$table->integer('nb_conjoint')->default('0');
 			$table->timestamps();
 			$table->softDeletes();

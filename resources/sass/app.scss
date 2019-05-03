@@ -1,2 +1,16 @@
-@import '../../public/css/main.css';
 
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import "~jquery-toast-plugin/dist/jquery.toast.min.css";
+@import "./steps.css";
+@import "./multi-select.css";
+@import "~bootstrap-select/dist/css/bootstrap-select.css";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "./select2.css";
+@import "~@mdi/font/css/materialdesignicons.css";
+@import "~flatpickr/dist/ie.css";
+@import "~flatpickr/dist/flatpickr.css";
+@import "~flatpickr/dist/themes/material_blue.css";

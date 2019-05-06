@@ -20,9 +20,7 @@ class CreateAgentsTable extends Migration {
 			$table->string('ref_engagement', 20)->nullable()->index();
 			$table->date('date_engagement')->nullable();
 			$table->string('type', 15);
-			$table->integer('nb_fille')->default('0');
-            $table->integer('nb_garcon')->default('0');
-			$table->integer('nb_conjoint')->default('0');
+            $table->date('date_prise_service')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

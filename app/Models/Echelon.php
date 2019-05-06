@@ -15,6 +15,6 @@ class Echelon extends Model {
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent')->withPivot('ref_avancement','date_decision','observation');
+        return $this->belongsToMany('App\Models\Agent')->withPivot('category_id', 'classe_id','ref_avancement','date_decision','observation');
     }
 }

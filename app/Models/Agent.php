@@ -10,7 +10,7 @@ class Agent extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('matricule', 'nom', 'prenom', 'date_naiss', 'lieu_naiss', 'sexe', 'nationnalite', 'date_titularisation', 'ref_engagement', 'date_engagement', 'type', 'nb_fille', 'nb_conjoint');
+	protected $fillable = array('matricule', 'nom', 'prenom', 'date_naiss', 'lieu_naiss', 'sexe', 'nationnalite', 'date_titularisation', 'ref_engagement', 'date_engagement', 'type', 'date_prise_service');
 
 	public function conges()
 	{
@@ -74,7 +74,7 @@ class Agent extends Model {
 
     public function echelons()
     {
-        return $this->belongsToMany('App\Models\Echelon')->withPivot('ref_avancement','date_decision','observation');
+        return $this->belongsToMany('App\Models\Echelon')->withPivot('category_id', 'classe_id','ref_avancement','date_decision','observation');
     }
 
 }

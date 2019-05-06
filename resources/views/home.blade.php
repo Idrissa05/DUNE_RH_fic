@@ -6,6 +6,7 @@
        <div class="card-body">
            <div class="text-primary">Dashboard</div>
 
+           {!! form($form) !!}
 
            <table class="table" id="example">
                <thead>
@@ -31,3 +32,8 @@
     </div>
 @endsection
 
+@section('js')
+    <script>
+        $('#name').flatpickr()
+    </script>
+@endsection

@@ -10,5 +10,13 @@
             </ul>
         </li>
 
+        <li>
+            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings-outline"></i><span class="hide-menu">Configurations </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{{ route('category.index') }}">Catégories</a></li>
+
+            </ul>
+        </li>
+
     </ul>
 </nav>

@@ -2,10 +2,25 @@
 
 namespace App\Http\Controllers;
 
-class CategoryController extends Controller {
+use App\Forms\CategorieForm;
+use App\Models\Category;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 
-  public function index()
+class CategoryController extends Controller {
+    use FormBuilderTrait;
+
+  public function index(FormBuilder $formBuilder)
   {
+      $form = $formBuilder->create(CategorieForm::class, [
+          'method' => 'POST',
+          'url' => route('category.store')
+      ]);
+      $categories = Category::all();
+      return view('configurations.categories.index', [
+          'categories' => $categories,
+          'form' => $form
+      ]);
 
   }
 
@@ -18,25 +33,27 @@ class CategoryController extends Controller {
 
   public function store()
   {
+      $form = $this->form(CategorieForm::class);
+
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      Category::create($form->getRequest()->all());
+      return redirect()->route('category.index');
 
   }
 
-
-  public function show($id)
+  public function update(Category $category)
   {
+      $form = $this->form(CategorieForm::class);
 
-  }
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
 
-
-  public function edit($id)
-  {
-
-  }
-
-
-  public function update($id)
-  {
-
+      $category->update($form->getRequest()->all());
+      return redirect()->route('category.index');
   }
 
 

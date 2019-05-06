@@ -14,7 +14,8 @@
     <!-- Custom CSS -->
     <link href="{{ asset('material/lite/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{{ asset("material/lite/css/colors/blue-gray.css") }}" id="theme" rel="stylesheet">
+    <link href="{{ asset("material/lite/css/colors/blue.css") }}" id="theme" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body class="fix-header fix-sidebar text-dark font-weight-normal card-no-border mini-sidebar">

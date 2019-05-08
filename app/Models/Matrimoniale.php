@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matrimoniale extends Model {
 
 	protected $fillable = array('name');
+	public $timestamps = false;
 
 	public function agents()
 	{

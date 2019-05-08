@@ -34,7 +34,6 @@ class EtablissementForm extends Form
                 'query_builder' => function (TypeEtablissement $typeEtablissement) {
                     return $typeEtablissement->pluck('name', 'id');
                 }
-            ])
-            ->add('submit', 'submit', ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-primary']]);
+            ]);
     }
 }

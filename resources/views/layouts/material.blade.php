@@ -68,7 +68,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
 
-                        <li class="nav-item"><a href="" class="nav-link"> <i class="mdi mdi-bell text-white mdi-18px"></i>0</a> </li>
+                        <li class="nav-item"><a href="" class="nav-link"> <i class="mdi mdi-bell text-white mdi-18px"></i><span class='badge float-sm-right badge-danger'> 0 </span></a> </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('holder.png') }}" alt="user" class="profile-pic" /></a>

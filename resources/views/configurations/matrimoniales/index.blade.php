@@ -7,15 +7,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle etablissement</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->inspection_id) !!}
-                    {!! form_row($form->localite_id) !!}
-                    {!! form_row($form->type_etablissement_id) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -28,7 +25,7 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les établissements</h3>
+            <h3 class="text-center label-default">Les matrimoniales</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
             <p>&nbsp;</p>
@@ -39,36 +36,24 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Inspection</th> '
-                    <th>Localité</th>
-                    <th>Type</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($etablissements as $etablissement)
+                @foreach($matrimoniales as $matrimoniale)
                     <tr>
-                        <td>{{ $etablissement->id }}</td>
-                        <td>{{ $etablissement->name }}</td>
-                        <td>{{ $etablissement->inspection->name }}</td>
-                        <td>{{ $etablissement->localite->name }}</td>
-                        <td>{{ $etablissement->typeEtablissement->name }}</td>
+                        <td>{{ $matrimoniale->id }}</td>
+                        <td>{{ $matrimoniale->name }}</td>
                         <td>
-                            <button id="etablissement{{ $etablissement->id }}"
-                                    data-classe="{{ $etablissement->classe_id }}" data-name="{{ $etablissement->name }}"
-                                    data-inspection="{{ $etablissement->inspection_id }}"
-                                    data-localite="{{ $etablissement->localite_id }}"
-                                    data-type="{{ $etablissement->type_etablissement_id }}"
-                                    data-route="{{ route('etablissement.update', $etablissement) }}"
-                                    onclick="updateEtablissement({{ $etablissement->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-18px mdi-pencil"></i>
+                            <button id="matrimoniale{{ $matrimoniale->id }}" data-name="{{ $matrimoniale->name }}" data-route="{{ route('matrimoniale.update', $matrimoniale) }}"
+                                    onclick="updateMatrimoniale({{ $matrimoniale->id }})" class="btn btn-sm btn-outline-warning">
+                                <i class="mdi mdi-pencil"></i>
                             </button>
 
-
-                            <form action="{{ route('etablissement.destroy', $etablissement) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('matrimoniale.destroy', $matrimoniale) }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-18px mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -83,28 +68,19 @@
     <script>
         let $modal = $('#add')
         let $name = $('#name')
-        let $inspection = $('#inspection_id')
-        let $localite = $('#localite_id')
-        let $type = $('#type_etablissement_id')
         let $form = $('form')
 
 
-        function updateEtablissement(id) {
-            let $el = $('#etablissement'+id)
+        function updateMatrimoniale(id) {
+            let $el = $('#matrimoniale'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
-            $inspection.val($el.attr('data-inspection'))
-            $localite.val($el.attr('data-localite'))
-            $type.val($el.attr('data-type'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }
 
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
-            $inspection.val(null)
-            $localite.val(null)
-            $type.val(null)
             $form.attr('action', '')
             $('input[name="_method"]').remove()
         })

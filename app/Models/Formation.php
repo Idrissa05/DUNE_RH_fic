@@ -17,7 +17,7 @@ class Formation extends Model {
 		return $this->belongsTo('App\Models\Agent');
 	}
 
-	public function ecole_formation()
+	public function ecoleFormation()
 	{
 		return $this->belongsTo('App\Models\EcoleFormation');
 	}
@@ -27,12 +27,12 @@ class Formation extends Model {
 		return $this->belongsTo('App\Models\Diplome');
 	}
 
-	public function niveau_etude()
+	public function niveauEtude()
 	{
 		return $this->belongsTo('App\Models\NiveauEtude');
 	}
 
-	public function equivalence_diplome()
+	public function equivalenceDiplome()
 	{
 		return $this->belongsTo('App\Models\EquivalenceDiplome');
 	}

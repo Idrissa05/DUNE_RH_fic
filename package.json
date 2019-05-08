@@ -27,7 +27,7 @@
     "dependencies": {
         "@mdi/font": "^3.6.95",
         "axios": "^0.18.0",
-        "sticky-kit": "^1.1.3",
-        "bootstrap-select": "^1.13.3"
+        "bootstrap-select": "^1.13.3",
+        "sticky-kit": "^1.1.3"
     }
 }

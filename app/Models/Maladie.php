@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Maladie extends Model {
 
 	protected $fillable = array('name');
+	public $timestamps = false;
 
 	public function agents()
 	{

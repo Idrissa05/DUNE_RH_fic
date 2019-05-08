@@ -19,6 +19,13 @@
                 <li><a href="{{ route('localite.index') }}">Localités</a></li>
                 <li><a href="{{ route('typeetablissement.index') }}">Types d'établissement</a></li>
                 <li><a href="{{ route('inspection.index') }}">Inspections</a></li>
+                <li><a href="{{ route('etablissement.index') }}">Établissements</a></li>
+                <li><a href="{{ route('ecoleformation.index') }}">Écoles de formation</a></li>
+                <li><a href="{{ route('equivalencediplome.index') }}">Équivalence diplôme</a></li>
+                <li><a href="{{ route('niveauetude.index') }}">Niveaux étude</a></li>
+                <li><a href="{{ route('maladie.index') }}">Maladies</a></li>
+                <li><a href="{{ route('matrimoniale.index') }}">Matrimoniales</a></li>
+                <li><a href="{{ route('formation.index') }}">Formations</a></li>
 
             </ul>
         </li>

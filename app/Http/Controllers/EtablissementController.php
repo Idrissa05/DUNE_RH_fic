@@ -25,38 +25,41 @@ class EtablissementController extends Controller {
   }
 
 
-  public function create()
-  {
-
-  }
-
-
   public function store()
   {
+      $form = $this->form(EtablissementForm::class);
+
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      Etablissement::create($form->getRequest()->all());
+      return redirect()->route('etablissement.index');
 
   }
 
 
-  public function show($id)
+  public function update(Etablissement $etablissement)
   {
+      $form = $this->form(EtablissementForm::class);
 
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      $etablissement->update($form->getRequest()->all());
+      return redirect()->route('etablissement.index');
   }
 
 
-  public function edit($id)
+  public function destroy(Etablissement $etablissement)
   {
-
-  }
-
-
-  public function update($id)
-  {
-
-  }
-
-
-  public function destroy($id)
-  {
+      try {
+          $etablissement->delete();
+      }catch (\Exception $exception) {
+          return redirect()->route('etablissement.index')->with('danger', 'Suppression impossible');
+      }
+      return redirect()->route('etablissement.index')->with('succes', 'Opération effectuée !');
 
   }
 

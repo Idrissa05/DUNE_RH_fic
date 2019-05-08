@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Etablissement extends Model {
 
 	protected $fillable = array('name', 'inspection_id', 'localite_id', 'type_etablissement_id');
+	public $timestamps = false;
 
 	public function affectations()
 	{
@@ -23,7 +24,7 @@ class Etablissement extends Model {
 		return $this->belongsTo('App\Models\Localite');
 	}
 
-	public function type_etablissement()
+	public function typeEtablissement()
 	{
 		return $this->belongsTo('App\Models\TypeEtablissement');
 	}

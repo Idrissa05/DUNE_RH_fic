@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Echelon extends Model {
 
-	protected $fillable = array('name');
+	protected $fillable = ['name', 'classe_id', 'description'];
+	public $timestamps = false;
 
     public function classe()
     {

@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Forms\CategorieForm;
 use App\Models\Category;
-use Kris\LaravelFormBuilder\FormBuilder;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 
 class CategoryController extends Controller {
     use FormBuilderTrait;
 
-  public function index(FormBuilder $formBuilder)
+  public function index()
   {
-      $form = $formBuilder->create(CategorieForm::class, [
+      $form = $this->form(CategorieForm::class, [
           'method' => 'POST',
           'url' => route('category.store')
       ]);
@@ -21,12 +20,6 @@ class CategoryController extends Controller {
           'categories' => $categories,
           'form' => $form
       ]);
-
-  }
-
-
-  public function create()
-  {
 
   }
 
@@ -57,8 +50,16 @@ class CategoryController extends Controller {
   }
 
 
-  public function destroy($id)
+  public function destroy(Category $category)
   {
+      try {
+          $category->delete();
+      }catch (\Exception $exception) {
+          return redirect()->back()->with('danger', 'Impossible de supprimer la catégorie');
+      }
+
+      return redirect()->back()->with('success', 'Opération effectuée !');
+
 
   }
 

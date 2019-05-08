@@ -7,12 +7,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle catégorie</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle localité</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
-                   {!! form_row($form->name) !!}
+                    {!! form_row($form->name) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -25,7 +25,7 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les catégories</h3>
+            <h3 class="text-center label-default">Les localités</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
             <p>&nbsp;</p>
@@ -40,17 +40,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $categroy)
+                @foreach($localites as $localite)
                     <tr>
-                        <td>{{ $categroy->id }}</td>
-                        <td>{{ $categroy->name }}</td>
+                        <td>{{ $localite->id }}</td>
+                        <td>{{ $localite->name }}</td>
                         <td>
-                            <button id="category{{ $categroy->id }}" data-name="{{ $categroy->name }}" data-route="{{ route('category.update', $categroy) }}"
-                                    onclick="updateCategory({{ $categroy->id }})" class="btn btn-sm btn-outline-warning">
+                            <button id="localite{{ $localite->id }}" data-name="{{ $localite->name }}" data-route="{{ route('localite.update', $localite) }}"
+                                    onclick="updateLocalite({{ $localite->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('category.destroy', $categroy) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('localite.destroy', $localite) }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
@@ -71,8 +71,8 @@
         let $form = $('form')
 
 
-        function updateCategory(id) {
-            let $el = $('#category'+id)
+        function updateLocalite(id) {
+            let $el = $('#localite'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
             $form.attr('action', $el.attr('data-route'))

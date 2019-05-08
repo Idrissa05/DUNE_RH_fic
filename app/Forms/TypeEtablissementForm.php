@@ -9,7 +9,7 @@ class TypeEtablissementForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Nom type établissement'
+            'label' => 'Nom du type'
         ]);
     }
 }

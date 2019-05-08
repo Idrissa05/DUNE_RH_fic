@@ -18,7 +18,6 @@ class InspectionForm extends Form
                 'query_builder' => function (Departement $departement) {
                     return $departement->pluck('name', 'id');
                 }
-            ])
-            ->add('submit', 'submit', ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-primary']]);
+            ]);
     }
 }

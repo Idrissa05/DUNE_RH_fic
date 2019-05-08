@@ -19,7 +19,6 @@ class ClasseForm extends Form
                 'query_builder' => function (Category $category) {
                     return $category->pluck('name', 'id');
                 }
-            ])
-            ->add('submit', 'submit', ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-primary']]);
+            ]);
     }
 }

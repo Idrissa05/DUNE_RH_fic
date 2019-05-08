@@ -2,46 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Forms\EchelonForm;
+use App\Models\Echelon;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
+
 class EchelonController extends Controller {
+    use FormBuilderTrait;
 
   public function index()
   {
+      $form = $this->form(EchelonForm::class, [
+          'method' => 'POST',
+          'url' => route('echelon.store')
+      ]);
 
-  }
-
-
-  public function create()
-  {
+      $echelons = Echelon::all();
+      return view('configurations.echelons.index', [
+          'form' => $form,
+          'echelons' => $echelons
+      ]);
 
   }
 
 
   public function store()
   {
+      $form = $this->form(EchelonForm::class);
+
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      Echelon::create($form->getRequest()->all());
+      return redirect()->route('echelon.index');
 
   }
 
 
-  public function show($id)
+  public function update(Echelon $echelon)
   {
+      $form = $this->form(EchelonForm::class);
+
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      $echelon->update($form->getRequest()->all());
+      return redirect()->route('echelon.index');
 
   }
 
 
-  public function edit($id)
+  public function destroy(Echelon $echelon)
   {
-
-  }
-
-
-  public function update($id)
-  {
-
-  }
-
-
-  public function destroy($id)
-  {
+      try {
+          $echelon->delete();
+      }catch (\Exception $exception) {
+          return redirect()->route('echelon.index')->with('danger', 'Suppression impossible');
+      }
+      return redirect()->route('echelon.index')->with('success', 'Opération effectuée !');
 
   }
 

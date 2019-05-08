@@ -19,7 +19,6 @@ class EchelonForm extends Form
                 'query_builder' => function (Classe $classe) {
                     return $classe->pluck('name', 'id');
                 }
-            ])
-            ->add('submit', 'submit', ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-primary']]);
+            ]);
     }
 }

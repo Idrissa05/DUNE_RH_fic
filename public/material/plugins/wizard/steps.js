@@ -7,7 +7,7 @@ $(".tab-wizard").steps({
         finish: "Enregistrer"
     }
     , onFinished: function (event, currentIndex) {
-       swal("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+        $('#steps-uid-0').submit();
     }
 });
 
@@ -29,7 +29,7 @@ $(".validation-wizard").steps({
         return form.validate().settings.ignore = ":disabled", form.valid()
     }
     , onFinished: function (event, currentIndex) {
-         swal("Form Submitted!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+        $('#steps-uid-0').submit();
     }
 }), $(".validation-wizard").validate({
     ignore: "input[type=hidden]"

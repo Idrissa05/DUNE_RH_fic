@@ -4,9 +4,7 @@
         <li>
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Agents </span></a>
             <ul aria-expanded="false" class="collapse">
-                <li><a href="/addd">Liste agents</a></li>
-                <li> <a href="/jdhhd"></a>
-
+                <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
             </ul>
         </li>
 

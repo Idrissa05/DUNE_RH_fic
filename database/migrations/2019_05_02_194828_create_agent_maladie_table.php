@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAgentMaladiesTable extends Migration {
+class CreateAgentMaladieTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('agent_maladies', function(Blueprint $table) {
+		Schema::create('agent_maladie', function(Blueprint $table) {
 			$table->integer('agent_id')->unsigned();
 			$table->integer('maladie_id')->unsigned();
 			$table->string('observation')->nullable();
@@ -19,6 +19,6 @@ class CreateAgentMaladiesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('agent_maladies');
+		Schema::drop('agent_maladie');
 	}
 }

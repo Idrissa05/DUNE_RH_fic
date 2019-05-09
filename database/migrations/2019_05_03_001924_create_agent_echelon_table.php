@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAgentEchelonsTable extends Migration {
+class CreateAgentEchelonTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('agent_echelons', function(Blueprint $table) {
+		Schema::create('agent_echelon', function(Blueprint $table) {
 			$table->integer('agent_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('classe_id')->unsigned()->nullable();
@@ -22,6 +22,6 @@ class CreateAgentEchelonsTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('agent_echelons');
+		Schema::drop('agent_echelon');
 	}
 }

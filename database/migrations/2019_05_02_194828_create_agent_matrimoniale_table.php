@@ -3,11 +3,11 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAgentMatrimonialesTable extends Migration {
+class CreateAgentMatrimonialeTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('agent_matrimoniales', function(Blueprint $table) {
+		Schema::create('agent_matrimoniale', function(Blueprint $table) {
 			$table->integer('agent_id')->unsigned();
 			$table->integer('matrimoniale_id')->unsigned();
 			$table->date('date');
@@ -18,6 +18,6 @@ class CreateAgentMatrimonialesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('agent_matrimoniales');
+		Schema::drop('agent_matrimoniale');
 	}
 }

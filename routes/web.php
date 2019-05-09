@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/api/agents','AgentController@api')->name('api.agents');
 
 Route::resource('agent', 'AgentController');
 Route::resource('affectation', 'AffectationController');

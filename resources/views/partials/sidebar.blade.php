@@ -28,6 +28,7 @@
 
             </ul>
         </li>
+        <li> <a class="waves-effect waves-dark" href="{{ route('config.index') }}" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Système</span></a>
 
     </ul>
 </nav>

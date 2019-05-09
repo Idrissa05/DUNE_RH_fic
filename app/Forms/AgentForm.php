@@ -19,16 +19,16 @@ class AgentForm extends Form
     {
         $this
             ->add('matricule','text',[
-                'label'=>'N° Matricule *', 'rules' => 'required'
+                'label'=>'N° Matricule *', 'rules' => 'required|string'
             ])
             ->add('nom','text', [
-                'label'=>'Nom *', 'rules' => 'required'
+                'label'=>'Nom *', 'rules' => 'required|string'
             ])
             ->add('prenom','text', [
-                'label'=>'Prénom *', 'rules' => 'required'
+                'label'=>'Prénom *', 'rules' => 'required|string'
             ])
             ->add('date_naiss','date', [
-                'label'=>'Date de Naissance *', 'rules' => 'required',
+                'label'=>'Date de Naissance *', 'rules' => 'required|date',
             ])
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance'
@@ -39,18 +39,18 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('nationnalite','text', [
-                'label'=>'Nationnalité *', 'rules' => 'required'
+                'label'=>'Nationnalité *', 'rules' => 'required|string'
             ])
             ->add('matrimoniale_id', 'entity', [
                 'class' => Matrimoniale::class,
-                'label' => 'Situation Matrimoniale *', 'rules' => 'required',
+                'label' => 'Situation Matrimoniale *', 'rules' => 'required|integer',
                 'query_builder' => function (Matrimoniale $matrimoniale) {
                     return $matrimoniale->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date','date', [
-                'label'=>'A quelle date ? *', 'rules' => 'required'
+                'label'=>'A quelle date ? *', 'rules' => 'required|date'
             ])
             ->add('type','select', [
                 'label'=>'Type d\'Agent *', 'rules' => 'required',
@@ -61,14 +61,14 @@ class AgentForm extends Form
                 'label'=>'Reférence de l\'Engagement *', //'rules' => 'required',
             ])
             ->add('date_engagement','date', [
-                'label'=>'Date de l\'Engagement *', //'rules' => 'required',
+                'label'=>'Date de l\'Engagement *', 'rules' => 'date|nullable',
             ])
             ->add('date_titularisation','date', [
-                'label'=>'Date de Titularisation *', //'rules' => 'required',
+                'label'=>'Date de Titularisation *', 'rules' => 'date|nullable',
             ])
             ->add('category_id','entity', [
                 'class' => Category::class,
-                'label' => 'Catégorie *', 'rules' => 'required',
+                'label' => 'Catégorie *', 'rules' => 'required|integer',
                 'query_builder' => function (Category $category) {
                     return $category->pluck('name','id');
                 },
@@ -91,11 +91,11 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_prise_service','date', [
-                'label'=>'Date de Prise de Service *', //'rules' => 'required',
+                'label'=>'Date de Prise de Service *', 'rules' => 'date|nullable',
             ])
             ->add('ecole_formation_id','entity', [
                 'class' => EcoleFormation::class,
-                'label' => 'Dernier Etablissement Fréquenté *', 'rules' => 'required',
+                'label' => 'Dernier Etablissement Fréquenté *', 'rules' => 'required|integer',
                 'query_builder' => function (EcoleFormation $ecoleFormation) {
                     return $ecoleFormation->pluck('name','id');
                 },
@@ -103,7 +103,7 @@ class AgentForm extends Form
             ])
             ->add('niveau_etude_id','entity', [
                 'class' => NiveauEtude::class,
-                'label' => 'Niveau Etude *', 'rules' => 'required',
+                'label' => 'Niveau Etude *', 'rules' => 'required|integer',
                 'query_builder' => function (NiveauEtude $niveauEtude) {
                     return $niveauEtude->pluck('name','id');
                 },
@@ -111,7 +111,7 @@ class AgentForm extends Form
             ])
             ->add('diplome_id','entity', [
                 'class' => Diplome::class,
-                'label' => 'Diplôme Obtenu *', 'rules' => 'required',
+                'label' => 'Diplôme Obtenu *', 'rules' => 'required|integer',
                 'query_builder' => function (Diplome $diplome) {
                     return $diplome->pluck('name','id');
                 },
@@ -119,17 +119,17 @@ class AgentForm extends Form
             ])
             ->add('equivalence_diplome_id','entity', [
                 'class' => EquivalenceDiplome::class,
-                'label' => 'Equivalence Diplôme *', 'rules' => 'required',
+                'label' => 'Equivalence Diplôme *', 'rules' => 'required|integer',
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
                     return $equivalenceDiplome->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_debut','date', [
-                'label'=>'Date Début Formation *', 'rules' => 'required',
+                'label'=>'Date Début Formation *', 'rules' => 'required|date|before:date_fin',
             ])
             ->add('date_fin','date', [
-                'label'=>'Date Fin Formation *', 'rules' => 'required',
+                'label'=>'Date Fin Formation *', 'rules' => 'required|date|after:date_debut',
             ])
             ->add('maladie_id','entity', [
                 'class' => Maladie::class,

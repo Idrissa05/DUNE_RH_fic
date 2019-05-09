@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link href="{{ asset('material/lite/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{{ asset("material/lite/css/colors/purple.css") }}" id="theme" rel="stylesheet">
+    <link href="{{ asset("material/lite/css/colors/{$config->theme}") }}" id="theme" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -47,7 +47,7 @@
                             <img src="{{ asset('logo.jpeg') }}" width="50px" height="50px" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text --><span class="text-white shadow-sm">RHmanager</span> </a>
+                        <!-- Logo text --><span class="text-white shadow-sm">{{ $config->name }}</span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->

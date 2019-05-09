@@ -117,32 +117,32 @@ class CreateForeignKeys extends Migration {
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_matrimoniales', function(Blueprint $table) {
+		Schema::table('agent_matrimoniale', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_matrimoniales', function(Blueprint $table) {
+		Schema::table('agent_matrimoniale', function(Blueprint $table) {
 			$table->foreign('matrimoniale_id')->references('id')->on('matrimoniales')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_maladies', function(Blueprint $table) {
+		Schema::table('agent_maladie', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_maladies', function(Blueprint $table) {
+		Schema::table('agent_maladie', function(Blueprint $table) {
 			$table->foreign('maladie_id')->references('id')->on('maladies')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_echelons', function(Blueprint $table) {
+		Schema::table('agent_echelon', function(Blueprint $table) {
 			$table->foreign('agent_id')->references('id')->on('agents')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
 		});
-		Schema::table('agent_echelons', function(Blueprint $table) {
+		Schema::table('agent_echelon', function(Blueprint $table) {
 			$table->foreign('echelon_id')->references('id')->on('echelons')
 						->onDelete('NO ACTION')
 						->onUpdate('NO ACTION');
@@ -217,22 +217,22 @@ class CreateForeignKeys extends Migration {
 		Schema::table('retraites', function(Blueprint $table) {
 			$table->dropForeign('retraites_agent_id_foreign');
 		});
-		Schema::table('agent_matrimoniales', function(Blueprint $table) {
+		Schema::table('agent_matrimoniale', function(Blueprint $table) {
 			$table->dropForeign('agent_matrimoniales_agent_id_foreign');
 		});
-		Schema::table('agent_matrimoniales', function(Blueprint $table) {
+		Schema::table('agent_matrimoniale', function(Blueprint $table) {
 			$table->dropForeign('agent_matrimoniales_matrimoniale_id_foreign');
 		});
-		Schema::table('agent_maladies', function(Blueprint $table) {
+		Schema::table('agent_maladie', function(Blueprint $table) {
 			$table->dropForeign('agent_maladies_agent_id_foreign');
 		});
-		Schema::table('agent_maladies', function(Blueprint $table) {
+		Schema::table('agent_maladie', function(Blueprint $table) {
 			$table->dropForeign('agent_maladies_maladie_id_foreign');
 		});
-		Schema::table('agent_echelons', function(Blueprint $table) {
+		Schema::table('agent_echelon', function(Blueprint $table) {
 			$table->dropForeign('agent_echelons_agent_id_foreign');
 		});
-		Schema::table('agent_echelons', function(Blueprint $table) {
+		Schema::table('agent_echelon', function(Blueprint $table) {
 			$table->dropForeign('agent_echelons_echelon_id_foreign');
 		});
 	}

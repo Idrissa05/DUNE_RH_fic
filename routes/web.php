@@ -46,3 +46,6 @@ Route::resource('notation', 'NotationController');
 Route::resource('reclassement', 'ReclassementController');
 Route::resource('retraite', 'RetraiteController');
 Route::resource('typeetablissement', 'TypeEtablissementController');
+
+Route::get('/configs', 'ConfigController@index')->name('config.index');
+Route::put('/configs', 'ConfigController@update')->name('config.update');

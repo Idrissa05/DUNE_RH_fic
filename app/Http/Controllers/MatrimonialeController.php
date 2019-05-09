@@ -31,11 +31,11 @@ class MatrimonialeController extends Controller {
       $form = $this->form(MatrimonialeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Matrimoniale::create($form->getRequest()->all());
-      return redirect()->route('matrimoniale.index');
+      return redirect()->route('matrimoniale.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -45,11 +45,11 @@ class MatrimonialeController extends Controller {
       $form = $this->form(MatrimonialeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $matrimoniale->update($form->getRequest()->all());
-      return redirect()->route('matrimoniale.index');
+      return redirect()->route('matrimoniale.index')->with('success', 'Opération effectuée !');
 
   }
 

@@ -30,11 +30,11 @@ class EchelonController extends Controller {
       $form = $this->form(EchelonForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Echelon::create($form->getRequest()->all());
-      return redirect()->route('echelon.index');
+      return redirect()->route('echelon.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -44,11 +44,11 @@ class EchelonController extends Controller {
       $form = $this->form(EchelonForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $echelon->update($form->getRequest()->all());
-      return redirect()->route('echelon.index');
+      return redirect()->route('echelon.index')->with('success', 'Opération effectuée !');
 
   }
 

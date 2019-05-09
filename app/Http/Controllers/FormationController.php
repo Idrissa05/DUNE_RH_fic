@@ -17,7 +17,7 @@ class FormationController extends Controller {
       ]);
 
       $formations = Formation::all();
-      return view('configurations.formations.index', [
+      return view('pages.agents.formations.index', [
           'form' => $form,
           'formations' => $formations
       ]);

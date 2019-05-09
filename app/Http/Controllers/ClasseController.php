@@ -31,11 +31,11 @@ class ClasseController extends Controller {
       $form = $this->form(ClasseForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Classe::create($form->getRequest()->all());
-      return redirect()->route('classe.index');
+      return redirect()->route('classe.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -46,11 +46,11 @@ class ClasseController extends Controller {
       $form = $this->form(ClasseForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $classe->update($form->getRequest()->all());
-      return redirect()->route('classe.index');
+      return redirect()->route('classe.index')->with('success', 'Opération effectuée !');
 
 
   }
@@ -64,7 +64,7 @@ class ClasseController extends Controller {
           return redirect()->route('classe.index')->with('danger', 'Suppression impossible');
 
       }
-      return redirect()->route('classe.index')->with('Opération effectuée !');
+      return redirect()->route('classe.index')->with('success', 'Opération effectuée !');
 
   }
 

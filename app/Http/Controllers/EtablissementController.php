@@ -30,11 +30,11 @@ class EtablissementController extends Controller {
       $form = $this->form(EtablissementForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Etablissement::create($form->getRequest()->all());
-      return redirect()->route('etablissement.index');
+      return redirect()->route('etablissement.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -44,11 +44,11 @@ class EtablissementController extends Controller {
       $form = $this->form(EtablissementForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $etablissement->update($form->getRequest()->all());
-      return redirect()->route('etablissement.index');
+      return redirect()->route('etablissement.index')->with('success', 'Opération effectuée !');
   }
 
 
@@ -59,7 +59,7 @@ class EtablissementController extends Controller {
       }catch (\Exception $exception) {
           return redirect()->route('etablissement.index')->with('danger', 'Suppression impossible');
       }
-      return redirect()->route('etablissement.index')->with('succes', 'Opération effectuée !');
+      return redirect()->route('etablissement.index')->with('success', 'Opération effectuée !');
 
   }
 

@@ -34,11 +34,11 @@ class InspectionController extends Controller {
       $form = $this->form(InspectionForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Inspection::create($form->getRequest()->all());
-      return redirect()->route('inspection.index');
+      return redirect()->route('inspection.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -49,7 +49,7 @@ class InspectionController extends Controller {
       $form = $this->form(InspectionForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $inspection->update($form->getRequest()->all());

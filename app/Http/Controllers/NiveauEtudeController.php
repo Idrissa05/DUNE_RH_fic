@@ -29,11 +29,11 @@ class NiveauEtudeController extends Controller {
       $form = $this->form(NiveauEtudeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       NiveauEtude::create($form->getRequest()->all());
-      return redirect()->route('niveauetude.index');
+      return redirect()->route('niveauetude.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -43,11 +43,11 @@ class NiveauEtudeController extends Controller {
       $form = $this->form(NiveauEtudeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $niveauetude->update($form->getRequest()->all());
-      return redirect()->route('niveauetude.index');
+      return redirect()->route('niveauetude.index')->with('success', 'Opération effectuée !');
 
   }
 

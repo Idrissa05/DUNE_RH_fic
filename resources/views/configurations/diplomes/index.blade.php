@@ -7,7 +7,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle equivalence</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouveau diplôme</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
@@ -25,10 +25,9 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les equivalences</h3>
+            <h3 class="text-center label-default">Les diplômes</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-
             <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>
@@ -38,21 +37,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($equivalences as $equivalence)
+                @foreach($diplomes as $diplome)
                     <tr>
-                        <td>{{ $equivalence->id }}</td>
-                        <td>{{ $equivalence->name }}</td>
+                        <td>{{ $diplome->id }}</td>
+                        <td>{{ $diplome->name }}</td>
                         <td>
-                            <button id="equivalence{{ $equivalence->id }}" data-name="{{ $equivalence->name }}" data-route="{{ route('equivalencediplome.update', $equivalence) }}"
-                                    onclick="updateEquivalence({{ $equivalence->id }})" class="btn btn-sm btn-outline-warning">
+                            <button id="diplome{{ $diplome->id }}" data-name="{{ $diplome->name }}" data-route="{{ route('diplome.update', $diplome) }}"
+                                    onclick="updateDiplome({{ $diplome->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('equivalencediplome.destroy', $equivalence) }}" id="del{{ $equivalence->id }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('diplome.destroy', $diplome) }}" id="del{{ $diplome->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $equivalence->id }}')">
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $diplome->id }}')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>
@@ -73,8 +72,8 @@
         let $form = $('form')
 
 
-        function updateEquivalence(id) {
-            let $el = $('#equivalence'+id)
+        function updateDiplome(id) {
+            let $el = $('#diplome'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
             $form.attr('action', $el.attr('data-route'))

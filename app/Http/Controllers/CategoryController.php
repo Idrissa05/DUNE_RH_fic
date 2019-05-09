@@ -29,11 +29,11 @@ class CategoryController extends Controller {
       $form = $this->form(CategorieForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Category::create($form->getRequest()->all());
-      return redirect()->route('category.index');
+      return redirect()->route('category.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -42,11 +42,11 @@ class CategoryController extends Controller {
       $form = $this->form(CategorieForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $category->update($form->getRequest()->all());
-      return redirect()->route('category.index');
+      return redirect()->route('category.index')->with('success', 'Opération effectuée !');
   }
 
 

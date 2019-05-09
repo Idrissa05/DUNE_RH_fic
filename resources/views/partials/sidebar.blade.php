@@ -5,6 +5,7 @@
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Agents </span></a>
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
+                <li><a href="{{ route('formation.index') }}">Formations</a></li>
             </ul>
         </li>
 
@@ -23,7 +24,7 @@
                 <li><a href="{{ route('niveauetude.index') }}">Niveaux étude</a></li>
                 <li><a href="{{ route('maladie.index') }}">Maladies</a></li>
                 <li><a href="{{ route('matrimoniale.index') }}">Matrimoniales</a></li>
-                <li><a href="{{ route('formation.index') }}">Formations</a></li>
+                <li><a href="{{ route('diplome.index') }}">Diplômes</a></li>
 
             </ul>
         </li>

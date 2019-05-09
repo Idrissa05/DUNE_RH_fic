@@ -30,11 +30,11 @@ class EcoleFormationController extends Controller {
       $form = $this->form(EcoleFormationForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       EcoleFormation::create($form->getRequest()->all());
-      return redirect()->route('ecoleformation.index');
+      return redirect()->route('ecoleformation.index')->with('success', 'Opération effectuée !');
   }
 
 
@@ -43,11 +43,11 @@ class EcoleFormationController extends Controller {
       $form = $this->form(EcoleFormationForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $ecoleformation->update($form->getRequest()->all());
-      return redirect()->route('ecoleformation.index');
+      return redirect()->route('ecoleformation.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -60,7 +60,7 @@ class EcoleFormationController extends Controller {
       }catch (\Exception $exception) {
           return redirect()->route('ecoleformation.index')->with('danger', 'Suppression impossible');
       }
-      return redirect()->route('ecoleformation.index')->with('succes', 'Opération effectuée !');
+      return redirect()->route('ecoleformation.index')->with('success', 'Opération effectuée !');
 
   }
 

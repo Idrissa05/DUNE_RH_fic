@@ -30,11 +30,11 @@ class EquivalenceDiplomeController extends Controller {
       $form = $this->form(EquivalenceDiplomeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       EquivalenceDiplome::create($form->getRequest()->all());
-      return redirect()->route('equivalencediplome.index');
+      return redirect()->route('equivalencediplome.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -44,11 +44,11 @@ class EquivalenceDiplomeController extends Controller {
       $form = $this->form(EquivalenceDiplomeForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $equivalencediplome->update($form->getRequest()->all());
-      return redirect()->route('equivalencediplome.index');
+      return redirect()->route('equivalencediplome.index')->with('success', 'Opération effectuée !');
 
   }
 

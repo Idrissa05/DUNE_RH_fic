@@ -28,10 +28,8 @@
             <h3 class="text-center label-default">Les matrimoniales</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -68,6 +66,7 @@
 @endsection
 
 @section('js')
+    @include('dataTable')
     <script>
         let $modal = $('#add')
         let $name = $('#name')

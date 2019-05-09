@@ -30,11 +30,11 @@ class LocaliteController extends Controller {
       $form = $this->form(LocaliteForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       Localite::create($form->getRequest()->all());
-      return redirect()->route('localite.index');
+      return redirect()->route('localite.index')->with('success', 'Opération effectuée !');
 
   }
 
@@ -45,11 +45,11 @@ class LocaliteController extends Controller {
       $form = $this->form(LocaliteForm::class);
 
       if (!$form->isValid()) {
-          return redirect()->back()->withErrors($form->getErrors())->withInput();
+          return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
       }
 
       $localite->update($form->getRequest()->all());
-      return redirect()->route('localite.index');
+      return redirect()->route('localite.index')->with('success', 'Opération effectuée !');
 
   }
 

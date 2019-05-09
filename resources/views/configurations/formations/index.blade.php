@@ -80,10 +80,13 @@
                             </button>
 
 
-                            <form action="{{ route('formation.destroy', $formation) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('formation.destroy', $formation) }}" id="del{{ $formation->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-18px mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $formation->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

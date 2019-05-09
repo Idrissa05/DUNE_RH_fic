@@ -65,10 +65,13 @@
                             </button>
 
 
-                            <form action="{{ route('etablissement.destroy', $etablissement) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('etablissement.destroy', $etablissement) }}" id="del{{ $etablissement->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-18px mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $etablissement->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

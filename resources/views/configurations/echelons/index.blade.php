@@ -56,14 +56,17 @@
                                     data-description="{{ $echelon->description }}"
                                     data-route="{{ route('echelon.update', $echelon) }}"
                                     onclick="updateEchelon({{ $echelon->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
 
-                            <form action="{{ route('echelon.destroy', $echelon) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('echelon.destroy', $echelon) }}" id="del{{ $echelon->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $echelon->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

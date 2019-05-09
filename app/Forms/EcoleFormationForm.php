@@ -9,7 +9,8 @@ class EcoleFormationForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Nom de l\'école'
+            'label' => 'Nom de l\'école',
+            'rules' => 'required|string'
         ]);
     }
 }

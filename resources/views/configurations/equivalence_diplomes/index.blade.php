@@ -47,13 +47,16 @@
                         <td>
                             <button id="equivalence{{ $equivalence->id }}" data-name="{{ $equivalence->name }}" data-route="{{ route('equivalencediplome.update', $equivalence) }}"
                                     onclick="updateEquivalence({{ $equivalence->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('equivalencediplome.destroy', $equivalence) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('equivalencediplome.destroy', $equivalence) }}" id="del{{ $equivalence->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $equivalence->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

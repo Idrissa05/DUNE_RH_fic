@@ -50,10 +50,13 @@
                                 <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('niveauetude.destroy', $niveau) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('niveauetude.destroy', $niveau) }}" id="del{{ $niveau->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-18px mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $niveau->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

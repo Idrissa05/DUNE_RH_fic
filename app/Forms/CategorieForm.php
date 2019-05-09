@@ -9,7 +9,8 @@ class CategorieForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Nom catégorie'
+            'label' => 'Nom catégorie',
+            'rules' => 'required|string'
         ]);
     }
 }

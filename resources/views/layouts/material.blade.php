@@ -129,6 +129,7 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="loader"></div>
+                <br>
                @yield('content')
             </div>
             <!-- ============================================================== -->
@@ -137,7 +138,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer"> © {{ date('Y') }} add </footer>
+            <footer class="footer"> © {{ date('Y') }} RHManager </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
@@ -156,7 +157,7 @@
     <script src="{{ mix('js/app.js') }}"></script>
 
     <script src="{{ asset('js/fileinput.min.js') }}"></script>
-    <script src="{{ asset('js/ajax.js') }}"></script>
+    <script src="{{ asset('js/helpers.js') }}"></script>
 
 @yield('js')
     @if(Session::has('success'))

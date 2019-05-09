@@ -56,14 +56,17 @@
                                     data-description="{{ $classe->description }}"
                                     data-route="{{ route('classe.update', $classe) }}"
                                     onclick="updateClasse({{ $classe->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
 
-                            <form action="{{ route('classe.destroy', $classe) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('classe.destroy', $classe) }}" id="del{{ $classe->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $classe->id }}')"
+                                ><i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

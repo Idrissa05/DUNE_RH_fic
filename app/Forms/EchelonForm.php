@@ -10,11 +10,15 @@ class EchelonForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Nom échelon'
+            'label' => 'Nom échelon',
+            'rules' => 'required|string'
         ])
-            ->add('description', 'text')
+            ->add('description', 'text', [
+                'rules' => 'required|string'
+            ])
             ->add('classe_id', 'entity', [
                 'label' => 'Classe',
+                'rules' => 'required|integer',
                 'class' => Classe::class,
                 'query_builder' => function (Classe $classe) {
                     return $classe->pluck('name', 'id');

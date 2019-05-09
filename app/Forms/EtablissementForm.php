@@ -12,10 +12,13 @@ class EtablissementForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Nom établissement'
+            'label' => 'Nom établissement',
+            'rules' => 'required|string'
+
         ])
             ->add('inspection_id', 'entity', [
                 'label' => 'Inspection',
+                'rules' => 'required|integer',
                 'class' => Inspection::class,
                 'query_builder' => function (Inspection $inspection) {
                     return $inspection->pluck('name', 'id');
@@ -23,6 +26,7 @@ class EtablissementForm extends Form
             ])
             ->add('localite_id', 'entity', [
                 'label' => 'Localité',
+                'rules' => 'required|integer',
                 'class' => Localite::class,
                 'query_builder' => function (Localite $localite) {
                     return $localite->pluck('name', 'id');
@@ -30,6 +34,7 @@ class EtablissementForm extends Form
             ])
             ->add('type_etablissement_id', 'entity', [
                 'label' => 'Type établissement',
+                'rules' => 'required|integer',
                 'class' => TypeEtablissement::class,
                 'query_builder' => function (TypeEtablissement $typeEtablissement) {
                     return $typeEtablissement->pluck('name', 'id');

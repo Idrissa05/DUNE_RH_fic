@@ -56,10 +56,13 @@
                             </button>
 
 
-                            <form action="{{ route('inspection.destroy', $inspection) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('inspection.destroy', $inspection) }}" id="del{{ $inspection->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $inspection->id }}')">
+                                    <i class="mdi mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -47,13 +47,16 @@
                         <td>
                             <button id="localite{{ $localite->id }}" data-name="{{ $localite->name }}" data-route="{{ route('localite.update', $localite) }}"
                                     onclick="updateLocalite({{ $localite->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('localite.destroy', $localite) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('localite.destroy', $localite) }}" id="del{{ $localite->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $localite->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

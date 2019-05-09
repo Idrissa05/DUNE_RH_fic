@@ -47,13 +47,16 @@
                         <td>
                             <button id="typeEtablissement{{ $typeEtablissement->id }}" data-name="{{ $typeEtablissement->name }}" data-route="{{ route('typeetablissement.update', $typeEtablissement) }}"
                                     onclick="updateType({{ $typeEtablissement->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
-                            <form action="{{ route('typeetablissement.destroy', ['id' => $typeEtablissement]) }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('typeetablissement.destroy', ['id' => $typeEtablissement]) }}" id="del{{ $typeEtablissement->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button class="btn btn-outline-danger btn-sm"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $typeEtablissement->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

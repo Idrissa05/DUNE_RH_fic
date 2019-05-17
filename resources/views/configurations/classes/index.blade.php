@@ -13,7 +13,6 @@
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->category_id) !!}
                     {!! form_row($form->description) !!}
                 </div>
                 <div class="modal-footer">
@@ -36,7 +35,6 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Catégorie</th>
                     <th>Description</th>
                     <th>Actions</th>
                 </tr>
@@ -46,11 +44,9 @@
                     <tr>
                         <td>{{ $classe->id }}</td>
                         <td>{{ $classe->name }}</td>
-                        <td>{{ $classe->category->name }}</td>
                         <td>{{ $classe->description }}</td>
                         <td>
                             <button id="classe{{ $classe->id }}"
-                                    data-category="{{ $classe->category_id }}" data-name="{{ $classe->name }}"
                                     data-description="{{ $classe->description }}"
                                     data-route="{{ route('classe.update', $classe) }}"
                                     onclick="updateClasse({{ $classe->id }})" class="btn btn-sm btn-outline-warning">
@@ -81,7 +77,6 @@
         let $modal = $('#add')
         let $name = $('#name')
         let $description = $('#description')
-        let $category = $('#category_id')
         let $form = $('form')
 
 
@@ -90,7 +85,6 @@
             $modal.modal('show')
             $name.val($el.attr('data-name'))
             $description.val($el.attr('data-description'))
-            $category.val($el.attr('data-category'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }
@@ -98,7 +92,6 @@
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
             $description.val('')
-            $category.val(null)
             $form.attr('action', '')
             $('input[name="_method"]').remove()
         })

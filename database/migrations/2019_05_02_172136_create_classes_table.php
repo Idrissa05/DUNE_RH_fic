@@ -10,8 +10,7 @@ class CreateClassesTable extends Migration {
 		Schema::create('classes', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name', 40);
-			$table->string('description', 40);
-			$table->integer('category_id')->unsigned();
+			$table->string('description', 40)->nullable();
 		});
 	}
 

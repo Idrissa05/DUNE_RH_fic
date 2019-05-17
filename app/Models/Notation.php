@@ -11,9 +11,9 @@ class Notation extends Eloquent {
 	protected $dates = ['deleted_at'];
 	protected $fillable = array('date_debut', 'date_fin', 'note', 'responsable', 'observation', 'agent_id');
 
-	public function agent()
+	public function titulaire()
 	{
-		return $this->belongsTo('App\Models\Agent');
+		return $this->belongsTo('App\Models\Titulaire');
 	}
 
 }

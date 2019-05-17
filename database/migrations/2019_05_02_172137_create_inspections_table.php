@@ -10,7 +10,7 @@ class CreateInspectionsTable extends Migration {
 		Schema::create('inspections', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name', 30);
-			$table->integer('departement_id')->unsigned();
+			$table->integer('commune_id')->unsigned();
 		});
 	}
 

@@ -16,14 +16,6 @@ class ClasseForm extends Form
             ->add('description', 'text', [
                 'rules' => 'required|string'
 
-            ])
-            ->add('category_id', 'entity', [
-                'label' => 'Catégorie',
-                'rules' => 'required|integer',
-                'class' => Category::class,
-                'query_builder' => function (Category $category) {
-                    return $category->pluck('name', 'id');
-                }
             ]);
     }
 }

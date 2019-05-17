@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inspection extends Model {
 
-	protected $fillable = array('name', 'departement_id');
+	protected $fillable = array('name', 'commune_id');
 	public $timestamps = false;
 
-	public function etablissements()
+	public function secteurPedagogiques()
 	{
-		return $this->hasMany('App\Models\Etablissement');
+		return $this->hasMany('App\Models\SecteurPedagogique');
 	}
 
-	public function departement()
+	public function commune()
 	{
-		return $this->belongsTo('App\Models\Departement');
+		return $this->belongsTo('App\Models\Commune');
 	}
 
 }

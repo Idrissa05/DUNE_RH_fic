@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classe extends Model {
 
-	protected $fillable = ['name', 'description', 'category_id'];
+	protected $fillable = ['name', 'description'];
 
 	public $timestamps = false;
-
-    public function category()
-    {
-        return $this->belongsTo('App\Models\Category');
-    }
 
     public function echelons()
     {
         return $this->hasMany('App\Models\Echelon');
+    }
+
+    public function indices()
+    {
+        return $this->hasMany('App\Models\Indice');
+    }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Models\Grade');
     }
 
 }

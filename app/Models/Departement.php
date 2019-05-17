@@ -8,9 +8,9 @@ class Departement extends Model {
 
 	protected $fillable = array('name', 'region_id');
 
-	public function inspections()
+	public function communes()
 	{
-		return $this->hasMany('App\Models\Inspection');
+		return $this->hasMany('App\Models\Commune');
 	}
 
 	public function region()

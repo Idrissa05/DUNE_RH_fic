@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Tightenco\Parental\HasChildren;
 
 class Agent extends Model {
 
 	use SoftDeletes;
+    use HasChildren;
 
+    protected $childTypes = [
+        'Contractuel' => Contractuel::class,
+        'Titulaire' => Titulaire::class,
+    ];
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('matricule', 'nom', 'prenom', 'date_naiss', 'lieu_naiss', 'sexe', 'nationnalite', 'date_titularisation', 'ref_engagement', 'date_engagement', 'type', 'date_prise_service');
+
 
 	public function conges()
 	{
@@ -32,16 +38,6 @@ class Agent extends Model {
 		return $this->hasMany('App\Models\Experience');
 	}
 
-	public function reclassements()
-	{
-		return $this->hasMany('App\Models\Reclassement');
-	}
-
-	public function retraite()
-	{
-		return $this->hasOne('App\Models\Retraite');
-	}
-
 	public function dece()
 	{
 		return $this->hasOne('App\Models\Dece');
@@ -52,15 +48,25 @@ class Agent extends Model {
 		return $this->hasMany('App\Models\Enfant');
 	}
 
-	public function notations()
-	{
-		return $this->hasMany('App\Models\Notation');
-	}
-
 	public function formations()
 	{
 		return $this->hasMany('App\Models\Formation');
 	}
+
+    public function grades()
+    {
+        return $this->hasMany('App\Models\Grade');
+    }
+
+    public function cadre()
+    {
+        return $this->belongsTo('App\Models\Cadre');
+    }
+
+    public function corp()
+    {
+        return $this->belongsTo('App\Models\Corp');
+    }
 
 	public function maladies()
 	{
@@ -72,9 +78,8 @@ class Agent extends Model {
 		return $this->belongsToMany('App\Models\Matrimoniale')->withPivot('date')->withTimestamps();
 	}
 
-    public function echelons()
+    public function positions()
     {
-        return $this->belongsToMany('App\Models\Echelon')->withPivot('category_id', 'classe_id','ref_avancement','date_decision','observation');
+        return $this->belongsToMany('App\Models\Position')->withPivot('ref_decision','date_decision','date_effet','observation')->withTimestamps();
     }
-
 }

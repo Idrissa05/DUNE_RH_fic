@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Etablissement extends Model {
 
-	protected $fillable = array('name', 'inspection_id', 'localite_id', 'type_etablissement_id');
+	protected $fillable = array('name','secteur_pedagogique_id','type_etablissement_id');
 	public $timestamps = false;
 
 	public function affectations()
@@ -14,14 +14,9 @@ class Etablissement extends Model {
 		return $this->hasMany('App\Models\Affectation');
 	}
 
-	public function inspection()
+	public function secteurPedagogique()
 	{
-		return $this->belongsTo('App\Models\Inspection');
-	}
-
-	public function localite()
-	{
-		return $this->belongsTo('App\Models\Localite');
+		return $this->belongsTo('App\Models\SecteurPedagogique');
 	}
 
 	public function typeEtablissement()

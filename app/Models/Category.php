@@ -9,9 +9,19 @@ class Category extends Model {
 	protected $fillable = array('name');
 	public $timestamps = false;
 
-    public function classes()
+    public function corps()
     {
-        return $this->hasMany('App\Models\Classe');
+        return $this->hasMany('App\Models\Corp');
+    }
+
+    public function indices()
+    {
+        return $this->hasMany('App\Models\Indice');
+    }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Models\Grade');
     }
 
 }

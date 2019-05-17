@@ -18,4 +18,14 @@ class Echelon extends Model {
     {
         return $this->belongsToMany('App\Models\Agent')->withPivot('category_id', 'classe_id','ref_avancement','date_decision','observation');
     }
+
+    public function indices()
+    {
+        return $this->hasMany('App\Models\Indice');
+    }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Models\Grade');
+    }
 }

@@ -24,14 +24,6 @@ class EtablissementForm extends Form
                     return $inspection->pluck('name', 'id');
                 }
             ])
-            ->add('localite_id', 'entity', [
-                'label' => 'Localité',
-                'rules' => 'required|integer',
-                'class' => Localite::class,
-                'query_builder' => function (Localite $localite) {
-                    return $localite->pluck('name', 'id');
-                }
-            ])
             ->add('type_etablissement_id', 'entity', [
                 'label' => 'Type établissement',
                 'rules' => 'required|integer',

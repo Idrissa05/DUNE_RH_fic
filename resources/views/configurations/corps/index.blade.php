@@ -7,14 +7,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle etablissement</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouveau corp</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->inspection_id) !!}
-                    {!! form_row($form->type_etablissement_id) !!}
+                    {!! form_row($form->abreviation) !!}
+                    {!! form_row($form->category_id) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -27,43 +27,41 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les établissements</h3>
+            <h3 class="text-center label-default">Les corps</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-
             <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Inspection</th> '
-                    <th>Type</th>
+                    <th>Abréviation</th>
+                    <th>Catégorie</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($etablissements as $etablissement)
+                @foreach($corps as $corp)
                     <tr>
-                        <td>{{ $etablissement->id }}</td>
-                        <td>{{ $etablissement->name }}</td>
-                        <td>{{ $etablissement->inspection->name }}</td>
-                        <td>{{ $etablissement->typeEtablissement->name }}</td>
+                        <td>{{ $corp->id }}</td>
+                        <td>{{ $corp->name }}</td>
+                        <td>{{ $corp->abreviation }}</td>
+                        <td>{{ $corp->category->name }}</td>
                         <td>
-                            <button id="etablissement{{ $etablissement->id }}"
-                                    data-classe="{{ $etablissement->classe_id }}" data-name="{{ $etablissement->name }}"
-                                    data-inspection="{{ $etablissement->inspection_id }}"
-                                    data-type="{{ $etablissement->type_etablissement_id }}"
-                                    data-route="{{ route('etablissement.update', $etablissement) }}"
-                                    onclick="updateEtablissement({{ $etablissement->id }})" class="btn btn-sm btn-outline-warning">
+                            <button id="corp{{ $corp->id }}"
+                                    data-category="{{ $corp->category_id }}" data-name="{{ $corp->name }}"
+                                    data-abreviation="{{ $corp->abreviation }}"
+                                    data-route="{{ route('corp.update', $corp) }}"
+                                    onclick="updateCorp({{ $corp->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
 
-                            <form action="{{ route('etablissement.destroy', $etablissement) }}" id="del{{ $etablissement->id }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('corp.destroy', $corp) }}" id="del{{ $corp->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $etablissement->id }}')">
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $corp->id }}')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>
@@ -81,25 +79,25 @@
     <script>
         let $modal = $('#add')
         let $name = $('#name')
-        let $inspection = $('#inspection_id')
-        let $type = $('#type_etablissement_id')
+        let $abreviation = $('#abreviation')
+        let $category = $('#category_id')
         let $form = $('form')
 
 
-        function updateEtablissement(id) {
-            let $el = $('#etablissement'+id)
+        function updateCorp(id) {
+            let $el = $('#corp'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
-            $inspection.val($el.attr('data-inspection'))
-            $type.val($el.attr('data-type'))
+            $abreviation.val($el.attr('data-abreviation'))
+            $category.val($el.attr('data-category'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }
 
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
-            $inspection.val(null)
-            $type.val(null)
+            $abreviation.val('')
+            $category.val(null)
             $form.attr('action', '')
             $('input[name="_method"]').remove()
         })

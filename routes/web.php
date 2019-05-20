@@ -32,7 +32,6 @@ Route::resource('enfant', 'EnfantController');
 Route::resource('region', 'RegionController');
 Route::resource('departement', 'DepartementController');
 Route::resource('inspection', 'InspectionController');
-Route::resource('localite', 'LocaliteController');
 Route::resource('experience', 'ExperienceController');
 Route::resource('formation', 'FormationController');
 Route::resource('ecoleformation', 'EcoleFormationController');
@@ -45,6 +44,8 @@ Route::resource('notation', 'NotationController');
 Route::resource('reclassement', 'ReclassementController');
 Route::resource('retraite', 'RetraiteController');
 Route::resource('typeetablissement', 'TypeEtablissementController');
+
+Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
 
 Route::get('/configs', 'ConfigController@index')->name('config.index');
 Route::put('/configs', 'ConfigController@update')->name('config.update');

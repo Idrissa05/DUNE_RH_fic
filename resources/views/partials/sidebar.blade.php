@@ -5,6 +5,7 @@
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Agents </span></a>
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
+                <li><a href="{{ route('conge.index') }}">Congés</a></li>
                 <li><a href="{{ route('formation.index') }}">Formations</a></li>
             </ul>
         </li>
@@ -15,7 +16,6 @@
                 <li><a href="{{ route('category.index') }}">Catégories</a></li>
                 <li><a href="{{ route('classe.index') }}">Classes</a></li>
                 <li><a href="{{ route('echelon.index') }}">Échelons</a></li>
-                <li><a href="{{ route('localite.index') }}">Localités</a></li>
                 <li><a href="{{ route('typeetablissement.index') }}">Types d'établissement</a></li>
                 <li><a href="{{ route('inspection.index') }}">Inspections</a></li>
                 <li><a href="{{ route('etablissement.index') }}">Établissements</a></li>

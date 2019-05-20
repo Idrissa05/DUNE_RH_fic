@@ -81,6 +81,7 @@ INSERT INTO niveau_etudes (id, name) VALUES
 INSERT INTO users (name, password, role, created_at, updated_at) VALUES
 ('soul', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 'Administrateur', NULL, NULL);
 
+
 INSERT INTO cadres (abreviation, name) VALUES
 ('AD','ADMINIST.GENER.'),
 ('AG','AGRICULTURE'),

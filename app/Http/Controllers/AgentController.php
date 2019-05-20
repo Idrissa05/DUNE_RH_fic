@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Forms\AgentForm;
 use App\Models\Agent;
-use App\Models\Equipement;
 use App\Models\Formation;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -14,9 +14,25 @@ class AgentController extends Controller {
 
     use FormBuilderTrait;
 
-    public function index()
+    public function index(Request $request)
   {
-      return view('pages.agents.index');
+      if ($request->ajax()) {
+          $agents = Agent::latest()->get();
+          return Datatables::of($agents)
+              ->addIndexColumn()
+              ->addColumn('action', function($agents){
+                  return '<a onclick="editData('. $agents->id .')" class="btn btn-sm btn-outline-warning" title="Modifier"><i class="mdi mdi-18px mdi-pencil"></i></a>'.' '.
+                      '<a onclick="deleteData('. $agents->id .')" class="btn btn-outline-danger btn-sm" title="Supprimer"><i class="mdi mdi-18px mdi-trash-can"></i></a>';
+              })
+              ->rawColumns(['action'])->make(true);
+      }
+
+      $form = $this->form(AgentForm::class, [
+          'method' => 'POST',
+          'url' => route('agent.store'),
+          'class' => 'tab-wizard wizard-circle'
+      ]);
+      return view('pages.agents.index', compact('form'));
   }
 
 
@@ -81,16 +97,6 @@ class AgentController extends Controller {
   public function destroy($id)
   {
 
-  }
-
-  public function api(){
-    $agents = Agent::all();
-    return DataTables::of($agents)
-        ->addColumn('action', function($agents){
-            return '<a onclick="" class="btn btn-outline-warning btn-xs" title="Modifier"><i class="mdi mdi-pencil"></i></a> '.
-                '<a onclick="" class="btn btn-outline-danger btn-xs" title="Supprimer"><i class="mdi mdi-trash-can"></i></a>';
-        })
-        ->rawColumns(['action'])->make(true);
   }
 
 }

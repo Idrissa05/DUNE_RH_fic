@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ $secteurPedagogique->id }}</td>
                         <td>{{ $secteurPedagogique->name }}</td>
-                        <td>{{ $secteurPedagogique->departement->name }}</td>
+                        <td>{{ $secteurPedagogique->inspection->name }}</td>
                         <td>
                             <button id="secteurPedagogique{{ $secteurPedagogique->id }}"
                                     data-inspection="{{ $secteurPedagogique->inspection_id }}" data-name="{{ $secteurPedagogique->name }}"

@@ -14,7 +14,7 @@ class SecteurPedagogique extends Model
         return $this->hasMany('App\Models\Etablissement');
     }
 
-    public function inpection()
+    public function inspection()
     {
         return $this->belongsTo('App\Models\Inspection');
     }

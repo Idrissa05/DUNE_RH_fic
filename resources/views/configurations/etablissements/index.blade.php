@@ -13,7 +13,7 @@
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->inspection_id) !!}
+                    {!! form_row($form->secteur_pedagogique_id) !!}
                     {!! form_row($form->type_etablissement_id) !!}
                 </div>
                 <div class="modal-footer">
@@ -36,7 +36,7 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Inspection</th> '
+                    <th>Secteur pédagogique</th> '
                     <th>Type</th>
                     <th>Actions</th>
                 </tr>
@@ -46,7 +46,7 @@
                     <tr>
                         <td>{{ $etablissement->id }}</td>
                         <td>{{ $etablissement->name }}</td>
-                        <td>{{ $etablissement->inspection->name }}</td>
+                        <td>{{ $etablissement->secteurPedagogique->name }}</td>
                         <td>{{ $etablissement->typeEtablissement->name }}</td>
                         <td>
                             <button id="etablissement{{ $etablissement->id }}"

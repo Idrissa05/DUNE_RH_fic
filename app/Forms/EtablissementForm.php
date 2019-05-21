@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use App\Models\Inspection;
 use App\Models\Localite;
+use App\Models\SecteurPedagogique;
 use App\Models\TypeEtablissement;
 use Kris\LaravelFormBuilder\Form;
 
@@ -16,12 +17,12 @@ class EtablissementForm extends Form
             'rules' => 'required|string'
 
         ])
-            ->add('inspection_id', 'entity', [
-                'label' => 'Inspection',
+            ->add('secteur_pedagogique_id', 'entity', [
+                'label' => 'Secteur pédagogique',
                 'rules' => 'required|integer',
-                'class' => Inspection::class,
-                'query_builder' => function (Inspection $inspection) {
-                    return $inspection->pluck('name', 'id');
+                'class' => SecteurPedagogique::class,
+                'query_builder' => function (SecteurPedagogique $secteurPedagogique) {
+                    return $secteurPedagogique->pluck('name', 'id');
                 }
             ])
             ->add('type_etablissement_id', 'entity', [

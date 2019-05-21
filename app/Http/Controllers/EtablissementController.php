@@ -16,7 +16,7 @@ class EtablissementController extends Controller {
           'url' => route('etablissement.store')
       ]);
 
-      $etablissements = Etablissement::with('inspection', 'localite', 'typeEtablissement')->get();
+      $etablissements = Etablissement::with('secteurPedagogique', 'typeEtablissement')->get();
       return view('configurations.etablissements.index', [
           'form' => $form,
           'etablissements' => $etablissements

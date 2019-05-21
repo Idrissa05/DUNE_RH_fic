@@ -16,7 +16,7 @@ class InspectionController extends Controller {
           'url' => route('inspection.store')
       ]);
 
-      $inspections = Inspection::with('departement')->get();
+      $inspections = Inspection::with('commune')->get();
 
       return view('configurations.inspections.index', [
           'form' => $form,

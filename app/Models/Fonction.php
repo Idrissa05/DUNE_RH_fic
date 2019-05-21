@@ -9,8 +9,8 @@ class Fonction extends Model
     protected $fillable = ['name'];
     public $timestamps = false;
 
-    public function titulaire()
+    public function agent()
     {
-        return $this->hasMany('App\Models\Titulaire');
+        return $this->hasMany('App\Models\Agent');
     }
 }

@@ -9,7 +9,7 @@ class CreateExperiencesTable extends Migration {
 	{
 		Schema::create('experiences', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('oragnisation', 40);
+			$table->string('organisation', 40);
 			$table->date('date_debut');
 			$table->date('date_fin');
 			$table->string('fonction', 40);

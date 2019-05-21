@@ -12,9 +12,9 @@ class Retraite extends Model {
 	protected $dates = ['deleted_at'];
 	protected $fillable = array('date', 'ref_decision', 'date_decision', 'observation', 'agent_id');
 
-	public function titulaire()
+	public function agent()
 	{
-		return $this->belongsTo('App\Models\Titulaire');
+		return $this->belongsTo('App\Models\Agent');
 	}
 
 }

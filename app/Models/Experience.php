@@ -10,7 +10,7 @@ class Experience extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('oragnisation', 'date_debut', 'date_fin', 'fonction', 'tache', 'observation', 'agent_id');
+	protected $fillable = array('organisation', 'date_debut', 'date_fin', 'fonction', 'tache', 'observation', 'agent_id');
 
 	public function agent()
 	{

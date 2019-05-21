@@ -108,7 +108,7 @@ class CongeController extends Controller {
                                 '.method_field('DELETE').'
                                 '.csrf_field().'
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation("del'.$conge->id.'")">
+                                onclick="myHelpers.deleteConfirmation(\'del'.$conge->id.'\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>';

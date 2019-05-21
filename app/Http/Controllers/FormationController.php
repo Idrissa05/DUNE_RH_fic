@@ -84,7 +84,7 @@ class FormationController extends Controller {
               return $formation->date_debut->format('d/m/Y');
           })
           ->addColumn('date_fin', function ($formation){
-              return $formation->date_debut->format('d/m/Y');
+              return $formation->date_fin->format('d/m/Y');
           })
           ->addColumn('ecoleFormation', function ($formation){
               return $formation->ecoleFormation->name;
@@ -116,7 +116,7 @@ class FormationController extends Controller {
                                 '.method_field('DELETE').'
                                 '.csrf_field().'
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation("del'.$formation->id.'")">
+                                onclick="myHelpers.deleteConfirmation(\'del'.$formation->id.'\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>';

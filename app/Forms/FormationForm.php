@@ -15,11 +15,11 @@ class FormationForm extends Form
     {
         $this->add('date_debut', 'text', [
             'label' => 'Date début',
-            'rules' => 'required|date'
+            'rules' => 'required|date|before:date_fin'
 
         ])
             ->add('date_fin', 'text', [
-                'rules' => 'required|date'
+                'rules' => 'required|date|after:date_debut'
             ])
             ->add('agent_id', 'entity', [
                 'label' => 'Agent',

@@ -5,9 +5,15 @@
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Agents </span></a>
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
+                <li><a href="{{ route('affectation.index') }}">Affectations</a></li>
                 <li><a href="{{ route('conge.index') }}">Congés</a></li>
                 <li><a href="{{ route('conjoint.index') }}">Conjoints</a></li>
+                <li><a href="{{ route('deces.index') }}">Decès</a></li>
+                <li><a href="{{ route('enfant.index') }}">Enfants</a></li>
+                <li><a href="{{ route('experience.index') }}">Expériences</a></li>
                 <li><a href="{{ route('formation.index') }}">Formations</a></li>
+                <li><a href="{{ route('notation.index') }}">Notations</a></li>
+                <li><a href="{{ route('retraite.index') }}">Retraites</a></li>
             </ul>
         </li>
 

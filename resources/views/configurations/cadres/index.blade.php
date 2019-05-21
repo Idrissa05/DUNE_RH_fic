@@ -7,13 +7,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle inspection</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouveau cadre</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->commune_id) !!}
+                    {!! form_row($form->abreviation) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -26,7 +26,7 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les inspections</h3>
+            <h3 class="text-center label-default">Les cadres</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
             <table class="table table-bordered text-center" id="myTable">
@@ -34,31 +34,32 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Commune</th>
+                    <th>Abréviation</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($inspections as $inspection)
+                @foreach($cadres as $cadre)
                     <tr>
-                        <td>{{ $inspection->id }}</td>
-                        <td>{{ $inspection->name }}</td>
-                        <td>{{ $inspection->commune->name }}</td>
+                        <td>{{ $cadre->id }}</td>
+                        <td>{{ $cadre->name }}</td>
+                        <td>{{ $cadre->abreviation }}</td>
                         <td>
-                            <button id="inspection{{ $inspection->id }}"
-                                    data-commune="{{ $inspection->commune_id }}" data-name="{{ $inspection->name }}"
-                                    data-route="{{ route('inspection.update', $inspection) }}"
-                                    onclick="updateInspection({{ $inspection->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-pencil"></i>
+                            <button id="cadre{{ $cadre->id }}"
+                                    data-abreviation="{{ $cadre->abreviation }}"
+                                    data-name="{{ $cadre->name }}"
+                                    data-route="{{ route('cadre.update', $cadre) }}"
+                                    onclick="updateCadre({{ $cadre->id }})" class="btn btn-sm btn-outline-warning">
+                                <i class="mdi mdi-18px mdi-pencil"></i>
                             </button>
 
 
-                            <form action="{{ route('inspection.destroy', $inspection) }}" id="del{{ $inspection->id }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('cadre.destroy', $cadre) }}" id="del{{ $cadre->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $inspection->id }}')">
-                                    <i class="mdi mdi-trash-can-outline"></i>
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $cadre->id }}')">
+                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>
                         </td>
@@ -75,22 +76,22 @@
     <script>
         let $modal = $('#add')
         let $name = $('#name')
-        let $commune = $('#commune_id')
+        let $abreviation = $('#abreviation')
         let $form = $('form')
 
 
-        function updateInspection(id) {
-            let $el = $('#inspection'+id)
+        function updateCadre(id) {
+            let $el = $('#cadre'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
-            $commune.val($el.attr('data-commune'))
+            $abreviation.val($el.attr('data-abreviation'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }
 
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
-            $departement.val(null)
+            $abreviation.val('')
             $form.attr('action', '')
             $('input[name="_method"]').remove()
         })

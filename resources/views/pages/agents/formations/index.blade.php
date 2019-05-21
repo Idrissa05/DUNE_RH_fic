@@ -45,6 +45,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Agent</th>
                     <th>Date début</th>
                     <th>Date fin</th> '
                     <th>Écolde de formation</th>
@@ -54,50 +55,26 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($formations as $formation)
-                    <tr>
-                        <td>{{ $formation->id }}</td>
-                        <td>{{ $formation->date_debut }}</td>
-                        <td>{{ $formation->date_fin }}</td>
-                        <td>{{ $formation->ecoleFormation->name }}</td>
-                        <td>{{ $formation->diplome->name }}</td>
-                        <td>{{ $formation->niveauEtude->name }}</td>
-                        <td>{{ $formation->equivalenceDiplome->name }}</td>
-                        <td>
-                            <button id="formation{{ $formation->id }}"
-                                    data-debut="{{ $formation->date_debut }}"
-                                    data-fin="{{ $formation->date_fin }}"
-                                    data-ecole="{{ $formation->ecole_formation_id }}"
-                                    data-diplome="{{ $formation->diplome_id }}"
-                                    data-niveau="{{ $formation->niveau_etude_id }}"
-                                    data-equivalence="{{ $formation->equivalence_diplome_id }}"
-                                    data-route="{{ route('formation.update', $formation) }}"
-                                    onclick="updateFormation({{ $formation->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-18px mdi-pencil"></i>
-                            </button>
-
-
-                            <form action="{{ route('formation.destroy', $formation) }}" id="del{{ $formation->id }}" style="display: inline-block;" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $formation->id }}')">
-                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
             </table>
         </div>
     </div>
 @endsection
 
 @section('js')
-    @include('dataTable')
     <script>
+        $(function () {
+            @include('dataTableAjax', ['columns' => "[
+                { data: 'id', name: 'id' },
+                { data: 'agent', name: 'agent' },
+                { data: 'date_debut', name: 'date_debut' },
+                { data: 'date_fin', name: 'date_fin' },
+                { data: 'ecoleFormation', name: 'ecoleFormation' },
+                { data: 'diplome', name: 'diplome' },
+                { data: 'niveauEtude', name: 'niveauEtude' },
+                { data: 'equivalenceDiplome', name: 'equivalenceDiplome' },
+                { data: 'actions', name: 'Actions', searchable: false, orderable: false },
+            ]", 'route' => route('formation.index')], ['scroll' => '450px'])
+        })
         let $modal = $('#add')
         let $debut = $('#date_debut')
         let $fin = $('#date_fin')
@@ -108,11 +85,28 @@
         let $form = $('form')
 
 
+        let b = flatpickr($fin, {
+            altInput: true,
+            altFormat: 'd/m/Y',
+            dateFormat: "Y-m-d",
+            allowInput: false,
+            locale: 'fr'
+        })
+
+        let a = flatpickr($debut, {
+            altInput: true,
+            altFormat: 'd/m/Y',
+            dateFormat: "Y-m-d",
+            allowInput: false,
+            locale: 'fr'
+        })
+
+
         function updateFormation(id) {
             let $el = $('#formation'+id)
             $modal.modal('show')
-            $debut.val($el.attr('data-debut'))
-            $fin.val($el.attr('data-fin'))
+            a.setDate($el.attr('data-debut'))
+            b.setDate($el.attr('data-fin'))
             $ecole.val($el.attr('data-ecole'))
             $diplome.val($el.attr('data-diplome'))
             $niveau.val($el.attr('data-niveau'))
@@ -122,8 +116,8 @@
         }
 
         $modal.on('hidden.bs.modal', function (e) {
-            $debut.val(null)
-            $fin.val(null)
+            a.setDate(null)
+            b.setDate(null)
             $ecole.val(null)
             $diplome.val(null)
             $niveau.val(null)

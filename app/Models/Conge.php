@@ -9,7 +9,7 @@ class Conge extends Model {
 
 	use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at', 'date_debut', 'date_fin'];
 	protected $fillable = array('ref_decision', 'date_debut', 'date_fin', 'observation', 'agent_id');
 
 	public function agent()

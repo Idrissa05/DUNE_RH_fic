@@ -13,7 +13,9 @@ class CorpForm extends Form
             'label' => 'Libellé'
         ])
             ->add('abreviation', 'text', [
-                'label' => 'Abréviation'
+                'label' => 'Abréviation',
+                'rules' => 'required|max:15'
+
             ])
             ->add('category_id', 'entity', [
                 'label' => 'Catégorie',

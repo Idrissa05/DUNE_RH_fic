@@ -12,7 +12,8 @@ class CadreForm extends Form
             'label' => 'Libellé'
         ])
             ->add('abreviation', 'text', [
-                'label' => 'Abréviation'
+                'label' => 'Abréviation',
+                'rules' => 'required|max:3'
             ]);
     }
 }

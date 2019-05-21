@@ -16,7 +16,7 @@ class CreateCadresTable extends Migration
         Schema::create('cadres', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 30);
-            $table->char('abreviation', 3);
+            $table->string('abreviation', 3);
         });
     }
 

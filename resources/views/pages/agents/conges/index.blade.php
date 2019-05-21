@@ -40,55 +40,31 @@
                 <tr>
                     <th>#</th>
                     <th>Ref décision</th>
+                    <th>Agent</th>
                     <th>Date début</th>
                     <th>Date fin</th> '
                     <th>Observation</th>
-                    <th>Agent</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($conges as $conge)
-                    <tr>
-                        <td>{{ $conge->id }}</td>
-                        <td>{{ $conge->ref_decision }}</td>
-                        <td>{{ $conge->date_debut }}</td>
-                        <td>{{ $conge->date_fin }}</td>
-                        <td>{{ $conge->observation }}</td>
-                        <td>{{ $conge->agent->matricule }}</td>
-                        <td>
-                            <button id="conge{{ $conge->id }}"
-                                    data-ref="{{ $conge->ref_decision }}"
-                                    data-debut="{{ $conge->date_debut }}"
-                                    data-fin="{{ $conge->date_fin }}"
-                                    data-observation="{{ $conge->observation }}"
-                                    data-agent="{{ $conge->agent->id }}"
-                                    data-route="{{ route('conge.update', $conge) }}"
-                                    onclick="updateConge({{ $conge->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-18px mdi-pencil"></i>
-                            </button>
-
-
-                            <form action="{{ route('conge.destroy', $conge) }}" id="del{{ $conge->id }}" style="display: inline-block;" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-outline-danger btn-sm" type="button"
-                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $conge->id }}')">
-                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
             </table>
         </div>
     </div>
 @endsection
 
 @section('js')
-    @include('dataTable')
     <script>
+        $(function () {
+            @include('dataTableAjax', ['columns' => "[
+                { data: 'id', name: 'id' },
+                { data: 'ref_decision', name: 'ref_decision' },
+                { data: 'agent', name: 'agent' },
+                { data: 'date_debut', name: 'date_debut' },
+                { data: 'date_fin', name: 'date_fin' },
+                { data: 'observation', name: 'observation' },
+                { data: 'actions', name: 'Actions', searchable: false, orderable: false },
+            ]", 'route' => route('conge.index')], ['scroll' => '450px'])
+        })
         let $modal = $('#add')
         let $ref = $('#ref_decision')
         let $debut = $('#date_debut')
@@ -97,15 +73,28 @@
         let $agent = $('#agent_id')
         let $form = $('form')
 
-        $debut.flatpickr()
-        $fin.flatpickr()
+        let b = flatpickr($fin, {
+            altInput: true,
+            altFormat: 'd/m/Y',
+            dateFormat: "Y-m-d",
+            allowInput: false,
+            locale: 'fr'
+        })
+
+        let a = flatpickr($debut, {
+            altInput: true,
+            altFormat: 'd/m/Y',
+            dateFormat: "Y-m-d",
+            allowInput: false,
+            locale: 'fr'
+        })
 
         function updateConge(id) {
             let $el = $('#conge'+id)
             $modal.modal('show')
             $ref.val($el.attr('data-ref'))
-            $debut.val($el.attr('data-debut'))
-            $fin.val($el.attr('data-fin'))
+            a.setDate($el.attr('data-debut'))
+            b.setDate($el.attr('data-fin'))
             $observation.val($el.attr('data-observation'))
             $agent.val($el.attr('data-agent'))
             $form.attr('action', $el.attr('data-route'))
@@ -114,8 +103,8 @@
 
         $modal.on('hidden.bs.modal', function (e) {
             $ref.val(null)
-            $debut.val(null)
-            $fin.val(null)
+            a.setDate(null)
+            b.setDate(null)
             $observation.val(null)
             $agent.val(null)
             $form.attr('action', '')

@@ -10,8 +10,12 @@ class CongeForm extends Form
     public function buildForm()
     {
         $this->add('ref_decision', 'text')
-            ->add('date_debut', 'text')
-            ->add('date_fin', 'text')
+            ->add('date_debut', 'text', [
+                'rules' => 'required|date|before:date_fin'
+            ])
+            ->add('date_fin', 'text', [
+                'rules' => 'required|date|after:date_debut'
+            ])
             ->add('observation', 'text')
             ->add('agent_id', 'entity', [
                 'label' => 'Agent',

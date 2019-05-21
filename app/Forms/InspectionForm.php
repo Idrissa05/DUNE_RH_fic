@@ -2,6 +2,7 @@
 
 namespace App\Forms;
 
+use App\Models\Commune;
 use App\Models\Departement;
 use Kris\LaravelFormBuilder\Form;
 
@@ -13,12 +14,12 @@ class InspectionForm extends Form
             'label' => 'Nom inspection',
             'rules' => 'required|string'
         ])
-            ->add('departement_id', 'entity', [
-                'label' => 'Département',
+            ->add('commune_id', 'entity', [
+                'label' => 'Commune',
                 'rules' => 'required|integer',
-                'class' => Departement::class,
-                'query_builder' => function (Departement $departement) {
-                    return $departement->pluck('name', 'id');
+                'class' => Commune::class,
+                'query_builder' => function (Commune $commune) {
+                    return $commune->pluck('name', 'id');
                 }
             ]);
     }

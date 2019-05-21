@@ -46,6 +46,11 @@ Route::resource('retraite', 'RetraiteController');
 Route::resource('typeetablissement', 'TypeEtablissementController');
 
 Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
+Route::resource('cadre',  'CadreController', ['only' => ['store', 'index', 'update', 'destroy']]);
+Route::resource('fonction',  'FonctionController', ['only' => ['store', 'index', 'update', 'destroy']]);
+Route::resource('indice',  'IndiceController', ['only' => ['store', 'index', 'update', 'destroy']]);
+Route::resource('position',  'PositionController', ['only' => ['store', 'index', 'update', 'destroy']]);
+Route::resource('secteurPedagogique',  'SecteurPedagogiqueController', ['only' => ['store', 'index', 'update', 'destroy']]);
 
 Route::get('/configs', 'ConfigController@index')->name('config.index');
 Route::put('/configs', 'ConfigController@update')->name('config.update');

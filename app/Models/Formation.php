@@ -9,7 +9,7 @@ class Formation extends Model {
 
 	use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at', 'date_debut', 'date_fin'];
 	protected $fillable = array('date_debut', 'date_fin', 'agent_id', 'ecole_formation_id', 'diplome_id', 'niveau_etude_id', 'equivalence_diplome_id');
 
 	public function agent()

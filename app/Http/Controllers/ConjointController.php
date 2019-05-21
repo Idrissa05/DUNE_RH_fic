@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class ConjointController extends Controller {
 
 
-  public function index()
+  public function index(Request $request)
   {
+      if($request->ajax()) {
+          return [];
+      }
+      return view('pages.agents.conjoints.index');
 
   }
 

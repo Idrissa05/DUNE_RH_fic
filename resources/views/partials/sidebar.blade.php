@@ -6,6 +6,7 @@
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
                 <li><a href="{{ route('conge.index') }}">Congés</a></li>
+                <li><a href="{{ route('conjoint.index') }}">Conjoints</a></li>
                 <li><a href="{{ route('formation.index') }}">Formations</a></li>
             </ul>
         </li>
@@ -13,12 +14,17 @@
         <li>
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings-outline"></i><span class="hide-menu">Configurations </span></a>
             <ul aria-expanded="false" class="collapse">
+                <li><a href="{{ route('corp.index') }}">Corps</a></li>
+                <li><a href="{{ route('cadre.index') }}">Cadres</a></li>
+                <li><a href="{{ route('fonction.index') }}">Fonctions</a></li>
+                <li><a href="{{ route('indice.index') }}">Indices</a></li>
                 <li><a href="{{ route('category.index') }}">Catégories</a></li>
                 <li><a href="{{ route('classe.index') }}">Classes</a></li>
                 <li><a href="{{ route('echelon.index') }}">Échelons</a></li>
                 <li><a href="{{ route('typeetablissement.index') }}">Types d'établissement</a></li>
                 <li><a href="{{ route('inspection.index') }}">Inspections</a></li>
                 <li><a href="{{ route('etablissement.index') }}">Établissements</a></li>
+                <li><a href="{{ route('secteurPedagogique.index') }}">Secteurs pédagogiques</a></li>
                 <li><a href="{{ route('ecoleformation.index') }}">Écoles de formation</a></li>
                 <li><a href="{{ route('equivalencediplome.index') }}">Équivalence diplôme</a></li>
                 <li><a href="{{ route('niveauetude.index') }}">Niveaux étude</a></li>

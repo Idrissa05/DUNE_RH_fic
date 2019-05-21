@@ -7,13 +7,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle inspection</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouveau secteur</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
                     {!! form_row($form->name) !!}
-                    {!! form_row($form->commune_id) !!}
+                    {!! form_row($form->inspection_id) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -26,7 +26,7 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les inspections</h3>
+            <h3 class="text-center label-default">Les secteurs pédagogiques</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
             <table class="table table-bordered text-center" id="myTable">
@@ -34,30 +34,30 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Commune</th>
+                    <th>Inspection</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($inspections as $inspection)
+                @foreach($secteurPedagogiques as $secteurPedagogique)
                     <tr>
-                        <td>{{ $inspection->id }}</td>
-                        <td>{{ $inspection->name }}</td>
-                        <td>{{ $inspection->commune->name }}</td>
+                        <td>{{ $secteurPedagogique->id }}</td>
+                        <td>{{ $secteurPedagogique->name }}</td>
+                        <td>{{ $secteurPedagogique->departement->name }}</td>
                         <td>
-                            <button id="inspection{{ $inspection->id }}"
-                                    data-commune="{{ $inspection->commune_id }}" data-name="{{ $inspection->name }}"
-                                    data-route="{{ route('inspection.update', $inspection) }}"
-                                    onclick="updateInspection({{ $inspection->id }})" class="btn btn-sm btn-outline-warning">
+                            <button id="secteurPedagogique{{ $secteurPedagogique->id }}"
+                                    data-inspection="{{ $secteurPedagogique->inspection_id }}" data-name="{{ $secteurPedagogique->name }}"
+                                    data-route="{{ route('secteurPedagogique.update', $secteurPedagogique) }}"
+                                    onclick="updateSecteurPedagogique({{ $secteurPedagogique->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-pencil"></i>
                             </button>
 
 
-                            <form action="{{ route('inspection.destroy', $inspection) }}" id="del{{ $inspection->id }}" style="display: inline-block;" method="post">
+                            <form action="{{ route('secteurPedagogique.destroy', $secteurPedagogique) }}" id="del{{ $secteurPedagogique->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $inspection->id }}')">
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $secteurPedagogique->id }}')">
                                     <i class="mdi mdi-trash-can-outline"></i>
                                 </button>
                             </form>
@@ -75,22 +75,22 @@
     <script>
         let $modal = $('#add')
         let $name = $('#name')
-        let $commune = $('#commune_id')
+        let $inspection = $('#inspection_id')
         let $form = $('form')
 
 
-        function updateInspection(id) {
-            let $el = $('#inspection'+id)
+        function updateSecteurPedagogique(id) {
+            let $el = $('#secteurPedagogique'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
-            $commune.val($el.attr('data-commune'))
+            $inspection.val($el.attr('data-departement'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }
 
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
-            $departement.val(null)
+            $inspection.val(null)
             $form.attr('action', '')
             $('input[name="_method"]').remove()
         })

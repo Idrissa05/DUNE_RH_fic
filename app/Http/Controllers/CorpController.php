@@ -60,5 +60,7 @@ class CorpController extends Controller
             return redirect()->route('corp.index')->with('danger', 'Une erreur est survenue');
 
         }
+        return redirect()->route('corp.index')->with('success', 'Opération effectuée !');
+
     }
 }

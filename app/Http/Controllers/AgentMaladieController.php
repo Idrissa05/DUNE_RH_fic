@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Forms\AgentMaladieForm;
 use App\Models\Agent;
 use App\Models\Maladie;
-use App\User;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
@@ -77,7 +76,7 @@ class AgentMaladieController extends Controller
 
     private function getData() {
 
-        return DataTables::of(Agent::with('maladies')->get())
+        return DataTables::of((Agent::all())->filter(function ($agent) { return $agent->maladies->count() > 0; }))
             ->addColumn('maladies', function ($agent){
                 $html = "";
                 foreach ($agent->maladies as $malady) {

@@ -55,7 +55,7 @@ class AgentMatrimonialeController extends Controller
 
     private function getData() {
 
-        return DataTables::of(Agent::with('maladies')->get())
+        return DataTables::of((Agent::all())->filter(function ($agent) { return $agent->matrimoniales->count() > 0; }))
             ->addColumn('matrimoniales', function ($agent){
                 $html = "";
                 foreach ($agent->matrimoniales as $matrimoniale) {

@@ -12,7 +12,10 @@
                 <li><a href="{{ route('enfant.index') }}">Enfants</a></li>
                 <li><a href="{{ route('experience.index') }}">Expériences</a></li>
                 <li><a href="{{ route('formation.index') }}">Formations</a></li>
+                <li><a href="{{ route('agent-maladie.index') }}">Maladies</a></li>
+                <li><a href="{{ route('agent-matrimoniale.index') }}">Matrimoniales</a></li>
                 <li><a href="{{ route('notation.index') }}">Notations</a></li>
+                <li><a href="{{ route('agent-position.index') }}">Positions</a></li>
                 <li><a href="{{ route('retraite.index') }}">Retraites</a></li>
             </ul>
         </li>

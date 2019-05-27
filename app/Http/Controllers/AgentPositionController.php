@@ -68,6 +68,7 @@ class AgentPositionController extends Controller
             agent_position.observation as observation, agent_position.id as id, agents.id as agent_id, positions.id as position_id
             ")
             ->orderByDesc('agent_position.created_at')
+            ->where('agents.deleted_at', '=', null)
             ->get();
         return DataTables::of($positions)
             ->addColumn('agent', function ($agent){

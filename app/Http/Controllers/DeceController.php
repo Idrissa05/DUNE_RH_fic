@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\DeceForm;
+use App\Models\Agent;
 use App\Models\Dece;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -48,6 +49,8 @@ class DeceController extends Controller {
         }
 
         Dece::create($form->getRequest()->all());
+        $agent = Agent::findOrFail($form->getRequest()->agent_id);
+        $agent->delete();
         return redirect()->route('deces.index')->with('success', 'Enregistrement effectué');
 
     }
@@ -96,7 +99,7 @@ class DeceController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Dece::with('agent')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Dece::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc')->get())
             ->addColumn('id', function ($dece){
                 return $dece->id;
             })

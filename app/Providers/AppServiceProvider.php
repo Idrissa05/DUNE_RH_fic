@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\ConfigComposer;
+use App\Models\Agent;
+use App\Observers\AgentObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', ConfigComposer::class);
+
+        Agent::observe(AgentObserver::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\RetraiteForm;
+use App\Models\Agent;
 use App\Models\Retraite;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -48,6 +49,8 @@ class RetraiteController extends Controller {
         }
 
         Retraite::create($form->getRequest()->all());
+        $agent = Agent::findOrFail($form->getRequest()->agent_id);
+        $agent->delete();
         return redirect()->route('retraite.index')->with('success', 'Enregistrement effectué');
 
     }
@@ -96,7 +99,7 @@ class RetraiteController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Retraite::with('agent')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Retraite::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc')->get())
             ->addColumn('id', function ($retraite){
                 return $retraite->id;
             })

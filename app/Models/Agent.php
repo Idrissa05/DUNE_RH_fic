@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Tightenco\Parental\HasChildren;
 
 class Agent extends Model {
@@ -56,6 +57,21 @@ class Agent extends Model {
     public function grades()
     {
         return $this->hasMany('App\Models\Grade');
+    }
+
+    public function retraite()
+    {
+        return $this->hasOne('App\Models\Retraite');
+    }
+
+    public function notations()
+    {
+        return $this->hasMany('App\Models\Notation');
+    }
+
+    public function fonction()
+    {
+        return $this->belongsTo('App\Models\Fonction');
     }
 
     public function cadre()

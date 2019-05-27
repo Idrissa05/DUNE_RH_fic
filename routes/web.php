@@ -69,4 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/configs', 'ConfigController@index')->name('config.index');
     Route::put('/configs', 'ConfigController@update')->name('config.update');
+
+    Route::get('/api_category', 'HomeController@apiCategory');
+    Route::get('/api_echelon', 'HomeController@apiEchelon');
+    Route::get('/api_indice', 'HomeController@apiIndice');
 });

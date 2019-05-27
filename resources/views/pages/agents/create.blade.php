@@ -17,6 +17,10 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        {!! form_row($form->type) !!}</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         {!! form_row($form->matricule) !!} </div>
                                 </div>
                                 <div class="col-md-4">
@@ -27,13 +31,11 @@
                                     <div class="form-group">
                                         {!! form_row($form->prenom) !!} </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         {!! form_row($form->sexe) !!} </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         {!! form_row($form->date_naiss) !!} </div>
                                 </div>
@@ -45,63 +47,103 @@
                                     <div class="form-group">
                                         {!! form_row($form->nationnalite) !!} </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! form_row($form->ref_acte_naiss) !!} </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! form_row($form->date_etablissement_acte_naiss) !!} </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! form_row($form->lieu_etablissement_acte_naiss) !!} </div>
+                                </div>
                             </div>
                         </section>
                         <!-- Step 2 -->
-                        <h6>Situation Matrimoniale</h6>
-                        <section>
-                            <div class="row offset-2">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        {!! form_row($form->matrimoniale_id) !!} </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        {!! form_row($form->date) !!} </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Step 3 -->
                         <h6>Situation Administrative</h6>
                         <section>
-                            <div class="row">
-                                <div class="col-md-4 offset-4">
-                                    <div class="form-group">
-                                        <div class="offset-4">{!! form_label($form->type) !!}</div>
-                                        {!! form_widget($form->type) !!}
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row" id="titulaire" hidden>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->ref_engagement) !!} </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->date_engagement) !!} </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->ref_titularisation) !!} </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->date_titularisation) !!} </div>
                                 </div>
                             </div>
                             <div class="row" id="both">
-                                <div class="col-md-4" id="category" hidden>
-                                    <div class="form-group">
-                                        {!! form_row($form->category_id) !!} </div>
-                                </div>
-                                <div class="col-md-4" id="contractuel" hidden>
+                                <div class="col-md-3" id="contractuel" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->date_prise_service) !!} </div>
                                 </div>
-                                <div class="col-md-4" id="classe" hidden>
+                                <div class="col-md-3" id="fonction" hidden>
+                                    <div class="form-group">
+                                        {!! form_row($form->fonction_id) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->cadre_id) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->corp_id) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->category_id) !!} </div>
+                                </div>
+                                <div class="col-md-3" id="classe" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->classe_id) !!} </div>
                                 </div>
-                                <div class="col-md-4" id="echelon" hidden>
+                                <div class="col-md-3" id="echelon" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->echelon_id) !!} </div>
+                                </div>
+                                <div class="col-md-3" id="indice" hidden>
+                                    <div class="form-group">
+                                        {!! form_row($form->indice) !!} </div>
+                                </div>
+                                <div class="col-md-3" id="salary" hidden>
+                                    <div class="form-group">
+                                        {!! form_row($form->salary) !!} </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Step 3 -->
+                        <h6>Affectations</h6>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->etablissement_id) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->ref) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->date_affectation) !!} </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! form_row($form->date_prise_effet) !!} </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! form_row($form->observation_affectation) !!} </div>
                                 </div>
                             </div>
                         </section>
@@ -136,24 +178,92 @@
                             </div>
                         </section>
                         <!-- Step 5 -->
-                        <h6>Autres informations</h6>
+                        <h6>Situation Matrimoniale</h6>
                         <section>
-                            <div class="row">
-                                <div class="col-md-4">
+                            <div class="row offset-2">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        {!! form_row($form->maladie_id) !!} </div>
+                                        {!! form_row($form->matrimoniale_id) !!} </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        {!! form_row($form->observation) !!} </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! form_row($form->date_observation) !!} </div>
+                                        {!! form_row($form->date) !!} </div>
                                 </div>
                             </div>
                         </section>
-                    {!! form_end($form) !!}
+                        <!-- Step 6 -->
+                        <h6>Enfants</h6>
+                        <section>
+                            <div style="height:300px; overflow:auto;" class="table-responsive">
+                                <div class="col-md-3 offset-5">
+                                    <div class="form-row">
+                                        <h4>Nombre d'Enfant <span class="badge badge-primary" id="ne"> 0</span></h4>
+                                    </div>
+                                </div>
+                                <table class="table color-bordered-table purple-bordered-table table-bordered" id="enfant">
+                                    <thead>
+                                    <tr>
+                                        <th>Prénom*</th>
+                                        <th>Date Naissance*</th>
+                                        <th>Lieu Naissance*</th>
+                                        <th>Sexe*</th>
+                                        <th><a style="font-size:18px;" id="addMoreEnfant" class="btn btn-sm btn-outline-light"><span class="mdi mdi-plus"></span></a></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <!-- Step 7 -->
+                        <h6>Conjoints</h6>
+                        <section>
+                            <div style="height:300px; overflow:auto;" class="table-responsive">
+                                <div class="col-md-3 offset-5">
+                                    <div class="form-row">
+                                        <h4>Nombre de Conjoint <span class="badge badge-primary" id="nc"> 0</span></h4>
+                                    </div>
+                                </div>
+                                <table class="table color-bordered-table purple-bordered-table table-bordered" id="conjoint">
+                                    <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom*</th>
+                                        <th>Prénom*</th>
+                                        <th>Date Naissance*</th>
+                                        <th>Lieu Naissance*</th>
+                                        <th>Sexe*</th>
+                                        <th>Réf Acte Mariage*</th>
+                                        <th>Nationnalité*</th>
+                                        <th>Téléphone*</th>
+                                        <th>Employeur</th>
+                                        <th>Profession*</th>
+                                        <th><a style="font-size:18px;" id="addMoreConjoint" class="btn btn-sm btn-outline-light"><span class="mdi mdi-plus"></span></a></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <!-- Step 8 -->
+                        <h6>Autres informations</h6>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! form_row($form->maladie_id) !!} </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! form_row($form->date_observation) !!} </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! form_row($form->observation) !!} </div>
+                                </div>
+                            </div>
+                        </section>
+                    {!! form_end($form, false) !!}
                 </div>
             </div>
         </div>
@@ -161,26 +271,96 @@
 @endsection
 
 @section('js')
-    <script>
-    $(document).ready(function () {
-        $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_debut, #date_fin, #date_observation').flatpickr({'locale' : 'fr'});
-        $('#type').on('change', function(e){
-            if($("#type option:selected").val() == 'Contractuel'){
-                $('#titulaire, #category, #classe, #echelon').hide();
-                $('#ref_engagement, #date_engagement, #date_titularisation, #classe_id, #echelon_id').removeAttr('required').val('');
-                $('#both').addClass('offset-3');
-                $('#contractuel, #category').removeAttr('hidden').show();
-                $('#date_prise_service').attr('required', true);
-            }else if($("#type option:selected").val() == 'Titulaire'){
-                $('#contractuel, #category').hide();
-                $('#date_prise_service').removeAttr('required').val('');
-                $('#both').removeClass('offset-3');
-                $('#titulaire, #category, #classe, #echelon').removeAttr('hidden').show();
-                $('#ref_engagement, #date_engagement, #date_titularisation, #classe_id, #echelon_id').attr('required', true);
-            }else $('#titulaire, #contractuel, #category, #classe, #echelon').hide();
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_affectation, #date_prise_effet, #date_debut, #date_fin, #date_observation, #date_etablissement_acte_naiss').flatpickr({'locale' : 'fr'});
 
+            $('#type').on('change', function(e){
+                if($("#type option:selected").val() == 'Contractuel'){
+                    $("label[for='matricule']").text("N° Identifiant");
+                    $('#titulaire, #indice, #salary, #echelon, #fonction, #classe').hide();
+                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #fonction_id').removeAttr('required').val('');
+                    $('#contractuel').removeAttr('hidden').show();
+                    $('#date_prise_service').attr('required', true);
+                }else if($("#type option:selected").val() == 'Titulaire'){
+                    $("label[for='matricule']").text("N° Matricule");
+                    $('#contractuel').hide();
+                    $('#date_prise_service').removeAttr('required').val('');
+                    $('#titulaire, #fonction, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
+                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #fonction_id').attr('required', true);
+                }else $('#titulaire, #contractuel, #fonction, #classe, #echelon, #indice, #salary').hide();
+            });
+
+            $('#corp_id').on('change', function(e){
+                let corp_id = $("#corp_id option:selected").val();
+                $.get('/api_category?corp_id=' + corp_id,function(data) {
+                    $("#category_id").val(data.id)
+                });
+            });
+
+            $('#category_id').on('change', function () {
+                $('#classe_id').val('');
+                $('#echelon_id').empty().append('<option value selected="selected">Sélectionner</option>');
+                $("#indice input:text").val('');
+                $("#salary input:text").val('');
+            });
+
+            $('#classe_id').on('change', function(e){
+                let classe_id = $("#classe_id option:selected").val();
+                $.get('/api_echelon?classe_id=' + classe_id,function(data) {
+                    $('#echelon_id').empty().append('<option value selected="selected">Sélectionner</option>');
+                    $("#indice input:text").val('');
+                    $("#salary input:text").val('');
+                    $.each(data, function(index, echelon){
+                        $('#echelon_id').append('<option value="'+ echelon.id +'">'+ echelon.name +'</option>');
+                    })
+                });
+            });
+
+            $('#echelon_id').on('change', function(e){
+                $("#indice input:text").val('');
+                $("#salary input:text").val('');
+                let category_id = $("#category_id option:selected").val();
+                let classe_id = $("#classe_id option:selected").val();
+                let echelon_id = $("#echelon_id option:selected").val();
+                $.get('/api_indice?category_id=' + category_id + '&classe_id=' + classe_id + '&echelon_id=' + echelon_id,function(data) {
+                    $("#indice input:text").val(data[0].value);
+                    $("#salary input:text").val(data[0].salary);
+                });
+            });
+
+            let num_child_rows=0;
+            $('#addMoreEnfant').on('click', function() {
+                let row = "<tr><td><input class='table_field_required form-control' id='prenom_enfant' name=prenom_enfant["+num_child_rows+"] type='text'></td><td><input class='table_field_required form-control' id='date_naiss_enfant' name=date_naiss_enfant["+num_child_rows+"] type='date'></td> <td><input class='table_field_required form-control' id='lieu_naiss_enfant' name=lieu_naiss_enfant["+num_child_rows+"] type='text'></td> <td> <select class='table_field_required form-control' id='sexe_enfant' name=sexe_enfant["+num_child_rows+"]> <option value='' selected='selected'>Sélectionner</option> <option value='F'>Féminin</option><option value='M'>Masculin</option> </select> </td> <td><a class='removeEnfant btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td> </tr>";
+                $("#enfant").append(row);
+                num_child_rows++;
+                $('#ne').text(num_child_rows);
+            });
+            $("#enfant").on("click", ".removeEnfant", function() {
+                $(this).closest("tr").remove();
+                num_child_rows--;
+                $('#ne').text(num_child_rows);
+            });
+
+            let num_partner_rows=0;
+            $('#addMoreConjoint').on('click', function() {
+                let row = "<tr><td><input class='form-control' id='matricule_conjoint' name='matricule_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nom_conjoint' name='nom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='prenom_conjoint' name='prenom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='date_naiss_conjoint' name='date_naiss_conjoint["+num_partner_rows+"]' type='date'></td><td><input class='table_field_required form-control' id='lieu_naiss_conjoint' name='lieu_naiss_conjoint["+num_partner_rows+"]' type='text'></td><td><select class='table_field_required form-control' id='sexe_conjoint' name='sexe_conjoint["+num_partner_rows+"]'><option value=' selected='selected'>Sélectionner</option><option value='F'>Féminin</option><option value='M'>Masculin</option></select></td><td><input class='table_field_required form-control' id='ref_acte_mariage' name='ref_acte_mariage["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nationnalite_conjoint' name='nationnalite_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='tel' name='tel["+num_partner_rows+"]' type='text'></td><td><input class='form-control' id='employeur' name='employeur["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='profession' name='profession["+num_partner_rows+"]' type='text'></td><td><a class='removeConjoint btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td></tr>";
+                $("#conjoint").append(row);
+                num_partner_rows++;
+                $('#nc').text(num_partner_rows);
+            });
+            $("#conjoint").on("click", ".removeConjoint", function() {
+                $(this).closest("tr").remove();
+                num_partner_rows--;
+                $('#nc').text(num_partner_rows);
+            });
+
+            $.validator.addClassRules({
+                table_field_required:{
+                    required: true,
+                }
+            });
         });
-    })
     </script>
     <script src="{{asset('material/plugins/wizard/jquery.validate.min.js')}}"></script>
     <script src="{{asset('material/plugins/wizard/steps.js')}}"></script>

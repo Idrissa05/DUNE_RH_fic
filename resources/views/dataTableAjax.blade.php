@@ -1,11 +1,12 @@
 $('#myTable').DataTable({
 serverSide: true,
 ajax: '{!! $route !!}',
-processing:     true,
+processing: true,
 pageLength: 200,
 lengthMenu: [ 10, 25, 50, 75, 100, 200 ],
 columns: {!! $columns !!},
-ordering: false,
+ordering: true,
+scrollY: true,
 language: {
 processing:     "Traitement en cours...",
 search:         "Rechercher&nbsp;:",

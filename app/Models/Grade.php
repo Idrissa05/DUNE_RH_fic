@@ -14,8 +14,8 @@ class Grade extends Model
     protected $childTypes = [
         'Avancement' => Avancement::class,
         'Reclassement' => Reclassement::class,
-        'Titularisation' => Titulaire::class,
-        'Engagement' => Engagement::class
+        'Titularisation' => Titularisation::class,
+        'Contrat' => Contrat::class
     ];
     protected $dates = ['deleted_at'];
 

@@ -11,7 +11,7 @@
                         <thead>
                         <tr>
                             <th width="30">No</th>
-                            <th>Matricule</th>
+                            <th>Matricule/Code</th>
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>Date Naissance</th>
@@ -33,33 +33,7 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable({
-                language: {
-                    processing:     "Traitement en cours...",
-                    search:         "Rechercher&nbsp;:",
-                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    infoPostFix:    "",
-                    loadingRecords: "Chargement en cours...",
-                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    emptyTable:     "Aucune donnée disponible dans le tableau",
-                    paginate: {
-                        first:      "Premier",
-                        previous:   "Pr&eacute;c&eacute;dent",
-                        next:       "Suivant",
-                        last:       "Dernier"
-                    },
-                    aria: {
-                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
-                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
-                    }
-                },
-                processing: true,
-                serverSide: true,
-                ajax: "{{route('agent.index')}}",
-                columns: [
+            @include('dataTableAjax', ['columns' => "[
                     {data: 'id', name: 'id'},
                     {data: 'matricule', name: 'matricule'},
                     {data: 'nom', name: 'nom'},
@@ -70,9 +44,7 @@
                     {data: 'type', name: 'type'},
                     {data: 'lieu_naiss', name: 'lieu_naiss'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
-                ],
-            });
-
+                ]", 'route' => route('agent.index')], ['scroll' => '450px'])
             $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_debut, #date_fin, #date_observation').flatpickr({'locale' : 'fr'});
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){
@@ -91,7 +63,6 @@
 
             });
         });
-
     </script>
     <script src="{{asset('material/plugins/wizard/jquery.validate.min.js')}}"></script>
     <script src="{{asset('material/plugins/wizard/steps.js')}}"></script>

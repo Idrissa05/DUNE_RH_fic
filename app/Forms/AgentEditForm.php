@@ -17,7 +17,7 @@ use App\Models\Matrimoniale;
 use App\Models\NiveauEtude;
 use Kris\LaravelFormBuilder\Form;
 
-class AgentForm extends Form
+class AgentEditForm extends Form
 {
     public function buildForm()
     {
@@ -87,18 +87,6 @@ class AgentForm extends Form
             ->add('date_prise_service','date', [
                 'label'=>'Date de Prise de Service *', 'rules' => 'date|nullable',
             ])
-            //******************************** Situation Matrimoniale *****************************
-            ->add('matrimoniale_id', 'entity', [
-                'class' => Matrimoniale::class,
-                'label' => 'Situation Matrimoniale *', 'rules' => 'required',
-                'query_builder' => function (Matrimoniale $matrimoniale) {
-                    return $matrimoniale->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('date','date', [
-                'label'=>'A quelle date ? *', 'rules' => 'required|date'
-            ])
             //******************************** Situation Administrative or Grades *****************************
             ->add('ref_engagement','text', [
                 'label'=>'Ref Engagement *', //'rules' => 'required',
@@ -142,83 +130,6 @@ class AgentForm extends Form
             ->add('salary','text', [
                 'label'=>'Salaire', 'attr' => ['disabled' => 'disabled']
             ])
-            //******************************** Niveau Etudes *****************************
-            ->add('ecole_formation_id','entity', [
-                'class' => EcoleFormation::class,
-                'label' => 'Dernier Etablissement Fréquenté *', 'rules' => 'required',
-                'query_builder' => function (EcoleFormation $ecoleFormation) {
-                    return $ecoleFormation->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('niveau_etude_id','entity', [
-                'class' => NiveauEtude::class,
-                'label' => 'Niveau Etude *', 'rules' => 'required',
-                'query_builder' => function (NiveauEtude $niveauEtude) {
-                    return $niveauEtude->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('diplome_id','entity', [
-                'class' => Diplome::class,
-                'label' => 'Diplôme Obtenu *', 'rules' => 'required',
-                'query_builder' => function (Diplome $diplome) {
-                    return $diplome->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('equivalence_diplome_id','entity', [
-                'class' => EquivalenceDiplome::class,
-                'label' => 'Equivalence Diplôme *', 'rules' => 'required',
-                'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
-                    return $equivalenceDiplome->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('date_debut','date', [
-                'label'=>'Date Début Formation *', 'rules' => 'required|date|before:date_fin',
-            ])
-            ->add('date_fin','date', [
-                'label'=>'Date Fin Formation *', 'rules' => 'required|date|after:date_debut',
-            ])
-            //******************************** Autres Infos *****************************
-            ->add('maladie_id','entity', [
-                'class' => Maladie::class,
-                'label' => 'Maladie Diagnostiquée Connue',
-                'query_builder' => function (Maladie $maladie) {
-                    return $maladie->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('date_observation','date', [
-                'label'=>'Date Observation',
-            ])
-            ->add('observation','textarea', [
-                'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']
-            ])
-            //******************************** Affectations *****************************
-            ->add('etablissement_id','entity', [
-                'class' => Etablissement::class,
-                'label' => 'Etablissement *', 'rules' => 'required',
-                'query_builder' => function (Etablissement $etablissement) {
-                    return $etablissement->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('ref','text', [
-                'label'=>'Reférence Affectation *', 'rules' => 'required',
-            ])
-            ->add('date_affectation','date', [
-                'label'=>'Date Affectation *', 'rules' => 'date|required',
-            ])
-            ->add('date_prise_effet','date', [
-                'label'=>'Date Effet / Prise de service *', 'rules' => 'date|required',
-            ])
-            ->add('observation_affectation','textarea', [
-                'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']
-            ])
-            //******************************** Enfants *****************************
-            //******************************** Conjoints *****************************
         ;
     }
 }

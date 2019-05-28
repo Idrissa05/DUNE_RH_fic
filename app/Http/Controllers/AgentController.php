@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Forms\AgentEditForm;
 use App\Models\Affectation;
 use App\Models\Conjoint;
 use App\Models\Contractuel;
@@ -24,23 +25,29 @@ class AgentController extends Controller {
     public function index(Request $request)
   {
       if ($request->ajax()) {
-          $agents = Agent::latest()->orderBy('created_at', 'desc');
-          return Datatables::of($agents)
+          $agent = Agent::latest()->orderBy('created_at', 'desc');
+          return Datatables::of($agent)
               ->addIndexColumn()
-              ->addColumn('action', function($agents){
-                  return '<a onclick="editData('. $agents->id .')" class="btn btn-sm btn-outline-warning" title="Modifier"><i class="mdi mdi-18px mdi-pencil"></i></a>'.' '.
-                      '<form action="'.route("agent.destroy", $agents).'" id="del'.$agents->id.'" style="display: inline-block;" method="post">
+              ->addColumn('action', function($agent){
+                  return '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
+                      '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
                             '.method_field('DELETE').'
                             '.csrf_field().'
                             <button class="btn btn-outline-danger btn-sm" type="button"
-                            onclick="myHelpers.deleteConfirmation(\'del'.$agents->id.'\')">
+                            onclick="myHelpers.deleteConfirmation(\'del'.$agent->id.'\')">
                                 <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                             </button>
                       </form>';
               })
               ->rawColumns(['action'])->make(true);
       }
-      return view('pages.agents.index');
+
+      $form = $this->form(AgentEditForm::class, [
+          'method' => 'POST',
+          'class' => 'tab-wizard wizard-circle'
+      ]);
+
+      return view('pages.agents.index', compact('form'));
   }
 
 
@@ -49,7 +56,7 @@ class AgentController extends Controller {
       $form = $this->form(AgentForm::class, [
           'method' => 'POST',
           'url' => route('agent.store'),
-          'class' => 'validation-wizard wizard-circle'
+          'class' => 'tab-wizard wizard-circle'
       ]);
       return view('pages.agents.create', compact('form'));
   }
@@ -156,13 +163,53 @@ class AgentController extends Controller {
 
   public function edit($id)
   {
-
+      $agent = Agent::findOrFail($id);
+      return response()->json([$agent, $agent->grades]);
   }
 
 
-  public function update($id)
+  public function update(Agent $agent)
   {
+      $form = $this->form(AgentEditForm::class);
 
+      if (!$form->isValid()) {
+          return redirect()->back()->withErrors($form->getErrors())->withInput();
+      }
+
+      try {
+          DB::beginTransaction();
+
+          $agent->update($form->getRequest()->all());
+
+          if($form->getRequest()->only('type')['type'] == 'Titulaire'){
+              DB::table('agents')->where('id', $agent->id)->update(['fonction_id' => $form->getRequest()->only('fonction_id')['fonction_id']]);
+              $agent->grades()->update([
+                  'category_id' => $form->getRequest()->only('category_id')['category_id'],
+                  'classe_id' => $form->getRequest()->only('classe_id')['classe_id'],
+                  'echelon_id' => $form->getRequest()->only('echelon_id')['echelon_id'],
+                  'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
+                  'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
+                  'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
+                  'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
+                  'type' => 'Titularisation',
+              ]);
+          }else {
+              DB::table('agents')->where('id', $agent->id)->update(['date_prise_service' => $form->getRequest()->only('date_prise_service')['date_prise_service']]);
+              $agent->grades()->update([
+                  'category_id' => $form->getRequest()->only('category_id')['category_id'],
+                  'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
+                  'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
+                  'type' => 'Contrat',
+              ]);
+          }
+              DB::commit();
+          }
+      catch (\Exception $e) {
+          DB::rollBack();
+          return redirect()->route('agent.index')->with('danger', 'Opération non effectuée, Erreur technique !');
+      }
+
+      return redirect()->route('agent.index')->with('success', 'Opération effectuée avec succès !');
   }
 
 

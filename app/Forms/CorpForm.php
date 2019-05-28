@@ -10,7 +10,8 @@ class CorpForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Libellé'
+            'label' => 'Libellé',
+            'rules' => 'required'
         ])
             ->add('abreviation', 'text', [
                 'label' => 'Abréviation',

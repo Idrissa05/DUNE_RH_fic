@@ -65,6 +65,11 @@
                 { data: 'actions', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('conge.index')], ['scroll' => '450px'])
         })
+
+        @if($errors->any())
+            $('#add').modal('show')
+        @endif
+
         let $modal = $('#add')
         let $ref = $('#ref_decision')
         let $debut = $('#date_debut')

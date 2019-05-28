@@ -67,6 +67,11 @@
 @section('js')
     @include('dataTable')
     <script>
+
+        @if($errors->any())
+            $('#add').modal('show')
+        @endif
+
         let $modal = $('#add')
         let $name = $('#name')
         let $form = $('form')

@@ -75,6 +75,11 @@
                 { data: 'actions', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('formation.index')], ['scroll' => '450px'])
         })
+
+        @if($errors->any())
+            $('#add').modal('show')
+        @endif
+
         let $modal = $('#add')
         let $debut = $('#date_debut')
         let $fin = $('#date_fin')

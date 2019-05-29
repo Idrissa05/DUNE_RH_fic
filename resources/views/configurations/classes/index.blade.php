@@ -47,6 +47,7 @@
                         <td>{{ $classe->description }}</td>
                         <td>
                             <button id="classe{{ $classe->id }}"
+                                    data-name="{{ $classe->name }}"
                                     data-description="{{ $classe->description }}"
                                     data-route="{{ route('classe.update', $classe) }}"
                                     onclick="updateClasse({{ $classe->id }})" class="btn btn-sm btn-outline-warning">

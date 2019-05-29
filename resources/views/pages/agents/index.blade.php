@@ -294,11 +294,7 @@
 
         $('#edit').on('hidden.bs.modal', function (e) {
             $('#edit form')[0].reset();
-        });
-
-        @if($errors->any())
-            $('#edit').modal('show');
-        @endif
+        })
 
     </script>
     <script src="{{asset('material/plugins/wizard/jquery.validate.min.js')}}"></script>

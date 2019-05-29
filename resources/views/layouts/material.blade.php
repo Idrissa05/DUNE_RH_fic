@@ -44,10 +44,11 @@
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
 
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('logo.jpeg') }}" width="50px" height="50px" alt="homepage" class="light-logo" />
+                            <img src="{{ asset('logo.png') }}" width="50px" height="50px" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text --><span class="text-white shadow-sm">{{ $config->name }}</span> </a>
+                        <!-- Logo text --><span class="text-white shadow-sm">{{ $config->name }}</span>
+                    </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->

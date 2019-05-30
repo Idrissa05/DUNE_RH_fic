@@ -32,6 +32,6 @@ class HomeController extends Controller
     }
 
     public function apiIndice(){
-        return response()->json(Indice::where('category_id', Input::get('category_id'))->where('classe_id', Input::get('classe_id'))->where('echelon_id', Input::get('echelon_id'))->get(['value','salary']));
+        return response()->json(Indice::where('category_id', Input::get('category_id'))->where('classe_id', Input::get('classe_id'))->where('echelon_id', Input::get('echelon_id'))->get(['id','value','salary']));
     }
 }

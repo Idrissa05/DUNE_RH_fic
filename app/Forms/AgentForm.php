@@ -142,6 +142,7 @@ class AgentForm extends Form
             ->add('salary','text', [
                 'label'=>'Salaire', 'attr' => ['disabled' => 'disabled']
             ])
+            ->add('indice_id','text', ['attr' => ['hidden' => true, 'id' => 'indice_id']])
             //******************************** Niveau Etudes *****************************
             ->add('ecole_formation_id','entity', [
                 'class' => EcoleFormation::class,

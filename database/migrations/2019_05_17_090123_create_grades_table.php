@@ -29,6 +29,7 @@ class CreateGradesTable extends Migration
             $table->date('date_titularisation')->nullable();
             $table->string('ref_engagement', 30)->nullable()->index();
             $table->date('date_engagement')->nullable();
+            $table->integer('indice_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

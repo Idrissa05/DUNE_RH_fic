@@ -130,6 +130,7 @@ class AgentEditForm extends Form
             ->add('salary','text', [
                 'label'=>'Salaire', 'attr' => ['disabled' => 'disabled']
             ])
+            ->add('indice_id','text', ['attr' => ['hidden' => true, 'id' => 'indice_id']])
         ;
     }
 }

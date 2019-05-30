@@ -187,6 +187,11 @@ class CreateForeignKeys extends Migration {
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->foreign('indice_id')->references('id')->on('indices')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
         Schema::table('communes', function(Blueprint $table) {
             $table->foreign('departement_id')->references('id')->on('departements')
                 ->onDelete('NO ACTION')
@@ -308,6 +313,9 @@ class CreateForeignKeys extends Migration {
         });
         Schema::table('grades', function(Blueprint $table) {
             $table->dropForeign('grades_echelon_id_foreign');
+        });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->dropForeign('grades_indice_id_foreign');
         });
         Schema::table('communes', function(Blueprint $table) {
             $table->dropForeign('communes_departement_id_foreign');

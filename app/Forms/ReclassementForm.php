@@ -44,7 +44,8 @@ class ReclassementForm extends Form
                 'class' => Echelon::class,
                 'query_builder' => function (Echelon $echelon) {
                     return $echelon->pluck('name', 'id');
-                }
+                },
+                'empty_value' => 'Séléctionner'
             ])
             ->add('ref_reclassement', 'text', [
                 'rules' => 'required'

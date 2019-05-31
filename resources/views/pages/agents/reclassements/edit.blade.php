@@ -18,6 +18,9 @@
 @endsection
 @section('js')
     <script>
+
+        @include('dynamicDropDown')
+
         flatpickr($('#date_reclassement'), {
             altInput: true,
             altFormat: 'd/m/Y',

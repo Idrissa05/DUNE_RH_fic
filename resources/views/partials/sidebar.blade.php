@@ -16,6 +16,7 @@
                 <li><a href="{{ route('agent-matrimoniale.index') }}">Matrimoniales</a></li>
                 <li><a href="{{ route('notation.index') }}">Notations</a></li>
                 <li><a href="{{ route('agent-position.index') }}">Positions</a></li>
+                <li><a href="{{ route('reclassement.index') }}">Reclassements</a></li>
                 <li><a href="{{ route('retraite.index') }}">Retraites</a></li>
             </ul>
         </li>
@@ -43,7 +44,14 @@
 
             </ul>
         </li>
-        <li> <a class="waves-effect waves-dark" href="{{ route('config.index') }}" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Système</span></a>
+        <li>
+            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Administration </span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="{{ route('config.index') }}">Système</a></li>
+                <li><a href="{{ route('users.index') }}">Utilisateurs</a></li>
+
+            </ul>
+        </li>
 
     </ul>
 </nav>

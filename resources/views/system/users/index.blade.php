@@ -1,0 +1,110 @@
+@extends('layouts.material')
+
+
+@section('content')
+
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel1">Nouval utilisateur</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                {!! form_start($form) !!}
+                <div class="modal-body">
+                   {!! form_row($form->name) !!}
+                   <div id="p">
+                       {!! form_row($form->password) !!}
+                       {!! form_row($form->password_confirmation) !!}
+                   </div>
+                   {!! form_row($form->role) !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+                {!! form_end($form) !!}
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-outline-info">
+        <div class="card-body">
+            <h3 class="text-center label-default">Les utilisateurs</h3>
+
+            <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
+
+            <table class="table table-bordered text-center" id="myTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td>
+                            <button id="user{{ $user->id }}"
+                                    data-name="{{ $user->name }}"
+                                    data-role="{{ $user->role }}"
+                                    data-route="{{ route('users.update', $user) }}"
+                                    onclick="updateClasse({{ $user->id }})" class="btn btn-sm btn-outline-warning">
+                                <i class="mdi mdi-18px mdi-pencil"></i>
+                            </button>
+
+
+                            <form action="{{ route('users.destroy', $user) }}" id="del{{ $user->id }}" style="display: inline-block;" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-outline-danger btn-sm" type="button"
+                                        onclick="myHelpers.deleteConfirmation('{{ 'del'. $user->id }}')"
+                                ><i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    @include('dataTable')
+    <script>
+
+        @if($errors->any())
+        $('#add').modal('show')
+                @endif
+
+        let $modal = $('#add')
+        let $name = $('#name')
+        let $role = $('#role')
+        let $form = $('form')
+
+
+        function updateClasse(id) {
+            let $el = $('#user'+id)
+            $modal.modal('show')
+            $name.val($el.attr('data-name'))
+            $role.val($el.attr('data-role'))
+            $form.attr('action', $el.attr('data-route'))
+            $form.append("<input type='hidden' name='_method' value='PUT'>")
+            $('#p').hide()
+        }
+
+        $modal.on('hidden.bs.modal', function (e) {
+            $name.val('')
+            $form.attr('action', '')
+            $('input[name="_method"]').remove()
+            $('#p').show()
+        })
+    </script>
+@endsection

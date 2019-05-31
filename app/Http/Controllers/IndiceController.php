@@ -44,12 +44,17 @@ class IndiceController extends Controller
     public function update(Indice $indice)
     {
         $form = $this->form(IndiceForm::class);
+        $request = $form->getRequest();
 
-        if (!$form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
-        }
+        $this->validate($request, [
+            'salary' => 'required|numeric',
+            'value' => 'required|numeric'
+        ]);
 
-        $indice->update($form->getRequest()->all());
+        $indice->update([
+            'salary' => $request->salary,
+            'value' => $request->value
+        ]);
         return redirect()->route('indice.index')->with('success', 'Opération effectuée !');
 
     }

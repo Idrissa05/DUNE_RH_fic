@@ -38,7 +38,6 @@
         <div class="card-body">
             <h3 class="text-center label-default">Les indices</h3>
 
-            <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
 
             <table class="table table-bordered text-center" id="myTable">
                 <thead>
@@ -77,14 +76,14 @@
                             </button>
 
 
-                            <form action="{{ route('indice.destroy', $indice) }}" id="del{{ $indice->id }}" style="display: inline-block;" method="post">
+                           {{-- <form action="{{ route('indice.destroy', $indice) }}" id="del{{ $indice->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-outline-danger btn-sm" type="button"
                                         onclick="myHelpers.deleteConfirmation('{{ 'del'. $indice->id }}')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
+                            </form>--}}
                         </td>
                     </tr>
                 @endforeach

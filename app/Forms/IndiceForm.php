@@ -12,11 +12,13 @@ class IndiceForm extends Form
     public function buildForm()
     {
         $this->add('name', 'text', [
-            'label' => 'Libellé'
+            'label' => 'Libellé',
+            'attr' => ['disabled' => 'true']
         ])->add('value', 'number')
             ->add('salary', 'number')
             ->add('category_id', 'entity', [
                 'label' => 'Catégorie',
+                'attr' => ['disabled' => 'true'],
                 'rules' => 'required|integer',
                 'class' => Category::class,
                 'query_builder' => function (Category $category) {
@@ -24,6 +26,7 @@ class IndiceForm extends Form
                 }
             ])
             ->add('echelon_id', 'entity', [
+                'attr' => ['disabled' => 'true'],
                 'label' => 'Echelon',
                 'rules' => 'required|integer',
                 'class' => Echelon::class,
@@ -33,6 +36,7 @@ class IndiceForm extends Form
             ])
             ->add('classe_id', 'entity', [
                 'label' => 'classe',
+                'attr' => ['disabled' => 'true'],
                 'rules' => 'required|integer',
                 'class' => Classe::class,
                 'query_builder' => function (Classe $classe) {

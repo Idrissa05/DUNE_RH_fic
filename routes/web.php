@@ -70,6 +70,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/configs', 'ConfigController@index')->name('config.index');
     Route::put('/configs', 'ConfigController@update')->name('config.update');
 
+    Route::resource('users', 'UsersController', ['only' => ['index', 'update', 'destroy']]);
+    Route::get('/change-password', 'UsersController@changePassword')->name('change.password');
+    Route::post('/change-password', 'UsersController@changePassword');
     Route::get('/api_category', 'HomeController@apiCategory');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');

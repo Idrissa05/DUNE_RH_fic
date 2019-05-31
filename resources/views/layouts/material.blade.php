@@ -80,12 +80,12 @@
                                             <div class="u-img"><img src="{{ asset('holder.png') }}" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>{{ Auth::user()->name }}</h4>
-                                                <p class="text-muted">moi@ck</p><a href="" class="btn btn-rounded btn-danger btn-sm">Voir Profil</a></div>
+                                                <p class="text-muted"></p><a href="" class="btn btn-rounded btn-danger btn-sm">Voir Profil</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a><i class="mdi mdi-account-box-outline"></i> Profil: <span class="ml-2">admin</span></a></li>
-                                    <li><a href=""><i class="mdi mdi-account-edit"></i> Changer mot de passe <span class="ml-2"></span></a></li>
+                                    <li><a><i class="mdi mdi-account-box-outline"></i> Rôle: <span class="ml-2">{{ Auth::user()->role }}</span></a></li>
+                                    <li><a href="{{ route('change.password') }}"><i class="mdi mdi-account-edit"></i> Changer mot de passe <span class="ml-2"></span></a></li>
                                     <li><a href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="mdi mdi-logout-variant"></i> Déconnexion</a></li>
                                 </ul>

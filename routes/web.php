@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reclassement', 'ReclassementController');
     Route::resource('retraite', 'RetraiteController');
     Route::resource('typeetablissement', 'TypeEtablissementController');
+    Route::resource('avancement', 'AvancementController');
 
     Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
     Route::resource('cadre',  'CadreController', ['only' => ['store', 'index', 'update', 'destroy']]);
@@ -76,4 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api_category', 'HomeController@apiCategory');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');
+
+    Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
+    Route::get('/auto/create','AvancementController@autoCreate')->name('avancement.auto.create');
 });

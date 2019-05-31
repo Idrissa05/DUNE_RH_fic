@@ -65,7 +65,7 @@ class AgentController extends Controller {
   public function store()
   {
       $form = $this->form(AgentForm::class);
-
+      
       if (!$form->isValid()) {
         return redirect()->back()->withErrors($form->getErrors())->withInput();
       }
@@ -192,6 +192,7 @@ class AgentController extends Controller {
                   'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
                   'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
                   'type' => 'Titularisation',
+                  'indice_id' => $form->getRequest()->only('indice_id')['indice_id']
               ]);
           }else {
               DB::table('agents')->where('id', $agent->id)->update(['date_prise_service' => $form->getRequest()->only('date_prise_service')['date_prise_service']]);

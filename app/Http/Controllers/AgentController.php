@@ -27,7 +27,6 @@ class AgentController extends Controller {
       if ($request->ajax()) {
           $agent = Agent::orderBy('created_at', 'desc')->get();
           return Datatables::of($agent)
-              ->addIndexColumn()
               ->addColumn('action', function($agent){
                   return '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
                       '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
@@ -39,7 +38,7 @@ class AgentController extends Controller {
                             </button>
                       </form>';
               })
-              ->rawColumns(['action'])->make(true);
+              ->escapeColumns([])->make(true);
       }
 
       $form = $this->form(AgentEditForm::class, [

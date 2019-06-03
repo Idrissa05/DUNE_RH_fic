@@ -56,7 +56,7 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#date_decision_avancement').flatpickr({altInput: true, altFormat: 'd/m/Y', dateFormat: "Y-m-d", allowInput: true, locale: 'fr'});
+            $('#date_decision_avancement').flatpickr({locale: 'fr'});
             @include('dynamicDropDown')
             @if(isset($edit))
                 $('#agent_id').attr('readonly', true);

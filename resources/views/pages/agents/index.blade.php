@@ -175,7 +175,7 @@
                     {data: 'lieu_naiss', name: 'lieu_naiss'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]", 'route' => route('agent.index')], ['scroll' => '450px'])
-            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_etablissement_acte_naiss, #date_prise_service').flatpickr({'locale' : 'fr'});
+            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_etablissement_acte_naiss, #date_prise_service').flatpickr({altInput: true, altFormat: 'd/m/Y', dateFormat: "Y-m-d", allowInput: true, locale: 'fr'});
 
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){

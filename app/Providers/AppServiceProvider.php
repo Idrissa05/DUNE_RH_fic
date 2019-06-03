@@ -8,6 +8,7 @@ use App\Observers\AgentObserver;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;

@@ -25,7 +25,7 @@ class AgentController extends Controller {
     public function index(Request $request)
   {
       if ($request->ajax()) {
-          $agent = Agent::latest()->orderBy('created_at', 'desc');
+          $agent = Agent::orderBy('created_at', 'desc')->get();
           return Datatables::of($agent)
               ->addIndexColumn()
               ->addColumn('action', function($agent){
@@ -65,7 +65,7 @@ class AgentController extends Controller {
   public function store()
   {
       $form = $this->form(AgentForm::class);
-      
+
       if (!$form->isValid()) {
         return redirect()->back()->withErrors($form->getErrors())->withInput();
       }

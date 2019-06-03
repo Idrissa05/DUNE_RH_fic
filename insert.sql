@@ -1,3 +1,5 @@
+-- SET DATEFORMAT ymd
+-- SET IDENTITY_INSERT categories ON
 INSERT INTO categories (id, name) VALUES
 (1, 'A1'),
 (2, 'A2'),
@@ -8,13 +10,17 @@ INSERT INTO categories (id, name) VALUES
 (7, 'C2'),
 (8, 'D1'),
 (9, 'D2');
+-- SET IDENTITY_INSERT categories OFF
 
+-- SET IDENTITY_INSERT classes ON
 INSERT INTO classes (id, name, description) VALUES
 (1, '1ère Classe', '1ère Classe'),
 (2, '2ème Classe', '2ème Classe'),
 (3, 'Classe Principale', 'Classe Principale'),
 (4, 'Classe Exceptionnelle', 'Classe Exceptionnelle');
+-- SET IDENTITY_INSERT classes OFF
 
+-- SET IDENTITY_INSERT echelons ON
 INSERT INTO echelons (id, name, description, classe_id) VALUES
 (1, 'E1', '', 1),
 (2, 'E2', '', 1),
@@ -30,6 +36,7 @@ INSERT INTO echelons (id, name, description, classe_id) VALUES
 (12, 'E1', '', 3),
 (13, 'E2', '', 3),
 (14, 'E3', '', 3);
+-- SET IDENTITY_INSERT echelons OFF
 
 INSERT INTO diplomes (name) VALUES
 ('Diplome'),
@@ -92,6 +99,7 @@ INSERT INTO diplomes (name) VALUES
 ('PHD'),
 ('PROGRAMMEUR');
 
+-- SET IDENTITY_INSERT ecole_formations ON
 INSERT INTO ecole_formations (id, name) VALUES
 (1, 'ENAM'),
 (2, 'ENS'),
@@ -103,6 +111,7 @@ INSERT INTO ecole_formations (id, name) VALUES
 (8,'EN TAHOUA '),
 (9,'EMS'),
 (10,'UMAD');
+-- SET IDENTITY_INSERT ecole_formations OFF
 
 INSERT INTO equivalence_diplomes (name) VALUES
 ('BEPC'),
@@ -118,21 +127,27 @@ INSERT INTO equivalence_diplomes (name) VALUES
 ('BAC + 7'),
 ('BAC + 8');
 
+-- SET IDENTITY_INSERT maladies ON
 INSERT INTO maladies (id, name) VALUES
 (1, 'Diabète'),
 (2, 'Hypertension Artérielle');
+-- SET IDENTITY_INSERT maladies OFF
 
+-- SET IDENTITY_INSERT matrimoniales ON
 INSERT INTO matrimoniales (id, name) VALUES
 (1, 'Célibataire'),
 (2, 'Marié(e)'),
 (3, 'Divorcé(e)'),
 (4, 'Veuf/Veuve');
+-- SET IDENTITY_INSERT matrimoniales OFF
 
+-- SET IDENTITY_INSERT niveau_etudes ON
 INSERT INTO niveau_etudes (id, name) VALUES
 (1, 'Primaire'),
 (2, 'Moyen'),
 (3, 'Secondaire'),
 (4, 'Supérieur');
+-- SET IDENTITY_INSERT niveau_etudes OFF
 
 INSERT INTO users (name, password, role, created_at, updated_at) VALUES
 ('admin', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 'Administrateur', NULL, NULL);
@@ -491,12 +506,12 @@ INSERT INTO positions (name) VALUES
 ('LICENCIE'),
 ('DEPART P.A.I.P.C.E.'),
 ('CONGE LONGUE DUREE'),
-('CONGE MALADIE SERVIC'),
+('CONGE MALADIE SERVICE'),
 ('CONGE MALADI.ACT.DEV'),
 ('EN ATTENTE NOMINAT'),
 ('REVOQUE'),
 ('STATUT SPECIAL'),
-('SUSPENDU DEMI-SALAIR'),
+('SUSPENDU DEMI-SALAIRE'),
 ('ABANDON DE POSTE'),
 ('TRANSFERT AUX. COLL.'),
 ('ERREUR DE SAISIE');
@@ -630,6 +645,7 @@ INSERT INTO indices(category_id,classe_id,echelon_id,name,value,salary)VALUES
 (1,4,10,'A1CEE3',1008,'351120'),
 (1,4,11,'A1CEE4',1050,'365750');
 
+-- SET IDENTITY_INSERT regions ON
 INSERT INTO regions (id, name) VALUES
 (1,'Agadez'),
 (2,'Diffa'),
@@ -639,7 +655,9 @@ INSERT INTO regions (id, name) VALUES
 (6,'Tillaberi'),
 (7,'Zinder'),
 (8,'Niamey');
+-- SET IDENTITY_INSERT regions OFF
 
+-- SET IDENTITY_INSERT departements ON
 INSERT INTO departements (id,name,region_id)VALUES
 (101,'Aderbissinat',1),
 (102,'Arlit',1),
@@ -709,7 +727,9 @@ INSERT INTO departements (id,name,region_id)VALUES
 (711,'BIRNI''NKAZOE',7),
 (790,'Ville De Zinder',7),
 (890,'Ville De Niamey',8);
+-- SET IDENTITY_INSERT departements OFF
 
+-- SET IDENTITY_INSERT communes ON
 INSERT INTO communes (id,name,departement_id) VALUES
 (10101,'Aderbissinat',101),
 (10201,'Arlit',102),
@@ -982,13 +1002,16 @@ INSERT INTO communes (id,name,departement_id) VALUES
 (89003,'Niamey Arrondissement 3',890),
 (89004,'Niamey Arrondissement 4',890),
 (89005,'Niamey Arrondissement 5',890);
+-- SET IDENTITY_INSERT communes OFF
 
+-- SET IDENTITY_INSERT inspections ON
 INSERT INTO inspections (id, name, commune_id) VALUES
 (1,'INSPECTION 1',89001),
 (2,'INSPECTION 2',89001),
 (3,'INSPECTION 3',89001),
 (4,'INSPECTION 4',89001),
 (5,'INSPECTION 5',89001);
+-- SET IDENTITY_INSERT inspections OFF
 
 INSERT INTO secteur_pedagogiques (name, inspection_id) VALUES
 ('SECTEUR 1',1),
@@ -1002,13 +1025,16 @@ INSERT INTO secteur_pedagogiques (name, inspection_id) VALUES
 ('SECTEUR 1',5),
 ('SECTEUR 2',5);
 
+-- SET IDENTITY_INSERT type_etablissements ON
 INSERT INTO type_etablissements (id,name) VALUES
 (1,'Prés scolaire'),
 (2,'Primaire'),
 (3,'Collège'),
 (4,'Lycées'),
 (5,'CES');
+-- SET IDENTITY_INSERT type_etablissements OFF
 
+-- SET IDENTITY_INSERT etablissements ON
 INSERT INTO etablissements (id,name,secteur_pedagogique_id,type_etablissement_id) VALUES
 (100004,'J/E TCHARMEY',1,2),
 (101003,'MEDERSA AGADEZ',2,1),
@@ -1017,3 +1043,68 @@ INSERT INTO etablissements (id,name,secteur_pedagogique_id,type_etablissement_id
 (109700,'DREN AGADEZ',5,3),
 (109701,'IECBII/M AGADEZ',6,3),
 (109702,'IEB AGADEZ COMMUNE',7,5);
+-- SET IDENTITY_INSERT etablissements OFF
+
+-- SET IDENTITY_INSERT agents ON
+INSERT INTO agents (id, matricule, nom, prenom, date_naiss, lieu_naiss, ref_acte_naiss, date_etablissement_acte_naiss, lieu_etablissement_acte_naiss, sexe, nationnalite, cadre_id, corp_id, type, fonction_id, date_prise_service, created_at, updated_at, deleted_at) VALUES
+(1, '100859', 'MAMANE', 'Balkissa', '1983-12-21', 'Dosso', 'XXXX', '1983-12-28', 'Dosso', 'F', 'Nigérienne', 9, 12, 'Contractuel', NULL, '2005-10-01', '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(2, '0106651A', 'ABDOU', 'HAROUNA', '1980-12-31', 'GOGE/MALBAZA', 'XXX', '1981-01-05', 'GOGE/MALBAZA', 'M', 'Nigérienne', 9, 11, 'Titulaire', 45, NULL, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(3, '100942', 'MAHAMADOU', 'ISSA', '1987-02-21', 'Niamey', 'XXXX', '1987-02-28', 'Niamey', 'M', 'Nigérienne', 13, 17, 'Contractuel', NULL, '2008-11-01', '2019-06-02 23:12:44', '2019-06-02 23:14:26', NULL),
+(4, '0106661B', 'ALI', 'INOUSSA', '1981-11-10', 'Tillabéry', 'XXX', '1981-11-25', 'Tillabéry', 'M', 'Nigérienne', 1, 8, 'Titulaire', 35, NULL, '2019-05-30 23:23:32', '2019-05-31 23:23:32', NULL),
+(5, '0104631C', 'ISSAKA', 'Ousmane', '1979-04-15', 'Tahoua', 'XXX', '1979-11-15', 'Tahoua', 'M', 'Nigérienne', 4, 3, 'Titulaire', 15, NULL, '2019-05-31 23:23:32', '2019-05-31 23:23:32', NULL),
+(6, '0102231A', 'ISSIFOU', 'Abdou', '1985-10-01', 'Zinder', 'XXX', '1985-11-13', 'Zinder', 'M', 'Nigérienne', 7, 18, 'Titulaire', 4, NULL, '2019-06-01 23:23:32', '2019-06-03 23:23:32', NULL),
+(7, '0102568D', 'YAHOUZA', 'Mohamed', '1991-08-14', 'Niamey', 'XXX', '1991-11-05', 'Niamey', 'M', 'Nigérienne', 11, 6, 'Titulaire', 23, NULL, '2019-04-20 23:23:32', '2019-05-31 23:23:32', NULL);
+-- SET IDENTITY_INSERT agents OFF
+
+-- SET IDENTITY_INSERT grades ON
+INSERT INTO grades (id, agent_id, category_id, classe_id, echelon_id, type, ref_avancement, date_decision_avancement, observation_avancement, ref_reclassement, date_reclassement, ref_titularisation, date_titularisation, ref_engagement, date_engagement, indice_id, created_at, updated_at, deleted_at) VALUES
+(1, 1, 6, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(2, 3, 3, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(3, 2, 4, 1, 2, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2013-03-15', 'XXX', '2013-03-15', 53, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(4, 4, 1, 1, 3, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2012-02-05', 'XXX', '2012-02-05', 63, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(5, 5, 2, 2, 6, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2018-12-25', 'XXX', '2018-12-25', 31, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(6, 6, 1, 3, 13, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2010-12-31', 'XXX', '2010-12-31', 89, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(7, 7, 2, 4, 10, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2017-11-21', 'XXX', '2017-11-21', 121, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+-- SET IDENTITY_INSERT grades OFF
+
+INSERT INTO agent_matrimoniale (agent_id, matrimoniale_id, date, created_at, updated_at, deleted_at) VALUES
+(1, 2, '2017-06-15', '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(2, 1, '2012-11-10', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(4, 2, '2013-03-14', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(3, 3, '2010-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(7, 1, '2017-11-10', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(6, 4, '2009-03-14', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(7, 3, '2018-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+
+-- SET IDENTITY_INSERT affectations ON
+INSERT INTO affectations (id, ref, date, date_prise_effet, observation, agent_id, etablissement_id, created_at, updated_at, deleted_at) VALUES
+(1, 'MEN/DRH2547', '2019-05-15', '2019-06-03', NULL, 1, 109700, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(2, 'MEN/DRH25/2017', '2014-06-20', '2014-06-30', NULL, 2, 101011, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(3, 'MEN/DRH123/2018', '2018-12-15', '2019-01-02', NULL, 7, 109701, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(4, 'MEN/DRH2579', '2017-04-20', '2017-05-01', NULL, 3, 109702, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+-- SET IDENTITY_INSERT affectations OFF
+
+-- SET IDENTITY_INSERT formations ON
+INSERT INTO formations (id, date_debut, date_fin, agent_id, ecole_formation_id, diplome_id, niveau_etude_id, equivalence_diplome_id, created_at, updated_at, deleted_at) VALUES
+(1, '2017-09-04', '2019-04-10', 1, 1, 14, 3, 6, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(2, '2008-06-17', '2011-06-30', 2, 1, 15, 4, 7, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+-- SET IDENTITY_INSERT formations OFF
+
+INSERT INTO agent_maladie (agent_id, maladie_id, observation, date_observation, created_at, updated_at, deleted_at) VALUES
+(2, 2, NULL, '2010-06-16', '2019-06-01 23:23:33', '2019-06-01 23:23:33', NULL),
+(4, 1, NULL, '2014-02-16', '2019-06-01 23:23:33', '2019-06-01 23:23:33', NULL),
+(6, 1, NULL, '2017-01-16', '2019-06-01 23:23:33', '2019-06-01 23:23:33', NULL);
+
+-- SET IDENTITY_INSERT enfants ON
+INSERT INTO enfants (id, prenom, date_naiss, lieu_naiss, sexe, agent_id, created_at, updated_at, deleted_at) VALUES
+(1, 'Issaka', '2017-07-20', 'Niamey', 'M', 1, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(2, 'Abdou', '2018-02-25', 'Niamey', 'M', 3, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(3, 'Alissa', '2014-11-02', 'Niamey', 'F', 5, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
+-- SET IDENTITY_INSERT enfants OFF
+
+-- SET IDENTITY_INSERT conjoints ON
+INSERT INTO conjoints (id, matricule, nom, prenom, date_naiss, lieu_naiss, sexe, nationnalite, tel, employeur, profession, ref_acte_mariage, agent_id, created_at, updated_at, deleted_at) VALUES
+(1, '0206648C', 'ABDOU', 'Alassan', '1987-12-31', 'Niamey', 'M', 'Nigérienne', '90 90 90 90', 'MESS', 'Enseigant', 'XXX', 1, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(2, '0306547A', 'ALI', 'IBOU', '1982-11-30', 'Niamey', 'F', 'Nigérienne', '91 90 90 90', 'MEN', 'Enseigante', 'XXX', 5, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
+(3, '0106894D', 'OUSMANE', 'IBRAHIM', '1980-02-27', 'Niamey', 'F', 'Nigérienne', '93 90 90 90', 'DRESS', 'MEDECIN', 'XXX', 4, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
+-- SET IDENTITY_INSERT conjoints OFF

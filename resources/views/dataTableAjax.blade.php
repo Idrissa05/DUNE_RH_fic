@@ -5,6 +5,7 @@ processing: true,
 pageLength: 200,
 lengthMenu: [ 10, 25, 50, 75, 100, 200 ],
 columns: {!! $columns !!},
+columnDefs: {!! $defs ?? "[]"!!},
 ordering: true,
 scrollY: true,
 language: {

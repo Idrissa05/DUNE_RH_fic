@@ -274,7 +274,7 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_affectation, #date_prise_effet, #date_debut, #date_fin, #date_observation, #date_etablissement_acte_naiss').flatpickr({'locale' : 'fr'});
+            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_affectation, #date_prise_effet, #date_debut, #date_fin, #date_observation, #date_etablissement_acte_naiss').flatpickr({altInput: true, altFormat: 'd/m/Y', dateFormat: "Y-m-d", allowInput: true, locale: 'fr'});
 
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){

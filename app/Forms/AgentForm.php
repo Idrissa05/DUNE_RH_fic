@@ -192,7 +192,7 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_observation','date', [
-                'label'=>'Date Observation',
+                'label'=>'Date Observation', 'rules' => 'date|nullable'
             ])
             ->add('observation','textarea', [
                 'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']

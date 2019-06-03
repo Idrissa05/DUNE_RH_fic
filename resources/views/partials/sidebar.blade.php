@@ -6,6 +6,7 @@
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
                 <li><a href="{{ route('affectation.index') }}">Affectations</a></li>
+                <li><a href="{{ route('avancement.index') }}">Avancements</a></li>
                 <li><a href="{{ route('conge.index') }}">Congés</a></li>
                 <li><a href="{{ route('conjoint.index') }}">Conjoints</a></li>
                 <li><a href="{{ route('deces.index') }}">Decès</a></li>

@@ -38,4 +38,9 @@ class Grade extends Model
     {
         return $this->belongsTo('App\Models\Echelon');
     }
+
+    public function indice()
+    {
+        return $this->belongsTo('App\Models\Indice');
+    }
 }

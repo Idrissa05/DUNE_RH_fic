@@ -79,5 +79,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api_indice', 'HomeController@apiIndice');
 
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
-    Route::get('/auto/create','AvancementController@autoCreate')->name('avancement.auto.create');
+    Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');
 });

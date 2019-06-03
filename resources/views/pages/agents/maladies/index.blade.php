@@ -43,7 +43,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Matricule</th> '
+                    <th>Matricule</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Maladies</th>

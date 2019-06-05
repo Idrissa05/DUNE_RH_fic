@@ -78,6 +78,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');
 
+    /**
+     * Les états
+     */
+    Route::get('print-agents', 'PrintController@agents')->name('print.agents');
+
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');
 });

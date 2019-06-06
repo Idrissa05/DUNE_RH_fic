@@ -7,8 +7,6 @@ use Mpdf\Mpdf;
 
 class PrintController extends Controller
 {
-
-
     public function agents() {
         $agents = Agent::all();
 

@@ -6,10 +6,15 @@
     <table class="table table-bordered table table-sm text-center table-striped" style="font-size: 10px;">
         <thead class="thead-dark">
         <tr>
-            <th>#</th>
+            <th>No</th>
+            <th>Matriucle</th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Matriucle</th>
+            <th>Date Naissance</th>
+            <th>Lieu Naissance</th>
+            <th>Sexe</th>
+            <th>Nationnalité</th>
+            <th>Type d'Agent</th>
         </tr>
         </thead>
 
@@ -20,9 +25,14 @@
         @foreach($agents as $agent)
             <tr>
                 <td>{{ $i }}</td>
+                <td>{{ $agent->matricule }}</td>
                 <td>{{ $agent->nom }}</td>
                 <td>{{ $agent->prenom }}</td>
-                <td>{{ $agent->matricule }}</td>
+                <td>{{ $agent->date_naiss }}</td>
+                <td>{{ $agent->lieu_naiss }}</td>
+                <td>{{ $agent->sexe }}</td>
+                <td>{{ $agent->nationnalite }}</td>
+                <td>{{ $agent->type }}</td>
             </tr>
             @php
                 $i++;

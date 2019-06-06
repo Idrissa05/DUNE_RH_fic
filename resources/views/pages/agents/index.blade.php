@@ -5,8 +5,11 @@
         <section class="card card-fluid">
             <h3 class="m-b-0 text-white text-center bg-primary">Liste des Agents</h3>
             <div class="card-body">
-                <div class="table-responsive m-t-0">
+                <div class="row">
                     <a href="{{route('agent.create')}}" class="btn btn-primary"><i class="mdi mdi-plus"></i> Ajouter</a>
+                    <a href="{{route('print.agents')}}" class="btn btn-dark offset-lg-10"><i class="mdi mdi-printer"></i> Imprimer</a>
+                </div>
+                <div class="table-responsive m-t-0">
                     <table id="myTable" class="table table-bordered table-striped">
                         <thead>
                         <tr>

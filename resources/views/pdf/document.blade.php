@@ -160,10 +160,11 @@
 </head>
 <body>
 <table style="margin-left: 180px;" class="text-center">
+    <!--
     <tr>
         <td><h4 class="text-monospace">État</h4></td>
     </tr>
-
+    -->
 </table>
     @yield('content')
 </body>

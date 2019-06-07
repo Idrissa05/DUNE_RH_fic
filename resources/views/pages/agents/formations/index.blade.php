@@ -14,15 +14,16 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            {!! form_row($form->date_debut) !!}
-                            {!! form_row($form->date_fin) !!}
                             {!! form_row($form->agent_id) !!}
                             {!! form_row($form->ecole_formation_id) !!}
+                            {!! form_row($form->date_debut) !!}
+                            {!! form_row($form->equivalence_diplome_id) !!}
+
                         </div>
                         <div class="col-md-6">
                             {!! form_row($form->diplome_id) !!}
                             {!! form_row($form->niveau_etude_id) !!}
-                            {!! form_row($form->equivalence_diplome_id) !!}
+                            {!! form_row($form->date_fin) !!}
                         </div>
                     </div>
                 </div>
@@ -90,28 +91,13 @@
         let $form = $('form')
 
 
-        let b = flatpickr($fin, {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-
-        let a = flatpickr($debut, {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
 
 
         function updateFormation(id) {
             let $el = $('#formation'+id)
             $modal.modal('show')
-            a.setDate($el.attr('data-debut'))
-            b.setDate($el.attr('data-fin'))
+            $debut.val($el.attr('data-debut'))
+            $fin.val($el.attr('data-fin'))
             $ecole.val($el.attr('data-ecole'))
             $diplome.val($el.attr('data-diplome'))
             $niveau.val($el.attr('data-niveau'))
@@ -121,8 +107,8 @@
         }
 
         $modal.on('hidden.bs.modal', function (e) {
-            a.setDate(null)
-            b.setDate(null)
+            $debut.val(null)
+            $fin.val(null)
             $ecole.val(null)
             $diplome.val(null)
             $niveau.val(null)

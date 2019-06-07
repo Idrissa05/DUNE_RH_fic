@@ -13,11 +13,11 @@
                 {!! form_start($form) !!}
                 <div class="modal-body">
 
+                    {!! form_row($form->agent_id) !!}
                     {!! form_row($form->ref_decision) !!}
                     {!! form_row($form->date_debut) !!}
                     {!! form_row($form->date_fin) !!}
                     {!! form_row($form->observation) !!}
-                    {!! form_row($form->agent_id) !!}
 
                 </div>
                 <div class="modal-footer">
@@ -78,28 +78,13 @@
         let $agent = $('#agent_id')
         let $form = $('form')
 
-        let b = flatpickr($fin, {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-
-        let a = flatpickr($debut, {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
 
         function updateConge(id) {
             let $el = $('#conge'+id)
             $modal.modal('show')
             $ref.val($el.attr('data-ref'))
-            a.setDate($el.attr('data-debut'))
-            b.setDate($el.attr('data-fin'))
+            $debut.val($el.attr('data-debut'))
+            $fin.val($el.attr('data-fin'))
             $observation.val($el.attr('data-observation'))
             $agent.val($el.attr('data-agent'))
             $form.attr('action', $el.attr('data-route'))
@@ -108,8 +93,8 @@
 
         $modal.on('hidden.bs.modal', function (e) {
             $ref.val(null)
-            a.setDate(null)
-            b.setDate(null)
+            $debut.val(null)
+            $fin.val(null)
             $observation.val(null)
             $agent.val(null)
             $form.attr('action', '')

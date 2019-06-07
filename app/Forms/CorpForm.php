@@ -22,6 +22,7 @@ class CorpForm extends Form
                 'label' => 'Catégorie',
                 'rules' => 'required|integer',
                 'class' => Category::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Category $category) {
                     return $category->pluck('name', 'id');
                 }

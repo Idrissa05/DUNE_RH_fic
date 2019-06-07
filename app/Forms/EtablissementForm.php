@@ -21,6 +21,7 @@ class EtablissementForm extends Form
                 'label' => 'Secteur pédagogique',
                 'rules' => 'required|integer',
                 'class' => SecteurPedagogique::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (SecteurPedagogique $secteurPedagogique) {
                     return $secteurPedagogique->pluck('name', 'id');
                 }
@@ -29,6 +30,7 @@ class EtablissementForm extends Form
                 'label' => 'Type établissement',
                 'rules' => 'required|integer',
                 'class' => TypeEtablissement::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (TypeEtablissement $typeEtablissement) {
                     return $typeEtablissement->pluck('name', 'id');
                 }

@@ -20,6 +20,7 @@ class EchelonForm extends Form
                 'label' => 'Classe',
                 'rules' => 'required|integer',
                 'class' => Classe::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Classe $classe) {
                     return $classe->pluck('name', 'id');
                 }

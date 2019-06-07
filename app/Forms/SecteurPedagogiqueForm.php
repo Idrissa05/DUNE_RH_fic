@@ -17,6 +17,7 @@ class SecteurPedagogiqueForm extends Form
                 'label' => 'Inspection',
                 'rules' => 'required|integer',
                 'class' => Inspection::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Inspection $inspection) {
                     return $inspection->pluck('name', 'id');
                 }

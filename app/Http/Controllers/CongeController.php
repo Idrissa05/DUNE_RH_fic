@@ -86,7 +86,7 @@ class CongeController extends Controller {
                 return $conge->date_debut->format('d/m/Y');
             })
             ->addColumn('date_fin', function ($conge){
-                return $conge->date_debut->format('d/m/Y');
+                return $conge->date_fin->format('d/m/Y');
             })
             ->addColumn('observation', function ($conge){
                 return $conge->observation;

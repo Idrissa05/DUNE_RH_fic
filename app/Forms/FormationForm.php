@@ -15,16 +15,25 @@ class FormationForm extends Form
     {
         $this->add('date_debut', 'date', [
             'label' => 'Date début',
-            'rules' => 'required|date|before:date_fin'
+            'rules' => 'required|date|before:date_fin',
+            'attr' => [
+                'max' => null,
+                'min' => null
+            ]
 
         ])
             ->add('date_fin', 'date', [
-                'rules' => 'required|date|after:date_debut'
+                'rules' => 'required|date|after:date_debut',
+                'attr' => [
+                    'max' => null,
+                    'min' => null
+                ]
             ])
             ->add('agent_id', 'entity', [
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule', 'id');
                 }
@@ -34,6 +43,7 @@ class FormationForm extends Form
                 'label' => 'École de formation',
                 'rules' => 'required|integer',
                 'class' => EcoleFormation::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (EcoleFormation $ecoleFormation) {
                     return $ecoleFormation->pluck('name', 'id');
                 }
@@ -43,6 +53,7 @@ class FormationForm extends Form
                 'label' => 'Diplôme',
                 'rules' => 'required|integer',
                 'class' => Diplome::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Diplome $diplome) {
                     return $diplome->pluck('name', 'id');
                 }
@@ -53,6 +64,7 @@ class FormationForm extends Form
                 'label' => 'Niveu d\'étude',
                 'rules' => 'required|integer',
                 'class' => NiveauEtude::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (NiveauEtude $niveauEtude) {
                     return $niveauEtude->pluck('name', 'id');
                 }
@@ -62,6 +74,7 @@ class FormationForm extends Form
                 'label' => 'Équivalence diplôme',
                 'rules' => 'required|integer',
                 'class' => EquivalenceDiplome::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
                     return $equivalenceDiplome->pluck('name', 'id');
                 }

@@ -22,6 +22,7 @@ class DeceForm extends Form
             ->add('agent_id','entity', [
                 'class' => Agent::class,
                 'label' => 'Matricule Agent', 'rules' => 'required',
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule','id');
                 }

@@ -18,6 +18,7 @@ class InspectionForm extends Form
                 'label' => 'Commune',
                 'rules' => 'required|integer',
                 'class' => Commune::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Commune $commune) {
                     return $commune->pluck('name', 'id');
                 }

@@ -15,6 +15,7 @@ class AgentMatrimonialeForm extends Form
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule', 'id');
                 }
@@ -23,6 +24,7 @@ class AgentMatrimonialeForm extends Form
                 'label' => 'Matrimoniale',
                 'rules' => 'required|integer',
                 'class' => Matrimoniale::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Matrimoniale $matrimoniale) {
                     return $matrimoniale->pluck('name', 'id');
                 }

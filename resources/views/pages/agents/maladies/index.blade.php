@@ -15,10 +15,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             {!! form_row($form->agent_id) !!}
-                            {!! form_row($form->maladie_id) !!}
+                            {!! form_row($form->observation) !!}
                         </div>
                         <div class="col-md-6">
-                            {!! form_row($form->observation) !!}
+                            {!! form_row($form->maladie_id) !!}
                             {!! form_row($form->date_observation) !!}
                         </div>
                     </div>

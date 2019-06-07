@@ -57,13 +57,6 @@
 
 @section('js')
     <script>
-        flatpickr($('#date_observation'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
         $(function () {
             @include('dataTableAjax', ['columns' => "[
                 { data: 'id', name: 'id' },

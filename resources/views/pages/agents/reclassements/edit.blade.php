@@ -1,8 +1,6 @@
 @extends('layouts.material')
 
-
 @section('content')
-
     <div class="card card-outline-info">
         <div class="card-body">
             @if($reclassement->id)
@@ -12,22 +10,12 @@
             @endif
 
             @include('pages.agents.reclassements.form', ['form' => $form])
-
         </div>
     </div>
 @endsection
+
 @section('js')
     <script>
-
         @include('dynamicDropDown')
-
-        flatpickr($('#date_reclassement'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
     </script>
-
 @endsection

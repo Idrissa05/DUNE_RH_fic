@@ -4,6 +4,8 @@
         {!!  form_row($form->date) !!}
         {!!  form_row($form->ref_decision) !!}
         {!!  form_row($form->date_decision) !!}
+        {!!  form_row($form->lieu) !!}
+        {!!  form_row($form->contact) !!}
     </div>
     <div class="col-md-4">
         {!!  form_row($form->observation) !!}

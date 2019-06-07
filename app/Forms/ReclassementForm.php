@@ -15,7 +15,7 @@ class ReclassementForm extends Form
     {
         $this
             ->add('agent_id', 'entity', [
-                'label' => 'Agent',
+                'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Titulaire::class,
                 'query_builder' => function (Titulaire $titulaire) {
@@ -50,11 +50,17 @@ class ReclassementForm extends Form
             ->add('ref_reclassement', 'text', [
                 'rules' => 'required'
             ])
-            ->add('date_reclassement', 'text', [
+            ->add('date_reclassement', 'date', [
                 'rules' => 'required|date'
             ])
             ->add('indice_id', 'text', [
                 'attr' => ['hidden' => true, 'id' => 'indice_id']
+            ])
+            ->add('indice','text', [
+                'label'=>'Indice', 'attr' => ['disabled' => 'disabled']
+            ])
+            ->add('salary','text', [
+                'label'=>'Salaire', 'attr' => ['disabled' => 'disabled']
             ]);
     }
 }

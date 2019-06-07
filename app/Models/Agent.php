@@ -95,7 +95,7 @@ class Agent extends Model {
 
     public function positions()
     {
-        return $this->belongsToMany('App\Models\Position')->withPivot('ref_decision','date_decision','date_effet','observation')->withTimestamps();
+        return $this->belongsToMany('App\Models\Position')->withPivot('ref_decision','date_decision','date_effet','date_fin','observation')->withTimestamps();
     }
 
     public function getFullNameAttribute() {

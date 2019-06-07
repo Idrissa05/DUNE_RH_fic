@@ -12,6 +12,8 @@ class CreateRetraitesTable extends Migration {
 			$table->date('date');
 			$table->string('ref_decision', 15);
 			$table->date('date_decision');
+            $table->string('lieu', 15);
+            $table->string('contact', 30);
 			$table->string('observation')->nullable();
 			$table->integer('agent_id')->unsigned();
 			$table->timestamps();

@@ -40,6 +40,6 @@
         { data: 'date_reclassement', name: 'date_reclassement' },
         { data: 'actions', name: 'Actions', searchable: false, orderable: false },
     ]", 'route' => route('reclassement.index')], ['scroll' => '450px'])
-    })
+    });
 </script>
 @endsection

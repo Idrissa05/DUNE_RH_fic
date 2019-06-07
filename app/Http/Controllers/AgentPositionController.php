@@ -47,6 +47,7 @@ class AgentPositionController extends Controller
             'ref_decision'=> $request->ref_decision,
             'date_decision'=> $request->date_decision,
             'date_effet'=> $request->date_effet,
+            'date_fin'=> $request->date_fin,
             'observation' => $request->observation,
         ]);
         return redirect()->route('agent-position.index')->with('success', 'Opération effectuée !');
@@ -65,7 +66,7 @@ class AgentPositionController extends Controller
             ->join('positions', 'positions.id', '=', 'agent_position.position_id')
             ->selectRaw("agents.matricule as matricule, agents.nom as nom, agents.prenom as prenom, positions.name as position,
             agent_position.ref_decision as ref_decision, agent_position.date_decision as date_decision, agent_position.date_effet as date_effet,
-            agent_position.observation as observation, agent_position.id as id, agents.id as agent_id, positions.id as position_id
+            agent_position.observation as observation, agent_position.id as id, agents.id as agent_id, positions.id as position_id, agent_position.date_fin
             ")
             ->orderByDesc('agent_position.created_at')
             ->where('agents.deleted_at', '=', null)
@@ -85,6 +86,9 @@ class AgentPositionController extends Controller
             })
             ->addColumn('date_effet', function ($agent){
                 return $agent->date_effet;
+            })
+            ->addColumn('date_fin', function ($agent){
+                return $agent->date_fin;
             })
             ->addColumn('observation', function ($agent){
                 return $agent->observation;

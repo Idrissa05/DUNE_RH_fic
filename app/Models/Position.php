@@ -11,6 +11,6 @@ class Position extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent')->withPivot('ref_decision','date_decision','date_effet','observation')->withTimestamps();
+        return $this->belongsToMany('App\Models\Agent')->withPivot('ref_decision','date_decision','date_effet','date_fin','observation')->withTimestamps();
     }
 }

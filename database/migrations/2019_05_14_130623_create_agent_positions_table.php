@@ -20,6 +20,7 @@ class CreateAgentPositionsTable extends Migration
             $table->string('ref_decision', 30)->nullable();
             $table->date('date_decision');
             $table->date('date_effet');
+            $table->date('date_fin');
             $table->string('observation')->nullable();
             $table->timestamps();
             $table->softDeletes();

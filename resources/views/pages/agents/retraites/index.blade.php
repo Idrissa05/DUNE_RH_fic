@@ -16,6 +16,8 @@
                 <th>Date</th>
                 <th>Ref décision</th> '
                 <th>Date décision</th>
+                <th>Lieu</th>
+                <th>Contact</th>
                 <th>Observation</th>
                 <th>Agent</th>
                 <th>Actions</th>
@@ -34,6 +36,8 @@
         { data: 'date', name: 'date' },
         { data: 'ref_decision', name: 'ref_decision' },
         { data: 'date_decision', name: 'date_decision' },
+        { data: 'lieu', name: 'lieu' },
+        { data: 'contact', name: 'contact' },
         { data: 'observation', name: 'observation' },
         { data: 'agent', name: 'agent' },
         { data: 'actions', name: 'Actions', searchable: false, orderable: false },

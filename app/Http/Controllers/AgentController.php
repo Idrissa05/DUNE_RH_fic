@@ -55,7 +55,7 @@ class AgentController extends Controller {
       $form = $this->form(AgentForm::class, [
           'method' => 'POST',
           'url' => route('agent.store'),
-          'class' => 'validation-wizard wizard-circle'
+          'class' => 'tab-wizard wizard-circle'
       ]);
       return view('pages.agents.create', compact('form'));
   }

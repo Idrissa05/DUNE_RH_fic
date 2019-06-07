@@ -17,22 +17,5 @@
     </div>
 @endsection
 @section('js')
-    <script>
-        flatpickr($('#date'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-
-        flatpickr($('#date_decision'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-    </script>
 
 @endsection

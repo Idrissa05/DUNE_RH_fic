@@ -13,12 +13,12 @@ class CongeForm extends Form
             ->add('date_debut', 'text', [
                 'rules' => 'required|date|before:date_fin'
             ])
-            ->add('date_fin', 'text', [
+            ->add('date_fin', 'date', [
                 'rules' => 'required|date|after:date_debut'
             ])
             ->add('observation', 'text')
             ->add('agent_id', 'entity', [
-                'label' => 'Agent',
+                'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
                 'query_builder' => function (Agent $agent) {

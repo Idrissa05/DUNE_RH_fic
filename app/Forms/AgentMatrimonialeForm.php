@@ -12,7 +12,7 @@ class AgentMatrimonialeForm extends Form
     {
         $this
             ->add('agent_id', 'entity', [
-                'label' => 'Agent',
+                'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
                 'query_builder' => function (Agent $agent) {
@@ -27,7 +27,7 @@ class AgentMatrimonialeForm extends Form
                     return $matrimoniale->pluck('name', 'id');
                 }
             ])
-            ->add('date', 'text', [
+            ->add('date', 'date', [
                 'rules' => 'required|date'
             ]);
     }

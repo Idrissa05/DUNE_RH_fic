@@ -12,18 +12,18 @@ class AffectationForm extends Form
     {
         $this->add('ref', 'text', [
             'rules' => 'required|'
-        ])->add('date', 'text', [
+        ])->add('date', 'date', [
             'rules' => 'required|date',
             'label' => 'Date début'
         ])
-            ->add('date_prise_effet', 'text', [
+            ->add('date_prise_effet', 'date', [
                 'rules' => 'required|date'
             ])->add('observation', 'text', [
                 'rules' => 'required'
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,
-                'label' => 'Agent', 'rules' => 'required',
+                'label' => 'Matricule Agent', 'rules' => 'required',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule','id');
                 }

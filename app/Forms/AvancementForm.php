@@ -14,7 +14,7 @@ class AvancementForm extends Form
     {
             $this->add('agent_id','entity', [
                     'class' => Titulaire::class,
-                    'label' => 'Agent *', 'rules' => 'required',
+                    'label' => 'Matricule Agent *', 'rules' => 'required',
                     'query_builder' => function (Titulaire $titulaire) {
                         return $titulaire->pluck('matricule','id');
                     },
@@ -48,7 +48,7 @@ class AvancementForm extends Form
                     'label' => 'Ref Avancemenet *',
                     'rules' => 'required'
                 ])
-                ->add('date_decision_avancement', 'text', [
+                ->add('date_decision_avancement', 'date', [
                     'label' => 'Date Décision Avancement *',
                     'rules' => 'required|date'
                 ])

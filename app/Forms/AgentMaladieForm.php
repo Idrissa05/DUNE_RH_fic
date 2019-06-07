@@ -12,7 +12,7 @@ class AgentMaladieForm extends Form
     {
         $this
             ->add('agent_id', 'entity', [
-                'label' => 'Agent',
+                'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
                 'query_builder' => function (Agent $agent) {
@@ -32,7 +32,7 @@ class AgentMaladieForm extends Form
                 'rules' => 'required'
 
             ])
-                ->add('date_observation', 'text', [
+                ->add('date_observation', 'date', [
                     'rules' => 'required|date'
                 ]);
     }

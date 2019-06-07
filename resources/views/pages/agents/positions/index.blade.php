@@ -21,6 +21,7 @@
                         <div class="col-md-6">
                             {!! form_row($form->date_decision) !!}
                             {!! form_row($form->date_effet) !!}
+                            {!! form_row($form->date_fin) !!}
                             {!! form_row($form->observation) !!}
                         </div>
                     </div>
@@ -51,6 +52,7 @@
                     <th>Réf. décision</th>
                     <th>Date décision</th>
                     <th>Date effet</th>
+                    <th>Date fin</th>
                     <th>Observation</th>
                     <th>Actions</th>
                 </tr>
@@ -62,22 +64,6 @@
 
 @section('js')
     <script>
-        flatpickr($('#date_decision'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-
-        flatpickr($('#date_effet'), {
-            altInput: true,
-            altFormat: 'd/m/Y',
-            dateFormat: "Y-m-d",
-            allowInput: false,
-            locale: 'fr'
-        })
-
         $(function () {
             @include('dataTableAjax', ['columns' => "[
                 { data: 'id', name: 'id' },
@@ -87,6 +73,7 @@
                 { data: 'ref_decision', name: 'ref_decision' },
                 { data: 'date_decision', name: 'date_decision' },
                 { data: 'date_effet', name: 'date_effet' },
+                { data: 'date_fin', name: 'date_fin' },
                 { data: 'observation', name: 'observation' },
                 { data: 'actions', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('agent-position.index')], ['scroll' => '450px'])

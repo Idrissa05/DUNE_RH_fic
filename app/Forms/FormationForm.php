@@ -13,16 +13,16 @@ class FormationForm extends Form
 {
     public function buildForm()
     {
-        $this->add('date_debut', 'text', [
+        $this->add('date_debut', 'date', [
             'label' => 'Date début',
             'rules' => 'required|date|before:date_fin'
 
         ])
-            ->add('date_fin', 'text', [
+            ->add('date_fin', 'date', [
                 'rules' => 'required|date|after:date_debut'
             ])
             ->add('agent_id', 'entity', [
-                'label' => 'Agent',
+                'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
                 'query_builder' => function (Agent $agent) {

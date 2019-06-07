@@ -9,7 +9,7 @@ class DeceForm extends Form
 {
     public function buildForm()
     {
-        $this->add('date', 'text', [
+        $this->add('date', 'date', [
             'rules' => 'required|date',
             'label' => 'Date'
         ])
@@ -21,7 +21,7 @@ class DeceForm extends Form
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,
-                'label' => 'Agent', 'rules' => 'required',
+                'label' => 'Matricule Agent', 'rules' => 'required',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule','id');
                 }

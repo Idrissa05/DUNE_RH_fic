@@ -9,6 +9,8 @@
         {!!  form_row($form->category_id) !!}
         {!!  form_row($form->echelon_id) !!}
         {!!  form_row($form->date_reclassement) !!}
+        {!!  form_row($form->indice) !!}
+        {!!  form_row($form->salary) !!}
         {!! form_widget($form->indice_id) !!}
         <div class="form-group mt-5">
             <button class="btn btn-primary" type="submit"><i class="mdi mdi-content-save mdi-24px"></i>  Enregistrer</button>

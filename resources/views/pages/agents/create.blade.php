@@ -87,7 +87,7 @@
                                     <div class="form-group">
                                         {!! form_row($form->date_prise_service) !!} </div>
                                 </div>
-                                <div class="col-md-3" id="fonction" hidden>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->fonction_id) !!} </div>
                                 </div>
@@ -274,22 +274,20 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#date_naiss, #date, #date_engagement, #date_titularisation, #date_prise_service, #date_affectation, #date_prise_effet, #date_debut, #date_fin, #date_observation, #date_etablissement_acte_naiss').flatpickr({'locale' : 'fr'});
-
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){
                     $("label[for='matricule']").text("N° Identifiant");
-                    $('#titulaire, #indice, #salary, #echelon, #fonction, #classe').hide();
-                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #fonction_id').removeAttr('required').val('');
+                    $('#titulaire, #indice, #salary, #echelon, #classe').hide();
+                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').removeAttr('required').val('');
                     $('#contractuel').removeAttr('hidden').show();
                     $('#date_prise_service').attr('required', true);
                 }else if($("#type option:selected").val() == 'Titulaire'){
                     $("label[for='matricule']").text("N° Matricule");
                     $('#contractuel').hide();
                     $('#date_prise_service').removeAttr('required').val('');
-                    $('#titulaire, #fonction, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
-                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #fonction_id').attr('required', true);
-                }else $('#titulaire, #contractuel, #fonction, #classe, #echelon, #indice, #salary').hide();
+                    $('#titulaire, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
+                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').attr('required', true);
+                }else $('#titulaire, #contractuel, #classe, #echelon, #indice, #salary').hide();
             });
 
             @include('dynamicDropDown')

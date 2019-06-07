@@ -11,11 +11,11 @@ class ExperienceForm extends Form
     {
         $this->add('organisation', 'text', [
             'rules' => 'required|'
-        ])->add('date_debut', 'text', [
+        ])->add('date_debut', 'date', [
             'rules' => 'required|date|before:date_fin',
             'label' => 'Date début'
         ])
-            ->add('date_fin', 'text', [
+            ->add('date_fin', 'date', [
                 'rules' => 'required|date|after:date_debut'
             ])->add('fonction', 'text', [
                 'rules' => 'required'
@@ -26,7 +26,7 @@ class ExperienceForm extends Form
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,
-                'label' => 'Agent', 'rules' => 'required',
+                'label' => 'Matricule Agent', 'rules' => 'required',
                 'query_builder' => function (Agent $agent) {
                     return $agent->pluck('matricule','id');
                 }

@@ -77,7 +77,7 @@ class AgentEditForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('fonction_id','entity', [
-                'class' => Fonction::class,
+                'class' => Fonction::class, 'rules' => 'required',
                 'label' => 'Fonction *',
                 'query_builder' => function (Fonction $fonction) {
                     return $fonction->pluck('name','id');

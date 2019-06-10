@@ -1,10 +1,10 @@
 @extends('layouts.material')
 
 @section('content')
+    <h3 class="m-b-0 text-white text-center bg-primary">Changement de mot de passe</h3>
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Changement de mot de passe</h3>
 
             @if($errors->any())
                 <ul>

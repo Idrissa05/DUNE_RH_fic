@@ -2,10 +2,10 @@
 
 
 @section('content')
+    <h3 class="m-b-0 text-white text-center bg-primary">Les retraites</h3>
 
 <div class="card card-outline-info">
     <div class="card-body">
-        <h3 class="text-center label-default">Les retraites</h3>
 
         <a href="{{ route('retraite.create') }}" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></a>
 

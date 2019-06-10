@@ -4,12 +4,12 @@
         {!!  form_row($form->agent_id) !!}
         {!!  form_row($form->classe_id) !!}
         {!!  form_row($form->ref_reclassement) !!}
+        {!!  form_row($form->indice) !!}
     </div>
     <div class="col-md-4">
         {!!  form_row($form->category_id) !!}
         {!!  form_row($form->echelon_id) !!}
         {!!  form_row($form->date_reclassement) !!}
-        {!!  form_row($form->indice) !!}
         {!!  form_row($form->salary) !!}
         {!! form_widget($form->indice_id) !!}
         <div class="form-group mt-5">

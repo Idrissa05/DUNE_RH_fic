@@ -33,9 +33,10 @@
     </div>
 
 
+    <h3 class="m-b-0 text-white text-center bg-primary">Agent maladie</h3>
+
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Agent maladie</h3>
 
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
 

@@ -33,10 +33,10 @@
             </div>
         </div>
     </div>
+    <h3 class="m-b-0 text-white text-center bg-primary">Les indices</h3>
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Les indices</h3>
 
 
             <table class="table table-bordered text-center" id="myTable">

@@ -2,10 +2,10 @@
 
 
 @section('content')
+    <h3 class="m-b-0 text-white text-center bg-primary">Système</h3>
 
     <div class="card card-outline-info">
         <div class="card-body">
-            <h3 class="text-center label-default">Système</h3>
             {!! form_start($form) !!}
             <div class="row">
                 <div class="col-sm-6 offset-sm-3">

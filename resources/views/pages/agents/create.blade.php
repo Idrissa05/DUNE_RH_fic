@@ -111,11 +111,11 @@
                                     <div class="form-group">
                                         {!! form_row($form->echelon_id) !!} </div>
                                 </div>
-                                <div class="col-md-3" id="indice" hidden>
+                                <div class="col-md-3" id="indices" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->indice) !!} </div>
                                 </div>
-                                <div class="col-md-3" id="salary" hidden>
+                                <div class="col-md-3" id="salaries" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->salary) !!} </div>
                                 </div>
@@ -277,7 +277,7 @@
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){
                     $("label[for='matricule']").text("N° Identifiant");
-                    $('#titulaire, #indice, #salary, #echelon, #classe').hide();
+                    $('#titulaire, #indices, #salaries, #echelon, #classe').hide();
                     $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').removeAttr('required').val('');
                     $('#contractuel').removeAttr('hidden').show();
                     $('#date_prise_service').attr('required', true);
@@ -285,9 +285,9 @@
                     $("label[for='matricule']").text("N° Matricule");
                     $('#contractuel').hide();
                     $('#date_prise_service').removeAttr('required').val('');
-                    $('#titulaire, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
+                    $('#titulaire, #classe, #echelon, #indices, #salaries').removeAttr('hidden').show();
                     $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').attr('required', true);
-                }else $('#titulaire, #contractuel, #classe, #echelon, #indice, #salary').hide();
+                }else $('#titulaire, #contractuel, #classe, #echelon, #indices, #salaries').hide();
             });
 
             @include('dynamicDropDown')

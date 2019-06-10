@@ -142,11 +142,11 @@
                                     <div class="form-group">
                                         {!! form_row($form->echelon_id) !!} </div>
                                 </div>
-                                <div class="col-md-4" id="indice" hidden>
+                                <div class="col-md-4" id="indices" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->indice) !!} </div>
                                 </div>
-                                <div class="col-md-4" id="salary" hidden>
+                                <div class="col-md-4" id="salaries" hidden>
                                     <div class="form-group">
                                         {!! form_row($form->salary) !!} </div>
                                 </div>
@@ -181,7 +181,7 @@
             $('#type').on('change', function(e){
                 if($("#type option:selected").val() == 'Contractuel'){
                     $("label[for='matricule']").text("N° Identifiant");
-                    $('#titulaire, #indice, #salary, #echelon, #classe').hide();
+                    $('#titulaire, #indices, #salaries, #echelon, #classe').hide();
                     $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').removeAttr('required').val('');
                     $('#contractuel').removeAttr('hidden').show();
                     $('#date_prise_service').attr('required', true);
@@ -189,12 +189,10 @@
                     $("label[for='matricule']").text("N° Matricule");
                     $('#contractuel').hide();
                     $('#date_prise_service').removeAttr('required').val('');
-                    $('#titulaire, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
+                    $('#titulaire, #classe, #echelon, #indices, #salaries').removeAttr('hidden').show();
                     $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').attr('required', true);
-                }else $('#titulaire, #contractuel, #classe, #echelon, #indice, #salary').hide();
+                }else $('#titulaire, #contractuel, #classe, #echelon, #indices, #salaries').hide();
             });
-
-            @include('dynamicDropDown')
         });
 
         function editData(id) {
@@ -221,7 +219,7 @@
                     $('#category_id').val(data[0].grades[0].category_id);
                     if($("#type option:selected").val() == 'Contractuel'){
                         $("label[for='matricule']").text("N° Identifiant");
-                        $('#titulaire, #indice, #salary, #echelon, #classe').hide();
+                        $('#titulaire, #indices, #salaries, #echelon, #classe').hide();
                         $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').removeAttr('required').val('');
                         $('#contractuel').removeAttr('hidden').show();
                         $('#date_prise_service').attr('required', true).val(data[0].date_prise_service);
@@ -230,7 +228,7 @@
                         $("label[for='matricule']").text("N° Matricule");
                         $('#contractuel').hide();
                         $('#date_prise_service').removeAttr('required').val('');
-                        $('#titulaire, #classe, #echelon, #indice, #salary').removeAttr('hidden').show();
+                        $('#titulaire, #classe, #echelon, #indices, #salaries').removeAttr('hidden').show();
                         $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id').attr('required', true);
                         $('#fonction_id').val(data[0].fonction_id);
                         $('#classe_id').val(data[0].grades[0].classe_id);
@@ -239,13 +237,13 @@
                         $('#date_engagement').val(data[0].grades[0].date_engagement);
                         $('#ref_titularisation').val(data[0].grades[0].ref_titularisation);
                         $('#date_titularisation').val(data[0].grades[0].date_titularisation);
-                        $("#indice input:text").val('');
-                        $("#salary input:text").val('');
+                        $("#indice").val('');
+                        $("#salary").val('');
                         $.get('/api_indice?category_id=' + data[0].grades[0].category_id + '&classe_id=' + data[0].grades[0].classe_id + '&echelon_id=' + data[0].grades[0].echelon_id,function(data) {
-                            $("#indice input:text").val(data[0].value);
-                            $("#salary input:text").val(data[0].salary);
+                            $("#indice").val(data[0].value);
+                            $("#salary").val(data[0].salary);
                         });
-                    }else $('#titulaire, #contractuel, #classe, #echelon, #indice, #salary').hide();
+                    }else $('#titulaire, #contractuel, #classe, #echelon, #indices, #salaries').hide();
                 },
                 error : function() {
                     swal({
@@ -266,7 +264,7 @@
         @if($errors->any())
             $('#edit').modal('show');
         @endif
-
+        @include('dynamicDropDown')
     </script>
     <script src="{{asset('material/plugins/wizard/jquery.validate.min.js')}}"></script>
     <script src="{{asset('material/plugins/wizard/steps.js')}}"></script>

@@ -88,7 +88,9 @@ class RetraiteController extends Controller {
     public function destroy(Retraite $retraite)
     {
         try {
-            $retraite->delete();
+
+            $retraite->agent->restore();
+            $retraite->forceDelete();
         }catch (\Exception $exception) {
             return redirect()->route('retraite.index')->with('danger', 'Impossible de supprimer');
 

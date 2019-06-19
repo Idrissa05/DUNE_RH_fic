@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Agent;
+use App\Models\Category;
 use App\Models\Corp;
 use App\Models\Echelon;
 use App\Models\Indice;
+use App\Models\Matrimoniale;
+use App\Models\Position;
 use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
@@ -20,7 +24,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        $categories = Category::all();
+        $agents = Agent::all();
+        $corps = Corp::all();
+        $positions = Position::all();
+        $matrimoniales = Matrimoniale::all();
+        return view('home', compact('categories', 'agents', 'corps', 'positions', 'matrimoniales'));
     }
 
     public function apiCategory(){
@@ -32,6 +41,10 @@ class HomeController extends Controller
     }
 
     public function apiIndice(){
-        return response()->json(Indice::where('category_id', Input::get('category_id'))->where('classe_id', Input::get('classe_id'))->where('echelon_id', Input::get('echelon_id'))->get(['id','value','salary']));
+        return response()
+            ->json(Indice::where('category_id', Input::get('category_id'))
+                ->where('classe_id', Input::get('classe_id'))
+                ->where('echelon_id', Input::get('echelon_id'))
+                ->get(['id','value','salary']));
     }
 }

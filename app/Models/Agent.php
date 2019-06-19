@@ -15,7 +15,7 @@ class Agent extends Model {
         'Contractuel' => Contractuel::class,
         'Titulaire' => Titulaire::class,
     ];
-	protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at', 'date_naiss', 'date_etablissement_acte_naiss', 'date_prise_service'];
 
 
 	public function conges()

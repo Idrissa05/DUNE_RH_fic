@@ -11,6 +11,7 @@
                 <div class="col-sm-6 offset-sm-3">
                     {!! form_row($form->name) !!}
                     {!! form_row($form->theme) !!}
+                    {!! form_row($form->age_retraite) !!}
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Enregistrer</button>
                     </div>

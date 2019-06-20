@@ -78,6 +78,14 @@
                         <td>Date prise de service :</td>
                         <td>{{ $agent->date_prise_service->format('d/m/Y') }}</td>
                     </tr>
+                    <tr>
+                        <td>Nombre de conjoint(e)s :</td>
+                        <td>{{ $agent->conjoints->count() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre d'enfants :</td>
+                        <td>{{ $agent->enfants->count() }}</td>
+                    </tr>
                 </table>
             </td>
         </tr>

@@ -26,7 +26,7 @@
                 <td>{{ $agent->matricule }}</td>
                 <td>{{ $agent->nom }}</td>
                 <td>{{ $agent->prenom }}</td>
-                <td>{{ $agent->date_naiss->format('d/m/Y') }}</td>
+                <td>{{ formaterDate($agent->date_naiss) }}</td>
                 <td>{{ $agent->lieu_naiss }}</td>
                 <td>{{ $agent->corp->name }}</td>
             </tr>

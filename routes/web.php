@@ -92,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/print-positions', 'PrintController@listParPosition')->name('prints.parposition');
     Route::get('/print-matrimoniales', 'PrintController@listParMatrimoniale')->name('prints.parmatrimoniale');
     Route::get('/print-infos', 'PrintController@infos')->name('prints.infos');
+    Route::get('/print-historique-avancement', 'PrintController@history')->name('prints.history');
 
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');

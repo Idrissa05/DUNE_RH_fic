@@ -23,7 +23,8 @@ class CreateConfigsTable extends Migration
 
         \Illuminate\Support\Facades\DB::table('configs')->insert([
             'name' => 'RHManager',
-            'theme' => 'purple.css'
+            'theme' => 'purple.css',
+            'age_retraite' => 60
         ]);
     }
 

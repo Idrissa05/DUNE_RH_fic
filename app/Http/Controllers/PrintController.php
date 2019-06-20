@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Config;
 use App\Models\Agent;
+use App\Models\Avancement;
 use function foo\func;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
@@ -105,6 +106,14 @@ class PrintController extends Controller
         $agent->load('enfants', 'conjoints', 'formations', 'corp', 'cadre', 'experiences');
         $mpdf = new Mpdf();
         $view = view('pdf.infos', ['agent' => $agent])->render();
+        $mpdf->WriteHTML($view);
+        $mpdf->Output();
+    }
+
+    public function history(Request $request) {
+        $avancements = Avancement::where('agent_id', '=', $request->agent)->get();
+        $mpdf = new Mpdf();
+        $view = view('pdf.avancements', ['avancements' => $avancements])->render();
         $mpdf->WriteHTML($view);
         $mpdf->Output();
     }

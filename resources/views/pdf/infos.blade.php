@@ -26,7 +26,7 @@
                     </tr>
                     <tr>
                         <td>Date de naissance :</td>
-                        <td>{{ $agent->date_naiss->format('d/m/Y') }}</td>
+                        <td>{{ formaterDate($agent->date_naiss) }}</td>
                     </tr>
                     <tr>
                         <td>Lieu de naissance :</td>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td>Date établissement acte :</td>
-                        <td>{{ $agent->date_etablissement_acte_naiss->format('d/m/Y') }}</td>
+                        <td>{{ formaterDate($agent->date_etablissement_acte_naiss) }}</td>
                     </tr>
                     <tr>
                         <td>Lieu établissement acte :</td>
@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                         <td>Date prise de service :</td>
-                        <td>{{ $agent->date_prise_service->format('d/m/Y') }}</td>
+                        <td>{{ $agent->date_prise_service ? formaterDate($agent->date_prise_service) : '' }}</td>
                     </tr>
                     <tr>
                         <td>Nombre de conjoint(e)s :</td>
@@ -121,7 +121,7 @@
                 <td>{{ $conjoint->matricule }}</td>
                 <td>{{ $conjoint->nom }}</td>
                 <td>{{ $conjoint->prenom }}</td>
-                <td>{{ $conjoint->date_naiss->format('d/m/Y') }}</td>
+                <td>{{ formaterDate($conjoint->date_naiss) }}</td>
                 <td>{{ $conjoint->lieu_naiss }}</td>
                 <td>{{ $conjoint->sexe }}</td>
                 <td>{{ $conjoint->nationnalite }}</td>
@@ -157,10 +157,10 @@
         @foreach($agent->enfants as $enfant)
             <tr>
                 <td>{{ $i }}</td>
-                <td>{{ $conjoint->prenom }}</td>
-                <td>{{ $conjoint->date_naiss->format('d/m/Y') }}</td>
-                <td>{{ $conjoint->lieu_naiss }}</td>
-                <td>{{ $conjoint->sexe }}</td>
+                <td>{{ $enfant->prenom }}</td>
+                <td>{{ formaterDate($enfant->date_naiss) }}</td>
+                <td>{{ $enfant->lieu_naiss }}</td>
+                <td>{{ $enfant->sexe }}</td>
             </tr>
             @php
                 $i++;
@@ -228,8 +228,8 @@
             <tr>
                 <td>{{ $i }}</td>
                 <td>{{ $experience->organisation }}</td>
-                <td>{{ $experience->date_debut->format('d/m/Y') }}</td>
-                <td>{{ $experience->date_fin->format('d/m/Y') }}</td>
+                <td>{{ formaterDate($experience->date_debut) }}</td>
+                <td>{{ formaterDate($experience->date_fin) }}</td>
                 <td>{{ $experience->fonction }}</td>
                 <td>{{ $experience->tache}}</td>
                 <td>{{ $experience->observation}}</td>

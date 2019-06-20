@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\Models\Cadre;
+use App\Models\CategoryAuxiliaire;
 use App\Models\Category;
 use App\Models\Classe;
 use App\Models\Corp;
@@ -24,7 +25,7 @@ class AgentForm extends Form
         $this
             //******************************** Agents *****************************
             ->add('matricule','text',[
-                'label'=>'Identifiant *', 'rules' => 'required|string'
+                'label'=>'Identifiant *', 'rules' => 'required|string|unique:agents'
             ])
             ->add('nom','text', [
                 'label'=>'Nom *', 'rules' => 'required|string'
@@ -57,7 +58,7 @@ class AgentForm extends Form
             ])
             ->add('type','select', [
                 'label'=>'Type d\'Agent *', 'rules' => 'required',
-                'choices' => ['Contractuel' => 'Contractuel', 'Titulaire' => 'Titulaire'],
+                'choices' => ['Auxiliaire' => 'Auxiliaire','Contractuel' => 'Contractuel', 'Titulaire' => 'Titulaire'],
                 'empty_value' => 'Sélectionner'
             ])
             ->add('cadre_id','entity', [
@@ -112,9 +113,17 @@ class AgentForm extends Form
             ->add('date_titularisation','date', [
                 'label'=>'Date Titularisation *', 'rules' => 'date|nullable',
             ])
+            ->add('category_auxiliaire_id','entity', [
+                'class' => CategoryAuxiliaire::class,
+                'label' => 'Catégorie *',
+                'query_builder' => function (CategoryAuxiliaire $categoryAuxiliaire) {
+                    return $categoryAuxiliaire->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
+            ])
             ->add('category_id','entity', [
                 'class' => Category::class,
-                'label' => 'Catégorie *', 'rules' => 'required',
+                'label' => 'Catégorie *',
                 'query_builder' => function (Category $category) {
                     return $category->pluck('name','id');
                 },

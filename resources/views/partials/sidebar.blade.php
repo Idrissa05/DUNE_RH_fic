@@ -5,6 +5,7 @@
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span class="hide-menu">Agents </span></a>
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{{ route('agent.index') }}">Liste agents</a></li>
+                <li><a href="{{ route('migration.index') }}">Migrations agents</a></li>
                 <li><a href="{{ route('affectation.index') }}">Affectations</a></li>
                 <li><a href="{{ route('avancement.index') }}">Avancements</a></li>
                 <li><a href="{{ route('conge.index') }}">Congés</a></li>
@@ -29,6 +30,7 @@
                 <li><a href="{{ route('cadre.index') }}">Cadres</a></li>
                 <li><a href="{{ route('fonction.index') }}">Fonctions</a></li>
                 <li><a href="{{ route('indice.index') }}">Indices</a></li>
+                <li><a href="{{ route('categoryAuxiliaire.index') }}">Catégories Auxiliaires</a></li>
                 <li><a href="{{ route('category.index') }}">Catégories</a></li>
                 <li><a href="{{ route('classe.index') }}">Classes</a></li>
                 <li><a href="{{ route('echelon.index') }}">Échelons</a></li>
@@ -53,6 +55,6 @@
 
             </ul>
         </li>
-
+        <!--<li> <a class="waves-effect waves-dark" href="{{ route('report.index') }}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Génération de Requêtes</span></a>-->
     </ul>
 </nav>

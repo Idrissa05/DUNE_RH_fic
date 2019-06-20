@@ -15,13 +15,19 @@ class Grade extends Model
         'Avancement' => Avancement::class,
         'Reclassement' => Reclassement::class,
         'Titularisation' => Titularisation::class,
-        'Contrat' => Contrat::class
+        'Contrat' => Contrat::class,
+        'TitularisationAuxiliaire' => TitularisationAuxiliaire::class
     ];
     protected $dates = ['deleted_at'];
 
     public function agent()
     {
         return $this->belongsTo('App\Models\Agent');
+    }
+
+    public function categoryAuxiliaire()
+    {
+        return $this->belongsTo('App\Models\CategoryAuxiliaire');
     }
 
     public function category()
@@ -42,5 +48,10 @@ class Grade extends Model
     public function indice()
     {
         return $this->belongsTo('App\Models\Indice');
+    }
+
+    public function agent_migrations()
+    {
+        return $this->hasMany('App\Models\AgentMigration');
     }
 }

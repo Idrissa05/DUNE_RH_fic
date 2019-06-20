@@ -3,18 +3,12 @@
 namespace App\Forms;
 
 use App\Models\Cadre;
+use App\Models\CategoryAuxiliaire;
 use App\Models\Category;
 use App\Models\Classe;
 use App\Models\Corp;
-use App\Models\Diplome;
 use App\Models\Echelon;
-use App\Models\EcoleFormation;
-use App\Models\EquivalenceDiplome;
-use App\Models\Etablissement;
 use App\Models\Fonction;
-use App\Models\Maladie;
-use App\Models\Matrimoniale;
-use App\Models\NiveauEtude;
 use Kris\LaravelFormBuilder\Form;
 
 class AgentEditForm extends Form
@@ -55,10 +49,8 @@ class AgentEditForm extends Form
             ->add('nationnalite','text', [
                 'label'=>'Nationnalité *', 'rules' => 'required|string'
             ])
-            ->add('type','select', [
-                'label'=>'Type d\'Agent *', 'rules' => 'required',
-                'choices' => ['Contractuel' => 'Contractuel', 'Titulaire' => 'Titulaire'],
-                'empty_value' => 'Sélectionner'
+            ->add('type','text', [
+                'label'=>'Type d\'Agent *', 'rules' => 'required', 'attr' => ['readonly' => true],
             ])
             ->add('cadre_id','entity', [
                 'class' => Cadre::class,
@@ -70,7 +62,7 @@ class AgentEditForm extends Form
             ])
             ->add('corp_id','entity', [
                 'class' => Corp::class,
-                'label' => 'Corps *', 'rules' => 'required',
+                'label' => 'Corps *', //'rules' => 'required',
                 'query_builder' => function (Corp $corp) {
                     return $corp->pluck('name','id');
                 },
@@ -100,9 +92,17 @@ class AgentEditForm extends Form
             ->add('date_titularisation','date', [
                 'label'=>'Date Titularisation *', 'rules' => 'date|nullable',
             ])
+            ->add('category_auxiliaire_id','entity', [
+                'class' => CategoryAuxiliaire::class,
+                'label' => 'Catégorie *',
+                'query_builder' => function (CategoryAuxiliaire $categoryAuxiliaire) {
+                    return $categoryAuxiliaire->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
+            ])
             ->add('category_id','entity', [
                 'class' => Category::class,
-                'label' => 'Catégorie *', 'rules' => 'required',
+                'label' => 'Catégorie *',
                 'query_builder' => function (Category $category) {
                     return $category->pluck('name','id');
                 },

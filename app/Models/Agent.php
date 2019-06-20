@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tightenco\Parental\HasChildren;
@@ -14,9 +15,9 @@ class Agent extends Model {
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
         'Titulaire' => Titulaire::class,
+        'Auxiliaire' => Auxiliaire::class
     ];
 	protected $dates = ['deleted_at'];
-
 
 	public function conges()
 	{
@@ -56,6 +57,11 @@ class Agent extends Model {
     public function grades()
     {
         return $this->hasMany('App\Models\Grade');
+    }
+
+    public function agent_migration()
+    {
+        return $this->hasOne('App\Models\AgentMigration');
     }
 
     public function retraite()

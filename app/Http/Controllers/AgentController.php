@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Forms\AgentEditForm;
 use App\Models\Affectation;
+use App\Models\Auxiliaire;
 use App\Models\Conjoint;
 use App\Models\Contractuel;
 use App\Models\Contrat;
 use App\Models\Enfant;
 use App\Models\Titulaire;
 use App\Models\Titularisation;
+use App\Models\TitularisationAuxiliaire;
 use Illuminate\Http\Request;
 use App\Forms\AgentForm;
 use App\Models\Agent;
@@ -55,7 +57,7 @@ class AgentController extends Controller {
       $form = $this->form(AgentForm::class, [
           'method' => 'POST',
           'url' => route('agent.store'),
-          'class' => 'tab-wizard wizard-circle'
+          'class' => 'validation-wizard wizard-circle'
       ]);
       return view('pages.agents.create', compact('form'));
   }
@@ -84,6 +86,12 @@ class AgentController extends Controller {
                   // Insertion Grade
                   $contrat = new Contrat($form->getRequest()->all());
                   $agent->grades()->save($contrat);
+              }elseif($form->getRequest()->only('type')['type'] == 'Auxiliaire') {
+                  // Inserion Agent Auxiliaire
+                  $agent = Auxiliaire::create($form->getRequest()->all());
+                  // Insertion Grade
+                  $auxiliaire = new TitularisationAuxiliaire($form->getRequest()->all());
+                  $agent->grades()->save($auxiliaire);
               }else return redirect()->route('agent.create')->with('danger', 'Opération non effectuée, Erreur technique !');
 
               // Inserion Situation Matrimoniale
@@ -163,7 +171,9 @@ class AgentController extends Controller {
   public function edit($id)
   {
       $agent = Agent::findOrFail($id);
-      return response()->json([$agent, $agent->grades]);
+      if($agent->grades->count() == 1){
+          return response()->json([$agent, $agent->grades->first()]);
+      }else return response()->json([$agent, false]);
   }
 
 
@@ -180,35 +190,47 @@ class AgentController extends Controller {
 
           $agent->update($form->getRequest()->all());
 
-          if($form->getRequest()->only('type')['type'] == 'Titulaire'){
-              DB::table('agents')->where('id', $agent->id)->update(['fonction_id' => $form->getRequest()->only('fonction_id')['fonction_id']]);
-              $agent->grades()->update([
-                  'category_id' => $form->getRequest()->only('category_id')['category_id'],
-                  'classe_id' => $form->getRequest()->only('classe_id')['classe_id'],
-                  'echelon_id' => $form->getRequest()->only('echelon_id')['echelon_id'],
-                  'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
-                  'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
-                  'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
-                  'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
-                  'type' => 'Titularisation',
-                  'indice_id' => $form->getRequest()->only('indice_id')['indice_id']
-              ]);
-          }else {
-              DB::table('agents')->where('id', $agent->id)->update(['date_prise_service' => $form->getRequest()->only('date_prise_service')['date_prise_service']]);
-              $agent->grades()->update([
-                  'category_id' => $form->getRequest()->only('category_id')['category_id'],
-                  'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
-                  'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
-                  'type' => 'Contrat',
-              ]);
+          if($agent->grades->count() == 1){
+              if($form->getRequest()->only('type')['type'] == 'Titulaire'){
+                  $agent->grades()->update([
+                      'category_id' => $form->getRequest()->only('category_id')['category_id'],
+                      'classe_id' => $form->getRequest()->only('classe_id')['classe_id'],
+                      'echelon_id' => $form->getRequest()->only('echelon_id')['echelon_id'],
+                      'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
+                      'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
+                      'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
+                      'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
+                      //'type' => 'Titularisation',
+                      'indice_id' => $form->getRequest()->only('indice_id')['indice_id']
+                  ]);
+              }else if($form->getRequest()->only('type')['type'] == 'Contractuel') {
+                  DB::table('agents')->where('id', $agent->id)->update(['date_prise_service' => $form->getRequest()->only('date_prise_service')['date_prise_service']]);
+                  $agent->grades()->update([
+                      'category_id' => $form->getRequest()->only('category_id')['category_id'],
+                      'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
+                      'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
+                      //'type' => 'Contrat',
+                  ]);
+              }else if($form->getRequest()->only('type')['type'] == 'Auxiliaire'){
+                  $agent->grades()->update([
+                      'category_auxiliaire_id' => $form->getRequest()->only('category_auxiliaire_id')['category_auxiliaire_id'],
+                      'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
+                      'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
+                      'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
+                      'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
+                      //'type' => 'TitularisationAuxiliaire'
+                  ]);
+              }else return false;
           }
               DB::commit();
           }
       catch (\Exception $e) {
           DB::rollBack();
+          if($e->getCode() == '23000'){
+              return redirect()->route('agent.index')->with('danger', 'Opération non effectuée. \n Risque de doublon, ce matricule existe déjà !');
+          }
           return redirect()->route('agent.index')->with('danger', 'Opération non effectuée, Erreur technique !');
       }
-
       return redirect()->route('agent.index')->with('success', 'Opération effectuée avec succès !');
   }
 

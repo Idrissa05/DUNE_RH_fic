@@ -12,6 +12,18 @@ INSERT INTO categories (id, name) VALUES
 (9, 'D2');
 -- SET IDENTITY_INSERT categories OFF
 
+-- SET IDENTITY_INSERT categories ON
+INSERT INTO category_auxiliaires (id, name) VALUES
+(1, '1ère Catégorie'),
+(2, '2ème Catégorie'),
+(3, '3ème Catégorie'),
+(4, '4ème Catégorie'),
+(5, '5ème Catégorie'),
+(6, '6ème Catégorie'),
+(7, '7ème Catégorie'),
+(8, '8ème Catégorie');
+-- SET IDENTITY_INSERT categories OFF
+
 -- SET IDENTITY_INSERT classes ON
 INSERT INTO classes (id, name, description) VALUES
 (1, '1ère Classe', '1ère Classe'),
@@ -1053,18 +1065,20 @@ INSERT INTO agents (id, matricule, nom, prenom, date_naiss, lieu_naiss, ref_acte
 (4, '0106661B', 'ALI', 'INOUSSA', '1981-11-10', 'Tillabéry', 'XXX', '1981-11-25', 'Tillabéry', 'M', 'Nigérienne', 1, 8, 'Titulaire', 35, NULL, '2019-05-30 23:23:32', '2019-05-31 23:23:32', NULL),
 (5, '0104631C', 'ISSAKA', 'Ousmane', '1979-04-15', 'Tahoua', 'XXX', '1979-11-15', 'Tahoua', 'M', 'Nigérienne', 4, 3, 'Titulaire', 15, NULL, '2019-05-31 23:23:32', '2019-05-31 23:23:32', NULL),
 (6, '0102231A', 'ISSIFOU', 'Abdou', '1985-10-01', 'Zinder', 'XXX', '1985-11-13', 'Zinder', 'M', 'Nigérienne', 7, 18, 'Titulaire', 4, NULL, '2019-06-01 23:23:32', '2019-06-03 23:23:32', NULL),
-(7, '0102568D', 'YAHOUZA', 'Mohamed', '1991-08-14', 'Niamey', 'XXX', '1991-11-05', 'Niamey', 'M', 'Nigérienne', 11, 6, 'Titulaire', 23, NULL, '2019-04-20 23:23:32', '2019-05-31 23:23:32', NULL);
+(7, '0102568D', 'YAHOUZA', 'Mohamed', '1991-08-14', 'Niamey', 'XXX', '1991-11-05', 'Niamey', 'M', 'Nigérienne', 11, 6, 'Titulaire', 23, NULL, '2019-04-20 23:23:32', '2019-05-31 23:23:32', NULL),
+(8, '200852', 'OUSMANE', 'Safia', '1992-11-21', 'Niamey', 'XXXX', '1992-12-28', 'Niamey', 'F', 'Nigérienne', 9, 12, 'Auxiliaire', 37, NULL, '2019-07-01 23:12:44', '2019-07-01 23:14:26', NULL);
 -- SET IDENTITY_INSERT agents OFF
 
 -- SET IDENTITY_INSERT grades ON
-INSERT INTO grades (id, agent_id, category_id, classe_id, echelon_id, type, ref_avancement, date_decision_avancement, observation_avancement, ref_reclassement, date_reclassement, ref_titularisation, date_titularisation, ref_engagement, date_engagement, indice_id, created_at, updated_at, deleted_at) VALUES
-(1, 1, 6, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
-(2, 3, 3, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
-(3, 2, 4, 1, 2, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2013-03-15', 'XXX', '2013-03-15', 76, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(4, 4, 1, 1, 3, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2012-02-05', 'XXX', '2012-02-05', 119, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(5, 5, 2, 2, 6, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2018-12-25', 'XXX', '2018-12-25', 101, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(6, 6, 1, 3, 12, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2010-12-31', 'XXX', '2010-12-31', 121, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(7, 7, 2, 4, 10, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2017-11-21', 'XXX', '2017-11-21', 111, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+INSERT INTO grades (id, agent_id, category_auxiliaire_id ,category_id, classe_id, echelon_id, type, ref_avancement, date_decision_avancement, observation_avancement, ref_reclassement, date_reclassement, ref_titularisation, date_titularisation, ref_engagement, date_engagement, indice_id, created_at, updated_at, deleted_at) VALUES
+(1, 1, NULL, 6, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(2, 3, NULL, 3, NULL, NULL, 'Contrat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(3, 2, NULL, 4, 1, 2, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2013-03-15', 'XXX', '2013-03-15', 76, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(4, 4, NULL, 1, 1, 3, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2012-02-05', 'XXX', '2012-02-05', 119, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(5, 5, NULL, 2, 2, 6, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2018-12-25', 'XXX', '2018-12-25', 101, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(6, 6, NULL, 1, 3, 12, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2010-12-31', 'XXX', '2010-12-31', 121, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(7, 7, NULL, 2, 4, 10, 'Titularisation', NULL, NULL, NULL, NULL, NULL, 'xxx', '2017-11-21', 'XXX', '2017-11-21', 111, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(8, 8, 5, NULL, NULL, NULL, 'TitularisationAuxiliaire', NULL, NULL, NULL, NULL, NULL, 'xxx', '2019-06-15', 'xxx', '2019-06-15', NULL, '2019-07-01 23:12:44', '2019-07-01 23:14:26', NULL);
 -- SET IDENTITY_INSERT grades OFF
 
 INSERT INTO agent_matrimoniale (agent_id, matrimoniale_id, date, created_at, updated_at, deleted_at) VALUES
@@ -1074,14 +1088,16 @@ INSERT INTO agent_matrimoniale (agent_id, matrimoniale_id, date, created_at, upd
 (3, 3, '2010-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (7, 1, '2017-11-10', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (6, 4, '2009-03-14', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(7, 3, '2018-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+(7, 3, '2018-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(8, 1, '2017-06-15', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
 
 -- SET IDENTITY_INSERT affectations ON
 INSERT INTO affectations (id, ref, date, date_prise_effet, observation, agent_id, etablissement_id, created_at, updated_at, deleted_at) VALUES
 (1, 'MEN/DRH2547', '2019-05-15', '2019-06-03', NULL, 1, 109700, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
 (2, 'MEN/DRH25/2017', '2014-06-20', '2014-06-30', NULL, 2, 101011, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (3, 'MEN/DRH123/2018', '2018-12-15', '2019-01-02', NULL, 7, 109701, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
-(4, 'MEN/DRH2579', '2017-04-20', '2017-05-01', NULL, 3, 109702, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
+(4, 'MEN/DRH2579', '2017-04-20', '2017-05-01', NULL, 3, 109702, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(5, 'MEN/DRH25289', '2019-06-15', '2019-07-03', NULL, 8, 109701, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
 -- SET IDENTITY_INSERT affectations OFF
 
 -- SET IDENTITY_INSERT formations ON
@@ -1107,4 +1123,12 @@ INSERT INTO conjoints (id, matricule, nom, prenom, date_naiss, lieu_naiss, sexe,
 (1, '0206648C', 'ABDOU', 'Alassan', '1987-12-31', 'Niamey', 'M', 'Nigérienne', '90 90 90 90', 'MESS', 'Enseigant', 'XXX', 1, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
 (2, '0306547A', 'ALI', 'IBOU', '1982-11-30', 'Niamey', 'F', 'Nigérienne', '91 90 90 90', 'MEN', 'Enseigante', 'XXX', 5, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
 (3, '0106894D', 'OUSMANE', 'IBRAHIM', '1980-02-27', 'Niamey', 'F', 'Nigérienne', '93 90 90 90', 'DRESS', 'MEDECIN', 'XXX', 4, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
+-- SET IDENTITY_INSERT conjoints OFF
+
+-- SET IDENTITY_INSERT conjoints ON
+INSERT INTO `queries` (`id`, `name`, `sql`, `fields`) VALUES
+(2, 'Requête 2', 'matricule LIKE(\'%A\') AND nom != \'\' AND prenom != \'\'', 'matricule,nom,prenom'),
+(3, 'Requête 3', 'matricule LIKE(\'%A%\') AND type = \'Contractuel\'', 'matricule,nom,prenom,sexe,date_prise_service'),
+(4, 'Requête 4', 'type = \'Titulaire\' AND date_naiss > \'1980/01/01\'', 'matricule,nationnalite,type'),
+(5, 'Requête 1', 'type = \'Titulaire\' AND sexe = \'M\' AND date_naiss > \'1990/01/01\'', 'matricule,nom,prenom,date_naiss,lieu_naiss,sexe,type');
 -- SET IDENTITY_INSERT conjoints OFF

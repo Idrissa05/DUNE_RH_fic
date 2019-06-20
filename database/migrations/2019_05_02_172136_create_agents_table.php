@@ -22,7 +22,7 @@ class CreateAgentsTable extends Migration {
             $table->integer('cadre_id')->unsigned();
             $table->integer('corp_id')->unsigned();
             $table->string('type', 15);
-            $table->integer('fonction_id')->unsigned()->nullable();
+            $table->integer('fonction_id')->unsigned();
             $table->date('date_prise_service')->nullable();
 			$table->timestamps();
 			$table->softDeletes();

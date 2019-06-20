@@ -16,10 +16,11 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agent_id')->unsigned();
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_auxiliaire_id')->unsigned()->nullable();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->integer('classe_id')->unsigned()->nullable();
             $table->integer('echelon_id')->unsigned()->nullable();
-            $table->string('type', 20);
+            $table->string('type', 30);
             $table->string('ref_avancement', 30)->nullable();
             $table->date('date_decision_avancement')->nullable();
             $table->string('observation_avancement')->nullable();

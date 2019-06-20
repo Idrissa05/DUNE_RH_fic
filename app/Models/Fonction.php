@@ -13,4 +13,8 @@ class Fonction extends Model
     {
         return $this->hasMany('App\Models\Agent');
     }
+    public function agent_migrations()
+    {
+        return $this->hasMany('App\Models\AgentMigration');
+    }
 }

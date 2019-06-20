@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('indice',  'IndiceController', ['only' => ['store', 'index', 'update', 'destroy']]);
     Route::resource('position',  'PositionController', ['only' => ['store', 'index', 'update', 'destroy']]);
     Route::resource('secteurPedagogique',  'SecteurPedagogiqueController', ['only' => ['store', 'index', 'update', 'destroy']]);
+    Route::resource('categoryAuxiliaire', 'CategoryAuxiliaireController', ['only' => ['store', 'index', 'update', 'destroy']]);
+    Route::resource('migration', 'AgentMigrationController', ['only' => ['store', 'index', 'create', 'destroy']]);
 
     Route::get('agent-maladie', 'AgentMaladieController@index')->name('agent-maladie.index');
     Route::post('agent-maladie', 'AgentMaladieController@store')->name('agent-maladie.store');
@@ -75,7 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/change-password', 'UsersController@changePassword')->name('change.password');
     Route::post('/change-password', 'UsersController@changePassword');
 
-
+    Route::get('/api_agent', 'AgentMigrationController@show');
     Route::get('/api_category', 'HomeController@apiCategory');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');
@@ -87,4 +89,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');
+
+    Route::get('/reports', 'reportController@index')->name('report.index');
+    Route::get('/reports_show', 'reportController@show')->name('report.show');
+    Route::post('/query_store', 'reportController@store')->name('query.store');
+    Route::get('/query_get', 'reportController@get');
 });

@@ -11,10 +11,18 @@ class NotationForm extends Form
     {
         $this->add('date_debut', 'date', [
             'rules' => 'required|date|before:date_fin',
-            'label' => 'Date début'
+            'label' => 'Date début',
+            'attr' => [
+                'max' => null,
+                'min' => null
+            ]
         ])
             ->add('date_fin', 'date', [
-                'rules' => 'required|date|after:date_debut'
+                'rules' => 'required|date|after:date_debut',
+                'attr' => [
+                    'max' => null,
+                    'min' => null
+                ]
             ])->add('note', 'number', [
                 'rules' => 'required'
             ])->add('responsable', 'text', [

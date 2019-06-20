@@ -88,7 +88,8 @@ class DeceController extends Controller {
     public function destroy(Dece $dece)
     {
         try {
-            $dece->delete();
+           $dece->agent->restore();
+            $dece->forceDelete();
         }catch (\Exception $exception) {
             return redirect()->route('deces.index')->with('danger', 'Impossible de supprimer');
 

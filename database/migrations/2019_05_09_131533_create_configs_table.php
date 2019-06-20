@@ -16,6 +16,7 @@ class CreateConfigsTable extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('age_retraite');
             $table->string('theme');
         });
 

@@ -54,7 +54,14 @@ class AgentObserver
      */
     public function restored(Agent $agent)
     {
-        //
+        $agent->conges()->restore();
+        $agent->conjoints()->restore();
+        $agent->enfants()->restore();
+        $agent->affectations()->restore();
+        $agent->experiences()->restore();
+        $agent->formations()->restore();
+        $agent->notations()->restore();
+        $agent->grades()->restore();
     }
 
     /**

@@ -14,7 +14,8 @@ class ConfigForm extends Form
             ->add('theme', 'select', [
                 'label' => 'Thème',
                 'choices' => $this->getChoices()
-            ]);
+            ])
+            ->add('age_retraite', 'text');
     }
 
 

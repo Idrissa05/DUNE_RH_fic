@@ -86,6 +86,12 @@ Route::group(['middleware' => ['auth']], function () {
      * Les états
      */
     Route::get('print-agents', 'PrintController@agents')->name('print.agents');
+    Route::get('/print-retraitables', 'PrintController@retraitables')->name('prints.retraitables');
+    Route::get('/print-list', 'PrintController@listParCategorieParSexe')->name('prints.list');
+    Route::get('/print-corps', 'PrintController@listParCorp')->name('prints.parcorps');
+    Route::get('/print-positions', 'PrintController@listParPosition')->name('prints.parposition');
+    Route::get('/print-matrimoniales', 'PrintController@listParMatrimoniale')->name('prints.parmatrimoniale');
+    Route::get('/print-infos', 'PrintController@infos')->name('prints.infos');
 
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');

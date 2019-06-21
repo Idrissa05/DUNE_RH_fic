@@ -27,7 +27,7 @@ class AgentEditForm extends Form
                 'label'=>'Prénom *', 'rules' => 'required|string'
             ])
             ->add('date_naiss','date', [
-                'label'=>'Date de Naissance *', 'rules' => 'required|date',
+                'label'=>'Date de Naissance *', 'rules' => 'required|date','attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance *', 'rules' => 'required'
@@ -41,7 +41,7 @@ class AgentEditForm extends Form
                 'label'=>'Référence Acte de Naissance *', 'rules' => 'required'
             ])
             ->add('date_etablissement_acte_naiss','date', [
-                'label'=>'Date d\'établissement *', 'rules' => 'required|date',
+                'label'=>'Date d\'établissement *', 'rules' => 'required|date|after_or_equal:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu_etablissement_acte_naiss','text', [
                 'label'=>'Lieu d\'établissement *', 'rules' => 'required'
@@ -77,20 +77,20 @@ class AgentEditForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_prise_service','date', [
-                'label'=>'Date de Prise de Service *', 'rules' => 'date|nullable',
+                'label'=>'Date de Prise de Service *', 'rules' => 'date|after:date_naiss|nullable', 'attr' => ['max' => null, 'min' => null]
             ])
             //******************************** Situation Administrative or Grades *****************************
             ->add('ref_engagement','text', [
                 'label'=>'Ref Engagement *', //'rules' => 'required',
             ])
             ->add('date_engagement','date', [
-                'label'=>'Date Engagement *', 'rules' => 'date|nullable',
+                'label'=>'Date Engagement *', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('ref_titularisation','text', [
                 'label'=>'Ref Titularisation *', //'rules' => 'required',
             ])
             ->add('date_titularisation','date', [
-                'label'=>'Date Titularisation *', 'rules' => 'date|nullable',
+                'label'=>'Date Titularisation *', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('category_auxiliaire_id','entity', [
                 'class' => CategoryAuxiliaire::class,

@@ -76,6 +76,7 @@
                             <button class="btn btn-outline-primary" type="submit"><i class="mdi mdi-content-save mdi-18px"></i>  Enregistrer</button>
                             <a href="{{ route('migration.index') }}" class="btn btn-outline-secondary"><i class="mdi mdi-cancel mdi-18px"></i> Annuler</a>
                         </div>
+                        {!! form_widget($form->dt_agent_test) !!}
                         {!! form_widget($form->indice_id) !!}
                         {!! form_widget($form->code) !!}
                         {!! form_widget($form->cadre) !!}
@@ -107,6 +108,7 @@
                         $('#fonction_id, #fonction').val(data.fonction_id);
                         $('#code').val(data.matricule);
                         $('#last_type').val(data.type);
+                        $('#dt_agent_test').val(data.date_naiss);
                     });
                 });
             })

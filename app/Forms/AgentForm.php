@@ -34,7 +34,7 @@ class AgentForm extends Form
                 'label'=>'Prénom *', 'rules' => 'required|string'
             ])
             ->add('date_naiss','date', [
-                'label'=>'Date de Naissance *', 'rules' => 'required|date',
+                'label'=>'Date de Naissance *', 'rules' => 'required|date','attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance *', 'rules' => 'required'
@@ -48,7 +48,7 @@ class AgentForm extends Form
                 'label'=>'Référence Acte de Naissance *', 'rules' => 'required'
             ])
             ->add('date_etablissement_acte_naiss','date', [
-                'label'=>'Date d\'établissement *', 'rules' => 'required|date',
+                'label'=>'Date d\'établissement *', 'rules' => 'required|date|after_or_equal:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu_etablissement_acte_naiss','text', [
                 'label'=>'Lieu d\'établissement *', 'rules' => 'required'
@@ -86,7 +86,7 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_prise_service','date', [
-                'label'=>'Date de Prise de Service *', 'rules' => 'date|nullable',
+                'label'=>'Date de Prise de Service *', 'rules' => 'date|after:date_naiss|nullable', 'attr' => ['max' => null, 'min' => null]
             ])
             //******************************** Situation Matrimoniale *****************************
             ->add('matrimoniale_id', 'entity', [
@@ -98,20 +98,20 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date','date', [
-                'label'=>'A quelle date ? *', 'rules' => 'required|date'
+                'label'=>'A quelle date ? *', 'rules' => 'required|date|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             //******************************** Situation Administrative or Grades *****************************
             ->add('ref_engagement','text', [
                 'label'=>'Ref Engagement *', //'rules' => 'required',
             ])
             ->add('date_engagement','date', [
-                'label'=>'Date Engagement *', 'rules' => 'date|nullable',
+                'label'=>'Date Engagement *', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('ref_titularisation','text', [
                 'label'=>'Ref Titularisation *', //'rules' => 'required',
             ])
             ->add('date_titularisation','date', [
-                'label'=>'Date Titularisation *', 'rules' => 'date|nullable',
+                'label'=>'Date Titularisation *', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('category_auxiliaire_id','entity', [
                 'class' => CategoryAuxiliaire::class,
@@ -186,10 +186,11 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_debut','date', [
-                'label'=>'Date Début Formation *', 'rules' => 'required|date|before:date_fin',
+                'label'=>'Date Début Formation *', 'rules' => 'required|date|before:date_fin|after:date_naiss',
+                'attr' => ['max' => null, 'min' => null]
             ])
             ->add('date_fin','date', [
-                'label'=>'Date Fin Formation *', 'rules' => 'required|date|after:date_debut',
+                'label'=>'Date Fin Formation *', 'rules' => 'required|date|after:date_debut|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             //******************************** Autres Infos *****************************
             ->add('maladie_id','entity', [
@@ -201,7 +202,7 @@ class AgentForm extends Form
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_observation','date', [
-                'label'=>'Date Observation', 'rules' => 'date|nullable'
+                'label'=>'Date Observation', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('observation','textarea', [
                 'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']
@@ -219,10 +220,12 @@ class AgentForm extends Form
                 'label'=>'Reférence Affectation *', 'rules' => 'required',
             ])
             ->add('date_affectation','date', [
-                'label'=>'Date Affectation *', 'rules' => 'date|required',
+                'label'=>'Date Affectation *', 'rules' => 'date|required|after:date_naiss|after_or_equal:date_prise_service|after_or_equal:date_engagement',
+                'attr' => ['max' => null, 'min' => null]
             ])
             ->add('date_prise_effet','date', [
-                'label'=>'Date Effet / Prise de service *', 'rules' => 'date|required',
+                'label'=>'Date Effet / Prise de service *', 'rules' => 'date|required|after:date_naiss|after_or_equal:date_affectation',
+                'attr' => ['max' => null, 'min' => null]
             ])
             ->add('observation_affectation','textarea', [
                 'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']

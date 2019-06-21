@@ -44,6 +44,12 @@ class DeceController extends Controller {
     {
         $form = $this->form(DeceForm::class);
 
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date' => 'date|required|after:'.$agent->date_naiss],[
+            'date.after' => 'Le champ Date doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
+
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }

@@ -50,7 +50,7 @@ class AvancementForm extends Form
                 ])
                 ->add('date_decision_avancement', 'date', [
                     'label' => 'Date Décision Avancement *',
-                    'rules' => 'required|date'
+                    'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
                 ])
                 ->add('observation_avancement','textarea', [
                     'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']

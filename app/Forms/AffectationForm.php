@@ -13,11 +13,11 @@ class AffectationForm extends Form
         $this->add('ref', 'text', [
             'rules' => 'required|'
         ])->add('date', 'date', [
-            'rules' => 'required|date',
-            'label' => 'Date début'
+            'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null],
+            'label' => 'Date Affectation'
         ])
             ->add('date_prise_effet', 'date', [
-                'rules' => 'required|date'
+                'rules' => 'required|date','attr' => ['max' => null, 'min' => null]
             ])->add('observation', 'text', [
                 'rules' => 'required'
             ])

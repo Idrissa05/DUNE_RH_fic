@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Forms\ExperienceForm;
 use App\Forms\ReclassementForm;
+use App\Models\Agent;
 use App\Models\Experience;
 use App\Models\Reclassement;
 use Illuminate\Http\Request;
@@ -44,6 +45,12 @@ class ReclassementController extends Controller {
     public function store()
     {
         $form = $this->form(ReclassementForm::class);
+
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date_reclassement' => 'date|required|after:'.$agent->date_naiss],[
+            'date_reclassement.after' => 'Le champ Date reclassement doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
@@ -86,13 +93,17 @@ class ReclassementController extends Controller {
 
     public function destroy(Reclassement $reclassement)
     {
-        try {
-            $reclassement->delete();
-        }catch (\Exception $exception) {
-            return redirect()->route('reclassement.index')->with('danger', 'Impossible de supprimer');
+        if($reclassement->agent->grades->last()->id != $reclassement->id){
+            return redirect()->route('reclassement.index')->with('danger', 'Impossible de supprimer ce reclassement');
+        }else {
+            try {
+                $reclassement->delete();
+            } catch (\Exception $exception) {
+                return redirect()->route('reclassement.index')->with('danger', 'Impossible de supprimer');
 
+            }
+            return redirect()->route('reclassement.index')->with('success', 'Suppression effectuée');
         }
-        return redirect()->route('reclassement.index')->with('success', 'Suppression effectuée');
 
     }
 

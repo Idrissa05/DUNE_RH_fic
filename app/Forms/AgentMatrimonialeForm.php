@@ -30,7 +30,7 @@ class AgentMatrimonialeForm extends Form
                 }
             ])
             ->add('date', 'date', [
-                'rules' => 'required|date'
+                'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ]);
     }
 }

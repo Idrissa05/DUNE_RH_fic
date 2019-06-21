@@ -14,7 +14,7 @@ class EnfantForm extends Form
                 'label'=>'Prénom', 'rules' => 'required|string'
             ])
             ->add('date_naiss','date', [
-                'label'=>'Date de Naissance', 'rules' => 'required|date',
+                'label'=>'Date de Naissance', 'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance'

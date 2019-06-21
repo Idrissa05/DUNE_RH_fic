@@ -10,7 +10,7 @@ class DeceForm extends Form
     public function buildForm()
     {
         $this->add('date', 'date', [
-            'rules' => 'required|date',
+            'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null],
             'label' => 'Date'
         ])
             ->add('ref_document', 'text', [

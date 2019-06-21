@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tightenco\Parental\HasChildren;
@@ -17,7 +16,7 @@ class Agent extends Model {
         'Titulaire' => Titulaire::class,
         'Auxiliaire' => Auxiliaire::class
     ];
-	protected $dates = ['deleted_at', 'date_naiss', 'date_etablissement_acte_naiss', 'date_prise_service'];
+	protected $dates = ['deleted_at'];
 
 	public function conges()
 	{

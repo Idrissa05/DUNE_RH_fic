@@ -35,6 +35,14 @@ class AgentPositionController extends Controller
     public function store() {
         $form = $this->form(AgentPositionForm::class);
 
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate([
+            'date_decision' => 'required|date|after:'.$agent->date_naiss,
+            'date_effet' => 'required|date|after_or_equal:date_decision|after:'.$agent->date_naiss,
+            'date_fin' => 'required|date|after:date_decision|after:date_effet|after:'.$agent->date_naiss
+        ]);
+
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
         }

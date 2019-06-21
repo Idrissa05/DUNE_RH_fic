@@ -67,6 +67,9 @@
                 { data: 'maladies', name: 'maladies' },
                 { data: 'actions', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('agent-maladie.index')], ['scroll' => '450px'])
-        })
+        });
+        @if($errors->any())
+            $('#add').modal('show');
+        @endif
     </script>
 @endsection

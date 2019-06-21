@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\EnfantForm;
+use App\Models\Agent;
 use App\Models\Enfant;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -42,6 +43,12 @@ class EnfantController extends Controller {
     public function store()
     {
         $form = $this->form(EnfantForm::class);
+
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date_naiss' => 'date|required|after:'.$agent->date_naiss],[
+            'date_naiss.after' => 'Le champ Date de Niassance doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();

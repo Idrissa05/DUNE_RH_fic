@@ -57,6 +57,9 @@
                 { data: 'prenom', name: 'prenom' },
                 { data: 'matrimoniales', name: 'matrimoniales' },
             ]", 'route' => route('agent-matrimoniale.index')], ['scroll' => '450px'])
-        })
+        });
+        @if($errors->any())
+            $('#add').modal('show');
+        @endif
     </script>
 @endsection

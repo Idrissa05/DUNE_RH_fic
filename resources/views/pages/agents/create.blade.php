@@ -279,32 +279,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#type').on('change', function(e){
-                if($("#type option:selected").val() == 'Contractuel'){
-                    $("label[for='matricule']").text("N° Identifiant");
-                    $('#titulaire, #indices, #salaries, #echelon, #classe, #auxiliaire').hide();
-                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #auxiliaire').removeAttr('required').val('');
-                    $('#contractuel, #category').removeAttr('hidden').show();
-                    $('#date_prise_service, #category_id').attr('required', true);
-                }else if($("#type option:selected").val() == 'Titulaire'){
-                    $("label[for='matricule']").text("N° Matricule");
-                    $('#contractuel, #auxiliaire').hide();
-                    $('#date_prise_service, #auxiliaire').removeAttr('required').val('');
-                    $('#titulaire, #classe, #echelon, #indices, #salaries, #category').removeAttr('hidden').show();
-                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #classe_id, #echelon_id, #category_id').attr('required', true);
-                }else if($("#type option:selected").val() == 'Auxiliaire'){
-                    $("label[for='matricule']").text("N° Matricule");
-                    $('#contractuel, #titulaire, #indices, #salaries, #category, #echelon, #classe').hide();
-                    $('#date_prise_service, #category_id, #classe_id, #echelon_id').removeAttr('required').val('');
-                    $('#titulaire, #auxiliaire').removeAttr('hidden').show();
-                    $('#ref_engagement, #date_engagement, #ref_titularisation, #date_titularisation, #auxiliaire').attr('required', true);
-                }else $('#titulaire, #contractuel, #classe, #echelon, #indices, #salaries, #auxiliaire').hide();
+                @include('dependentTypeFieldsCreate')
             });
 
+
+            @include('dependentTypeFieldsCreate')
             @include('dynamicDropDown')
 
             let num_child_rows=0;
             $('#addMoreEnfant').on('click', function() {
-                let row = "<tr><td><input class='table_field_required form-control' id='prenom_enfant' name=prenom_enfant["+num_child_rows+"] type='text'></td><td><input class='table_field_required form-control' id='date_naiss_enfant' name=date_naiss_enfant["+num_child_rows+"] type='date'></td> <td><input class='table_field_required form-control' id='lieu_naiss_enfant' name=lieu_naiss_enfant["+num_child_rows+"] type='text'></td> <td> <select class='table_field_required form-control' id='sexe_enfant' name=sexe_enfant["+num_child_rows+"]> <option value='' selected='selected'>Sélectionner</option> <option value='F'>Féminin</option><option value='M'>Masculin</option> </select> </td> <td><a class='removeEnfant btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td> </tr>";
+                let row = "<tr><td><input class='table_field_required form-control' id='prenom_enfant' name=prenom_enfant["+num_child_rows+"] type='text'></td><td><input class='table_field_required child_date form-control' id='date_naiss_enfant' name=date_naiss_enfant["+num_child_rows+"] type='date'></td> <td><input class='table_field_required form-control' id='lieu_naiss_enfant' name=lieu_naiss_enfant["+num_child_rows+"] type='text'></td> <td> <select class='table_field_required form-control' id='sexe_enfant' name=sexe_enfant["+num_child_rows+"]> <option value='' selected='selected'>Sélectionner</option> <option value='F'>Féminin</option><option value='M'>Masculin</option> </select> </td> <td><a class='removeEnfant btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td> </tr>";
                 $("#enfant").append(row);
                 num_child_rows++;
                 $('#ne').text(num_child_rows);
@@ -328,9 +312,18 @@
                 $('#nc').text(num_partner_rows);
             });
 
+            $.validator.addMethod("greaterThan",
+                function() {
+                    return $('#date_naiss').val() < $('#date_naiss_enfant').val()
+                },'La date de naissance de l\'enfant doit être supérieure à celle du Père'
+            );
+
             $.validator.addClassRules({
                 table_field_required:{
                     required: true,
+                },
+                child_date:{
+                    greaterThan: ""
                 }
             });
         });

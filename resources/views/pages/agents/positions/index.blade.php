@@ -77,6 +77,9 @@
                 { data: 'observation', name: 'observation' },
                 { data: 'actions', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('agent-position.index')], ['scroll' => '450px'])
-        })
+        });
+        @if($errors->any())
+            $('#add').modal('show');
+        @endif
     </script>
 @endsection

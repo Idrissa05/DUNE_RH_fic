@@ -33,13 +33,13 @@ class AgentPositionForm extends Form
 
             ])
             ->add('date_decision', 'date', [
-                'rules' => 'required|date'
+                'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('date_effet', 'date', [
-                'rules' => 'required|date'
+                'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('date_fin', 'date', [
-                'rules' => 'required|date'
+                'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('observation', 'text', [
                 'rules' => 'required'

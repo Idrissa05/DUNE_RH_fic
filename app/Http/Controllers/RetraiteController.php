@@ -44,6 +44,13 @@ class RetraiteController extends Controller {
     {
         $form = $this->form(RetraiteForm::class);
 
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date' => 'date|required|after_or_equal:date_decision|after:'.$agent->date_naiss, 'date_decision' => 'date|required|after:'.$agent->date_naiss],[
+            'date.after' => 'Le champ Date doit être une date supérieur à la date de naissance de l\'agent.',
+            'date_decision.after' => 'Le champ Date décision doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
+
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }

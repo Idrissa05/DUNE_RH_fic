@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\AvancementForm;
+use App\Models\Agent;
 use App\Models\Avancement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,9 @@ class AvancementController extends Controller
                 ->addColumn('echelon', function ($avancement){
                     return $avancement->echelon->name;
                 })
+                ->addColumn('date_decision_avancement', function ($avancement){
+                    return formaterDate($avancement->date_decision_avancement);
+                })
                 ->addColumn('action', function($avancement){
                     return '<a href="'.route("avancement.edit", $avancement).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
                         '<form action="'.route("avancement.destroy", $avancement).'" id="del'.$avancement->id.'" style="display: inline-block;" method="post">
@@ -62,6 +66,13 @@ class AvancementController extends Controller
     public function store()
     {
         $form = $this->form(AvancementForm::class);
+
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date_decision_avancement' => 'date|required|after:'.$agent->date_naiss],[
+            'date_decision_avancement.after' => 'Le champ Date Décision Avancement doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
+
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
@@ -104,13 +115,17 @@ class AvancementController extends Controller
 
     public function destroy(Avancement $avancement)
     {
-        try {
-            $avancement->delete();
-        }catch (\Exception $exception) {
-            return redirect()->route('avancement.index')->with('danger', 'Impossible de supprimer');
+        if($avancement->agent->grades->last()->id != $avancement->id){
+            return redirect()->route('avancement.index')->with('danger', 'Impossible de supprimer cet avancement');
+        }else {
+            try {
+                $avancement->delete();
+            } catch (\Exception $exception) {
+                return redirect()->route('avancement.index')->with('danger', 'Impossible de supprimer');
 
+            }
+            return redirect()->route('avancement.index')->with('success', 'Suppression effectuée');
         }
-        return redirect()->route('avancement.index')->with('success', 'Suppression effectuée');
 
     }
 
@@ -146,10 +161,10 @@ class AvancementController extends Controller
             return Datatables::of($grade)
                 ->addColumn('date', function ($grade){
                     if($grade->type == 'Avancement'){
-                        return $grade->date_decision_avancement;
+                        return formaterDate($grade->date_decision_avancement);
                     }elseif ($grade->type == 'Reclassement'){
-                        return $grade->date_reclassement;
-                    }else{ return $grade->date_titularisation; }
+                        return formaterDate($grade->date_reclassement);
+                    }else{ return formaterDate($grade->date_titularisation); }
                 })
                 ->addColumn('category', function ($grade){
                     if($grade->category_id != $grade->current_category_id) {

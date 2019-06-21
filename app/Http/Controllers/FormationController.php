@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\FormationForm;
+use App\Models\Agent;
 use App\Models\Formation;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -33,6 +34,10 @@ class FormationController extends Controller {
   public function store()
   {
       $form = $this->form(FormationForm::class);
+
+      $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+      $form->validate(['date_debut' => 'required|date|after:'.$agent->date_naiss, 'date_fin' => 'required|date|after:date_debut|after:'.$agent->date_naiss]);
 
       if (!$form->isValid()) {
           return redirect()->back()->withErrors($form->getErrors())->withInput();

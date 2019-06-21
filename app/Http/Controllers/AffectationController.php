@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Forms\AffectationForm;
 use App\Models\Affectation;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
@@ -42,6 +43,13 @@ class AffectationController extends Controller {
     public function store()
     {
         $form = $this->form(AffectationForm::class);
+
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date' => 'date|required|before:date_prise_effet|after:'.$agent->date_naiss, 'date_prise_effet' => 'date|required|after_or_equal:date|after:'.$agent->date_naiss ],[
+            'date.after' => 'Le champ Date Affectation doit être une date supérieur à la date de naissance de l\'agent.',
+            'date_prise_effet.after' => 'Le champ Date Affectation doit être une date supérieur à la date de naissance de l\'agent.',
+        ]);
 
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();

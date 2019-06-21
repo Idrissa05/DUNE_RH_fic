@@ -34,6 +34,12 @@ class AgentMaladieController extends Controller
     public function store() {
         $form = $this->form(AgentMaladieForm::class);
 
+        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+
+        $form->validate(['date_observation' => 'required|date|after:'.$agent->date_naiss],[
+        'date_observation.after' => 'Le champ Date observation doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
+
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput()->with('danger', 'Une erreur est survenue');
         }

@@ -52,18 +52,19 @@ class ContractuelAgentMigrationForm extends Form
                 },
                 'empty_value' => 'Sélectionner'
             ])
+            ->add('dt_agent_test','text', ['attr' => ['hidden' => true, 'id' => 'dt_agent_test']])
             //******************************** Situation Administrative or Grades *****************************
             ->add('ref_engagement','text', [
                 'label'=>'Ref Engagement *', 'rules' => 'required',
             ])
             ->add('date_engagement','date', [
-                'label'=>'Date Engagement *', 'rules' => 'date|required',
+                'label'=>'Date Engagement *', 'rules' => 'date|required|after:dt_agent_test','attr' => ['max' => null, 'min' => null]
             ])
             ->add('ref_titularisation','text', [
                 'label'=>'Ref Titularisation *', 'rules' => 'required',
             ])
             ->add('date_titularisation','date', [
-                'label'=>'Date Titularisation *', 'rules' => 'date|required',
+                'label'=>'Date Titularisation *', 'rules' => 'date|required|after:dt_agent_test', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('category_id','entity', [
                 'class' => Category::class,

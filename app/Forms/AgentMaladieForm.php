@@ -33,7 +33,7 @@ class AgentMaladieForm extends Form
 
             ])
                 ->add('date_observation', 'date', [
-                    'rules' => 'required|date'
+                    'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
                 ]);
     }
 }

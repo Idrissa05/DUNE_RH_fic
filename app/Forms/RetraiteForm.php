@@ -10,14 +10,14 @@ class RetraiteForm extends Form
     public function buildForm()
     {
         $this->add('date', 'date', [
-            'rules' => 'required|date',
+            'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null],
             'label' => 'Date'
         ])
             ->add('ref_decision', 'text', [
                 'rules' => 'required'
             ])
             ->add('date_decision', 'date', [
-                'rules' => 'required'
+                'label' => 'Date décision', 'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu', 'text', [
             ])

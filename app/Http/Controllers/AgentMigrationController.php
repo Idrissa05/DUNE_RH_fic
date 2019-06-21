@@ -70,6 +70,11 @@ class AgentMigrationController extends Controller {
     {
         $form = $this->form(ContractuelAgentMigrationForm::class);
 
+        $form->validate(['date_engagement' => 'date|required|after:dt_agent_test', 'date_titularisation' => 'date|required|after:dt_agent_test' ],[
+            'date_engagement.after' => 'Le champ Date Engagement doit être une date supérieur à la date de naissance de l\'agent.',
+            'date_titularisation.after' => 'Le champ Date Titularisation doit être une date supérieur à la date de naissance de l\'agent.'
+        ]);
+
         if (!$form->isValid()) {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }

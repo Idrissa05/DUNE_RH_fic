@@ -29,6 +29,9 @@ class AgentController extends Controller {
       if ($request->ajax()) {
           $agent = Agent::orderBy('created_at', 'desc')->get();
           return Datatables::of($agent)
+              ->addColumn('date_naiss', function ($agent){
+                  return formaterDate($agent->date_naiss);
+              })
               ->addColumn('action', function($agent){
                   return '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
                       '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
@@ -181,6 +184,8 @@ class AgentController extends Controller {
   {
       $form = $this->form(AgentEditForm::class);
 
+      $form->validate(['matricule' => 'required|string|unique:agents,matricule,'. $agent->id]);
+
       if (!$form->isValid()) {
           return redirect()->back()->withErrors($form->getErrors())->withInput();
       }
@@ -226,9 +231,6 @@ class AgentController extends Controller {
           }
       catch (\Exception $e) {
           DB::rollBack();
-          if($e->getCode() == '23000'){
-              return redirect()->route('agent.index')->with('danger', 'Opération non effectuée. \n Risque de doublon, ce matricule existe déjà !');
-          }
           return redirect()->route('agent.index')->with('danger', 'Opération non effectuée, Erreur technique !');
       }
       return redirect()->route('agent.index')->with('success', 'Opération effectuée avec succès !');

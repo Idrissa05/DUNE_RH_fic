@@ -143,7 +143,94 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card text-center">
+                        <div class="card-header bg-secondary text-white"><i class="mdi mdi-account-multiple-outline mdi-36px"></i></div>
+                        <div class="card-body">
+                            <p>
+                                Liste par secteur pédagogique, inspection, département, région, sexe.
+                            </p>
+                            <form action="{{ route('prints.par') }}" class="form-inline" target="_blank">
+                                <div class="d-flex flex-row mb-2">
+                                    <select name="region" id="region_id" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner une région</option>
+                                        @foreach($regions as $region)
+                                            <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <select name="departement" id="departement_id" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner un département</option>
+                                    </select>
+                                    <select name="commune" id="commune_id" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner une commune</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-row align-items-end">
+                                    <select name="inspection" id="inspection_id" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner une inspection</option>
+                                    </select>
+                                    <select name="secteur" id="secteur_pedagogique_id" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner un secteur</option>
+                                    </select>
+                                    <select name="sexe" class="form-control form-control-sm mr-1">
+                                        <option value="">Sélectionner un sexe</option>
+                                        <option value="M">Masculin</option>
+                                        <option value="F">Féminin</option>
+                                    </select>
+                                    <button title="imprimer" class="btn btn-sm btn-red mt-1"><i class="mdi mdi-printer mdi-18px"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        $(function () {
+            $('#region_id').on('change', function(e){
+                let region_id = $("#region_id option:selected").val();
+                $.get('/api?model=departement&column=region_id&id=' + region_id,function(data) {
+                    $('#departement_id').empty().append('<option value selected="selected">Sélectionner un département</option>');
+                    $.each(data, function(index, departement){
+                        $('#departement_id').append('<option value="'+ departement.id +'">'+ departement.name +'</option>');
+                    })
+                });
+            });
+
+            $('#departement_id').on('change', function(e){
+                let departement_id = $("#departement_id option:selected").val();
+                $.get('/api?model=commune&column=departement_id&id=' + departement_id,function(data) {
+                    $('#commune_id').empty().append('<option value selected="selected">Sélectionner une commune</option>');
+                    $.each(data, function(index, commune){
+                        $('#commune_id').append('<option value="'+ commune.id +'">'+ commune.name +'</option>');
+                    })
+                });
+            });
+
+            $('#commune_id').on('change', function(e){
+                let commune_id = $("#commune_id option:selected").val();
+                $.get('/api?model=inspection&column=commune_id&id=' + commune_id,function(data) {
+                    $('#inspection_id').empty().append('<option value selected="selected">Sélectionner une inspection</option>');
+                    $.each(data, function(index, inspection){
+                        $('#inspection_id').append('<option value="'+ inspection.id +'">'+ inspection.name +'</option>');
+                    })
+                });
+            });
+
+            $('#inspection_id').on('change', function(e){
+                let inspection_id = $("#inspection_id option:selected").val();
+                $.get('/api?model=secteurPedagogique&column=inspection_id&id=' + inspection_id,function(data) {
+                    $('#secteur_pedagogique_id').empty().append('<option value selected="selected">Sélectionner un secteur</option>');
+                    $.each(data, function(index, secteur){
+                        $('#secteur_pedagogique_id').append('<option value="'+ secteur.id +'">'+ secteur.name +'</option>');
+                    })
+                });
+            });
+        })
+    </script>
 @endsection

@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api_category', 'HomeController@apiCategory');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');
+    Route::get('/api', 'HomeController@api');
 
     /**
      * Les états
@@ -93,6 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/print-matrimoniales', 'PrintController@listParMatrimoniale')->name('prints.parmatrimoniale');
     Route::get('/print-infos', 'PrintController@infos')->name('prints.infos');
     Route::get('/print-historique-avancement', 'PrintController@history')->name('prints.history');
+    Route::get('/print-par', 'PrintController@par')->name('prints.par');
 
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');

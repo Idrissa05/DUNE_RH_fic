@@ -14,8 +14,6 @@
     <!-- Custom CSS -->
     <link href="{{ asset('material/lite/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{{ asset('material/lite/css/colors/blue-gray.css') }}" id="theme" rel="stylesheet">
-
     </head>
 
 <body>

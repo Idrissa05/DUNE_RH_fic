@@ -1,7 +1,7 @@
 @extends('pdf.document')
 
 @section('content')
-    <h3 class="text-center text-monospace" style="border: #2f3d4a 1px solid; font-size: 18px;">Liste ou tableau des agents par sexe et catégorie</h3>
+    <h3 class="text-center text-monospace" style="border: #2f3d4a 1px solid; font-size: 18px;">Liste ou tableau des agents par critères</h3>
 
     <table class="table table-bordered table table-sm text-center table-striped" style="font-size: 10px;">
         <thead class="thead-dark">

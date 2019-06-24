@@ -8,6 +8,7 @@ use App\Models\Agent;
 use App\Models\Avancement;
 use function foo\func;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 
@@ -27,7 +28,7 @@ class PrintController extends Controller
         $agents = Agent::all();
 
         $agents = $agents->filter(function ($agent) {
-           return $agent->date_naiss->diffInMonths(date('Y-m-d')) >= (Config::first()->age_retraite * 12) - 3;
+           return (new Carbon($agent->date_naiss))->diffInMonths(date('Y-m-d')) >= (Config::first()->age_retraite * 12) - 3;
         });
 
         $mpdf = new Mpdf();

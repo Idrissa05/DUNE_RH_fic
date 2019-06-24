@@ -21,8 +21,9 @@ class IndiceForm extends Form
                 'attr' => ['disabled' => 'true'],
                 'rules' => 'required|integer',
                 'class' => Category::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Category $category) {
-                    return $category->pluck('name', 'id');
+                    return $category->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('echelon_id', 'entity', [
@@ -30,8 +31,9 @@ class IndiceForm extends Form
                 'label' => 'Echelon',
                 'rules' => 'required|integer',
                 'class' => Echelon::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Echelon $echelon) {
-                    return $echelon->pluck('name', 'id');
+                    return $echelon->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('classe_id', 'entity', [
@@ -39,8 +41,9 @@ class IndiceForm extends Form
                 'attr' => ['disabled' => 'true'],
                 'rules' => 'required|integer',
                 'class' => Classe::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Classe $classe) {
-                    return $classe->pluck('name', 'id');
+                    return $classe->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

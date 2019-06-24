@@ -35,7 +35,7 @@ class FormationForm extends Form
                 'class' => Agent::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule', 'id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule', 'id');
                 }
             ])
 
@@ -45,7 +45,7 @@ class FormationForm extends Form
                 'class' => EcoleFormation::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (EcoleFormation $ecoleFormation) {
-                    return $ecoleFormation->pluck('name', 'id');
+                    return $ecoleFormation->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
 
@@ -55,7 +55,7 @@ class FormationForm extends Form
                 'class' => Diplome::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Diplome $diplome) {
-                    return $diplome->pluck('name', 'id');
+                    return $diplome->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
 
@@ -66,7 +66,7 @@ class FormationForm extends Form
                 'class' => NiveauEtude::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (NiveauEtude $niveauEtude) {
-                    return $niveauEtude->pluck('name', 'id');
+                    return $niveauEtude->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
 
@@ -76,7 +76,7 @@ class FormationForm extends Form
                 'class' => EquivalenceDiplome::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
-                    return $equivalenceDiplome->pluck('name', 'id');
+                    return $equivalenceDiplome->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

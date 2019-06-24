@@ -19,7 +19,7 @@ class SecteurPedagogiqueForm extends Form
                 'class' => Inspection::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Inspection $inspection) {
-                    return $inspection->pluck('name', 'id');
+                    return $inspection->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

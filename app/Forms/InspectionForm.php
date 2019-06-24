@@ -20,7 +20,7 @@ class InspectionForm extends Form
                 'class' => Commune::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Commune $commune) {
-                    return $commune->pluck('name', 'id');
+                    return $commune->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

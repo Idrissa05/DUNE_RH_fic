@@ -56,7 +56,7 @@ class AgentEditForm extends Form
                 'class' => Cadre::class,
                 'label' => 'Cadre *', 'rules' => 'required',
                 'query_builder' => function (Cadre $cadre) {
-                    return $cadre->pluck('name','id');
+                    return $cadre->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -64,7 +64,7 @@ class AgentEditForm extends Form
                 'class' => Corp::class,
                 'label' => 'Corps *', //'rules' => 'required',
                 'query_builder' => function (Corp $corp) {
-                    return $corp->pluck('name','id');
+                    return $corp->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -72,7 +72,7 @@ class AgentEditForm extends Form
                 'class' => Fonction::class, 'rules' => 'required',
                 'label' => 'Fonction *',
                 'query_builder' => function (Fonction $fonction) {
-                    return $fonction->pluck('name','id');
+                    return $fonction->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -96,7 +96,7 @@ class AgentEditForm extends Form
                 'class' => CategoryAuxiliaire::class,
                 'label' => 'Catégorie *',
                 'query_builder' => function (CategoryAuxiliaire $categoryAuxiliaire) {
-                    return $categoryAuxiliaire->pluck('name','id');
+                    return $categoryAuxiliaire->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -104,7 +104,7 @@ class AgentEditForm extends Form
                 'class' => Category::class,
                 'label' => 'Catégorie *',
                 'query_builder' => function (Category $category) {
-                    return $category->pluck('name','id');
+                    return $category->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -112,7 +112,7 @@ class AgentEditForm extends Form
                 'class' => Classe::class,
                 'label' => 'Classe *', //'rules' => 'required',
                 'query_builder' => function (Classe $classe) {
-                    return $classe->pluck('name','id');
+                    return $classe->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -120,7 +120,7 @@ class AgentEditForm extends Form
                 'class' => Echelon::class,
                 'label' => 'Echelon *', //'rules' => 'required',
                 'query_builder' => function (Echelon $echelon) {
-                    return $echelon->pluck('name','id');
+                    return $echelon->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])

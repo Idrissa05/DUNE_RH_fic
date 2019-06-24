@@ -18,34 +18,37 @@ class ReclassementForm extends Form
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Titulaire::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Titulaire $titulaire) {
-                    return $titulaire->pluck('matricule', 'id');
+                    return $titulaire->orderBy('matricule', 'asc')->pluck('matricule', 'id');
                 }
             ])
             ->add('category_id', 'entity', [
                 'label' => 'Catégorie',
                 'rules' => 'required|integer',
                 'class' => Category::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Category $category) {
-                    return $category->pluck('name', 'id');
+                    return $category->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('classe_id', 'entity', [
                 'label' => 'Classe',
                 'rules' => 'required|integer',
                 'class' => Classe::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Classe $classe) {
-                    return $classe->pluck('name', 'id');
+                    return $classe->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('echelon_id', 'entity', [
                 'label' => 'Echelon',
                 'rules' => 'required|integer',
                 'class' => Echelon::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Echelon $echelon) {
-                    return $echelon->pluck('name', 'id');
+                    return $echelon->orderBy('name', 'asc')->pluck('name', 'id');
                 },
-                'empty_value' => 'Séléctionner'
             ])
             ->add('ref_reclassement', 'text', [
                 'rules' => 'required'

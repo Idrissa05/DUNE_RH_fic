@@ -15,16 +15,18 @@ class AgentPositionForm extends Form
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule', 'id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule', 'id');
                 }
             ])
             ->add('position_id', 'entity', [
                 'label' => 'Position',
                 'rules' => 'required|integer',
                 'class' => Position::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Position $position) {
-                    return $position->pluck('name', 'id');
+                    return $position->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
 

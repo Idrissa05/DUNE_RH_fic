@@ -17,7 +17,7 @@ class AgentMatrimonialeForm extends Form
                 'class' => Agent::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule', 'id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule', 'id');
                 }
             ])
             ->add('matrimoniale_id', 'entity', [
@@ -26,7 +26,7 @@ class AgentMatrimonialeForm extends Form
                 'class' => Matrimoniale::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Matrimoniale $matrimoniale) {
-                    return $matrimoniale->pluck('name', 'id');
+                    return $matrimoniale->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('date', 'date', [

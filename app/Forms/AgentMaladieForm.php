@@ -15,16 +15,18 @@ class AgentMaladieForm extends Form
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
                 'class' => Agent::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule', 'id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule', 'id');
                 }
             ])
             ->add('maladie_id', 'entity', [
                 'label' => 'Maladie',
                 'rules' => 'required|integer',
                 'class' => Maladie::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Maladie $maladie) {
-                    return $maladie->pluck('name', 'id');
+                    return $maladie->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('observation', 'text', [

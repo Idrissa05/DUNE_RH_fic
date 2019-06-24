@@ -24,7 +24,7 @@ class CorpForm extends Form
                 'class' => Category::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Category $category) {
-                    return $category->pluck('name', 'id');
+                    return $category->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

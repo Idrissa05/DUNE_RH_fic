@@ -17,8 +17,9 @@ class CommuneForm extends Form
                 'label' => 'Département',
                 'rules' => 'required|integer',
                 'class' => Departement::class,
+                'empty_value' => 'Sélectionner',
                 'query_builder' => function (Departement $departement) {
-                    return $departement->pluck('name', 'id');
+                    return $departement->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

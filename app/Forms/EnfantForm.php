@@ -29,7 +29,7 @@ class EnfantForm extends Form
                 'label' => 'Matricule Agent', 'rules' => 'required',
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule','id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule','id');
                 }
             ]);
     }

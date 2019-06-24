@@ -16,7 +16,7 @@ class AvancementForm extends Form
                     'class' => Titulaire::class,
                     'label' => 'Matricule Agent *', 'rules' => 'required',
                     'query_builder' => function (Titulaire $titulaire) {
-                        return $titulaire->pluck('matricule','id');
+                        return $titulaire->orderBy('matricule', 'asc')->pluck('matricule','id');
                     },
                     'empty_value' => 'Sélectionner'
                 ])
@@ -24,7 +24,7 @@ class AvancementForm extends Form
                     'class' => Category::class,
                     'label' => 'Catégorie *', 'rules' => 'required',
                     'query_builder' => function (Category $category) {
-                        return $category->pluck('name','id');
+                        return $category->orderBy('name', 'asc')->pluck('name','id');
                     },
                     'empty_value' => 'Sélectionner'
                 ])
@@ -32,7 +32,7 @@ class AvancementForm extends Form
                     'class' => Classe::class,
                     'label' => 'Classe *', 'rules' => 'required',
                     'query_builder' => function (Classe $classe) {
-                        return $classe->pluck('name','id');
+                        return $classe->orderBy('name', 'asc')->pluck('name','id');
                     },
                     'empty_value' => 'Sélectionner'
                 ])
@@ -40,7 +40,7 @@ class AvancementForm extends Form
                     'class' => Echelon::class,
                     'label' => 'Echelon *', 'rules' => 'required',
                     'query_builder' => function (Echelon $echelon) {
-                        return $echelon->pluck('name','id');
+                        return $echelon->orderBy('name', 'asc')->pluck('name','id');
                     },
                     'empty_value' => 'Sélectionner'
                 ])

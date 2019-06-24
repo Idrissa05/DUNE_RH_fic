@@ -22,7 +22,7 @@ class EchelonForm extends Form
                 'class' => Classe::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Classe $classe) {
-                    return $classe->pluck('name', 'id');
+                    return $classe->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

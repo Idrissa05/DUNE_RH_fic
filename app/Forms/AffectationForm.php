@@ -26,7 +26,7 @@ class AffectationForm extends Form
                 'label' => 'Matricule Agent', 'rules' => 'required',
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Agent $agent) {
-                    return $agent->pluck('matricule','id');
+                    return $agent->orderBy('matricule', 'asc')->pluck('matricule','id');
                 }
             ])
             ->add('etablissement_id','entity', [
@@ -34,7 +34,7 @@ class AffectationForm extends Form
                 'label' => 'Etablissement', 'rules' => 'required',
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Etablissement $etablissement) {
-                    return $etablissement->pluck('name','id');
+                    return $etablissement->orderBy('name', 'asc')->pluck('name','id');
                 }
             ]);
     }

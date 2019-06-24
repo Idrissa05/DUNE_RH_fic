@@ -23,7 +23,7 @@ class EtablissementForm extends Form
                 'class' => SecteurPedagogique::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (SecteurPedagogique $secteurPedagogique) {
-                    return $secteurPedagogique->pluck('name', 'id');
+                    return $secteurPedagogique->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('type_etablissement_id', 'entity', [
@@ -32,7 +32,7 @@ class EtablissementForm extends Form
                 'class' => TypeEtablissement::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (TypeEtablissement $typeEtablissement) {
-                    return $typeEtablissement->pluck('name', 'id');
+                    return $typeEtablissement->orderBy('name', 'asc')->pluck('name', 'id');
                 }
             ]);
     }

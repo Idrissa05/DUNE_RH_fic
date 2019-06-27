@@ -158,6 +158,10 @@
 
     <script src="{{ asset('js/fileinput.min.js') }}"></script>
     <script src="{{ asset('js/helpers.js') }}"></script>
+<script>
+    $('.select').select2()
+
+</script>
 
 @yield('js')
     @if(Session::has('success'))

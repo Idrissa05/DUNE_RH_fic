@@ -20,6 +20,7 @@ class RetraiteForm extends Form
                 'label' => 'Date décision', 'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('lieu', 'text', [
+                'label' => 'Lieu de jouissance'
             ])
             ->add('contact', 'text', [
             ])

@@ -49,7 +49,7 @@ class AvancementForm extends Form
                     'rules' => 'required'
                 ])
                 ->add('date_decision_avancement', 'date', [
-                    'label' => 'Date Décision Avancement *',
+                    'label' => 'Date Effet Avancement *',
                     'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
                 ])
                 ->add('observation_avancement','textarea', [

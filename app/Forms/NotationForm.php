@@ -24,11 +24,16 @@ class NotationForm extends Form
                     'min' => null
                 ]
             ])->add('note', 'number', [
-                'rules' => 'required'
+                'rules' => 'required',
+                'attr' => [
+                    'step' => 0.1,
+
+                ]
             ])->add('responsable', 'text', [
                 'rules' => 'required'
             ])->add('observation', 'text', [
-                'rules' => 'required'
+                'rules' => 'required',
+                'label' => 'Appréciations'
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,

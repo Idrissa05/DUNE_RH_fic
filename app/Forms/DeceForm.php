@@ -17,7 +17,8 @@ class DeceForm extends Form
                 'rules' => 'required'
             ])
             ->add('observation', 'text', [
-                'rules' => 'required'
+                'rules' => 'required',
+                'label' => 'Cause du decès'
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,

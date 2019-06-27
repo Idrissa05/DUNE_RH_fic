@@ -87,18 +87,18 @@ class CongeController extends Controller {
                 return $conge->agent->matricule;
             })
             ->addColumn('date_debut', function ($conge){
-                return $conge->date_debut->format('d/m/Y');
+                return formaterDate($conge->date_debut);
             })
             ->addColumn('date_fin', function ($conge){
-                return $conge->date_fin->format('d/m/Y');
+                return formaterDate($conge->date_fin);
             })
             ->addColumn('observation', function ($conge){
                 return $conge->observation;
             })
             ->addColumn('actions', function ($conge){
                 return '<button id="conge'.$conge->id.'"
-                                    data-debut="'.$conge->date_debut->format('Y-m-d').'"
-                                    data-fin="'.$conge->date_fin->format('Y-m-d').'"
+                                    data-debut="'.$conge->date_debut.'"
+                                    data-fin="'.$conge->date_fin.'"
                                     data-ref="'.$conge->ref_decision.'"
                                     data-observation="'.$conge->observation.'"
                                     data-agent="'.$conge->agent_id.'"

@@ -96,7 +96,7 @@ class RetraiteController extends Controller {
     {
         try {
 
-            $retraite->agent->restore();
+            Agent::withTrashed()->find($retraite->agent_id)->restore();
             $retraite->forceDelete();
         }catch (\Exception $exception) {
             return redirect()->route('retraite.index')->with('danger', 'Impossible de supprimer');

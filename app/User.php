@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'role', 'password',
+        'name', 'role', 'password', 'region_id', 'ministere_id'
     ];
 
     /**
@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $with = ['region', 'ministere'];
+
+    public function region()
+    {
+        return $this->belongsTo('App\Models\Region');
+    }
+
+    public function ministere()
+    {
+        return $this->belongsTo('App\Models\Ministere');
+    }
 }

@@ -9,9 +9,9 @@ class Cadre extends Model
     protected $fillable = ['name','abreviation'];
     public $timestamps = false;
 
-    public function agents()
+    public function grades()
     {
-        return $this->hasMany('App\Models\Agent');
+        return $this->hasMany('App\Models\Grade');
     }
     public function agent_migrations()
     {

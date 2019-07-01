@@ -67,7 +67,7 @@ class AvancementController extends Controller
     {
         $form = $this->form(AvancementForm::class);
 
-        $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
+        $agent = Agent::findOrFail($form->getRequest()->only('agent')['agent']);
 
         $form->validate(['date_decision_avancement' => 'date|required|after:'.$agent->date_naiss],[
             'date_decision_avancement.after' => 'Le champ Date Décision Avancement doit être une date supérieur à la date de naissance de l\'agent.'
@@ -78,7 +78,19 @@ class AvancementController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        Avancement::create($form->getRequest()->all());
+        Avancement::create([
+          "agent_id" => $form->getRequest()->only('agent')['agent'],
+          "ref_avancement" => $form->getRequest()->only('ref_avancement')['ref_avancement'],
+          "date_decision_avancement" => $form->getRequest()->only('date_decision_avancement')['date_decision_avancement'],
+          "cadre_id" => $form->getRequest()->only('cadre_id')['cadre_id'],
+          "corp_id" => $form->getRequest()->only('corp_id')['corp_id'],
+          "fonction_id" => $form->getRequest()->only('fonction_id')['fonction_id'],
+          "category_id" => $form->getRequest()->only('category_id')['category_id'],
+          "classe_id" => $form->getRequest()->only('classe_id')['classe_id'],
+          "echelon_id" => $form->getRequest()->only('echelon_id')['echelon_id'],
+          "observation_avancement" => $form->getRequest()->only('observation_avancement')['observation_avancement'],
+          "indice_id" => $form->getRequest()->only('indice_id')['indice_id']
+        ]);
         return redirect()->route('avancement.index')->with('success', 'Enregistrement effectué avec succès !');
 
     }
@@ -94,7 +106,7 @@ class AvancementController extends Controller
         return view('pages.agents.avancements.form', [
             'form' => $form,
             'edit' => false,
-            'affectation' => $avancement,
+            'avancement' => $avancement,
             'titre' => 'Modification Avancement',
             'cancelRoute' => route('avancement.index')
         ]);
@@ -108,8 +120,23 @@ class AvancementController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $avancement->update($form->getRequest()->all());
-        return redirect()->route('avancement.index')->with('success', 'Mise à jour effectuée');
+        if($avancement->agent->grades->last()->id != $avancement->id){
+            return redirect()->route('avancement.index')->with('danger', 'Impossible de modifier cet avancement');
+        }else {
+            $avancement->update([
+                "ref_avancement" => $form->getRequest()->only('ref_avancement')['ref_avancement'],
+                "date_decision_avancement" => $form->getRequest()->only('date_decision_avancement')['date_decision_avancement'],
+                "cadre_id" => $form->getRequest()->only('cadre_id')['cadre_id'],
+                "corp_id" => $form->getRequest()->only('corp_id')['corp_id'],
+                "fonction_id" => $form->getRequest()->only('fonction_id')['fonction_id'],
+                "category_id" => $form->getRequest()->only('category_id')['category_id'],
+                "classe_id" => $form->getRequest()->only('classe_id')['classe_id'],
+                "echelon_id" => $form->getRequest()->only('echelon_id')['echelon_id'],
+                "observation_avancement" => $form->getRequest()->only('observation_avancement')['observation_avancement'],
+                "indice_id" => $form->getRequest()->only('indice_id')['indice_id']
+            ]);
+            return redirect()->route('avancement.index')->with('success', 'Mise à jour effectuée');
+        }
 
     }
 
@@ -132,30 +159,58 @@ class AvancementController extends Controller
     public function autoIndex(Request $request)
     {
         if ($request->ajax()) {
-            if(config('database','default')['default'] === 'sqlsrv'){
-                $grade = DB::select(DB::raw(
-                    "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+            if(auth()->user()->role != 'Administrateur'){
+                if (config('database', 'default')['default'] === 'sqlsrv') {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
                     from grades g, agents a, indices i, categories ct, classes cl, echelons e 
-                    where g.id in (select max(id) from grades group by agent_id) 
-                    and (DATEDIFF(day,g.date_decision_avancement,GETDATE())>=730 or DATEDIFF(day,g.date_reclassement,GETDATE())>=730 or DATEDIFF(day,g.date_titularisation,GETDATE())>=365) and g.deleted_at is null
-                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id")
-                );
-            }elseif(config('database','default')['default'] === 'pgsql'){
-                $grade = DB::select(DB::raw(
-                    "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id) 
+                    and (DATEDIFF(day,g.date_decision_avancement,GETDATE())>=730 or DATEDIFF(day,g.date_reclassement,GETDATE())>=730 or DATEDIFF(day,g.date_titularisation,GETDATE())>=365) and a.created_by_ministere_id = :ministere
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id", ['ministere' => auth()->user()->ministere_id]
+                    );
+                } elseif (config('database', 'default')['default'] === 'pgsql') {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
                     from grades g, agents a, indices i, categories ct, classes cl, echelons e 
-                    where g.id in (select max(id) from grades group by agent_id) 
-                    and (CURRENT_DATE - g.date_decision_avancement >=730 or CURRENT_DATE - g.date_reclassement >=730 or CURRENT_DATE - g.date_titularisation >=365) and g.deleted_at is null
-                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id")
-                );
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id) 
+                    and (CURRENT_DATE - g.date_decision_avancement >=730 or CURRENT_DATE - g.date_reclassement >=730 or CURRENT_DATE - g.date_titularisation >=365) and a.created_by_ministere_id = :ministere
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id", ['ministere' => auth()->user()->ministere_id]
+                    );
+                } else {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type ,g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+                    from grades g, agents a, indices i, categories ct, classes cl, echelons e 
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id) 
+                    and (DATEDIFF(CURRENT_DATE,g.date_decision_avancement)>=730 or DATEDIFF(CURRENT_DATE,g.date_reclassement)>=730 or DATEDIFF(CURRENT_DATE,g.date_titularisation)>=365) and a.created_by_ministere_id = :ministere
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id", ['ministere' => auth()->user()->ministere_id]
+                    );
+                }
             }else {
-                $grade = DB::select(DB::raw(
-                    "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+                if (config('database', 'default')['default'] === 'sqlsrv') {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
                     from grades g, agents a, indices i, categories ct, classes cl, echelons e 
-                    where g.id in (select max(id) from grades group by agent_id) 
-                    and (DATEDIFF(CURRENT_DATE,g.date_decision_avancement)>=730 or DATEDIFF(CURRENT_DATE,g.date_reclassement)>=730 or DATEDIFF(CURRENT_DATE,g.date_titularisation)>=365) and g.deleted_at is null
-                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id")
-                );
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id) 
+                    and (DATEDIFF(day,g.date_decision_avancement,GETDATE())>=730 or DATEDIFF(day,g.date_reclassement,GETDATE())>=730 or DATEDIFF(day,g.date_titularisation,GETDATE())>=365)
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id"
+                    );
+                } elseif (config('database', 'default')['default'] === 'pgsql') {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+                    from grades g, agents a, indices i, categories ct, classes cl, echelons e 
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id) 
+                    and (CURRENT_DATE - g.date_decision_avancement >=730 or CURRENT_DATE - g.date_reclassement >=730 or CURRENT_DATE - g.date_titularisation >=365)
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id"
+                    );
+                } else {
+                    $grade = DB::select(
+                        "select g.agent_id, a.matricule, concat(a.nom ,' ',a.prenom) as full_name, i.category_id, g.category_id as current_category_id, ct.name as category, i.classe_id, g.classe_id as current_classe_id ,cl.name as classe, i.echelon_id, e.name as echelon, g.indice_id+1 as indice_id, g.type, g.cadre_id, g.corp_id, g.fonction_id, g.date_decision_avancement, g.date_reclassement, g.date_titularisation 
+                    from grades g, agents a, indices i, categories ct, classes cl, echelons e 
+                    where g.id in (select max(id) from grades where deleted_at is null group by agent_id ) 
+                    and (DATEDIFF(CURRENT_DATE,g.date_decision_avancement)>=730 or DATEDIFF(CURRENT_DATE,g.date_reclassement)>=730 or DATEDIFF(CURRENT_DATE,g.date_titularisation)>=365)
+                    and g.agent_id = a.id and g.indice_id+1 = i.id and i.category_id = ct.id and i.classe_id = cl.id and i.echelon_id = e.id"
+                    );
+                }
             }
 
             return Datatables::of($grade)
@@ -184,7 +239,7 @@ class AvancementController extends Controller
                 ->addColumn('action', function($grade){
                     if($grade->category_id != $grade->current_category_id or $grade->classe_id != $grade->current_classe_id) {
                         return "<span class='label label-danger'>Avancement au Choix</span>";
-                    }else return '<a href="'.route("avancement.auto.create",['data','ag' => $grade->agent_id, 'ca' => $grade->category_id, 'cl' => $grade->classe_id, 'ec' => $grade->echelon_id, 'in' => $grade->indice_id]).'" class="btn btn-sm btn-outline-info"><i class="mdi mdi-18px mdi-content-save"></i></a>';
+                    }else return '<a href="'.route("avancement.auto.create",['data','ag' => $grade->agent_id, 'ca' => $grade->category_id, 'cl' => $grade->classe_id, 'ec' => $grade->echelon_id, 'in' => $grade->indice_id, 'cd' => $grade->cadre_id, 'co' => $grade->corp_id, 'fo' => $grade->fonction_id]).'" class="btn btn-sm btn-outline-info"><i class="mdi mdi-18px mdi-content-save"></i></a>';
                 })
                 ->rawColumns(['action'])->escapeColumns([])->make(true);
         }

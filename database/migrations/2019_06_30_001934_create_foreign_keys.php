@@ -153,17 +153,12 @@ class CreateForeignKeys extends Migration {
                 ->onUpdate('NO ACTION');
         });
         Schema::table('agents', function(Blueprint $table) {
-            $table->foreign('cadre_id')->references('id')->on('cadres')
+            $table->foreign('created_by_region_id')->references('id')->on('regions')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
         Schema::table('agents', function(Blueprint $table) {
-            $table->foreign('corp_id')->references('id')->on('corps')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
-        });
-        Schema::table('agents', function(Blueprint $table) {
-            $table->foreign('fonction_id')->references('id')->on('fonctions')
+            $table->foreign('created_by_ministere_id')->references('id')->on('ministeres')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
@@ -193,6 +188,21 @@ class CreateForeignKeys extends Migration {
                 ->onUpdate('NO ACTION');
         });
         Schema::table('grades', function(Blueprint $table) {
+            $table->foreign('cadre_id')->references('id')->on('cadres')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->foreign('corp_id')->references('id')->on('corps')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->foreign('fonction_id')->references('id')->on('fonctions')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+        Schema::table('grades', function(Blueprint $table) {
             $table->foreign('indice_id')->references('id')->on('indices')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
@@ -213,22 +223,17 @@ class CreateForeignKeys extends Migration {
                 ->onUpdate('NO ACTION');
         });
         Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->foreign('cadre_id')->references('id')->on('cadres')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->foreign('corp_id')->references('id')->on('corps')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->foreign('fonction_id')->references('id')->on('fonctions')
-                ->onDelete('NO ACTION')
-                ->onUpdate('NO ACTION');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
             $table->foreign('grade_id')->references('id')->on('grades')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+        Schema::table('users', function(Blueprint $table) {
+            $table->foreign('region_id')->references('id')->on('regions')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+        Schema::table('users', function(Blueprint $table) {
+            $table->foreign('ministere_id')->references('id')->on('ministeres')
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
@@ -324,13 +329,10 @@ class CreateForeignKeys extends Migration {
             $table->dropForeign('agent_position_position_id_foreign');
         });
         Schema::table('agents', function(Blueprint $table) {
-            $table->dropForeign('agents_cadre_id_foreign');
+            $table->dropForeign('agents_created_by_region_id_foreign');
         });
         Schema::table('agents', function(Blueprint $table) {
-            $table->dropForeign('agents_corp_id_foreign');
-        });
-        Schema::table('agents', function(Blueprint $table) {
-            $table->dropForeign('agents_fonction_id_foreign');
+            $table->dropForeign('agents_created_by_ministere_id_foreign');
         });
         Schema::table('grades', function(Blueprint $table) {
             $table->dropForeign('grades_agent_id_foreign');
@@ -348,6 +350,15 @@ class CreateForeignKeys extends Migration {
             $table->dropForeign('grades_echelon_id_foreign');
         });
         Schema::table('grades', function(Blueprint $table) {
+            $table->dropForeign('grades_cadre_id_foreign');
+        });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->dropForeign('grades_corp_id_foreign');
+        });
+        Schema::table('grades', function(Blueprint $table) {
+            $table->dropForeign('grades_fonction_id_foreign');
+        });
+        Schema::table('grades', function(Blueprint $table) {
             $table->dropForeign('grades_indice_id_foreign');
         });
         Schema::table('communes', function(Blueprint $table) {
@@ -360,16 +371,13 @@ class CreateForeignKeys extends Migration {
             $table->dropForeign('agent_migrations_agent_id_foreign');
         });
         Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->dropForeign('agent_migrations_cadre_id_foreign');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->dropForeign('agent_migrations_corp_id_foreign');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
-            $table->dropForeign('agent_migrations_fonction_id_foreign');
-        });
-        Schema::table('agent_migrations', function(Blueprint $table) {
             $table->dropForeign('agent_migrations_grade_id_foreign');
+        });
+        Schema::table('users', function(Blueprint $table) {
+            $table->dropForeign('users_region_id_foreign');
+        });
+        Schema::table('users', function(Blueprint $table) {
+            $table->dropForeign('users_ministere_id_foreign');
         });
 	}
 }

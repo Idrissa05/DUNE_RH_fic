@@ -25,6 +25,9 @@ class ConjointForm extends Form
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance'
             ])
+            ->add('ref_acte_naiss','text', [
+                'label'=>'Référence Acte Naissance'
+            ])
             ->add('sexe','select', [
                 'label'=>'Sexe', 'rules' => 'required',
                 'choices' => ['F' => 'Féminin', 'M' => 'Masculin'],
@@ -45,6 +48,9 @@ class ConjointForm extends Form
             ->add('ref_acte_mariage','text', [
                 'label' => 'Réference acte de mariage',
                 'rules' => 'required|string'
+            ])
+            ->add('date_mariage','date', [
+                'label'=>'Date du Mariage', 'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null]
             ])
             ->add('agent_id','entity', [
                 'class' => Agent::class,

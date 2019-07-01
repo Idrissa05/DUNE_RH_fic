@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/change-password', 'UsersController@changePassword')->name('change.password');
     Route::post('/change-password', 'UsersController@changePassword');
 
-    Route::get('/api_agent', 'AgentMigrationController@show');
+    Route::get('/api_agent', 'HomeController@apiAgent');
     Route::get('/api_category', 'HomeController@apiCategory');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');

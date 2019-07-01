@@ -68,8 +68,6 @@
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
 
-                        <li class="nav-item"><a href="" class="nav-link"> <i class="mdi mdi-bell text-white mdi-18px"></i><span class='badge float-sm-right badge-danger'> 0 </span></a> </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('holder.png') }}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
@@ -78,8 +76,10 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="{{ asset('holder.png') }}" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>{{ Auth::user()->name }}</h4>
-                                                <p class="text-muted"></p><a href="" class="btn btn-rounded btn-danger btn-sm">Voir Profil</a></div>
+                                                <h5 class="mt-1">Login : <span class="label label-primary">{{ Auth::user()->name }}</span></h5>
+                                                <h5 class="mt-2">Region : <span class="label label-primary">{{ Auth::user()->region->name }}</span></h5>
+                                                <h5 class="mt-2">Ministère : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>
+                                            </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>

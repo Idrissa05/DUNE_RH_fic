@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Multiteamable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tightenco\Parental\HasChildren;
@@ -10,6 +11,7 @@ class Agent extends Model {
 
 	use SoftDeletes;
     use HasChildren;
+    use Multiteamable;
 
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
@@ -73,19 +75,14 @@ class Agent extends Model {
         return $this->hasMany('App\Models\Notation');
     }
 
-    public function fonction()
+    public function region()
     {
-        return $this->belongsTo('App\Models\Fonction');
+        return $this->belongsTo('App\Models\Region');
     }
 
-    public function cadre()
+    public function ministere()
     {
-        return $this->belongsTo('App\Models\Cadre');
-    }
-
-    public function corp()
-    {
-        return $this->belongsTo('App\Models\Corp');
+        return $this->belongsTo('App\Models\Ministere');
     }
 
 	public function maladies()

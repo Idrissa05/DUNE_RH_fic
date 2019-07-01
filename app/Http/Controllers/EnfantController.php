@@ -107,7 +107,6 @@ class EnfantController extends Controller {
             ->addColumn('id', function ($enfant){
                 return $enfant->id;
             })
-
             ->addColumn('agent', function ($enfant){
                 return $enfant->agent->fullName;
             })

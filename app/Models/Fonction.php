@@ -9,10 +9,11 @@ class Fonction extends Model
     protected $fillable = ['name'];
     public $timestamps = false;
 
-    public function agent()
+    public function grades()
     {
-        return $this->hasMany('App\Models\Agent');
+        return $this->hasMany('App\Models\Grade');
     }
+
     public function agent_migrations()
     {
         return $this->hasMany('App\Models\AgentMigration');

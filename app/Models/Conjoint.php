@@ -10,7 +10,7 @@ class Conjoint extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
-	protected $fillable = array('matricule','nom', 'prenom', 'date_naiss', 'lieu_naiss', 'sexe', 'nationnalite', 'tel', 'employeur', 'profession','ref_acte_mariage','agent_id');
+	protected $fillable = array('matricule','nom', 'prenom', 'date_naiss','ref_acte_naiss','lieu_naiss', 'sexe', 'nationnalite', 'tel', 'employeur', 'profession','ref_acte_mariage','date_mariage','agent_id');
 
 	public function agent()
 	{

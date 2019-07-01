@@ -69,7 +69,7 @@ class AgentPositionController extends Controller
 
 
     private function getData() {
-        $positions = DB::table('agents')
+        $query = DB::table('agents')
             ->join('agent_position', 'agents.id', '=', 'agent_position.agent_id')
             ->join('positions', 'positions.id', '=', 'agent_position.position_id')
             ->selectRaw("agents.matricule as matricule, agents.nom as nom, agents.prenom as prenom, positions.name as position,
@@ -77,8 +77,11 @@ class AgentPositionController extends Controller
             agent_position.observation as observation, agent_position.id as id, agents.id as agent_id, positions.id as position_id, agent_position.date_fin
             ")
             ->orderByDesc('agent_position.created_at')
-            ->where('agents.deleted_at', '=', null)
-            ->get();
+            ->where('agents.deleted_at', '=', null);
+        if(auth()->user()->role <> 'Administrateur') {
+            $query->whereRaw('agents.created_by_ministere_id = :ministere', ['ministere' => auth()->user()->ministere_id]);
+        }
+        $positions = $query->get();
         return DataTables::of($positions)
             ->addColumn('agent', function ($agent){
                 return $agent->nom.' '.$agent->prenom;

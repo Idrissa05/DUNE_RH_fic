@@ -40,7 +40,7 @@
                             {!! $errors->first('password_confirmation') !!}
                         </div>
                     </div>
-                    <button class="btn btn-outline-primary">Changer</button>
+                    <button class="col-md-12 btn btn-outline-primary">Changer</button>
                 </div>
             </div>
             </form>

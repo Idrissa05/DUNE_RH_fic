@@ -11,7 +11,7 @@ use App\Models\Contrat;
 use App\Models\Enfant;
 use App\Models\Titulaire;
 use App\Models\Titularisation;
-use App\Models\TitularisationAuxiliaire;
+use App\Models\Auxiliairement;
 use Illuminate\Http\Request;
 use App\Forms\AgentForm;
 use App\Models\Agent;
@@ -83,18 +83,21 @@ class AgentController extends Controller {
                   // Insertion Grade
                   $titularisation = new Titularisation($form->getRequest()->all());
                   $agent->grades()->save($titularisation);
+                  $agent->positions()->attach(1);
               }elseif($form->getRequest()->only('type')['type'] == 'Contractuel') {
                   // Inserion Agent Contractuel
                   $agent = Contractuel::create($form->getRequest()->all());
                   // Insertion Grade
                   $contrat = new Contrat($form->getRequest()->all());
                   $agent->grades()->save($contrat);
+                  $agent->positions()->attach(1);
               }elseif($form->getRequest()->only('type')['type'] == 'Auxiliaire') {
                   // Inserion Agent Auxiliaire
                   $agent = Auxiliaire::create($form->getRequest()->all());
                   // Insertion Grade
-                  $auxiliaire = new TitularisationAuxiliaire($form->getRequest()->all());
+                  $auxiliaire = new Auxiliairement($form->getRequest()->all());
                   $agent->grades()->save($auxiliaire);
+                  $agent->positions()->attach(1);
               }else return redirect()->route('agent.create')->with('danger', 'Opération non effectuée, Erreur technique !');
 
               // Inserion Situation Matrimoniale
@@ -127,6 +130,7 @@ class AgentController extends Controller {
                           'prenom' => $prenom,
                           'date_naiss' => $form->getRequest()->only('date_naiss_enfant')['date_naiss_enfant'][$key],
                           'lieu_naiss' => $form->getRequest()->only('lieu_naiss_enfant')['lieu_naiss_enfant'][$key],
+                          'ref_acte_naiss' => $form->getRequest()->only('ref_acte_naiss_enfant')['ref_acte_naiss_enfant'][$key],
                           'sexe' => $form->getRequest()->only('sexe_enfant')['sexe_enfant'][$key],
                       ]);
                       $agent->enfants()->save($enfant);
@@ -143,12 +147,14 @@ class AgentController extends Controller {
                           'prenom' => $form->getRequest()->only('prenom_conjoint')['prenom_conjoint'][$key],
                           'date_naiss' => $form->getRequest()->only('date_naiss_conjoint')['date_naiss_conjoint'][$key],
                           'lieu_naiss' => $form->getRequest()->only('lieu_naiss_conjoint')['lieu_naiss_conjoint'][$key],
+                          'ref_acte_naiss' => $form->getRequest()->only('ref_acte_naiss_conjoint')['ref_acte_naiss_conjoint'][$key],
                           'sexe' => $form->getRequest()->only('sexe_conjoint')['sexe_conjoint'][$key],
                           'nationnalite' => $form->getRequest()->only('nationnalite_conjoint')['nationnalite_conjoint'][$key],
                           'tel' => $form->getRequest()->only('tel')['tel'][$key],
                           'employeur' => $form->getRequest()->only('employeur')['employeur'][$key],
                           'profession'  => $form->getRequest()->only('profession')['profession'][$key],
                           'ref_acte_mariage' => $form->getRequest()->only('ref_acte_mariage')['ref_acte_mariage'][$key],
+                          'date_mariage' => $form->getRequest()->only('date_mariage')['date_mariage'][$key],
                       ]);
                       $agent->conjoints()->save($conjoint);
                   }
@@ -184,7 +190,8 @@ class AgentController extends Controller {
   {
       $form = $this->form(AgentEditForm::class);
 
-      $form->validate(['matricule' => 'required|string|unique:agents,matricule,'. $agent->id]);
+      $max = date('Y-m-d', strtotime('-8 years'));
+      $form->validate(['matricule' => 'required|string|unique:agents,matricule,'. $agent->id, 'date_naiss' => 'required|date|min:'.$max]);
 
       if (!$form->isValid()) {
           return redirect()->back()->withErrors($form->getErrors())->withInput();
@@ -201,6 +208,9 @@ class AgentController extends Controller {
                       'category_id' => $form->getRequest()->only('category_id')['category_id'],
                       'classe_id' => $form->getRequest()->only('classe_id')['classe_id'],
                       'echelon_id' => $form->getRequest()->only('echelon_id')['echelon_id'],
+                      'cadre_id' => $form->getRequest()->only('cadre_id')['cadre_id'],
+                      'corp_id' => $form->getRequest()->only('corp_id')['corp_id'],
+                      'fonction_id' => $form->getRequest()->only('fonction_id')['fonction_id'],
                       'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
                       'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
                       'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
@@ -212,6 +222,9 @@ class AgentController extends Controller {
                   DB::table('agents')->where('id', $agent->id)->update(['date_prise_service' => $form->getRequest()->only('date_prise_service')['date_prise_service']]);
                   $agent->grades()->update([
                       'category_id' => $form->getRequest()->only('category_id')['category_id'],
+                      'cadre_id' => $form->getRequest()->only('cadre_id')['cadre_id'],
+                      'corp_id' => $form->getRequest()->only('corp_id')['corp_id'],
+                      'fonction_id' => $form->getRequest()->only('fonction_id')['fonction_id'],
                       'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
                       'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
                       //'type' => 'Contrat',
@@ -219,11 +232,12 @@ class AgentController extends Controller {
               }else if($form->getRequest()->only('type')['type'] == 'Auxiliaire'){
                   $agent->grades()->update([
                       'category_auxiliaire_id' => $form->getRequest()->only('category_auxiliaire_id')['category_auxiliaire_id'],
-                      'ref_titularisation' => $form->getRequest()->only('ref_titularisation')['ref_titularisation'],
-                      'date_titularisation' => $form->getRequest()->only('date_titularisation')['date_titularisation'],
+                      'cadre_id' => $form->getRequest()->only('cadre_id')['cadre_id'],
+                      'corp_id' => $form->getRequest()->only('corp_id')['corp_id'],
+                      'fonction_id' => $form->getRequest()->only('fonction_id')['fonction_id'],
                       'ref_engagement' => $form->getRequest()->only('ref_engagement')['ref_engagement'],
                       'date_engagement' => $form->getRequest()->only('date_engagement')['date_engagement'],
-                      //'type' => 'TitularisationAuxiliaire'
+                      //'type' => 'Auxiliairement'
                   ]);
               }else return false;
           }

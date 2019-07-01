@@ -2,7 +2,12 @@ $(function () {
     $('#corp_id').on('change', function(e){
         let corp_id = $("#corp_id option:selected").val();
         $.get('/api_category?corp_id=' + corp_id,function(data) {
-            $("#category_id").val(data.id)
+            $("#category_id").val(data.id);
+            $('#classe_id').val('');
+            $('#echelon_id').val('');
+            $("#indice").val('');
+            $("#salary").val('');
+            $("#indice_id").val('');
         });
     });
 
@@ -11,6 +16,7 @@ $(function () {
         $('#echelon_id').empty().append('<option value selected="selected">Sélectionner</option>');
         $("#indice").val('');
         $("#salary").val('');
+        $("#indice_id").val('');
     });
 
     $('#classe_id').on('change', function(e){

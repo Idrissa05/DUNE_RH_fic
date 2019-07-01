@@ -48,7 +48,7 @@ class ReclassementController extends Controller {
 
         $agent = Agent::findOrFail($form->getRequest()->only('agent_id')['agent_id']);
 
-        $form->validate(['date_reclassement' => 'date|required|after:'.$agent->date_naiss],[
+        $form->validate(['date_reclassement' => 'date|required|after:'.$agent->date_naiss, 'agent_id' => 'required|integer'],[
             'date_reclassement.after' => 'Le champ Date reclassement doit être une date supérieur à la date de naissance de l\'agent.'
         ]);
 
@@ -85,7 +85,11 @@ class ReclassementController extends Controller {
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $reclassement->update($form->getRequest()->all());
+        if($reclassement->agent->grades->last()->id != $reclassement->id){
+            return redirect()->route('reclassement.index')->with('danger', 'Impossible de modifier ce reclassement');
+        }else {
+            $reclassement->update($form->getRequest()->all());
+        }
         return redirect()->route('reclassement.index')->with('success', 'Mise à jour effectuée');
 
     }

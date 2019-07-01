@@ -19,9 +19,6 @@ class CreateAgentMigrationsTable extends Migration
             $table->integer('grade_id')->unsigned();
             $table->string('matricule', 30);
             $table->string('type', 30);
-            $table->integer('cadre_id')->unsigned();
-            $table->integer('corp_id')->unsigned();
-            $table->integer('fonction_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

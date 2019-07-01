@@ -11,10 +11,13 @@
             <th>Nom</th>
             <th>Prénom</th>
             <th>Sexe</th>
+            <th>Fonction</th>
             <th>Région</th>
             <th>Département</th>
+            <th>Commune</th>
             <th>Inspection</th>
             <th>S. Pédagogique</th>
+            <th>Etablissement</th>
         </tr>
         </thead>
 
@@ -29,10 +32,13 @@
                 <td>{{ $affectation->nom }}</td>
                 <td>{{ $affectation->prenom }}</td>
                 <td>{{ $affectation->sexe }}</td>
+                <td>{{ $affectation->fonction }}</td>
                 <td>{{ $affectation->region }}</td>
                 <td>{{ $affectation->departement }}</td>
+                <td>{{ $affectation->commune }}</td>
                 <td>{{ $affectation->inspection }}</td>
                 <td>{{ $affectation->secteur }}</td>
+                <td>{{ $affectation->etablissement }}</td>
             </tr>
             @php
                 $i++;

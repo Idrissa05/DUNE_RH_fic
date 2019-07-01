@@ -179,11 +179,11 @@
                         <div class="card-header bg-secondary text-white"><i class="mdi mdi-account-multiple-outline mdi-36px"></i></div>
                         <div class="card-body">
                             <p>
-                                Liste par secteur pédagogique, inspection, département, région, sexe.
+                                Liste par critères.
                             </p>
                             <form action="{{ route('prints.par') }}" class="" target="_blank">
                                 <div class="row">
-                                    <div class="form-group col-md-3 offset-md-1">
+                                    <div class="form-group col-md-3">
                                         <select name="region" id="region_id" class="select">
                                             <option value="">Sélectionner une région</option>
                                             @foreach($regions as $region)
@@ -201,16 +201,29 @@
                                             <option value="">Sélectionner une commune</option>
                                         </select>
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <select name="inspection" id="inspection_id" class="select">
+                                            <option value="">Sélectionner une inspection</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                   <div class="form-group col-md-3 offset-md-1">
-                                       <select name="inspection" id="inspection_id" class="select">
-                                           <option value="">Sélectionner une inspection</option>
-                                       </select>
-                                   </div>
                                     <div class="form-group col-md-3">
                                         <select name="secteur" id="secteur_pedagogique_id" class="select">
                                             <option value="">Sélectionner un secteur</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <select name="etablissement" id="etablissement_id" class="select">
+                                            <option value="">Sélectionner un établissement</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <select name="fonction" id="fonction_id" class="select">
+                                            <option value="">Sélectionner une fonction</option>
+                                            @foreach($fonctions as $fonction)
+                                                <option value="{{ $fonction->id }}">{{ $fonction->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                    <div class="form-group col-md-3">

@@ -11,6 +11,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'AJOUTER_CONFIGURATION'
+        ]);
+
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'MODIFIER_CONFIGURATION'
+        ]);
+
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'SUPPRIMER_CONFIGURATION'
+        ]);
+
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'CONSULTER_CONFIGURATION'
+        ]);
     }
 }

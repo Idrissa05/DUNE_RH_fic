@@ -96,6 +96,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/print-historique-avancement', 'PrintController@history')->name('prints.history');
     Route::get('/print-par', 'PrintController@par')->name('prints.par');
 
+    /**
+     * ACL
+     */
+    Route::resource('/role', 'RoleController')->except(['show']);
+
     Route::get('/auto','AvancementController@autoIndex')->name('avancement.auto');
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');
 

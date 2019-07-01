@@ -51,6 +51,7 @@
         <li>
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Administration </span></a>
             <ul aria-expanded="false" class="collapse">
+                <li><a href="{{ route('role.index') }}">Rôles</a></li>
                 <li><a href="{{ route('users.index') }}">Utilisateurs</a></li>
                 <li><a href="{{ route('config.index') }}">Système</a></li>
 

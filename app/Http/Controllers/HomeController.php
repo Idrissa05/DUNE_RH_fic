@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Corp;
 use App\Models\Departement;
 use App\Models\Echelon;
+use App\Models\Fonction;
 use App\Models\Indice;
 use App\Models\Inspection;
 use App\Models\Matrimoniale;
@@ -29,13 +30,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
-        $agents = Agent::all();
-        $corps = Corp::all();
-        $positions = Position::all();
-        $matrimoniales = Matrimoniale::all();
-        $regions = Region::all();
-        return view('home', compact('categories', 'agents', 'corps', 'positions', 'matrimoniales', 'regions'));
+        $categories = Category::orderBy('name')->get();
+        $agents = Agent::orderBy('matricule')->get();
+        $corps = Corp::orderBy('name')->get();
+        $positions = Position::orderBy('name')->get();
+        $matrimoniales = Matrimoniale::orderBy('name')->get();
+        $fonctions = Fonction::orderBy('name')->get();
+        $regions = Region::orderBy('name')->get();
+        return view('home', compact('categories', 'agents', 'corps', 'positions', 'matrimoniales', 'regions', 'fonctions'));
     }
 
     public function apiCategory(){

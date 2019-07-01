@@ -16,6 +16,7 @@
                 <th>Prénom</th>
                 <th>Date naissance</th> '
                 <th>Lieu naissance</th>
+                <th>Ref Acte Naissance</th>
                 <th>Sexe</th>
                 <th>Agent</th>
                 <th>Actions</th>
@@ -34,6 +35,7 @@
         { data: 'prenom', name: 'prenom' },
         { data: 'date_naiss', name: 'date_naiss' },
         { data: 'lieu_naiss', name: 'lien_naiss' },
+        { data: 'ref_acte_naiss', name: 'ref_acte_naiss' },
         { data: 'sexe', name: 'sexe' },
         { data: 'agent', name: 'agent' },
         { data: 'actions', name: 'Actions', searchable: false, orderable: false },

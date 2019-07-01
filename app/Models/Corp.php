@@ -14,10 +14,11 @@ class Corp extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function agents()
+    public function grades()
     {
-        return $this->hasMany('App\Models\Agent');
+        return $this->hasMany('App\Models\Grade');
     }
+
     public function agent_migrations()
     {
         return $this->hasMany('App\Models\AgentMigration');

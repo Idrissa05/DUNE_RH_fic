@@ -19,6 +19,9 @@ class EnfantForm extends Form
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance'
             ])
+            ->add('ref_acte_naiss','text', [
+                'label'=>'Référence Acte Naissance'
+            ])
             ->add('sexe','select', [
                 'label'=>'Sexe', 'rules' => 'required',
                 'choices' => ['F' => 'Féminin', 'M' => 'Masculin'],

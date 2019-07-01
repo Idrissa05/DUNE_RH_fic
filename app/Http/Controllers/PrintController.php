@@ -136,7 +136,10 @@ class PrintController extends Controller
             ->join('regions', 'regions.id', 'departements.region_id')
             ->orderByDesc('affectations.created_at')
             ->whereRaw('affectations.created_at = (SELECT max(affectations.created_at) from affectations where affectations.agent_id=agents.id)')
-            ->selectRaw('agents.id ,affectations.created_at, agents.matricule, agents.nom, agents.prenom,agents.sexe, regions.name as region, departements.name as departement,communes.name as commune, etablissements.name as etablissement,fonctions.name as fonction, inspections.name as inspection, secteur_pedagogiques.name secteur');
+            ->selectRaw('agents.id ,affectations.created_at, agents.matricule, agents.nom, agents.prenom,agents.sexe, regions.name as region, departements.name as departement, inspections.name as inspection, secteur_pedagogiques.name secteur');
+        if(auth()->user()->role != 'Administrateur') {
+            $query->whereRaw('agents.created_by_ministere_id = :ministere', ['ministere' => auth()->user()->ministere_id]);
+        }
         if($request->region) {
             $query->where('regions.id', '=', $request->region);
         }

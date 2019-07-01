@@ -17,10 +17,10 @@ class CreateAgentPositionsTable extends Migration
             $table->increments('id');
             $table->integer('agent_id')->unsigned();
             $table->integer('position_id')->unsigned();
+            $table->date('date_effet')->nullable();
             $table->string('ref_decision', 30)->nullable();
-            $table->date('date_decision');
-            $table->date('date_effet');
-            $table->date('date_fin');
+            $table->date('date_decision')->nullable();
+            $table->date('date_fin')->nullable();
             $table->string('observation')->nullable();
             $table->timestamps();
             $table->softDeletes();

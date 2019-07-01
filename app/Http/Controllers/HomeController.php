@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\Category;
 use App\Models\Corp;
-use App\Models\Departement;
 use App\Models\Echelon;
 use App\Models\Fonction;
 use App\Models\Indice;
-use App\Models\Inspection;
 use App\Models\Matrimoniale;
 use App\Models\Position;
 use App\Models\Region;
-use App\Models\SecteurPedagogique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -54,6 +51,12 @@ class HomeController extends Controller
                 ->where('classe_id', Input::get('classe_id'))
                 ->where('echelon_id', Input::get('echelon_id'))
                 ->get(['id','value','salary']));
+    }
+
+    public function apiAgent() {
+        return response()->json(Agent::with(['grades' => function ($q) {
+            $q->with('indice')->latest()->limit(1);
+        }])->find( Input::get('agent_id')));
     }
 
     public function api(Request $request) {

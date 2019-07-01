@@ -89,13 +89,17 @@
                                     <div class="form-group">
                                         {!! form_row($form->lieu_etablissement_acte_naiss) !!} </div>
                                 </div>
+                                <div class="col-md-4" id="both" hidden>
+                                    <div class="form-group">
+                                        {!! form_row($form->date_prise_service) !!} </div>
+                                </div>
                             </div>
                         </section>
 
                         <!-- Step 2 -->
                         <h6>Situation Administrative</h6>
                         <section>
-                            <div class="row"> <!--id="titulaire" hidden-->
+                            <div class="row">
                                 <div class="col-md-4 titulaire">
                                     <div class="form-group">
                                         {!! form_row($form->ref_engagement) !!} </div>
@@ -112,17 +116,11 @@
                                     <div class="form-group">
                                         {!! form_row($form->date_titularisation) !!} </div>
                                 </div>
-                            <!--</div>
-                            <div class="row" id="both">-->
-                                <div class="col-md-4" id="contractuel" hidden>
-                                    <div class="form-group">
-                                        {!! form_row($form->date_prise_service) !!} </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4" id="fonction">
                                     <div class="form-group">
                                         {!! form_row($form->fonction_id) !!} </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4" id="cadre">
                                     <div class="form-group">
                                         {!! form_row($form->cadre_id) !!} </div>
                                 </div>
@@ -203,9 +201,6 @@
                     $('#ref_acte_naiss').val(data[0].ref_acte_naiss);
                     $('#date_etablissement_acte_naiss').val(data[0].date_etablissement_acte_naiss);
                     $('#lieu_etablissement_acte_naiss').val(data[0].lieu_etablissement_acte_naiss);
-                    $('#fonction_id').val(data[0].fonction_id);
-                    $('#cadre_id').val(data[0].cadre_id);
-                    $('#corp_id').val(data[0].corp_id);
                     @include('dependentTypeFieldsEdit')
                 },
                 error : function() {

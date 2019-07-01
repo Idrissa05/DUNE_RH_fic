@@ -59,6 +59,10 @@
                                     <div class="form-group">
                                         {!! form_row($form->lieu_etablissement_acte_naiss) !!} </div>
                                 </div>
+                                <div class="col-md-4" id="both" hidden>
+                                    <div class="form-group">
+                                        {!! form_row($form->date_prise_service) !!} </div>
+                                </div>
                             </div>
                         </section>
                         <!-- Step 2 -->
@@ -82,11 +86,7 @@
                                         {!! form_row($form->date_titularisation) !!} </div>
                                 </div>
                             </div>
-                            <div class="row" id="both">
-                                <div class="col-md-3" id="contractuel" hidden>
-                                    <div class="form-group">
-                                        {!! form_row($form->date_prise_service) !!} </div>
-                                </div>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->fonction_id) !!} </div>
@@ -211,6 +211,7 @@
                                         <th>Prénom*</th>
                                         <th>Date Naissance*</th>
                                         <th>Lieu Naissance*</th>
+                                        <th>Ref Acte Naissance*</th>
                                         <th>Sexe*</th>
                                         <th><a style="font-size:18px;" id="addMoreEnfant" class="btn btn-sm btn-outline-light"><span class="mdi mdi-plus"></span></a></th>
                                     </tr>
@@ -237,7 +238,9 @@
                                         <th>Prénom*</th>
                                         <th>Date Naissance*</th>
                                         <th>Lieu Naissance*</th>
+                                        <th>Réf Acte Naissance*</th>
                                         <th>Sexe*</th>
+                                        <th>Date Mariage*</th>
                                         <th>Réf Acte Mariage*</th>
                                         <th>Nationnalité*</th>
                                         <th>Téléphone*</th>
@@ -282,13 +285,12 @@
                 @include('dependentTypeFieldsCreate')
             });
 
-
             @include('dependentTypeFieldsCreate')
             @include('dynamicDropDown')
 
             let num_child_rows=0;
             $('#addMoreEnfant').on('click', function() {
-                let row = "<tr><td><input class='table_field_required form-control' id='prenom_enfant' name=prenom_enfant["+num_child_rows+"] type='text'></td><td><input class='table_field_required child_date form-control' id='date_naiss_enfant' name=date_naiss_enfant["+num_child_rows+"] type='date'></td> <td><input class='table_field_required form-control' id='lieu_naiss_enfant' name=lieu_naiss_enfant["+num_child_rows+"] type='text'></td> <td> <select class='table_field_required form-control' id='sexe_enfant' name=sexe_enfant["+num_child_rows+"]> <option value='' selected='selected'>Sélectionner</option> <option value='F'>Féminin</option><option value='M'>Masculin</option> </select> </td> <td><a class='removeEnfant btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td> </tr>";
+                let row = "<tr><td><input class='table_field_required form-control' id='prenom_enfant' name=prenom_enfant["+num_child_rows+"] type='text'></td><td><input class='table_field_required child_date form-control' id='date_naiss_enfant' name=date_naiss_enfant["+num_child_rows+"] type='date'></td> <td><input class='table_field_required form-control' id='lieu_naiss_enfant' name=lieu_naiss_enfant["+num_child_rows+"] type='text'></td> <td><input class='table_field_required form-control' id='ref_acte_naiss_enfant' name=ref_acte_naiss_enfant["+num_child_rows+"] type='text'></td> <td> <select class='table_field_required form-control' id='sexe_enfant' name=sexe_enfant["+num_child_rows+"]> <option value='' selected='selected'>Sélectionner</option> <option value='F'>Féminin</option><option value='M'>Masculin</option> </select> </td> <td><a class='removeEnfant btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td> </tr>";
                 $("#enfant").append(row);
                 num_child_rows++;
                 $('#ne').text(num_child_rows);
@@ -301,7 +303,7 @@
 
             let num_partner_rows=0;
             $('#addMoreConjoint').on('click', function() {
-                let row = "<tr><td><input class='form-control' id='matricule_conjoint' name='matricule_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nom_conjoint' name='nom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='prenom_conjoint' name='prenom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='date_naiss_conjoint' name='date_naiss_conjoint["+num_partner_rows+"]' type='date'></td><td><input class='table_field_required form-control' id='lieu_naiss_conjoint' name='lieu_naiss_conjoint["+num_partner_rows+"]' type='text'></td><td><select class='table_field_required form-control' id='sexe_conjoint' name='sexe_conjoint["+num_partner_rows+"]'><option value=' selected='selected'>Sélectionner</option><option value='F'>Féminin</option><option value='M'>Masculin</option></select></td><td><input class='table_field_required form-control' id='ref_acte_mariage' name='ref_acte_mariage["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nationnalite_conjoint' name='nationnalite_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='tel' name='tel["+num_partner_rows+"]' type='text'></td><td><input class='form-control' id='employeur' name='employeur["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='profession' name='profession["+num_partner_rows+"]' type='text'></td><td><a class='removeConjoint btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td></tr>";
+                let row = "<tr><td><input class='form-control' id='matricule_conjoint' name='matricule_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nom_conjoint' name='nom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='prenom_conjoint' name='prenom_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='date_naiss_conjoint' name='date_naiss_conjoint["+num_partner_rows+"]' type='date'></td><td><input class='table_field_required form-control' id='lieu_naiss_conjoint' name='lieu_naiss_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='ref_acte_naiss_conjoint' name='ref_acte_naiss_conjoint["+num_partner_rows+"]' type='text'></td><td><select class='table_field_required form-control' id='sexe_conjoint' name='sexe_conjoint["+num_partner_rows+"]'><option value=' selected='selected'>Sélectionner</option><option value='F'>Féminin</option><option value='M'>Masculin</option></select></td><td><input class='table_field_required form-control' id='date_mariage' name='date_mariage["+num_partner_rows+"]' type='date'></td><td><input class='table_field_required form-control' id='ref_acte_mariage' name='ref_acte_mariage["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='nationnalite_conjoint' name='nationnalite_conjoint["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='tel' name='tel["+num_partner_rows+"]' type='text'></td><td><input class='form-control' id='employeur' name='employeur["+num_partner_rows+"]' type='text'></td><td><input class='table_field_required form-control' id='profession' name='profession["+num_partner_rows+"]' type='text'></td><td><a class='removeConjoint btn btn-outline-danger btn-sm'><i class='mdi mdi-18px mdi-trash-can-outline'></i></a></td></tr>";
                 $("#conjoint").append(row);
                 num_partner_rows++;
                 $('#nc').text(num_partner_rows);

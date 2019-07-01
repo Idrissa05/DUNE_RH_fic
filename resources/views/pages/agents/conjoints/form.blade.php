@@ -5,17 +5,19 @@
         {!!  form_row($form->nom) !!}
         {!!  form_row($form->prenom) !!}
         {!!  form_row($form->date_naiss) !!}
+        {!!  form_row($form->lieu_naiss) !!}
     </div>
     <div class="col-md-4">
-        {!!  form_row($form->matricule) !!}
-        {!!  form_row($form->lieu_naiss) !!}
+        {!!  form_row($form->ref_acte_naiss) !!}
         {!!  form_row($form->sexe) !!}
         {!!  form_row($form->nationnalite) !!}
+        {!!  form_row($form->matricule) !!}
+        {!! form_row($form->employeur) !!}
     </div>
     <div class="col-md-4">
-        {!!  form_row($form->tel) !!}
-        {!! form_row($form->employeur) !!}
         {!! form_row($form->profession) !!}
+        {!!  form_row($form->tel) !!}
+        {!! form_row($form->date_mariage) !!}
         {!! form_row($form->ref_acte_mariage) !!}
     </div>
 </div>

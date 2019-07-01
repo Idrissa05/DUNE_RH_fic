@@ -100,7 +100,6 @@ class ConjointController extends Controller {
           ->addColumn('id', function ($conjoint){
               return $conjoint->id;
           })
-
           ->addColumn('agent', function ($conjoint){
               return $conjoint->agent->fullName;
           })

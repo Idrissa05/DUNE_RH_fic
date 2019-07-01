@@ -16,7 +16,7 @@ class Grade extends Model
         'Reclassement' => Reclassement::class,
         'Titularisation' => Titularisation::class,
         'Contrat' => Contrat::class,
-        'TitularisationAuxiliaire' => TitularisationAuxiliaire::class
+        'Auxiliairement' => Auxiliairement::class
     ];
     protected $dates = ['deleted_at'];
 
@@ -43,6 +43,21 @@ class Grade extends Model
     public function echelon()
     {
         return $this->belongsTo('App\Models\Echelon');
+    }
+
+    public function cadre()
+    {
+        return $this->belongsTo('App\Models\Cadre');
+    }
+
+    public function corp()
+    {
+        return $this->belongsTo('App\Models\Corp');
+    }
+
+    public function fonction()
+    {
+        return $this->belongsTo('App\Models\Fonction');
     }
 
     public function indice()

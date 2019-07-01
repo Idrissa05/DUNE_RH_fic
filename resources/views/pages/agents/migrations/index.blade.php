@@ -12,11 +12,14 @@
                         <tr>
                             <th>No</th>
                             <th>Agent</th>
-                            <th>Code => Matricule</th>
+                            <th>Matricule</th>
                             <th>Type</th>
                             <th>Cadre</th>
                             <th>Corps</th>
                             <th>Fonction</th>
+                            <th>Catégorie</th>
+                            <th>Classe</th>
+                            <th>Echélon</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -30,7 +33,7 @@
 @section('js')
     <script>
         $(function () {
-            @include('dataTableAjax', ['columns' => "[
+            @include('dataTableAjaxAllScrolling', ['columns' => "[
                 { data: 'id', name: 'id' },
                 { data: 'agent', name: 'agent' },
                 { data: 'codeMat', name: 'codeMat' },
@@ -38,6 +41,9 @@
                 { data: 'cadre', name: 'cadre' },
                 { data: 'corps', name: 'corps' },
                 { data: 'fonction', name: 'fonction' },
+                { data: 'category_id', name: 'category_id' },
+                { data: 'classe_id', name: 'classe_id' },
+                { data: 'echelon_id', name: 'echelon_id' },
                 { data: 'action', name: 'Actions', searchable: false, orderable: false },
             ]", 'route' => route('migration.index')], ['scroll' => '450px'])
         })

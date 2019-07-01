@@ -22,6 +22,7 @@ class AgentForm extends Form
 {
     public function buildForm()
     {
+        $max = date('Y-m-d', strtotime('-8 years'));
         $this
             //******************************** Agents *****************************
             ->add('matricule','text',[
@@ -34,7 +35,7 @@ class AgentForm extends Form
                 'label'=>'Prénom *', 'rules' => 'required|string'
             ])
             ->add('date_naiss','date', [
-                'label'=>'Date de Naissance *', 'rules' => 'required|date','attr' => ['max' => null, 'min' => null]
+                'label'=>'Date de Naissance *', 'rules' => 'required|date','attr' => ['max' => $max, 'min' => null]
             ])
             ->add('lieu_naiss','text', [
                 'label'=>'Lieu de Naissance *', 'rules' => 'required'
@@ -61,32 +62,8 @@ class AgentForm extends Form
                 'choices' => ['Auxiliaire' => 'Auxiliaire','Contractuel' => 'Contractuel', 'Titulaire' => 'Titulaire'],
                 'empty_value' => 'Sélectionner'
             ])
-            ->add('cadre_id','entity', [
-                'class' => Cadre::class,
-                'label' => 'Cadre *', 'rules' => 'required',
-                'query_builder' => function (Cadre $cadre) {
-                    return $cadre->orderBy('name', 'asc')->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('corp_id','entity', [
-                'class' => Corp::class,
-                'label' => 'Corps *', 'rules' => 'required',
-                'query_builder' => function (Corp $corp) {
-                    return $corp->orderBy('name', 'asc')->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
-            ->add('fonction_id','entity', [
-                'class' => Fonction::class, 'rules' => 'required',
-                'label' => 'Fonction *',
-                'query_builder' => function (Fonction $fonction) {
-                    return $fonction->orderBy('name', 'asc')->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
             ->add('date_prise_service','date', [
-                'label'=>'Date de Prise de Service *', 'rules' => 'date|after:date_naiss|nullable', 'attr' => ['max' => null, 'min' => null]
+                'label'=>'Date Prise de Service de l\'Agent *', 'rules' => 'date|after:date_naiss|nullable', 'attr' => ['max' => null, 'min' => null]
             ])
             //******************************** Situation Matrimoniale *****************************
             ->add('matrimoniale_id', 'entity', [
@@ -112,6 +89,30 @@ class AgentForm extends Form
             ])
             ->add('date_titularisation','date', [
                 'label'=>'Date Titularisation *', 'rules' => 'date|nullable|after:date_naiss', 'attr' => ['max' => null, 'min' => null]
+            ])
+            ->add('cadre_id','entity', [
+                'class' => Cadre::class,
+                'label' => 'Cadre *', 'rules' => 'required',
+                'query_builder' => function (Cadre $cadre) {
+                    return $cadre->orderBy('name', 'asc')->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
+            ])
+            ->add('corp_id','entity', [
+                'class' => Corp::class,
+                'label' => 'Corps *', 'rules' => 'required',
+                'query_builder' => function (Corp $corp) {
+                    return $corp->orderBy('name', 'asc')->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
+            ])
+            ->add('fonction_id','entity', [
+                'class' => Fonction::class, 'rules' => 'required',
+                'label' => 'Fonction *',
+                'query_builder' => function (Fonction $fonction) {
+                    return $fonction->orderBy('name', 'asc')->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
             ])
             ->add('category_auxiliaire_id','entity', [
                 'class' => CategoryAuxiliaire::class,

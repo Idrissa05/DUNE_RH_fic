@@ -2,26 +2,26 @@
 
 namespace App\Forms;
 
+use App\Models\Agent;
 use App\Models\Cadre;
 use App\Models\Category;
 use App\Models\Classe;
-use App\Models\Contractuel;
 use App\Models\Corp;
 use App\Models\Echelon;
 use App\Models\Fonction;
 use Kris\LaravelFormBuilder\Form;
 
-class ContractuelAgentMigrationForm extends Form
+class AgentMigrationForm extends Form
 {
     public function buildForm()
     {
         $this
             //******************************** Agents *****************************
             ->add('agent_id','entity', [
-                'class' => Contractuel::class,
+                'class' => Agent::class,
                 'label' => 'Code Agent *', 'rules' => 'required',
-                'query_builder' => function (Contractuel $contractuel) {
-                    return $contractuel->orderBy('matricule', 'asc')->pluck('matricule','id');
+                'query_builder' => function (Agent $agent) {
+                    return $agent->where('type','<>','Titulaire')->orderBy('matricule', 'asc')->pluck('matricule','id');
                 },
                 'empty_value' => 'Sélectionner'
             ])
@@ -97,9 +97,6 @@ class ContractuelAgentMigrationForm extends Form
             ->add('fullName','text', ['label'=>'Nom & Prénom', 'attr' => ['readonly' => true, 'disabled' => true]])
             ->add('type','text', ['value' => 'Titulaire' ,'attr' => ['hidden' => true, 'id' => 'type']])
             // Save
-            ->add('cadre','text', ['attr' => ['hidden' => true, 'id' => 'cadre']])
-            ->add('corps','text', ['attr' => ['hidden' => true, 'id' => 'corps']])
-            ->add('fonction','text', ['attr' => ['hidden' => true, 'id' => 'fonction']])
             ->add('last_type','text', ['attr' => ['hidden' => true, 'id' => 'last_type']])
             ->add('code','text', ['attr' => ['hidden' => true, 'id' => 'code']])
         ;

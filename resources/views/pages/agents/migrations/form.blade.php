@@ -7,7 +7,7 @@
 @section('content')
     <div class="page-section">
         <section class="card card-fluid">
-            <h3 class="m-b-0 text-white text-center bg-primary">Migration Contractuel ==> Titulaire</h3>
+            <h3 class="m-b-0 text-white text-center bg-primary">Migration Agents (Contractuel & Auxiliaire) ==> Titulaire</h3>
             <div class="card-body">
                 {!! form_start($form) !!}
                 <section>
@@ -79,9 +79,6 @@
                         {!! form_widget($form->dt_agent_test) !!}
                         {!! form_widget($form->indice_id) !!}
                         {!! form_widget($form->code) !!}
-                        {!! form_widget($form->cadre) !!}
-                        {!! form_widget($form->corps) !!}
-                        {!! form_widget($form->fonction) !!}
                         {!! form_widget($form->type) !!}
                         {!! form_widget($form->last_type) !!}
                     </div>
@@ -100,12 +97,13 @@
                 $('#agent_id').on('change', function(e){
                     let agent_id = $("#agent_id option:selected").val();
                     $.get('/api_agent?agent_id=' + agent_id,function(data) {
+                        console.log(data);
                         $('#fullName').val(data.nom + ' '+ data.prenom);
                         $('#classe_id, #echelon_id, #indice, #salary').val('');
                         $('#category_id').val(data.grades[0].category_id);
-                        $('#cadre_id, #cadre').val(data.cadre_id);
-                        $('#corp_id, #corps').val(data.corp_id);
-                        $('#fonction_id, #fonction').val(data.fonction_id);
+                        $('#cadre_id, #cadre').val(data.grades[0].cadre_id);
+                        $('#corp_id, #corps').val(data.grades[0].corp_id);
+                        $('#fonction_id, #fonction').val(data.grades[0].fonction_id);
                         $('#code').val(data.matricule);
                         $('#last_type').val(data.type);
                         $('#dt_agent_test').val(data.date_naiss);

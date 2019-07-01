@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\ContractuelAgentMigrationForm;
+use App\Forms\AgentMigrationForm;
 use App\Models\Agent;
 use App\Models\AgentMigration;
 use App\Models\Titularisation;
@@ -18,7 +18,7 @@ class AgentMigrationController extends Controller {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $migrations = AgentMigration::with('agent', 'cadre', 'corp', 'fonction')->orderBy('created_at', 'desc')->get();
+            $migrations = AgentMigration::with('agent', 'grade')->orderBy('created_at', 'desc')->get();
             return Datatables::of($migrations)
                 ->addColumn('id', function ($migrations){
                     return $migrations->id;
@@ -27,19 +27,28 @@ class AgentMigrationController extends Controller {
                     return $migrations->agent->fullName;
                 })
                 ->addColumn('codeMat', function ($migrations){
-                    return "<span class='label label-light-info'>$migrations->matricule</span> => <span class='label label-primary'>{$migrations->agent->matricule}</span>";
+                    return "<span class='label label-light-danger'>$migrations->matricule</span> => <span class='label label-light-primary'>{$migrations->agent->matricule}</span>";
                 })
                 ->addColumn('type', function ($migrations){
-                    return "<span class='label label-light-info'>$migrations->type</span> => <span class='label label-primary'>{$migrations->agent->type}</span>";
+                    return "<span class='label label-light-danger'>$migrations->type</span> => <span class='label label-light-primary'>{$migrations->agent->type}</span>";
                 })
                 ->addColumn('cadre', function ($migrations){
-                    return $migrations->cadre->name;
+                    return "<span class='label label-light-primary'>{$migrations->grade->cadre->name}</span>";
                 })
                 ->addColumn('corps', function ($migrations){
-                    return $migrations->corp->name;
+                    return "<span class='label label-light-primary'>{$migrations->grade->corp->name}</span>";
                 })
                 ->addColumn('fonction', function ($migrations){
-                    return $migrations->fonction->name;
+                    return "<span class='label label-light-primary'>{$migrations->grade->fonction->name}</span>";
+                })
+                ->addColumn('category_id', function ($migrations){
+                    return "<span class='label label-light-primary'>{$migrations->grade->category->name}</span>";
+                })
+                ->addColumn('classe_id', function ($migrations){
+                    return "<span class='label label-light-primary'>{$migrations->grade->classe->name}</span>";
+                })
+                ->addColumn('echelon_id', function ($migrations){
+                    return "<span class='label label-light-primary'>{$migrations->grade->echelon->name}</span>";
                 })
                 ->addColumn('action', function($migrations){
                     return '<form action="'.route("migration.destroy", $migrations->id).'" id="del'.$migrations->id.'" style="display: inline-block;" method="post">
@@ -59,7 +68,7 @@ class AgentMigrationController extends Controller {
 
     public function create()
     {
-        $form = $this->form(ContractuelAgentMigrationForm::class, [
+        $form = $this->form(AgentMigrationForm::class, [
             'method' => 'POST',
             'url' => route('migration.store')
         ]);
@@ -68,7 +77,7 @@ class AgentMigrationController extends Controller {
 
     public function store()
     {
-        $form = $this->form(ContractuelAgentMigrationForm::class);
+        $form = $this->form(AgentMigrationForm::class);
 
         $form->validate(['date_engagement' => 'date|required|after:dt_agent_test', 'date_titularisation' => 'date|required|after:dt_agent_test' ],[
             'date_engagement.after' => 'Le champ Date Engagement doit être une date supérieur à la date de naissance de l\'agent.',
@@ -91,10 +100,7 @@ class AgentMigrationController extends Controller {
                 'agent_id' => $form->getRequest()->only('agent_id')['agent_id'],
                 'grade_id' => $titularisation->id,
                 'matricule' => $form->getRequest()->only('code')['code'],
-                'type' => $form->getRequest()->only('last_type')['last_type'],
-                'cadre_id' => $form->getRequest()->only('cadre')['cadre'],
-                'corp_id' => $form->getRequest()->only('corps')['corps'],
-                'fonction_id' => $form->getRequest()->only('fonction')['fonction'],
+                'type' => $form->getRequest()->only('last_type')['last_type']
             ]);
 
             DB::commit();
@@ -118,10 +124,7 @@ class AgentMigrationController extends Controller {
                 DB::beginTransaction();
                 $migrations->agent->update([
                     'matricule' => $migrations->matricule,
-                    'type' => $migrations->type,
-                    'cadre_id' => $migrations->cadre_id,
-                    'corp_id' => $migrations->corp_id,
-                    'fonction_id' => $migrations->fonction_id,
+                    'type' => $migrations->type
                 ]);
                 $migrations->forceDelete();
                 $migrations->grade->forceDelete();
@@ -132,11 +135,5 @@ class AgentMigrationController extends Controller {
             }
             return redirect()->route('migration.index')->with('success', 'Suppression effectuée');
         }
-    }
-
-    public function show() {
-        return response()->json(Agent::with(['grades' => function ($q) {
-            $q->latest()->limit(1);
-        }])->find(Input::get('agent_id')));
     }
 }

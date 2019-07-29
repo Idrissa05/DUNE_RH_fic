@@ -38,6 +38,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:ADMINISTRATION');
     }
 
     /**
@@ -50,7 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
+            'role_id' => ['required', 'integer'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -63,10 +64,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role']
+            'role' => 'Administrateur',
+            'region_id' => $data['region_id'],
+            'ministere_id' => $data['ministere_id'],
         ]);
+        $user->syncRoles($data['role_id']);
+        return $user;
     }
 }

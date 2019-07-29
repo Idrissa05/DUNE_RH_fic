@@ -60,11 +60,11 @@
                     </tr>
                     <tr>
                         <td>Cadre :</td>
-                        <td>{{ $agent->cadre->name }}</td>
+                        <td>{{ $agent->grades->last()->cadre->name }}</td>
                     </tr>
                     <tr>
                         <td>Corps :</td>
-                        <td>{{ $agent->corp->name }}</td>
+                        <td>{{ $agent->grades->last()->corp->name }}</td>
                     </tr>
                     <tr>
                         <td>Type :</td>
@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td>Fonction :</td>
-                        <td>{{ $agent->fonction->name }}</td>
+                        <td>{{ $agent->grades->last()->fonction->name }}</td>
                     </tr>
                     <tr>
                         <td>Date prise de service :</td>

@@ -22,38 +22,46 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('agent', 'AgentController');
     Route::resource('affectation', 'AffectationController');
-    Route::resource('etablissement', 'EtablissementController');
-    Route::resource('category', 'CategoryController');
-    Route::resource('classe', 'ClasseController');
-    Route::resource('echelon', 'EchelonController');
+
+    /**
+     * Routes des configurations
+     */
+    Route::group(['middleware' => ['permission:CONSULTER_CONFIGURATION']], function (){
+        Route::resource('etablissement', 'EtablissementController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('classe', 'ClasseController');
+        Route::resource('echelon', 'EchelonController');
+        Route::resource('region', 'RegionController');
+        Route::resource('departement', 'DepartementController');
+        Route::resource('inspection', 'InspectionController');
+        Route::resource('experience', 'ExperienceController');
+        Route::resource('formation', 'FormationController');
+        Route::resource('ecoleformation', 'EcoleFormationController');
+        Route::resource('diplome', 'DiplomeController');
+        Route::resource('niveauetude', 'NiveauEtudeController');
+        Route::resource('equivalencediplome', 'EquivalenceDiplomeController');
+        Route::resource('maladie', 'MaladieController');
+        Route::resource('matrimoniale', 'MatrimonialeController');
+        Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('cadre',  'CadreController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('fonction',  'FonctionController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('indice',  'IndiceController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('position',  'PositionController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('secteurPedagogique',  'SecteurPedagogiqueController', ['only' => ['store', 'index', 'update', 'destroy']]);
+        Route::resource('categoryAuxiliaire', 'CategoryAuxiliaireController', ['only' => ['store', 'index', 'update', 'destroy']]);
+    });
+
     Route::resource('conge', 'CongeController');
     Route::resource('conjoint', 'ConjointController');
     Route::resource('deces', 'DeceController');
     Route::resource('enfant', 'EnfantController');
-    Route::resource('region', 'RegionController');
-    Route::resource('departement', 'DepartementController');
-    Route::resource('inspection', 'InspectionController');
-    Route::resource('experience', 'ExperienceController');
-    Route::resource('formation', 'FormationController');
-    Route::resource('ecoleformation', 'EcoleFormationController');
-    Route::resource('diplome', 'DiplomeController');
-    Route::resource('niveauetude', 'NiveauEtudeController');
-    Route::resource('equivalencediplome', 'EquivalenceDiplomeController');
-    Route::resource('maladie', 'MaladieController');
-    Route::resource('matrimoniale', 'MatrimonialeController');
     Route::resource('notation', 'NotationController');
     Route::resource('reclassement', 'ReclassementController');
     Route::resource('retraite', 'RetraiteController');
     Route::resource('typeetablissement', 'TypeEtablissementController');
     Route::resource('avancement', 'AvancementController');
 
-    Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('cadre',  'CadreController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('fonction',  'FonctionController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('indice',  'IndiceController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('position',  'PositionController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('secteurPedagogique',  'SecteurPedagogiqueController', ['only' => ['store', 'index', 'update', 'destroy']]);
-    Route::resource('categoryAuxiliaire', 'CategoryAuxiliaireController', ['only' => ['store', 'index', 'update', 'destroy']]);
+
     Route::resource('migration', 'AgentMigrationController', ['only' => ['store', 'index', 'create', 'destroy']]);
 
     Route::get('agent-maladie', 'AgentMaladieController@index')->name('agent-maladie.index');

@@ -9,10 +9,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class AvancementController extends Controller
 {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_AVANCEMENT');
+        $this->middleware('permission:EDITER_AVANCEMENT')->only('create', 'store', 'edit', 'update', 'autoCreate');
+        $this->middleware('permission:SUPPRIMER_AVANCEMENT')->only('destroy');
+    }
 
     public function index(Request $request)
     {
@@ -38,8 +46,14 @@ class AvancementController extends Controller
                     return formaterDate($avancement->date_decision_avancement);
                 })
                 ->addColumn('action', function($avancement){
-                    return '<a href="'.route("avancement.edit", $avancement).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
-                        '<form action="'.route("avancement.destroy", $avancement).'" id="del'.$avancement->id.'" style="display: inline-block;" method="post">
+                    $html = '';
+                    $user = Auth::user();
+                    if($user->hasPermissionTo('EDITER_AVANCEMENT')) {
+                        $html .= '<a href="'.route("avancement.edit", $avancement).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' ';
+                    }
+
+                if ($user->hasPermissionTo('SUPPRIMER_AVANCEMENT')) {
+                        $html .= '<form action="'.route("avancement.destroy", $avancement).'" id="del'.$avancement->id.'" style="display: inline-block;" method="post">
                             '.method_field('DELETE').'
                             '.csrf_field().'
                             <button class="btn btn-outline-danger btn-sm" type="button"
@@ -47,6 +61,8 @@ class AvancementController extends Controller
                                 <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                             </button>
                       </form>';
+                }
+                return $html;
                 })
                 ->rawColumns(['action'])->make(true);
         }

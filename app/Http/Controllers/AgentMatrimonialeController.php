@@ -13,6 +13,13 @@ class AgentMatrimonialeController extends Controller
 {
     use FormBuilderTrait;
 
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_MATRIMONIALE');
+        $this->middleware('permission:EDITER_MATRIMONIALE')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_MATRIMONIALE')->only('destroy');
+    }
+
 
     public function index(Request $request) {
 

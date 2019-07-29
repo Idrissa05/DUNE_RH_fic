@@ -2,7 +2,10 @@
 
 namespace App\Forms;
 
+use App\Models\Ministere;
+use App\Models\Region;
 use Kris\LaravelFormBuilder\Form;
+use Spatie\Permission\Models\Role;
 
 class RegisterForm extends Form
 {
@@ -18,9 +21,32 @@ class RegisterForm extends Form
             ->add('password_confirmation', 'password', [
                 'label' => 'Confirmation de mot de passe'
             ])
-            ->add('role','select', [
-                'label'=>'Rôle', 'rules' => 'required',
-                'choices' => ['Administrateur' => 'Administrateur', 'Membre' => 'Membre']
+            ->add('region_id','entity', [
+                'label'=>'Région',
+                'rules' => 'required',
+                'class' => Region::class,
+                'empty_value' => 'Sélectionner',
+                'query_builder' => function (Region $region) {
+                    return $region->orderBy('name', 'asc')->pluck('name', 'id');
+                }
+            ])
+            ->add('ministere_id','entity', [
+                'label'=>'Ministère',
+                'rules' => 'required',
+                'class' => Ministere::class,
+                'empty_value' => 'Sélectionner',
+                'query_builder' => function (Ministere $ministere) {
+                    return $ministere->orderBy('name', 'asc')->pluck('name', 'id');
+                }
+            ])
+            ->add('role_id','entity', [
+                'label'=>'Rôle',
+                'rules' => 'required',
+                'class' => Role::class,
+                'empty_value' => 'Sélectionner',
+                'query_builder' => function (Role $role) {
+                    return $role->orderBy('name', 'asc')->pluck('name', 'id');
+                }
             ]);
 
 

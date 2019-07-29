@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel1">Nouval utilisateur</h4>
@@ -12,12 +12,22 @@
                 </div>
                 {!! form_start($form) !!}
                 <div class="modal-body">
-                   {!! form_row($form->name) !!}
-                   <div id="p">
-                       {!! form_row($form->password) !!}
-                       {!! form_row($form->password_confirmation) !!}
-                   </div>
-                   {!! form_row($form->role) !!}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! form_row($form->name) !!}
+                            <div id="p">
+                                {!! form_row($form->password) !!}
+                                {!! form_row($form->password_confirmation) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            {!! form_row($form->region_id) !!}
+                            {!! form_row($form->ministere_id) !!}
+                            {!! form_row($form->role_id) !!}
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
@@ -52,7 +62,7 @@
                         <td>
                             <button id="user{{ $user->id }}"
                                     data-name="{{ $user->name }}"
-                                    data-role="{{ $user->role }}"
+                                    data-role="{{ $user->role_id }}"
                                     data-route="{{ route('users.update', $user) }}"
                                     onclick="updateClasse({{ $user->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>
@@ -86,7 +96,7 @@
 
         let $modal = $('#add')
         let $name = $('#name')
-        let $role = $('#role')
+        let $role = $('#role_id')
         let $form = $('form')
 
 

@@ -8,10 +8,17 @@ use App\Models\Agent;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class AffectationController extends Controller {
     use FormBuilderTrait;
 
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_AFFECTATION');
+        $this->middleware('permission:EDITER_AFFECTATION')->only('create', 'store', 'edit', 'update');
+        $this->middleware('permission:SUPPRIMER_AFFECTATION')->only('destroy');
+    }
 
     public function index(Request $request)
     {
@@ -116,17 +123,25 @@ class AffectationController extends Controller {
                 return $affectation->etablissement->name;
             })
             ->addColumn('actions', function ($affectation){
-                return '<div class="btn-group">
-                    <a title="editer" href="'.route('affectation.edit', $affectation).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>
-                    <form action="'.route("affectation.destroy", $affectation).'" id="del'.$affectation->id.'" style="display: inline-block;" method="post">
+                $html = '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_AFFECTATION')) {
+                    $html .= '<a title="editer" href="'.route('affectation.edit', $affectation).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
+                }
+
+                if($user->hasPermissionTo('SUPPRIMER_AFFECTATION')) {
+                    $html .= '<form action="'.route("affectation.destroy", $affectation).'" id="del'.$affectation->id.'" style="display: inline-block;" method="post">
                                 '.method_field('DELETE').'
                                 '.csrf_field().'
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
                                 onclick="myHelpers.deleteConfirmation(\'del'.$affectation->id.'\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+        
+                }
+                $html .= '</div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

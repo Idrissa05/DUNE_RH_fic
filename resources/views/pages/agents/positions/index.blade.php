@@ -39,9 +39,9 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-
+            @can('EDITER_POSITION')
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-
+            @endcan
             <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>

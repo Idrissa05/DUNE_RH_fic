@@ -14,12 +14,22 @@ class UsersController extends Controller
     use FormBuilderTrait;
 
 
+    public function __construct()
+    {
+        $this->middleware('permission:ADMINISTRATION');
+
+    }
+
+
     public function index() {
         $form = $this->form(RegisterForm::class, [
             'method' => 'POST',
             'url' => route('register')
         ]);
         $users = User::all();
+        $users = $users->each(function ($user) {
+           return  $user->role_id = is_object($user->roles->first()) ? $user->roles->first()->id : null;
+        });
 
         return view('system.users.index', [
             'users' => $users,
@@ -30,13 +40,13 @@ class UsersController extends Controller
     public function update(Request $request, User $user) {
         $this->validate($request, [
             'name' => 'required',
-            'role' => 'required'
+            'role_id' => 'required'
         ]);
 
         $user->update([
-            'name' => $request->name,
-            'role' => $request->role,
+            'name' => $request->name
         ]);
+        $user->syncRoles($request->role_id);
 
         return redirect(route('users.index'))->with('success', 'Opération effectuée !');
     }

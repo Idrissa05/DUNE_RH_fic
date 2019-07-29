@@ -6,9 +6,9 @@
 
 <div class="card card-outline-info">
     <div class="card-body">
-
+        @can('EDITER_RETRAITE')
         <a href="{{ route('retraite.create') }}" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></a>
-
+        @endcan
         <table class="table table-bordered text-center" id="myTable">
             <thead>
             <tr>

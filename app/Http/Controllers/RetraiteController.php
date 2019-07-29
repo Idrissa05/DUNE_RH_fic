@@ -6,12 +6,19 @@ use App\Forms\RetraiteForm;
 use App\Models\Agent;
 use App\Models\Retraite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class RetraiteController extends Controller {
     use FormBuilderTrait;
 
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_RETRAITE');
+        $this->middleware('permission:EDITER_RETRAITE')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_RETRAITE')->only('destroy');
+    }
 
     public function index(Request $request)
     {
@@ -117,17 +124,24 @@ class RetraiteController extends Controller {
                 return $retraite->agent->matricule;
             })
             ->addColumn('actions', function ($retraite){
-                return '<div class="btn-group">
-                    <a title="editer" href="'.route('retraite.edit', $retraite).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>
-                    <form action="'.route("retraite.destroy", $retraite).'" id="del'.$retraite->id.'" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
+                $html = '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_RETRAITE')) {
+                    $html .= ' <a title="editer" href="' . route('retraite.edit', $retraite) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
+                }
+
+                if($user->hasPermissionTo('SUPPRIMER_RETRAITE')) {
+                    $html .= ' <form action="' . route("retraite.destroy", $retraite) . '" id="del' . $retraite->id . '" style="display: inline-block;" method="post">
+                                ' . method_field('DELETE') . '
+                                ' . csrf_field() . '
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$retraite->id.'\')">
+                                onclick="myHelpers.deleteConfirmation(\'del' . $retraite->id . '\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+                }
+                    $html .= ' </div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

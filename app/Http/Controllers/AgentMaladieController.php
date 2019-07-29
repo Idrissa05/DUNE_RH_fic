@@ -6,12 +6,20 @@ use App\Forms\AgentMaladieForm;
 use App\Models\Agent;
 use App\Models\Maladie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class AgentMaladieController extends Controller
 {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_MALADIE');
+        $this->middleware('permission:EDITER_MALADIE')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_MALADIE')->only('destroy');
+    }
 
 
     public function index(Request $request) {
@@ -113,16 +121,21 @@ class AgentMaladieController extends Controller
                 return $maladie->pivot->date_observation;
             })
             ->addColumn('actions', function ($maladie) use ($agent){
-                return '<div class="btn-group">
-                    <form action="'.route("agent-maladie.destroy", ['agent' => $agent, 'maladie' => $maladie]).'" id="del'.$maladie->id.'" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
+                $html = '';
+                $html .= '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('SUPPRIMER_MALADIE')) {
+                    $html .= '<form action="' . route("agent-maladie.destroy", ['agent' => $agent, 'maladie' => $maladie]) . '" id="del' . $maladie->id . '" style="display: inline-block;" method="post">
+                                ' . method_field('DELETE') . '
+                                ' . csrf_field() . '
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$maladie->id.'\')">
+                                onclick="myHelpers.deleteConfirmation(\'del' . $maladie->id . '\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+                }
+                   $html .= '</div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

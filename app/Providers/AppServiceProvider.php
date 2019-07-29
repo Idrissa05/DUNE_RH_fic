@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        View::composer('*', ConfigComposer::class);
+        View::composer('layouts.material', ConfigComposer::class);
 
         Agent::observe(AgentObserver::class);
     }

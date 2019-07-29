@@ -7,6 +7,7 @@ use App\Models\Agent;
 use App\Models\AgentMigration;
 use App\Models\Titularisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -14,6 +15,13 @@ use Yajra\DataTables\DataTables;
 
 class AgentMigrationController extends Controller {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_MIGRATION');
+        $this->middleware('permission:EFFECTUER_MIGRATION')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_MIGRATION')->only('destroy');
+    }
 
     public function index(Request $request)
     {
@@ -51,7 +59,10 @@ class AgentMigrationController extends Controller {
                     return "<span class='label label-light-primary'>{$migrations->grade->echelon->name}</span>";
                 })
                 ->addColumn('action', function($migrations){
-                    return '<form action="'.route("migration.destroy", $migrations->id).'" id="del'.$migrations->id.'" style="display: inline-block;" method="post">
+                    $html = '';
+                    $user = Auth::user();
+                    if($user->hasPermissionTo('SUPPRIMER_MIGRATION')) {
+                        $html .= '<form action="'.route("migration.destroy", $migrations->id).'" id="del'.$migrations->id.'" style="display: inline-block;" method="post">
                             '.method_field('DELETE').'
                             '.csrf_field().'
                             <button class="btn btn-outline-danger btn-sm" type="button"
@@ -59,6 +70,9 @@ class AgentMigrationController extends Controller {
                                 <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                             </button>
                       </form>';
+                    }
+
+                    return $html;
                 })
                 ->rawColumns(['action'])->escapeColumns([])->make(true);
         }

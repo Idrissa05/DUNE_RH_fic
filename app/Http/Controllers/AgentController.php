@@ -19,10 +19,19 @@ use App\Models\Formation;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends Controller {
 
     use FormBuilderTrait;
+
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_AGENT');
+        $this->middleware('permission:EDITER_AGENT')->only('create', 'store', 'edit', 'update');
+        $this->middleware('permission:SUPPRIMER_AGENT')->only('destroy');
+    }
 
     public function index(Request $request)
   {
@@ -33,8 +42,14 @@ class AgentController extends Controller {
                   return formaterDate($agent->date_naiss);
               })
               ->addColumn('action', function($agent){
-                  return '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' '.
-                      '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
+                  $html = '';
+                  $user = Auth::user();
+                  if($user->hasPermissionTo('EDITER_AGENT')){
+                    $html .= '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' ';
+                  }
+
+                  if($user->hasPermissionTo('SUPPRIMER_AGENT')) {
+                  $html .= '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
                             '.method_field('DELETE').'
                             '.csrf_field().'
                             <button class="btn btn-outline-danger btn-sm" type="button"
@@ -42,6 +57,8 @@ class AgentController extends Controller {
                                 <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                             </button>
                       </form>';
+                  }
+                      return $html;
               })
               ->escapeColumns([])->make(true);
       }

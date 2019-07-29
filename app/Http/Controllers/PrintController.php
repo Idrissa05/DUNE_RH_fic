@@ -38,7 +38,9 @@ class PrintController extends Controller
     }
 
     public function listParCategorieParSexe(Request $request) {
-        $agents = Agent::with('corp','corp.category');
+        $agents = Agent::with(['grades' => function($query) {
+            return $query->with('category', 'categoryAuxiliaire');
+        }]);
         if($request->sexe) {
             $agents->where('sexe', '=', $request->sexe);
         }
@@ -46,7 +48,9 @@ class PrintController extends Controller
 
         if($request->categorie) {
             $agents = $agents->filter(function ($agent) use ($request){
-                return $agent->corp->category_id == $request->categorie;
+                return $agent->grades->last()->category ?
+                    $agent->grades->last()->category->name == $request->categorie :
+                    $agent->grades->last()->categoryAuxiliaire->name == $request->categorie;
             });
         }
 
@@ -57,12 +61,14 @@ class PrintController extends Controller
     }
 
     public function listParCorp(Request $request) {
-        $agents = Agent::with('corp');
+        $agents = Agent::with('grades', 'grades.corp');
+        $agents = $agents->get();
 
         if($request->corp) {
-            $agents->where('corp_id', '=', $request->corp);
+            $agents = $agents->filter(function ($agent)use ($request){
+                return $agent->grades->last()->corp_id == $request->corp;
+            });
         }
-        $agents = $agents->get();
         $mpdf = new Mpdf();
         $view = view('pdf.corps', ['agents' => $agents])->render();
         $mpdf->WriteHTML($view);
@@ -106,7 +112,7 @@ class PrintController extends Controller
 
     public function infos(Request $request) {
         $agent = Agent::findOrFail($request->agent);
-        $agent->load(['enfants', 'conjoints', 'formations', 'corp', 'cadre', 'experiences','grades' => function($query) {
+        $agent->load(['enfants', 'conjoints', 'formations', 'experiences','grades' => function($query) {
             return $query;
         }]);
         $mpdf = new Mpdf();
@@ -127,7 +133,8 @@ class PrintController extends Controller
     public function par(Request $request) {
         $query = Affectation::query()
             ->join('agents', 'agents.id', '=', 'affectations.agent_id')
-            ->join('fonctions', 'fonctions.id', '=', 'agents.fonction_id')
+            ->join('grades', 'grades.agent_id', '=', 'agents.id')
+            ->join('fonctions', 'fonctions.id', '=', 'grades.fonction_id')
             ->join('etablissements', 'etablissements.id', '=', 'affectations.etablissement_id')
             ->join('secteur_pedagogiques', 'secteur_pedagogiques.id', 'etablissements.secteur_pedagogique_id')
             ->join('inspections', 'inspections.id', '=', 'secteur_pedagogiques.inspection_id')
@@ -136,7 +143,7 @@ class PrintController extends Controller
             ->join('regions', 'regions.id', 'departements.region_id')
             ->orderByDesc('affectations.created_at')
             ->whereRaw('affectations.created_at = (SELECT max(affectations.created_at) from affectations where affectations.agent_id=agents.id)')
-            ->selectRaw('agents.id ,affectations.created_at, agents.matricule, agents.nom, agents.prenom,agents.sexe, regions.name as region, departements.name as departement, inspections.name as inspection, secteur_pedagogiques.name secteur');
+            ->selectRaw('agents.id ,affectations.created_at, agents.matricule, agents.nom, agents.prenom,agents.sexe, regions.name as region, departements.name as departement, inspections.name as inspection, secteur_pedagogiques.name secteur, fonctions.name as fonction, etablissements.name as etablissement, communes.name as commune');
         if(auth()->user()->role != 'Administrateur') {
             $query->whereRaw('agents.created_by_ministere_id = :ministere', ['ministere' => auth()->user()->ministere_id]);
         }

@@ -7,7 +7,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel1">Nouvelle etablissement</h4>
+                    <h4 class="modal-title" id="exampleModalLabel1">Ajout/Modification établissement</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {!! form_start($form) !!}
@@ -51,7 +51,7 @@
                         <td>
                             <button id="etablissement{{ $etablissement->id }}"
                                     data-classe="{{ $etablissement->classe_id }}" data-name="{{ $etablissement->name }}"
-                                    data-inspection="{{ $etablissement->inspection_id }}"
+                                    data-secteur="{{ $etablissement->secteur_pedagogique_id }}"
                                     data-type="{{ $etablissement->type_etablissement_id }}"
                                     data-route="{{ route('etablissement.update', $etablissement) }}"
                                     onclick="updateEtablissement({{ $etablissement->id }})" class="btn btn-sm btn-outline-warning">
@@ -86,7 +86,7 @@
 
         let $modal = $('#add')
         let $name = $('#name')
-        let $inspection = $('#inspection_id')
+        let $secteur = $('#secteur_pedagogique_id')
         let $type = $('#type_etablissement_id')
         let $form = $('form')
 
@@ -95,7 +95,7 @@
             let $el = $('#etablissement'+id)
             $modal.modal('show')
             $name.val($el.attr('data-name'))
-            $inspection.val($el.attr('data-inspection'))
+            $secteur.val($el.attr('data-secteur'))
             $type.val($el.attr('data-type'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
@@ -103,7 +103,7 @@
 
         $modal.on('hidden.bs.modal', function (e) {
             $name.val('')
-            $inspection.val(null)
+            $secteur.val(null)
             $type.val(null)
             $form.attr('action', '')
             $('input[name="_method"]').remove()

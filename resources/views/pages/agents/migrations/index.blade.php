@@ -6,7 +6,9 @@
             <h3 class="m-b-0 text-white text-center bg-primary">Migration Agents</h3>
             <div class="card-body">
                 <div class="table-responsive m-t-0">
+                    @can('EFFECTUER_MIGRATION')
                     <a href="{{route('migration.create')}}" class="btn btn-primary"><i class="mdi mdi-plus"></i> Effectuer Migration</a>
+                    @endcan
                     <table id="myTable" class="table table-bordered text-center table-striped">
                         <thead>
                         <tr>

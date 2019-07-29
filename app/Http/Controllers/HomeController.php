@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\Category;
+use App\Models\CategoryAuxiliaire;
 use App\Models\Corp;
 use App\Models\Echelon;
 use App\Models\Fonction;
@@ -27,7 +28,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get()->toArray();
+        $categories = array_merge($categories, CategoryAuxiliaire::orderBy('name')->get()->toArray());
         $agents = Agent::orderBy('matricule')->get();
         $corps = Corp::orderBy('name')->get();
         $positions = Position::orderBy('name')->get();

@@ -30,7 +30,7 @@
                                        <select name="categorie" class="select">
                                            <option value="">Sélectionner une catégorie</option>
                                            @foreach($categories as $category)
-                                               <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                               <option value="{{ $category['name'] }}">{{ $category['name'] }}</option>
                                            @endforeach
                                        </select>
                                    </div>
@@ -283,6 +283,15 @@
                     $('#secteur_pedagogique_id').empty().append('<option value selected="selected">Sélectionner un secteur</option>');
                     $.each(data, function(index, secteur){
                         $('#secteur_pedagogique_id').append('<option value="'+ secteur.id +'">'+ secteur.name +'</option>');
+                    })
+                });
+            });
+            $('#secteur_pedagogique_id').on('change', function(e){
+                let secteur_id = $("#secteur_pedagogique_id option:selected").val();
+                $.get('/api?model=etablissement&column=secteur_pedagogique_id&id=' + secteur_id,function(data) {
+                    $('#etablissement_id').empty().append('<option value selected="selected">Sélectionner un établissement</option>');
+                    $.each(data, function(index, secteur){
+                        $('#etablissement_id').append('<option value="'+ secteur.id +'">'+ secteur.name +'</option>');
                     })
                 });
             });

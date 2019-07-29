@@ -6,12 +6,19 @@ use App\Forms\NotationForm;
 use App\Models\Agent;
 use App\Models\Notation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class NotationController extends Controller {
     use FormBuilderTrait;
 
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_NOTATION');
+        $this->middleware('permission:EDITER_NOTATION')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_NOTATION')->only('destroy');
+    }
 
     public function index(Request $request)
     {
@@ -110,17 +117,24 @@ class NotationController extends Controller {
                 return $notation->agent->fullName;
             })
             ->addColumn('actions', function ($notation){
-                return '<div class="btn-group">
-                    <a title="editer" href="'.route('notation.edit', $notation).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>
-                    <form action="'.route("notation.destroy", $notation).'" id="del'.$notation->id.'" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
+                $html = '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_NOTATION')) {
+                    $html .= ' <a title="editer" href="' . route('notation.edit', $notation) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
+                }
+
+                if($user->hasPermissionTo('SUPPRIMER_NOTATION')) {
+                    $html .= ' <form action="' . route("notation.destroy", $notation) . '" id="del' . $notation->id . '" style="display: inline-block;" method="post">
+                                ' . method_field('DELETE') . '
+                                ' . csrf_field() . '
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$notation->id.'\')">
+                                onclick="myHelpers.deleteConfirmation(\'del' . $notation->id . '\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+                }
+                    $html .= ' </div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

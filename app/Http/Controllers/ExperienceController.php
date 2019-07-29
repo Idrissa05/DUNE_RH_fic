@@ -6,11 +6,19 @@ use App\Forms\ExperienceForm;
 use App\Models\Agent;
 use App\Models\Experience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class ExperienceController extends Controller {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_EXPERIENCE');
+        $this->middleware('permission:EDITER_EXPERIENCE')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_EXPERIENCE')->only('destroy');
+    }
 
 
     public function index(Request $request)
@@ -109,18 +117,31 @@ class ExperienceController extends Controller {
             ->addColumn('agent', function ($experience){
                 return $experience->agent->fullName;
             })
+            ->addColumn('date_debut', function ($experience){
+                return formaterDate($experience->date_debut);
+            })
+            ->addColumn('date_fin', function ($experience){
+                return formaterDate($experience->date_fin);
+            })
             ->addColumn('actions', function ($experience){
-                return '<div class="btn-group">
-                    <a title="editer" href="'.route('experience.edit', $experience).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>
-                    <form action="'.route("experience.destroy", $experience).'" id="del'.$experience->id.'" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
+                $html = '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_EXPERIENCE')) {
+                    $html .= ' <a title="editer" href="' . route('experience.edit', $experience) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
+                }
+
+                if($user->hasPermissionTo('SUPPRIMER_EXPERIENCE')) {
+                    $html .= ' <form action="' . route("experience.destroy", $experience) . '" id="del' . $experience->id . '" style="display: inline-block;" method="post">
+                                ' . method_field('DELETE') . '
+                                ' . csrf_field() . '
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$experience->id.'\')">
+                                onclick="myHelpers.deleteConfirmation(\'del' . $experience->id . '\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+                }
+                    $html .= ' </div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

@@ -6,8 +6,10 @@
             <h3 class="m-b-0 text-white text-center bg-primary">Les Avancements</h3>
             <div class="card-body">
                 <div class="table-responsive m-t-0">
+                    @can('EDITER_AVANCEMENT')
                     <a href="{{route('avancement.create')}}" class="btn btn-primary"><i class="mdi mdi-plus"></i> Avancement au Choix </a>
                     <a href="{{route('avancement.auto')}}" class="btn btn-primary"><i class="mdi mdi-view-list"></i> Avancement Automatique</a>
+                    @endcan
                     <table id="myTable" class="table table-bordered text-center table-striped">
                         <thead>
                         <tr>

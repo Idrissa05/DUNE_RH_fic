@@ -8,10 +8,17 @@ use App\Models\Conge;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class CongeController extends Controller {
     use FormBuilderTrait;
 
+  public function __construct()
+  {
+        $this->middleware('permission:CONSULTER_CONGE');
+        $this->middleware('permission:EDITER_CONGE')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_CONGE')->only('destroy');
+  }
 
   public function index(Request $request)
   {
@@ -96,26 +103,33 @@ class CongeController extends Controller {
                 return $conge->observation;
             })
             ->addColumn('actions', function ($conge){
-                return '<button id="conge'.$conge->id.'"
-                                    data-debut="'.$conge->date_debut.'"
-                                    data-fin="'.$conge->date_fin.'"
-                                    data-ref="'.$conge->ref_decision.'"
-                                    data-observation="'.$conge->observation.'"
-                                    data-agent="'.$conge->agent_id.'"
-                                    data-route="'.route("conge.update", $conge).'"
-                                    onclick="updateConge('. $conge->id .')" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-18px mdi-pencil"></i>
-                            </button>
+                $html = '';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_CONGE')) {
+                    $html .= '<button id="conge'.$conge->id.'"
+                                        data-debut="'.$conge->date_debut.'"
+                                        data-fin="'.$conge->date_fin.'"
+                                        data-ref="'.$conge->ref_decision.'"
+                                        data-observation="'.$conge->observation.'"
+                                        data-agent="'.$conge->agent_id.'"
+                                        data-route="'.route("conge.update", $conge).'"
+                                        onclick="updateConge('. $conge->id .')" class="btn btn-sm btn-outline-warning">
+                                    <i class="mdi mdi-18px mdi-pencil"></i>
+                                </button>';
+                }
 
+            if ($user->hasPermissionTo('SUPPRIMER_CONGE')) {
 
-                            <form action="'.route("conge.destroy", $conge).'" id="del'.$conge->id.'}" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
-                                <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$conge->id.'\')">
-                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
-                                </button>
-                            </form>';
+                    $html .= '<form action="'.route("conge.destroy", $conge).'" id="del'.$conge->id.'}" style="display: inline-block;" method="post">
+                        '.method_field('DELETE').'
+                        '.csrf_field().'
+                        <button class="btn btn-outline-danger btn-sm" type="button"
+                        onclick="myHelpers.deleteConfirmation(\'del'.$conge->id.'\')">
+                            <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                        </button>
+                    </form>';
+            }
+            return $html;
             })
             ->escapeColumns([])
             ->make(true);

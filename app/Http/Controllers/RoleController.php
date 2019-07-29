@@ -12,6 +12,12 @@ class RoleController extends Controller
     use FormBuilderTrait;
 
 
+    public function __construct()
+    {
+        $this->middleware('permission:ADMINISTRATION');
+    }
+
+
     public function index() {
         $roles = Role::all();
 

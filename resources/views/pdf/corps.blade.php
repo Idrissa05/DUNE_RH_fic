@@ -28,7 +28,7 @@
                 <td>{{ $agent->prenom }}</td>
                 <td>{{ formaterDate($agent->date_naiss) }}</td>
                 <td>{{ $agent->lieu_naiss }}</td>
-                <td>{{ $agent->corp->name }}</td>
+                <td>{{ $agent->grades->last()->corp->name }}</td>
             </tr>
             @php
                 $i++;

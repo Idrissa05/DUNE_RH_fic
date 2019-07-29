@@ -6,11 +6,19 @@ use App\Forms\FormationForm;
 use App\Models\Agent;
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class FormationController extends Controller {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_FORMATION');
+        $this->middleware('permission:EDITER_FORMATION')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_FORMATION')->only('destroy');
+    }
 
   public function index(Request $request)
   {
@@ -104,7 +112,10 @@ class FormationController extends Controller {
               return $formation->equivalenceDiplome->name;
           })
           ->addColumn('actions', function ($formation){
-              return '<button id="formation'.$formation->id.'"
+              $html = '<div class="btn-group">';
+              $user = Auth::user();
+              if($user->hasPermissionTo('EDITER_FORMATION')) {
+                  $html .= '<button id="formation'.$formation->id.'"
                                     data-debut="'.$formation->date_debut->format('Y-m-d').'"
                                     data-fin="'.$formation->date_fin->format('Y-m-d').'"
                                     data-ecole="'.$formation->ecole_formation_id.'"
@@ -114,10 +125,11 @@ class FormationController extends Controller {
                                     data-route="'.route("formation.update", $formation).'"
                                     onclick="updateFormation('. $formation->id .')" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>
-                            </button>
+                            </button>';
+              }
 
-
-                            <form action="'.route("formation.destroy", $formation).'" id="del'.$formation->id.'" style="display: inline-block;" method="post">
+              if($user->hasPermissionTo('SUPPRIMER_FORMATION')) {
+                  $html .=  '<form action="'.route("formation.destroy", $formation).'" id="del'.$formation->id.'" style="display: inline-block;" method="post">
                                 '.method_field('DELETE').'
                                 '.csrf_field().'
                                 <button class="btn btn-outline-danger btn-sm" type="button"
@@ -125,6 +137,10 @@ class FormationController extends Controller {
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>';
+              }
+              $html .= '</div>';
+              return $html;
+
           })
           ->escapeColumns([])
           ->make(true);

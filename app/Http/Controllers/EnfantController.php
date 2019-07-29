@@ -6,11 +6,19 @@ use App\Forms\EnfantForm;
 use App\Models\Agent;
 use App\Models\Enfant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\Facades\DataTables;
 
 class EnfantController extends Controller {
     use FormBuilderTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:CONSULTER_ENFANT');
+        $this->middleware('permission:EDITER_ENFANT')->only('store', 'update');
+        $this->middleware('permission:SUPPRIMER_ENFANT')->only('destroy');
+    }
 
 
     public function index(Request $request)
@@ -111,17 +119,24 @@ class EnfantController extends Controller {
                 return $enfant->agent->fullName;
             })
             ->addColumn('actions', function ($enfant){
-                return '<div class="btn-group">
-                    <a title="editer" href="'.route('enfant.edit', $enfant).'" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>
-                    <form action="'.route("enfant.destroy", $enfant).'" id="del'.$enfant->id.'" style="display: inline-block;" method="post">
-                                '.method_field('DELETE').'
-                                '.csrf_field().'
+                $html = '<div class="btn-group">';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_ENFANT')) {
+                    $html .= ' <a title="editer" href="' . route('enfant.edit', $enfant) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
+                }
+
+                if($user->hasPermissionTo('SUPPRIMER_ENFANT')) {
+                    $html .= ' <form action="' . route("enfant.destroy", $enfant) . '" id="del' . $enfant->id . '" style="display: inline-block;" method="post">
+                                ' . method_field('DELETE') . '
+                                ' . csrf_field() . '
                                 <button title="supprimer" class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation(\'del'.$enfant->id.'\')">
+                                onclick="myHelpers.deleteConfirmation(\'del' . $enfant->id . '\')">
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
-                            </form>
-                    </div>';
+                            </form>';
+                }
+                    $html .= '</div>';
+                return $html;
             })
             ->escapeColumns([])
             ->make(true);

@@ -30,7 +30,11 @@
         <td>{{ formaterDate($agent->date_naiss) }}</td>
         <td>{{ $agent->lieu_naiss }}</td>
         <td>{{ $agent->sexe }}</td>
-        <td>{{ $agent->corp->category->name }}</td>
+        @if($agent instanceof \App\Models\Auxiliaire)
+            <td>{{ $agent->grades->last()->categoryAuxiliaire->name }}</td>
+        @else
+        <td>{{ $agent->grades->last()->category->name }}</td>
+        @endif
     </tr>
     @php
     $i++;

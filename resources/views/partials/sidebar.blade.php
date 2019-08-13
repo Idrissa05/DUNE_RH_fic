@@ -92,6 +92,6 @@
             </ul>
         </li>
     @endcan
-        <!--<li> <a class="waves-effect waves-dark" href="{{ route('report.index') }}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Génération de Requêtes</span></a>-->
+        <li> <a class="waves-effect waves-dark" href="{{ route('report.index') }}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Génération de Requêtes</span></a>
     </ul>
 </nav>

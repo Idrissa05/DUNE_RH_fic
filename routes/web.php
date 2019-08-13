@@ -113,7 +113,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/auto/create/{data}','AvancementController@autoCreate')->name('avancement.auto.create');
 
     Route::get('/reports', 'reportController@index')->name('report.index');
-    Route::get('/reports_show', 'reportController@show')->name('report.show');
+    Route::post('/reports_show', 'reportController@show')->name('report.show');
     Route::post('/query_store', 'reportController@store')->name('query.store');
     Route::get('/query_get', 'reportController@get');
 });

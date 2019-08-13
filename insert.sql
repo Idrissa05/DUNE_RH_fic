@@ -12,7 +12,7 @@ INSERT INTO categories (id, name) VALUES
 (9, 'D2');
 -- SET IDENTITY_INSERT categories OFF
 
--- SET IDENTITY_INSERT categories ON
+-- SET IDENTITY_INSERT category_auxiliaires ON
 INSERT INTO category_auxiliaires (id, name) VALUES
 (1, '1ère Catégorie'),
 (2, '2ème Catégorie'),
@@ -22,7 +22,7 @@ INSERT INTO category_auxiliaires (id, name) VALUES
 (6, '6ème Catégorie'),
 (7, '7ème Catégorie'),
 (8, '8ème Catégorie');
--- SET IDENTITY_INSERT categories OFF
+-- SET IDENTITY_INSERT category_auxiliaires OFF
 
 -- SET IDENTITY_INSERT classes ON
 INSERT INTO classes (id, name, description) VALUES
@@ -653,12 +653,14 @@ INSERT INTO indices(category_id,classe_id,echelon_id,name,value,salary)VALUES
 (1,4,10,'A1CEE3',1008,'351120'),
 (1,4,11,'A1CEE4',1050,'365750');
 
--- SET IDENTITY_INSERT regions ON
+-- SET IDENTITY_INSERT ministeres ON
 INSERT INTO ministeres (id, abreviation, name) VALUES
-(1,'MEP', 'Ministère de l\'Enseignement Primaire'),
+(1,'MEP', 'Ministère de l''Enseignement Primaire'),
 (2,'MESS', 'Ministère des Enseignement Secondaires et Supérieurs'),
-(3,'MEN', 'Ministère de l\'Enseignement Nationnale');
--- SET IDENTITY_INSERT regions OFF
+(3,'MEN', 'Ministère de l''Enseignement Nationnale');
+-- SET IDENTITY_INSERT ministeres OFF
+
+/* Traits: Avancement  //  AgentPosition  //  Print  //  Report */
 
 -- SET IDENTITY_INSERT regions ON
 INSERT INTO regions (id, name) VALUES
@@ -1091,7 +1093,7 @@ INSERT INTO agent_matrimoniale (agent_id, matrimoniale_id, date, created_at, upd
 (3, 3, '2010-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (7, 1, '2017-11-10', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (6, 4, '2009-03-14', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(7, 3, '2018-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(7, 2, '2018-08-12', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (5, 1, '2014-06-15', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (8, 1, '2017-06-15', '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
 
@@ -1102,7 +1104,6 @@ INSERT INTO agent_position (agent_id, position_id, created_at, updated_at, delet
 (3, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (7, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (6, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(7, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (5, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
 (8, 1, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL);
 
@@ -1138,14 +1139,6 @@ INSERT INTO conjoints (id, matricule, nom, prenom, date_naiss, ref_acte_naiss, l
 (1, '0206648C', 'ABDOU', 'Alassan', '1987-12-31','REF' ,'Niamey', 'M', 'Nigérienne', '90 90 90 90', 'MESS', 'Enseigant', 'XXX', '2016-03-04', 1, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
 (2, '0306547A', 'ALI', 'IBOU', '1982-11-30', 'REF', 'Niamey', 'F', 'Nigérienne', '91 90 90 90', 'MEN', 'Enseigante', 'XXX', '2016-05-04', 5, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL),
 (3, '0106894D', 'OUSMANE', 'IBRAHIM', '1980-02-27', 'REF', 'Niamey', 'F', 'Nigérienne', '93 90 90 90', 'DRESS', 'MEDECIN', 'XXX', '2016-09-04', 4, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
--- SET IDENTITY_INSERT conjoints OFF
-
--- SET IDENTITY_INSERT conjoints ON
-INSERT INTO `queries` (`id`, `name`, `sql`, `fields`) VALUES
-(2, 'Requête 2', 'matricule LIKE(\'%A\') AND nom != \'\' AND prenom != \'\'', 'matricule,nom,prenom'),
-(3, 'Requête 3', 'matricule LIKE(\'%A%\') AND type = \'Contractuel\'', 'matricule,nom,prenom,sexe,date_prise_service'),
-(4, 'Requête 4', 'type = \'Titulaire\' AND date_naiss > \'1980/01/01\'', 'matricule,nationnalite,type'),
-(5, 'Requête 1', 'type = \'Titulaire\' AND sexe = \'M\' AND date_naiss > \'1990/01/01\'', 'matricule,nom,prenom,date_naiss,lieu_naiss,sexe,type');
 -- SET IDENTITY_INSERT conjoints OFF
 
 INSERT INTO users (name, password, role, region_id, ministere_id, created_at, updated_at) VALUES

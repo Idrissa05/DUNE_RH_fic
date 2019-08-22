@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        View::composer('layouts.material', ConfigComposer::class);
+        View::composer(['layouts.material', 'pdf.document'], ConfigComposer::class);
 
         Agent::observe(AgentObserver::class);
     }

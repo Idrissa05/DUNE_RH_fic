@@ -77,7 +77,7 @@ class ImportsController extends Controller
         }
 
         if($result) return response()->json($result);
-        else return response()->json('OK');
+        else return response()->json(['success' => true]);
     }
 
     private function Departements($spreadsheet, $sheetName ,$totalRows){

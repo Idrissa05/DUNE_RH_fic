@@ -116,4 +116,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/reports_show', 'reportController@show')->name('report.show');
     Route::post('/query_store', 'reportController@store')->name('query.store');
     Route::get('/query_get', 'reportController@get');
+
+    // All importations pages (create) & their actions (store)
+    Route::get('/imports_page','ImportsController@create')->name('Imports.create');
+    Route::post('/imports_store','ImportsController@store')->name('Imports.store');
 });

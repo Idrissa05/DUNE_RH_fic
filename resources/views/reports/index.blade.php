@@ -261,7 +261,6 @@
                 let id = $("#list-sql").val();
                 if(id !== '0'){
                     $.get('/query_get?id=' + id,function(data) {
-                        console.log(data);
                         $('#builder').queryBuilder('setRulesFromSQL', data.sql);
                         $('#fields').multiSelect('deselect_all').multiSelect('select', data.fields);
                     });

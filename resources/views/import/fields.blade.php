@@ -1,0 +1,36 @@
+<select multiple id="fields" name="fields[]">
+    <option value="16">Departements</option>
+    <option value="10">Communes</option>
+    <option value="26">Inspections</option>
+    <option value="35">SecteurPedagogiques</option>
+    <option value="37">TypeEtablissements</option>
+    <option value="22">Etablissements</option>
+    <option value="6">Cadres</option>
+    <option value="7">CategorieAuxiliaires</option>
+    <option value="14">Corps</option>
+    <option value="24">Fonctions</option>
+    <option value="4">Auxiliaires</option>
+    <option value="13">Contractuels</option>
+    <option value="36">Titulaires</option>
+    <option value="0">Affectations</option>
+    <option value="5">Avancements</option>
+    <option value="32">Reclassements</option>
+    <option value="11">Conges</option>
+    <option value="12">Conjoints</option>
+    <option value="15">Deces</option>
+    <option value="20">Enfants</option>
+    <option value="23">Experiences</option>
+    <option value="30">Notations</option>
+    <option value="34">Retraites</option>
+    <option value="17">Diplomes</option>
+    <option value="19">EcoleFormations</option>
+    <option value="21">EquivalenceDiplomes</option>
+    <option value="29">NiveauEtudes</option>
+    <option value="25">Formations</option>
+    <option value="27">Maladies</option>
+    <option value="1">AgentsMaladies</option>
+    <option value="28">Matrimoniales</option>
+    <option value="2">AgentsMatrimoniales</option>
+    <option value="31">PositionAdministratives</option>
+    <option value="3">AgentsPositions</option>
+</select>

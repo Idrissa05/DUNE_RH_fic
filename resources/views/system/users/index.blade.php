@@ -50,6 +50,8 @@
                     <th>#</th>
                     <th>Nom d'utilisateur</th>
                     <th>Rôle</th>
+                    <th>Region</th>
+                    <th>Ministère</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -59,10 +61,14 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->role }}</td>
+                        <td>{{ $user->region->name }}</td>
+                        <td>{{ $user->ministere->abreviation }}</td>
                         <td>
                             <button id="user{{ $user->id }}"
                                     data-name="{{ $user->name }}"
                                     data-role="{{ $user->role_id }}"
+                                    data-region="{{ $user->region_id }}"
+                                    data-ministere="{{ $user->ministere_id }}"
                                     data-route="{{ route('users.update', $user) }}"
                                     onclick="updateClasse({{ $user->id }})" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>
@@ -97,6 +103,8 @@
         let $modal = $('#add')
         let $name = $('#name')
         let $role = $('#role_id')
+        let $region = $('#region_id')
+        let $ministere = $('#ministere_id')
         let $form = $('form')
 
 
@@ -105,6 +113,8 @@
             $modal.modal('show')
             $name.val($el.attr('data-name'))
             $role.val($el.attr('data-role'))
+            $region.val($el.attr('data-region'))
+            $ministere.val($el.attr('data-ministere'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
             $('#p').hide()

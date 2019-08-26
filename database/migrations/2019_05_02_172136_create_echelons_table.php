@@ -10,7 +10,7 @@ class CreateEchelonsTable extends Migration {
 		Schema::create('echelons', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name', 40);
-			$table->string('description', 40);
+        $table->string('description', 40)->nullable();
 			$table->integer('classe_id')->unsigned();
 		});
 	}

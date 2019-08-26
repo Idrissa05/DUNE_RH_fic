@@ -20,6 +20,7 @@ class reportController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:GENERER_REQUETE');
     }
 
     public function index()

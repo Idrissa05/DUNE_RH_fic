@@ -201,6 +201,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'SUPPRIMER_RETRAITE'
         ]);
 
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'IMPORTER_EXCEL'
+        ]);
+
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'GENERER_REQUETE'
+        ]);
+
 
         $role = \Spatie\Permission\Models\Role::create([
             'name' => 'Administrateur'

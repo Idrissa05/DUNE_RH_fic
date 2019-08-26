@@ -1141,7 +1141,7 @@ INSERT INTO conjoints (id, matricule, nom, prenom, date_naiss, ref_acte_naiss, l
 (3, '0106894D', 'OUSMANE', 'IBRAHIM', '1980-02-27', 'REF', 'Niamey', 'F', 'Nigérienne', '93 90 90 90', 'DRESS', 'MEDECIN', 'XXX', '2016-09-04', 4, '2019-06-01 23:12:44', '2019-06-01 23:12:44', NULL);
 -- SET IDENTITY_INSERT conjoints OFF
 
-INSERT INTO users (name, password, role, region_id, ministere_id, created_at, updated_at) VALUES
-('admin', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 'Administrateur', 8, 3 ,NULL, NULL),
-('user1', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 'Membre', 8, 1 ,NULL, NULL),
-('user2', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 'Membre', 8, 2 ,NULL, NULL);
+INSERT INTO users (name, password, region_id, ministere_id, created_at, updated_at) VALUES
+('admin', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 8, 3 ,NULL, NULL),
+('user1', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 1 ,NULL, NULL),
+('user2', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 2 ,NULL, NULL);

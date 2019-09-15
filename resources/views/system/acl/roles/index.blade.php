@@ -33,7 +33,7 @@
                                 <i class="mdi mdi-18px mdi-pencil"></i>
                             </a>
 
-
+                            <!--
                             <form action="{{ route('role.destroy', $role) }}" id="del{{ $role->id }}" style="display: inline-block;" method="post">
                                 @method('DELETE')
                                 @csrf
@@ -42,6 +42,7 @@
                                 ><i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>
+                            -->
                         </td>
                     </tr>
                 @endforeach

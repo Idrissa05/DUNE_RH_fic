@@ -44,7 +44,9 @@ class UsersController extends Controller
         ]);
 
         $user->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'region_id' => $request->region_id,
+            'ministere_id' => $request->ministere_id
         ]);
         $user->syncRoles($request->role_id);
 

@@ -28,16 +28,19 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-
+            @can('ACTIONS_CONFIGURATION')
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-            <table class="table table-bordered text-center" id="myTable">
+            @endcan
+                <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
                     <th>Classe</th>
                     <th>Description</th>
-                    <th>Actions</th>
+                    @can('ACTIONS_CONFIGURATION')
+                        <th>Actions</th>
+                    @endcan
                 </tr>
                 </thead>
                 <tbody>
@@ -47,6 +50,7 @@
                         <td>{{ $echelon->name }}</td>
                         <td>{{ $echelon->classe->name }}</td>
                         <td>{{ $echelon->description }}</td>
+                        @can('ACTIONS_CONFIGURATION')
                         <td>
                             <button id="echelon{{ $echelon->id }}"
                                     data-classe="{{ $echelon->classe_id }}" data-name="{{ $echelon->name }}"
@@ -66,6 +70,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endcan
                     </tr>
                 @endforeach
                 </tbody>

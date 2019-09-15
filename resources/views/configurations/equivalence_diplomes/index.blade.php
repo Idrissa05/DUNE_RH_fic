@@ -26,15 +26,17 @@
 
     <div class="card card-outline-info">
         <div class="card-body">
-
+            @can('ACTIONS_CONFIGURATION')
             <button data-toggle="modal" data-target="#add" data-whatever="@getbootstrap" class="btn btn-themecolor btn-sm"><i class="mdi font-weight-bold mdi-18px mdi-plus"> Ajouter</i></button>
-
+            @endcan
             <table class="table table-bordered text-center" id="myTable">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Actions</th>
+                    @can('ACTIONS_CONFIGURATION')
+                        <th>Actions</th>
+                    @endcan
                 </tr>
                 </thead>
                 <tbody>
@@ -42,6 +44,7 @@
                     <tr>
                         <td>{{ $equivalence->id }}</td>
                         <td>{{ $equivalence->name }}</td>
+                        @can('ACTIONS_CONFIGURATION')
                         <td>
                             <button id="equivalence{{ $equivalence->id }}" data-name="{{ $equivalence->name }}" data-route="{{ route('equivalencediplome.update', $equivalence) }}"
                                     onclick="updateEquivalence({{ $equivalence->id }})" class="btn btn-sm btn-outline-warning">
@@ -57,6 +60,7 @@
                                 </button>
                             </form>
                         </td>
+                        @endcan
                     </tr>
                 @endforeach
                 </tbody>

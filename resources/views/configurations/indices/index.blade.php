@@ -44,12 +44,14 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Valeur</th> '
+                    <th>Valeur</th>
                     <th>Salaire</th>
                     <th>Catégorie</th>
                     <th>Classe</th>
                     <th>Echelon</th>
-                    <th>Actions</th>
+                    @can('ACTIONS_CONFIGURATION')
+                        <th>Actions</th>
+                    @endcan
                 </tr>
                 </thead>
                 <tbody>
@@ -62,6 +64,7 @@
                         <td>{{ $indice->category->name }}</td>
                         <td>{{ $indice->classe->name }}</td>
                         <td>{{ $indice->echelon->name }}</td>
+                        @can('ACTIONS_CONFIGURATION')
                         <td>
                             <button id="indice{{ $indice->id }}"
                                     data-name="{{ $indice->name }}"
@@ -85,6 +88,7 @@
                                 </button>
                             </form>--}}
                         </td>
+                        @endcan
                     </tr>
                 @endforeach
                 </tbody>

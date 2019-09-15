@@ -15,8 +15,8 @@ class CreateAffectationsTable extends Migration {
 			$table->string('observation')->nullable();
 			$table->integer('agent_id')->unsigned();
 			$table->integer('etablissement_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

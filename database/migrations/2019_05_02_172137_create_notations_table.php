@@ -15,8 +15,8 @@ class CreateNotationsTable extends Migration {
 			$table->string('responsable', 30);
 			$table->string('observation')->nullable();
 			$table->integer('agent_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

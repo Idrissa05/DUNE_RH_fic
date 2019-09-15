@@ -16,8 +16,8 @@ class CreateFormationsTable extends Migration {
 			$table->integer('diplome_id')->unsigned();
 			$table->integer('niveau_etude_id')->unsigned();
 			$table->integer('equivalence_diplome_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

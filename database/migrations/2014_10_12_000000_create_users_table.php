@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->integer('region_id')->unsigned();
             $table->integer('ministere_id')->unsigned();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps(2);
         });
     }
 

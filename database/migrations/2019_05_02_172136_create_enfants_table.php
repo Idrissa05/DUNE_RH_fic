@@ -15,8 +15,8 @@ class CreateEnfantsTable extends Migration {
             $table->string('ref_acte_naiss', 30)->nullable();
 			$table->char('sexe', 1);
 			$table->integer('agent_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

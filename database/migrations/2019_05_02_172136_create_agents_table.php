@@ -23,8 +23,8 @@ class CreateAgentsTable extends Migration {
             $table->date('date_prise_service')->nullable();
             $table->integer('created_by_region_id')->unsigned();
             $table->integer('created_by_ministere_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

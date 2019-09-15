@@ -11,8 +11,8 @@ class CreateAgentMatrimonialeTable extends Migration {
 			$table->integer('agent_id')->unsigned();
 			$table->integer('matrimoniale_id')->unsigned();
 			$table->date('date');
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

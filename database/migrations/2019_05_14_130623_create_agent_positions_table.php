@@ -22,8 +22,8 @@ class CreateAgentPositionsTable extends Migration
             $table->date('date_decision')->nullable();
             $table->date('date_fin')->nullable();
             $table->string('observation')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamps(2);
+            $table->softDeletes('deleted_at',2);
         });
     }
 

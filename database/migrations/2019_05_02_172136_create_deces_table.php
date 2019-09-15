@@ -13,8 +13,8 @@ class CreateDecesTable extends Migration {
 			$table->string('ref_document', 20);
 			$table->string('observation')->nullable();
 			$table->integer('agent_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

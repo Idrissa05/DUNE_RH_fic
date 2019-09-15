@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Forms\RoleForm;
-use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Spatie\Permission\Models\Role;
 

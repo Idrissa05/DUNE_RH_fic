@@ -12,8 +12,8 @@ class CreateAgentMaladieTable extends Migration {
 			$table->integer('maladie_id')->unsigned();
 			$table->string('observation')->nullable();
 			$table->date('date_observation')->nullable();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->timestamps(2);
+			$table->softDeletes('deleted_at',2);
 		});
 	}
 

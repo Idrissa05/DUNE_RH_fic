@@ -9,7 +9,7 @@ class CreateEtablissementsTable extends Migration {
 	{
 		Schema::create('etablissements', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('name', 40);
+			$table->string('name', 150);
 			$table->integer('secteur_pedagogique_id')->unsigned();
 			$table->integer('type_etablissement_id')->unsigned();
 		});

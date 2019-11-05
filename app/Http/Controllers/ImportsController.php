@@ -41,7 +41,7 @@ use App\Models\TypeEtablissement;
 use Illuminate\Support\Facades\DB;
 
 ini_set ('memory_limit' , -1) ;
-set_time_limit (300);
+set_time_limit (3000);
 
 class ImportsController extends Controller
 {

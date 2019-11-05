@@ -9,7 +9,7 @@ class CreateDiplomesTable extends Migration {
 	{
 		Schema::create('diplomes', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('name', 50);
+			$table->string('name', 150);
 		});
 	}
 

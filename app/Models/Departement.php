@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Departement extends Model {
 
-	protected $fillable = array('name', 'region_id');
+	protected $fillable = array('id','name', 'region_id');
+
+    public $timestamps = false;
 
 	public function communes()
 	{

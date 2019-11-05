@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NiveauEtude extends Model {
 
-	protected $fillable = array('name');
+	protected $fillable = array('id','name');
 	public $timestamps = false;
 
 	public function formations()

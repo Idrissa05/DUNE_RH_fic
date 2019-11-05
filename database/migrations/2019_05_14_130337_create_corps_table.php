@@ -16,7 +16,7 @@ class CreateCorpsTable extends Migration
         Schema::create('corps', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->string('abreviation', 15);
+            $table->string('abreviation', 15)->nullable();
             $table->integer('category_id')->unsigned();
 
         });

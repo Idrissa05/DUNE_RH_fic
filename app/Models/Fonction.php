@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fonction extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['id','name'];
     public $timestamps = false;
 
     public function grades()

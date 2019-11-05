@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commune extends Model
 {
-    protected $fillable = ['name', 'departement_id'];
+    protected $fillable = ['id','name', 'departement_id'];
     public $timestamps = false;
 
     public function inspections()

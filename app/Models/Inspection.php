@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inspection extends Model {
 
-	protected $fillable = array('name', 'commune_id');
+	protected $fillable = array('id','name', 'commune_id');
 	public $timestamps = false;
 
 	public function secteurPedagogiques()

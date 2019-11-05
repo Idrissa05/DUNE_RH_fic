@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Etablissement extends Model {
 
-	protected $fillable = array('name','secteur_pedagogique_id','type_etablissement_id');
+	protected $fillable = array('id','name','secteur_pedagogique_id','type_etablissement_id');
 	public $timestamps = false;
 
 	public function affectations()

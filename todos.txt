@@ -15,7 +15,8 @@ INSERT INTO categories (id, name) VALUES
 (6, 'C1'),
 (7, 'C2'),
 (8, 'D1'),
-(9, 'D2');
+(9, 'D2'),
+(10, 'A renseigner');
 -- SET IDENTITY_INSERT categories OFF
 
 -- SET IDENTITY_INSERT classes ON
@@ -23,7 +24,8 @@ INSERT INTO classes (id, name, description) VALUES
 (1, '1ère Classe', '1ère Classe'),
 (2, '2ème Classe', '2ème Classe'),
 (3, 'Classe Principale', 'Classe Principale'),
-(4, 'Classe Exceptionnelle', 'Classe Exceptionnelle');
+(4, 'Classe Exceptionnelle', 'Classe Exceptionnelle'),
+(5, 'A renseigner', NULL);
 -- SET IDENTITY_INSERT classes OFF
 
 -- SET IDENTITY_INSERT echelons ON
@@ -41,7 +43,8 @@ INSERT INTO echelons (id, name, description, classe_id) VALUES
 (11, 'E4', '', 4),
 (12, 'E1', '', 3),
 (13, 'E2', '', 3),
-(14, 'E3', '', 3);
+(14, 'E3', '', 3),
+(15, 'A renseigner', '', 5);
 -- SET IDENTITY_INSERT echelons OFF
 
 -- SET IDENTITY_INSERT ministeres ON

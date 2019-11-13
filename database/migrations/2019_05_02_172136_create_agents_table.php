@@ -10,8 +10,8 @@ class CreateAgentsTable extends Migration {
 		Schema::create('agents', function(Blueprint $table) {
 			$table->increments('id');
             $table->string('matricule', 15)->unique();
-			$table->string('nom', 40);
-			$table->string('prenom', 50);
+			$table->string('nom', 100);
+			$table->string('prenom', 100)->nullable();
 			$table->date('date_naiss');
 			$table->string('lieu_naiss', 30);
             $table->string('ref_acte_naiss', 30);

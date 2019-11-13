@@ -13,6 +13,8 @@ class Agent extends Model {
     use HasChildren;
     use Multiteamable;
 
+    protected $fillable = ['id'];
+
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
         'Titulaire' => Titulaire::class,

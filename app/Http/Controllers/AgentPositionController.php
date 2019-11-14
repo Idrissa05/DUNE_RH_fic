@@ -88,7 +88,7 @@ class AgentPositionController extends Controller
         if(auth()->user()->role <> 'Administrateur') {
             $query->whereRaw('agents.created_by_ministere_id = :ministere', ['ministere' => auth()->user()->ministere_id]);
         }
-        $positions = $query->get();
+        $positions = $query;
         return DataTables::of($positions)
             ->addColumn('agent', function ($agent){
                 return $agent->nom.' '.$agent->prenom;

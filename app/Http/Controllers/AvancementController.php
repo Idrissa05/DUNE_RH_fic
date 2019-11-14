@@ -25,7 +25,7 @@ class AvancementController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $avancement = Avancement::with('agent', 'category', 'classe', 'echelon')->orderBy('created_at', 'desc')->get();
+            $avancement = Avancement::with('agent', 'category', 'classe', 'echelon')->orderBy('created_at', 'desc');
             return Datatables::of($avancement)
                 ->addColumn('id', function ($avancement){
                     return $avancement->id;

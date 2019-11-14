@@ -36,7 +36,7 @@ class AgentController extends Controller {
     public function index(Request $request)
   {
       if ($request->ajax()) {
-          $agent = Agent::orderBy('created_at', 'desc')->get();
+          $agent = Agent::orderBy('created_at', 'desc');
           return Datatables::of($agent)
               ->addColumn('date_naiss', function ($agent){
                   return formaterDate($agent->date_naiss);

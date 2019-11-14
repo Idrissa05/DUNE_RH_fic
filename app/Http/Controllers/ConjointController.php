@@ -104,7 +104,7 @@ class ConjointController extends Controller {
 
 
   private function getData() {
-      return DataTables::of(Conjoint::with('agent')->orderBy('created_at', 'desc')->get())
+      return DataTables::of(Conjoint::with('agent')->orderBy('created_at', 'desc'))
           ->addColumn('id', function ($conjoint){
               return $conjoint->id;
           })

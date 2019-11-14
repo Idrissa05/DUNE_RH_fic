@@ -120,7 +120,7 @@ class ReclassementController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Reclassement::with('agent', 'classe', 'echelon', 'category')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Reclassement::with('agent', 'classe', 'echelon', 'category')->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($reclassement){
                 return $reclassement->id;
             })

@@ -371,7 +371,7 @@ class ImportsController extends Controller
                         'nationnalite' => $spreadsheet->getSheetByName($sheetName)->getCell('J' . $i)->getValue()
                     ]);
 
-                    $indice = Indice::where('category_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('N' . $i)->getValue()))->where('classe_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('O' . $i)->getValue()))->where('echelon_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('P' . $i)->getValue()))->get(['id'])[0]->id;
+                    $indice = Indice::where('category_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('N' . $i)->getValue()))->where('classe_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('O' . $i)->getValue()))->where('echelon_id', trim($spreadsheet->getSheetByName($sheetName)->getCell('P' . $i)->getValue()))->get(['id'])[0]->id ?? null;
                     Titularisation::firstOrCreate([
                         'agent_id' => $titulaire->id,
                         'category_id' => trim($spreadsheet->getSheetByName($sheetName)->getCell('N' . $i)->getValue()),

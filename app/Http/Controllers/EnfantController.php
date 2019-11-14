@@ -111,7 +111,7 @@ class EnfantController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Enfant::with('agent')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Enfant::with('agent')->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($enfant){
                 return $enfant->id;
             })

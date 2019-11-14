@@ -114,7 +114,7 @@ class DeceController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Dece::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Dece::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($dece){
                 return $dece->id;
             })

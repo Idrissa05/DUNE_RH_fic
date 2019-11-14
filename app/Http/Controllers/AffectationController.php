@@ -111,7 +111,7 @@ class AffectationController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Affectation::with('agent', 'etablissement')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Affectation::with('agent', 'etablissement')->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($affectation){
                 return $affectation->id;
             })
@@ -138,7 +138,7 @@ class AffectationController extends Controller {
                                     <i class="mdi mdi-18px mdi-trash-can-outline"></i>
                                 </button>
                             </form>';
-        
+
                 }
                 $html .= '</div>';
                 return $html;

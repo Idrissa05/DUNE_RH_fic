@@ -169,7 +169,7 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            @include('dataTableAjax', ['columns' => "[
+            @include('dataTableAjaxAllScrolling', ['columns' => "[
                     {data: 'id', name: 'id'},
                     {data: 'matricule', name: 'matricule'},
                     {data: 'nom', name: 'nom'},

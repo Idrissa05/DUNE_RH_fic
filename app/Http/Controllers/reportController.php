@@ -142,7 +142,7 @@ class reportController extends Controller
         if(auth()->user()->role != 'Administrateur') {
             $query->whereRaw('reports.ministere_id = ? ', [auth()->user()->ministere_id]);
         }
-        return DataTables::of($query->get())->escapeColumns([])->make(true);
+        return DataTables::of($query)->escapeColumns([])->make(true);
     }
 
     public function store(Request $request)

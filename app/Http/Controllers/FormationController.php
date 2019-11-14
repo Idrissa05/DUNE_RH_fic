@@ -85,7 +85,7 @@ class FormationController extends Controller {
 
   private function getData() {
       return DataTables::of(Formation::with('agent', 'diplome', 'niveauEtude', 'equivalenceDiplome')
-          ->orderBy('created_at', 'desc')->get())
+          ->orderBy('created_at', 'desc'))
 
           ->addColumn('id', function ($formation){
               return $formation->id;

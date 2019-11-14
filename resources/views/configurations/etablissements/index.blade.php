@@ -36,53 +36,29 @@
                 <tr>
                     <th>#</th>
                     <th>Libellé</th>
-                    <th>Secteur pédagogique</th> '
+                    <th>Secteur pédagogique</th>
                     <th>Type</th>
                     @can('ACTIONS_CONFIGURATION')
                         <th>Actions</th>
                     @endcan
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($etablissements as $etablissement)
-                    <tr>
-                        <td>{{ $etablissement->id }}</td>
-                        <td>{{ $etablissement->name }}</td>
-                        <td>{{ $etablissement->secteurPedagogique->name }}</td>
-                        <td>{{ $etablissement->typeEtablissement->name }}</td>
-                        @can('ACTIONS_CONFIGURATION')
-                        <td>
-                            <button id="etablissement{{ $etablissement->id }}"
-                                    data-classe="{{ $etablissement->classe_id }}" data-name="{{ $etablissement->name }}"
-                                    data-secteur="{{ $etablissement->secteur_pedagogique_id }}"
-                                    data-type="{{ $etablissement->type_etablissement_id }}"
-                                    data-route="{{ route('etablissement.update', $etablissement) }}"
-                                    onclick="updateEtablissement({{ $etablissement->id }})" class="btn btn-sm btn-outline-warning">
-                                <i class="mdi mdi-18px mdi-pencil"></i>
-                            </button>
-
-
-                            <form action="{{ route('etablissement.destroy', $etablissement) }}" id="del{{ $etablissement->id }}" style="display: inline-block;" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-outline-danger btn-sm" type="button"
-                                onclick="myHelpers.deleteConfirmation('{{ 'del'. $etablissement->id }}')">
-                                    <i class="mdi mdi-18px mdi-trash-can-outline"></i>
-                                </button>
-                            </form>
-                        </td>
-                        @endcan
-                    </tr>
-                @endforeach
-                </tbody>
             </table>
         </div>
     </div>
 @endsection
 
 @section('js')
-    @include('dataTable')
     <script>
+        $(function () {
+            @include('dataTableAjax', ['columns' => "[
+                { data: 'id', name: 'id' },
+                { data: 'name', name: 'name' },
+                { data: 'secteurPedagogique', name: 'secteurPedagogique' },
+                { data: 'typeEtablissement', name: 'typeEtablissement' },
+                { data: 'actions', name: 'Actions', searchable: false, orderable: false },
+            ]", 'route' => route('etablissement.index')], ['scroll' => '450px'])
+        });
 
         @if($errors->any())
             $('#add').modal('show')

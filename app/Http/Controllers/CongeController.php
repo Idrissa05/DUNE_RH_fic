@@ -82,7 +82,7 @@ class CongeController extends Controller {
 
     private function getData() {
         return DataTables::of(Conge::with('agent')
-            ->orderBy('created_at', 'desc')->get())
+            ->orderBy('created_at', 'desc'))
 
             ->addColumn('id', function ($conge){
                 return $conge->id;

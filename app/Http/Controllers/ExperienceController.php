@@ -109,7 +109,7 @@ class ExperienceController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Experience::with('agent')->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Experience::with('agent')->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($experience){
                 return $experience->id;
             })

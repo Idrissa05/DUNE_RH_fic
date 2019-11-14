@@ -2,7 +2,7 @@ $('#myTable').DataTable({
 serverSide: true,
 ajax: '{!! $route !!}',
 processing: true,
-pageLength: 200,
+pageLength: 100,
 lengthMenu: [ 10, 25, 50, 75, 100, 200 ],
 columns: {!! $columns !!},
 columnDefs: {!! $defs ?? "[]"!!},

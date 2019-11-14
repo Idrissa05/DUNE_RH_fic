@@ -294,7 +294,7 @@
                             searching: false,
                             serverSide: true,
                             processing: true,
-                            pageLength: 200,
+                            pageLength: 100,
                             ajax:{
                                 beforeSend: function(xhr) {
                                     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))

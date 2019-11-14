@@ -90,7 +90,7 @@ class AgentMaladieController extends Controller
 
     private function getData() {
 
-        return DataTables::of((Agent::all())->filter(function ($agent) { return $agent->maladies->count() > 0; }))
+        return DataTables::of(Agent::has('maladies'))
             ->addColumn('maladies', function ($agent){
                 $html = "";
                 foreach ($agent->maladies as $malady) {

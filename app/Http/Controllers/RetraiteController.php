@@ -115,7 +115,7 @@ class RetraiteController extends Controller {
 
 
     private function getData() {
-        return DataTables::of(Retraite::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc')->get())
+        return DataTables::of(Retraite::with(['agent' => function($query) { return $query->withTrashed(); }])->orderBy('created_at', 'desc'))
             ->addColumn('id', function ($retraite){
                 return $retraite->id;
             })

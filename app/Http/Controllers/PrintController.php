@@ -3,110 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Config;
+use App\Exports\AffectationsExport;
+use App\Exports\AgentsExport;
+use App\Exports\ParCategorieSexeExport;
+use App\Exports\ParCorpExport;
+use App\Exports\ParMatrimonialeExport;
+use App\Exports\ParPositionExport;
+use App\Exports\RetraitablesExport;
 use App\Models\Affectation;
 use App\Models\Agent;
 use App\Models\Avancement;
 use function foo\func;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 class PrintController extends Controller
 {
     public function agents() {
-        $agents = Agent::all();
-
-        $mpdf = new Mpdf();
-        $view = view('pdf.agents', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new AgentsExport())->download('agents.xlsx');
     }
 
 
     public function retraitables() {
-        $agents = Agent::all();
+        return (new RetraitablesExport())->download('agents_retraitables.xlsx');
 
-        $agents = $agents->filter(function ($agent) {
-           return (new Carbon($agent->date_naiss))->diffInMonths(date('Y-m-d')) >= (Config::first()->age_retraite * 12) - 3;
-        });
-
-        $mpdf = new Mpdf();
-        $view = view('pdf.retraitables', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
     }
 
     public function listParCategorieParSexe(Request $request) {
-        $agents = Agent::with(['grades' => function($query) {
-            return $query->with('category', 'categoryAuxiliaire');
-        }]);
-        if($request->sexe) {
-            $agents->where('sexe', '=', $request->sexe);
-        }
-        $agents = $agents->get();
-
-        if($request->categorie) {
-            $agents = $agents->filter(function ($agent) use ($request){
-                return $agent->grades->last()->category ?
-                    $agent->grades->last()->category->name == $request->categorie :
-                    $agent->grades->last()->categoryAuxiliaire->name == $request->categorie;
-            });
-        }
-
-        $mpdf = new Mpdf();
-        $view = view('pdf.list', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new ParCategorieSexeExport($request->sexe, $request->categorie))->download('agents.xlsx');
     }
 
     public function listParCorp(Request $request) {
-        $agents = Agent::with('grades', 'grades.corp');
-        $agents = $agents->get();
-
-        if($request->corp) {
-            $agents = $agents->filter(function ($agent)use ($request){
-                return $agent->grades->last()->corp_id == $request->corp;
-            });
-        }
-        $mpdf = new Mpdf();
-        $view = view('pdf.corps', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new ParCorpExport($request->corp))->download('agents.xlsx');
     }
 
     public function listParPosition(Request $request) {
-        $agents = Agent::with('positions');
-        $agents = $agents->get();
-        $agents = $agents->filter(function ($agent) use($request){
-            return $agent->positions->count() > 0;
-        });
-        if($request->position) {
-            $agents = $agents->filter(function ($agent) use($request){
-                return $agent->positions->last()->id == $request->position;
-            });
-        }
-        $mpdf = new Mpdf();
-        $view = view('pdf.positions', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new ParPositionExport($request->position))->download('agents.xlsx');
     }
 
     public function listParMatrimoniale(Request $request) {
-        $agents = Agent::with('matrimoniales');
-        $agents = $agents->get();
-        $agents = $agents->filter(function ($agent) use($request){
-            return $agent->matrimoniales->count() > 0;
-        });
-        if($request->matrimoniale) {
-            $agents = $agents->filter(function ($agent) use($request){
-                return $agent->matrimoniales->last()->id == $request->matrimoniale;
-            });
-        }
-        $mpdf = new Mpdf();
-        $view = view('pdf.matrimoniales', ['agents' => $agents])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new ParMatrimonialeExport($request->matrimoniale))->download('agents.xlsx');
     }
 
 
@@ -131,50 +72,7 @@ class PrintController extends Controller
 
 
     public function par(Request $request) {
-        $query = Affectation::query()
-            ->join('agents', 'agents.id', '=', 'affectations.agent_id')
-            ->join('grades', 'grades.agent_id', '=', 'agents.id')
-            ->join('fonctions', 'fonctions.id', '=', 'grades.fonction_id')
-            ->join('etablissements', 'etablissements.id', '=', 'affectations.etablissement_id')
-            ->join('secteur_pedagogiques', 'secteur_pedagogiques.id', 'etablissements.secteur_pedagogique_id')
-            ->join('inspections', 'inspections.id', '=', 'secteur_pedagogiques.inspection_id')
-            ->join('communes', 'communes.id', '=', 'inspections.commune_id')
-            ->join('departements', 'departements.id', 'communes.departement_id')
-            ->join('regions', 'regions.id', 'departements.region_id')
-            ->orderByDesc('affectations.created_at')
-            ->whereRaw('affectations.created_at = (SELECT max(affectations.created_at) from affectations where affectations.agent_id=agents.id)')
-            ->selectRaw('agents.id ,affectations.created_at, agents.matricule, agents.nom, agents.prenom,agents.sexe, regions.name as region, departements.name as departement, inspections.name as inspection, secteur_pedagogiques.name secteur, fonctions.name as fonction, etablissements.name as etablissement, communes.name as commune');
-        if(auth()->user()->role != 'Administrateur') {
-            $query->whereRaw('agents.created_by_ministere_id = :ministere', ['ministere' => auth()->user()->ministere_id]);
-        }
-        if($request->region) {
-            $query->where('regions.id', '=', $request->region);
-        }
-        if($request->departement) {
-            $query->where('departements.id', '=', $request->departement);
-        }
-        if($request->commune) {
-            $query->where('communes.id', '=', $request->commune);
-        }
-        if($request->inspection) {
-            $query->where('inspections.id', '=', $request->inspection);
-        }
-        if($request->secteur) {
-            $query->where('secteur_pedagogiques.id', '=', $request->secteur);
-        }
-        if($request->sexe) {
-            $query->where('agents.sexe', '=', $request->sexe);
-        }
-        if($request->fonction) {
-            $query->where('fonctions.id', '=', $request->fonction);
-        }
-        if($request->etablissement) {
-            $query->where('etablissements.id', '=', $request->etablissement);
-        }
-        $affectations = $query->get();
-        $mpdf = new Mpdf();
-        $view = view('pdf.affectations', ['affectations' => $affectations])->render();
-        $mpdf->WriteHTML($view);
-        $mpdf->Output();
+        return (new AffectationsExport($request))->download('agents_affectations.xlsx');
+
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Config;
 use App\Traits\Multiteamable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 use Tightenco\Parental\HasChildren;
 
 class Agent extends Model {
@@ -104,5 +106,12 @@ class Agent extends Model {
 
     public function getFullNameAttribute() {
 	    return $this->nom .' '.$this->prenom;
+    }
+
+
+    public function scopeRetraitable(Builder $query) {
+	    $months = (Config::first()->age_retraite * 12) - 3;
+	    $days = $months * 30;
+	    return $query->whereRaw("DATEDIFF(CURDATE(), date_naiss) >= $days");
     }
 }

@@ -11,14 +11,15 @@ class AgentPositionForm extends Form
     public function buildForm()
     {
         $this
-            ->add('agent_id', 'entity', [
+            ->add('agent_id', 'select', [
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',
-                'class' => Agent::class,
+                'attr' => ['class'=>'form-control agent'],
+                //'class' => Agent::class,
                 'empty_value' => 'Sélectionner',
-                'query_builder' => function (Agent $agent) {
+                /*'query_builder' => function (Agent $agent) {
                     return $agent->orderBy('matricule', 'asc')->pluck('matricule', 'id');
-                }
+                }*/
             ])
             ->add('position_id', 'entity', [
                 'label' => 'Position',

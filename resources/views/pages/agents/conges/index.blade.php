@@ -81,7 +81,15 @@
 
 
         function updateConge(id) {
-            let $el = $('#conge'+id)
+            let $el = $('#conge'+id);
+            let $agent_id = $el.attr('data-agent');
+            $.ajax({
+                type: 'GET',
+                url: "/get_agent/" + $agent_id
+            }).then(function (data) {
+                let option = new Option(data.text, data.id, true, true);
+                $(".agent").append(option).trigger('change')
+            });
             $modal.modal('show')
             $ref.val($el.attr('data-ref'))
             $debut.val($el.attr('data-debut'))

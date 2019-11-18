@@ -20,13 +20,14 @@ class DeceForm extends Form
                 'rules' => 'required',
                 'label' => 'Cause du decès'
             ])
-            ->add('agent_id','entity', [
-                'class' => Agent::class,
+            ->add('agent_id','select', [
+                //'class' => Agent::class,
                 'label' => 'Matricule Agent', 'rules' => 'required',
+                'attr' => ['class'=>'form-control agent'],
                 'empty_value' => 'Sélectionner',
-                'query_builder' => function (Agent $agent) {
+                /*'query_builder' => function (Agent $agent) {
                     return $agent->orderBy('matricule', 'asc')->pluck('matricule','id');
-                }
+                }*/
             ]);
     }
 }

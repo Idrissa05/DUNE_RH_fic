@@ -88,13 +88,19 @@
         let $diplome = $('#diplome_id')
         let $niveau = $('#niveau_etude_id')
         let $equivalence = $('#equivalence_diplome_id')
+        let $agent = $('#agent_id')
         let $form = $('form')
-
-
-
 
         function updateFormation(id) {
             let $el = $('#formation'+id)
+            let $agent_id = $el.attr('data-agent');
+            $.ajax({
+                type: 'GET',
+                url: "/get_agent/" + $agent_id
+            }).then(function (data) {
+                let option = new Option(data.text, data.id, true, true);
+                $(".agent").append(option).trigger('change')
+            });
             $modal.modal('show')
             $debut.val($el.attr('data-debut'))
             $fin.val($el.attr('data-fin'))
@@ -102,6 +108,7 @@
             $diplome.val($el.attr('data-diplome'))
             $niveau.val($el.attr('data-niveau'))
             $equivalence.val($el.attr('data-equivalence'))
+            $agent.val($el.attr('data-agent'))
             $form.attr('action', $el.attr('data-route'))
             $form.append("<input type='hidden' name='_method' value='PUT'>")
         }

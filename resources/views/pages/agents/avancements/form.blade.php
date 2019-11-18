@@ -97,10 +97,24 @@
                 });
             })
             @if(isset($edit))
+                $.ajax({
+                    type: 'GET',
+                    url: "{{route('agent.get', $avancement->agent_id)}}"
+                }).then(function (data) {
+                    let option = new Option(data.text, data.id, true, true);
+                    $(".agent").append(option).trigger('change')
+                });
                 $('#agent_id').attr('disabled', true);
                 $('#agent').val($('#agent_id').val());
             @endif
             @if(isset($data))
+                $.ajax({
+                    type: 'GET',
+                    url: "{{route('agent.get', $data->ag)}}"
+                }).then(function (data) {
+                    let option = new Option(data.text, data.id, true, true);
+                    $(".agent").append(option).trigger('change')
+                });
                 $('#agent_id').val({{$data->ag}}).attr('disabled', true);
                 $('#agent').val($('#agent_id').val());
                 $('#category_id').val({{$data->ca}}).attr('readonly', true);

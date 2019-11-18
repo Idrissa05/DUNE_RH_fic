@@ -133,11 +133,8 @@
                             </p>
                             <form action="{{ route('prints.infos') }}" class="" target="_blank">
                                 <div class="form-group align-items-center">
-                                    <select name="agent" required class="select">
+                                    <select name="agent" required class="agent col-md-10">
                                         <option value="">Sélectionner un agent</option>
-                                        @foreach($agents as $agent)
-                                            <option value="{{ $agent->id }}">{{ $agent->matricule .' - '.$agent->fullName }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group align-items-center">
@@ -157,11 +154,8 @@
                             </p>
                             <form action="{{ route('prints.history') }}" class="" target="_blank">
                                 <div class="form-group align-items-center">
-                                    <select name="agent" required class="select">
+                                    <select name="agent" required class="agent col-md-10">
                                         <option value="">Sélectionner un agent</option>
-                                        @foreach($agents as $agent)
-                                            <option value="{{ $agent->id }}">{{ $agent->matricule .' - '.$agent->fullName }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group alert-link">
@@ -219,7 +213,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <select name="fonction" id="fonction_id" class="select">
+                                        <select name="fonction" id="fonction_id" class="select col-md-9">
                                             <option value="">Sélectionner une fonction</option>
                                             @foreach($fonctions as $fonction)
                                                 <option value="{{ $fonction->id }}">{{ $fonction->name }}</option>
@@ -227,7 +221,7 @@
                                         </select>
                                     </div>
                                    <div class="form-group col-md-3">
-                                       <select name="sexe" class="select">
+                                       <select name="sexe" class="select col-md-9">
                                            <option value="">Sélectionner un sexe</option>
                                            <option value="M">Masculin</option>
                                            <option value="F">Féminin</option>

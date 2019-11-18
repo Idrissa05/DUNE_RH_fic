@@ -35,6 +35,13 @@
             });
         });
         @if($reclassement->id)
+            $.ajax({
+                type: 'GET',
+                url: "{{route('agent.get',$reclassement->agent_id)}}"
+            }).then(function (data) {
+                let option = new Option(data.text, data.id, true, true);
+                $(".agent").append(option).trigger('change')
+            });
             $('#agent_id').attr('disabled', true);
         @else
             $('#agent_id').attr('required', true);

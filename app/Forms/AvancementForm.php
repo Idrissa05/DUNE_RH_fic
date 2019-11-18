@@ -15,12 +15,12 @@ class AvancementForm extends Form
 {
     public function buildForm()
     {
-            $this->add('agent_id','entity', [
-                    'class' => Titulaire::class,
-                    'label' => 'Matricule Agent *',
-                    'query_builder' => function (Titulaire $titulaire) {
+            $this->add('agent_id','select', [
+                    //'class' => Titulaire::class,
+                    'label' => 'Matricule Agent *', 'attr' => ['class'=>'form-control agent'],
+                    /*'query_builder' => function (Titulaire $titulaire) {
                         return $titulaire->orderBy('matricule', 'asc')->pluck('matricule','id');
-                    },
+                    },*/
                     'empty_value' => 'Sélectionner'
                 ])
                 ->add('category_id','entity', [

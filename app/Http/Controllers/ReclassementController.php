@@ -140,7 +140,7 @@ class ReclassementController extends Controller {
             ->addColumn('actions', function ($reclassement){
                 $html = '<div class="btn-group">';
                 $user = Auth::user();
-                if($user->hasPermissionTo('EDITER_REClASSEMENT')) {
+                if($user->hasPermissionTo('EDITER_RECLASSEMENT')) {
                     $html .= ' <a title="editer" href="' . route('reclassement.edit', $reclassement) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
                 }
 

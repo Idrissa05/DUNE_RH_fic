@@ -126,9 +126,9 @@ class RetraiteController extends Controller {
             ->addColumn('actions', function ($retraite){
                 $html = '<div class="btn-group">';
                 $user = Auth::user();
-                if($user->hasPermissionTo('EDITER_RETRAITE')) {
+                /*if($user->hasPermissionTo('EDITER_RETRAITE')) {
                     $html .= ' <a title="editer" href="' . route('retraite.edit', $retraite) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
-                }
+                }*/
 
                 if($user->hasPermissionTo('SUPPRIMER_RETRAITE')) {
                     $html .= ' <form action="' . route("retraite.destroy", $retraite) . '" id="del' . $retraite->id . '" style="display: inline-block;" method="post">

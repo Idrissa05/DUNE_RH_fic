@@ -122,6 +122,7 @@ class FormationController extends Controller {
                                     data-diplome="'.$formation->diplome_id.'"
                                     data-niveau="'.$formation->niveau_etude_id.'"
                                     data-equivalence="'.$formation->equivalence_diplome_id.'"
+                                    data-agent="'.$formation->agent_id.'"
                                     data-route="'.route("formation.update", $formation).'"
                                     onclick="updateFormation('. $formation->id .')" class="btn btn-sm btn-outline-warning">
                                 <i class="mdi mdi-18px mdi-pencil"></i>

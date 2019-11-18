@@ -17,14 +17,15 @@ class ReclassementForm extends Form
     public function buildForm()
     {
         $this
-            ->add('agent_id', 'entity', [
+            ->add('agent_id', 'select', [
                 'label' => 'Matricule Agent',
+                'attr' => ['class'=>'form-control agent'],
                 //'rules' => 'required|integer',
-                'class' => Titulaire::class,
+                //'class' => Titulaire::class,
                 'empty_value' => 'Sélectionner',
-                'query_builder' => function (Titulaire $titulaire) {
+                /*'query_builder' => function (Titulaire $titulaire) {
                     return $titulaire->orderBy('matricule', 'asc')->pluck('matricule', 'id');
-                }
+                }*/
             ])
             ->add('category_id', 'entity', [
                 'label' => 'Catégorie',

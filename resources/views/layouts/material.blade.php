@@ -159,8 +159,31 @@
     <script src="{{ asset('js/fileinput.min.js') }}"></script>
     <script src="{{ asset('js/helpers.js') }}"></script>
 <script>
-    $('.select').select2()
-
+    $('.select').select2();
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $(document).ready(function(){
+        $(".agent").select2({
+            width: '100%',
+            ajax: {
+                url: "{{route('agent.search')}}",
+                type: "post",
+                dataType: 'json',
+                delay: 50,
+                data: function (params) {
+                    return {
+                        _token: CSRF_TOKEN,
+                        search: params.term
+                    };
+                },
+                processResults: function (response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    });
 </script>
 
 @yield('js')

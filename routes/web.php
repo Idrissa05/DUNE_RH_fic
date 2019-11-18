@@ -120,4 +120,10 @@ Route::group(['middleware' => ['auth']], function () {
     // All importations pages (create) & their actions (store)
     Route::get('/imports_page','ImportsController@create')->name('Imports.create');
     Route::post('/imports_store','ImportsController@store')->name('Imports.store');
+
+    // Select2 Ajax Source
+    Route::get('get_agent/{id}', 'HomeController@getAgent')->name('agent.get');
+    Route::post('/search-agent/', 'HomeController@searchAgent')->name('agent.search');
+    Route::get('get_etablissement/{id}', 'HomeController@getEtablissement')->name('etablissement.get');
+    Route::post('/search-etablissement/', 'HomeController@searchEtablissement')->name('etablissement.search');
 });

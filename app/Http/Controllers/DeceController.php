@@ -125,9 +125,9 @@ class DeceController extends Controller {
             ->addColumn('actions', function ($dece){
                 $html = '<div class="btn-group">';
                 $user = Auth::user();
-                if($user->hasPermissionTo('EDITER_DECE')) {
+                /*if($user->hasPermissionTo('EDITER_DECE')) {
                     $html .= ' <a title="editer" href="' . route('deces.edit', $dece) . '" class="btn btn-outline-warning btn-sm mr-2"><i class="mdi mdi-account-edit mdi-18px"></i></a>';
-                }
+                }*/
 
                 if($user->hasPermissionTo('SUPPRIMER_DECE')) {
                     $html .= ' <form action="' . route("deces.destroy", $dece) . '" id="del' . $dece->id . '" style="display: inline-block;" method="post">

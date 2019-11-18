@@ -17,12 +17,13 @@ class AgentMigrationForm extends Form
     {
         $this
             //******************************** Agents *****************************
-            ->add('agent_id','entity', [
-                'class' => Agent::class,
+            ->add('agent_id','select', [
+                //'class' => Agent::class,
                 'label' => 'Code Agent *', 'rules' => 'required',
-                'query_builder' => function (Agent $agent) {
+                'attr' => ['class'=>'form-control agent'],
+                /*'query_builder' => function (Agent $agent) {
                     return $agent->where('type','<>','Titulaire')->orderBy('matricule', 'asc')->pluck('matricule','id');
-                },
+                },*/
                 'empty_value' => 'Sélectionner'
             ])
             ->add('matricule','text', [

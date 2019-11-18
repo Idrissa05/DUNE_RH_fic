@@ -207,8 +207,8 @@ class AgentController extends Controller {
   {
       $form = $this->form(AgentEditForm::class);
 
-      $max = date('Y-m-d', strtotime('-8 years'));
-      $form->validate(['matricule' => 'required|string|unique:agents,matricule,'. $agent->id, 'date_naiss' => 'required|date|min:'.$max]);
+      $max = date('Y-m-d', strtotime('-18 years'));
+      $form->validate(['matricule' => 'required|string|unique:agents,matricule,'. $agent->id, 'date_naiss' => 'required|date|max:'.$max]);
 
       if (!$form->isValid()) {
           return redirect()->back()->withErrors($form->getErrors())->withInput();

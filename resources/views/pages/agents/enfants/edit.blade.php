@@ -17,5 +17,15 @@
     </div>
 @endsection
 @section('js')
-
+    <script>
+        @if($enfant->id)
+        $.ajax({
+            type: 'GET',
+            url: "{{route('agent.get',$enfant->agent_id)}}"
+        }).then(function (data) {
+            let option = new Option(data.text, data.id, true, true);
+            $(".agent").append(option).trigger('change')
+        });
+        @endif
+    </script>
 @endsection

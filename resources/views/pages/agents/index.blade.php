@@ -20,10 +20,10 @@
                             <th>Nom</th>
                             <th>Prénom</th>
                             <th>Date Naissance</th>
+                            <th>Lieu Naissance</th>
                             <th>Sexe</th>
                             <th>Nationnalité</th>
                             <th>Type Agent</th>
-                            <th>Lieu Naissance</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -175,10 +175,10 @@
                     {data: 'nom', name: 'nom'},
                     {data: 'prenom', name: 'prenom'},
                     {data: 'date_naiss', name: 'date_naiss'},
+                    {data: 'lieu_naiss', name: 'lieu_naiss'},
                     {data: 'sexe', name: 'sexe'},
                     {data: 'nationnalite', name: 'nationnalite'},
                     {data: 'type', name: 'type'},
-                    {data: 'lieu_naiss', name: 'lieu_naiss'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]", 'route' => route('agent.index')], ['scroll' => '450px'])
             @include('dependentTypeFieldsEdit')

@@ -31,12 +31,12 @@ class RegisterForm extends Form
                 }
             ])
             ->add('ministere_id','entity', [
-                'label'=>'Ministère',
+                'label'=>'Directions',
                 'rules' => 'required',
                 'class' => Ministere::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (Ministere $ministere) {
-                    return $ministere->orderBy('name', 'asc')->pluck('name', 'id');
+                    return $ministere->orderBy('id', 'asc')->pluck('name', 'id');
                 }
             ])
             ->add('role_id','entity', [

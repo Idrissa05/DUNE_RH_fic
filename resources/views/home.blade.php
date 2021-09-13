@@ -7,6 +7,19 @@
             <h2 class="text-themecolor text-center">Tableau de bord</h2>
             <hr class="divider">
             <div class="row">
+            <div class="col-md-12">
+                    <div class="card text-center">
+                        <div class="card-header bg-secondary text-white"><i class="mdi mdi-account-multiple-outline mdi-36px"></i></div>
+                        <div class="card-body">
+                            <p>
+                                Etat nominatif.
+                            </p>
+                            <a href="{{ route('print.etatnominatif') }}" target="_blank" title="imprimer" class="btn btn-sm btn-themecolor"><i class="mdi mdi-printer mdi-18px"></i> Imprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-header bg-secondary text-white"><i class="mdi mdi-account-multiple-outline mdi-36px"></i></div>

@@ -654,18 +654,7 @@ INSERT INTO indices(category_id,classe_id,echelon_id,name,value,salary)VALUES
 (1,4,11,'A1CEE4',1050,'365750');
 
 -- SET IDENTITY_INSERT ministeres ON
-INSERT INTO ministeres (id, abreviation, name) VALUES
-(1,'DGE', 'Direction Générale des Enseignements');
-(2,'DEPP', 'Direction de l''Enseignement Préscolaire et Primaire'),
-(3,'DESG', 'Direction de l''Enseignement Secondaire Général'),
-(4,'DEFA', 'Direction de l''Enseignement Franco Arabe'),
-(5,'DEPRI', 'Direction de l''Enseignement Privé'),
-(6,'DEPS', 'Direction de l''Education Physique et Sportive'),
-(7,'DPSF', 'Direction de la Promotion de la Scolarisation des Filles'),
-(8,'DREN', 'Direction Régionale de l''Education Nationnale'),
-(9,'ICEP', 'Inspection Communale de l''Enseignement Primaire'),
-(10,'IESG', 'Inspection de l''Enseignement Secondaire Général'),
-(11,'IEFA', 'Inspection de l''Enseignement Franco Arabe');
+
 -- SET IDENTITY_INSERT ministeres OFF
 
 /* Traits: Avancement  //  AgentPosition  //  Print  //  Report */

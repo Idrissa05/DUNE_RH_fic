@@ -10,10 +10,15 @@ class AgentMigration extends Model {
 
     protected $dates = ['deleted_at'];
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     public function agent()
     {
         return $this->belongsTo('App\Models\Agent');
     }
+    
     public function grade()
     {
         return $this->belongsTo('App\Models\Grade');

@@ -10,7 +10,12 @@ class Dece extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+
 	protected $fillable = array('date', 'ref_document', 'observation', 'agent_id');
+
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
 
 	public function agent()
 	{

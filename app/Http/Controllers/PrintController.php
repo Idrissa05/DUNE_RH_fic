@@ -10,6 +10,7 @@ use App\Exports\ParCorpExport;
 use App\Exports\ParMatrimonialeExport;
 use App\Exports\ParPositionExport;
 use App\Exports\RetraitablesExport;
+use App\Exports\EtatNominatifExport;
 use App\Models\Affectation;
 use App\Models\Agent;
 use App\Models\Avancement;
@@ -26,6 +27,10 @@ class PrintController extends Controller
 {
     public function agents() {
         return (new AgentsExport())->download('agents.xlsx');
+    }
+
+    public function etatNominatifs() {
+        return (new EtatNominatifExport())->download('etat_nominatifs.xlsx');
     }
 
 

@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Maladie extends Model {
 
 	protected $fillable = array('id','name');
+
 	public $timestamps = false;
 
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+	
 	public function agents()
 	{
 		return $this->belongsToMany('App\Models\Agent')->withPivot('observation','date_observation')->withTimestamps();

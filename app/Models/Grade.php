@@ -20,6 +20,10 @@ class Grade extends Model
     ];
     protected $dates = ['deleted_at'];
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     public function agent()
     {
         return $this->belongsTo('App\Models\Agent');

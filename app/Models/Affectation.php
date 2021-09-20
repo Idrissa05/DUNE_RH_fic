@@ -9,7 +9,12 @@ class Affectation extends Model {
     use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+
 	protected $fillable = array('ref', 'date', 'date_prise_effet', 'observation', 'agent_id', 'etablissement_id');
+	
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
 
 	public function agent()
 	{

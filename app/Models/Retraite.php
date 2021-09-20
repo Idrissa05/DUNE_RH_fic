@@ -10,7 +10,12 @@ class Retraite extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+
 	protected $fillable = array('date', 'ref_decision', 'date_decision', 'observation', 'agent_id', 'lieu', 'contact');
+
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
 
 	public function agent()
 	{

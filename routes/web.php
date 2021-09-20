@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
     /**
      * Les états
      */
+    Route::get('print-etat-nominatif', 'PrintController@etatNominatifs')->name('print.etatnominatif');
     Route::get('print-agents', 'PrintController@agents')->name('print.agents');
     Route::get('/print-retraitables', 'PrintController@retraitables')->name('prints.retraitables');
     Route::get('/print-list', 'PrintController@listParCategorieParSexe')->name('prints.list');

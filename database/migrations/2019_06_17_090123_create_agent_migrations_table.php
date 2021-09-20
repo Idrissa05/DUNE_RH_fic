@@ -19,8 +19,8 @@ class CreateAgentMigrationsTable extends Migration
             $table->integer('grade_id')->unsigned();
             $table->string('matricule', 30);
             $table->string('type', 30);
-            $table->timestamps(2);
-            $table->softDeletes('deleted_at',2);
+            $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 

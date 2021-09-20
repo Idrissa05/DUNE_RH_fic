@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Corp extends Model
 {
     protected $fillable = ['id','name', 'abreviation','category_id'];
+    
     public $timestamps = false;
 
     public function category()

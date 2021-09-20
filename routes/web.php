@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('ecoleformation', 'EcoleFormationController');
         Route::resource('diplome', 'DiplomeController');
         Route::resource('niveauetude', 'NiveauEtudeController');
+        Route::resource('programmes', 'ProgrammeController');
         Route::resource('equivalencediplome', 'EquivalenceDiplomeController');
         Route::resource('maladie', 'MaladieController');
         Route::resource('matrimoniale', 'MatrimonialeController');

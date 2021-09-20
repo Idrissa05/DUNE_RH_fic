@@ -64,6 +64,11 @@ class Grade extends Model
         return $this->belongsTo('App\Models\Fonction');
     }
 
+    public function programme()
+    {
+        return $this->belongsTo('App\Models\Programme');
+    }
+
     public function indice()
     {
         return $this->belongsTo('App\Models\Indice');

@@ -19,6 +19,7 @@ class CreateGradesTable extends Migration
             $table->integer('cadre_id')->unsigned();
             $table->integer('corp_id')->unsigned();
             $table->integer('fonction_id')->unsigned();
+            $table->bigInteger('programme_id')->unsigned()->nullable();
             $table->integer('category_auxiliaire_id')->unsigned()->nullable();
             $table->integer('category_id')->unsigned()->nullable();
             $table->integer('classe_id')->unsigned()->nullable();

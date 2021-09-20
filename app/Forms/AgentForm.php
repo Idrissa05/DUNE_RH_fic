@@ -16,6 +16,7 @@ use App\Models\Fonction;
 use App\Models\Maladie;
 use App\Models\Matrimoniale;
 use App\Models\NiveauEtude;
+use App\Models\Programme;
 use Kris\LaravelFormBuilder\Form;
 
 class AgentForm extends Form
@@ -230,6 +231,14 @@ class AgentForm extends Form
             ])
             ->add('observation_affectation','textarea', [
                 'label'=>'Observation', 'rules' => 'max:190', 'attr' => ['rows' => 3, 'placeholder' => 'Limité à 190 caractères !']
+            ])
+            ->add('programme_id','entity', [
+                'class' => Programme::class,
+                'label' => 'Code programme *', 'rules' => 'required',
+                'query_builder' => function (Programme $programme) {
+                    return $programme->orderBy('name', 'asc')->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
             ])
             //******************************** Enfants *****************************
             //******************************** Conjoints *****************************

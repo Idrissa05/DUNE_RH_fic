@@ -17,6 +17,10 @@ class Agent extends Model {
 
     protected $fillable = ['id'];
 
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
         'Titulaire' => Titulaire::class,

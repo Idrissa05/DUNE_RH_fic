@@ -8,6 +8,10 @@ class Ministere extends Model {
 
 	protected $fillable = array('name', 'abreviation');
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     public function agent()
     {
         return $this->hasMany('App\Models\Agent');

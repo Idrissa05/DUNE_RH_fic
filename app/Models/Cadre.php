@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cadre extends Model
 {
     protected $fillable = ['id','name','abreviation'];
+
     public $timestamps = false;
 
     public function grades()

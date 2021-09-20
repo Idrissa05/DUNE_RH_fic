@@ -10,7 +10,12 @@ class Conge extends Model {
 	use SoftDeletes;
 
 	protected $dates = ['deleted_at'];
+
 	protected $fillable = array('ref_decision', 'date_debut', 'date_fin', 'observation', 'agent_id');
+
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
 
 	public function agent()
 	{

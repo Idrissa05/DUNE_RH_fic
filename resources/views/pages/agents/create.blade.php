@@ -265,9 +265,13 @@
                                     <div class="form-group">
                                         {!! form_row($form->date_observation) !!} </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         {!! form_row($form->observation) !!} </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! form_row($form->programme_id) !!} </div>
                                 </div>
                             </div>
                         </section>

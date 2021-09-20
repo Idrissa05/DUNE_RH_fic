@@ -202,6 +202,11 @@ class CreateForeignKeys extends Migration {
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
+		Schema::table('grades', function(Blueprint $table) {
+            $table->foreign('programme_id')->references('id')->on('programmes')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
         Schema::table('grades', function(Blueprint $table) {
             $table->foreign('indice_id')->references('id')->on('indices')
                 ->onDelete('NO ACTION')

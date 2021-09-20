@@ -8,5 +8,5 @@ class Auxiliairement extends Grade
 {
     use HasParent;
     public function impersonate($agents){}
-    protected $fillable = ['agent_id','category_auxiliaire_id','cadre_id','corp_id','fonction_id','type','ref_engagement','date_engagement'];
+    protected $fillable = ['agent_id','category_auxiliaire_id','cadre_id','corp_id','fonction_id', 'programme_id' ,'type','ref_engagement','date_engagement'];
 }

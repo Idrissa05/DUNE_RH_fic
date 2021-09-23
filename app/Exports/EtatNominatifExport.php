@@ -47,7 +47,8 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
             'Classe_2',
             'Indice_2',
             'Salbase',
-            'Position'
+            'Code position',
+            'Code programme'
         ];
     }
 
@@ -59,8 +60,10 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
     public function map($agent): array
     {
         $categorie = $agent instanceof Auxiliaire ?
-            $agent->grades->last()->categoryAuxiliaire->name :
-            $agent->grades->last()->category->name;
+        $agent->grades->last()->categoryAuxiliaire->name :
+        $agent->grades->last()->category->name;
+        $programme = $agent->grades->last()->programme->name ?? '';
+            
         if(count($agent->grades) > 1)
         {
             $position = $agent->positions->last()->name;
@@ -89,8 +92,8 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
                 $classe2,
                 $indice2,
                 $salbase,
-                $position
-    
+                $position,
+                $programme 
             ];
         } else {
             if($agent->grades[0]->indice)
@@ -113,6 +116,7 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
                 $indice1 = '';
                 $indice2 = '';
                 $salbase = 0;
+                
             }
             $position = $agent->positions->last()->name;
             $jour_av = 0;
@@ -131,7 +135,8 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
                 $classe2,
                 $indice2,
                 $salbase,
-                $position
+                $position,
+                $programme
     
             ];
         }
@@ -145,10 +150,10 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
     public function collection()
     {
         $agents = Agent::with(['positions','grades' => function($query) {
-            return $query->with('category', 'categoryAuxiliaire','category', 'classe', 'indice');
+            return $query->with('category', 'categoryAuxiliaire','category', 'classe', 'indice', 'programme');
         }])->has('grades')->get();
         //$avancement = Avancement::with('agent', 'category', 'classe', 'echelon')->get();
         //dd($agents);
-        return $agents;
+        return $agents;  
     }
 }

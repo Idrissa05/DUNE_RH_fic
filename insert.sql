@@ -1061,14 +1061,14 @@ INSERT INTO etablissements (id,name,secteur_pedagogique_id,type_etablissement_id
 
 -- SET IDENTITY_INSERT agents ON
 INSERT INTO agents (id, matricule, nom, prenom, date_naiss, lieu_naiss, ref_acte_naiss, date_etablissement_acte_naiss, lieu_etablissement_acte_naiss, sexe, nationnalite, type, date_prise_service, created_by_region_id, created_by_ministere_id, created_at, updated_at, deleted_at) VALUES
-(1, '100859', 'MAMANE', 'Balkissa', '1983-12-21', 'Dosso', 'XXXX', '1983-12-28', 'Dosso', 'F', 'Nigérienne', 'Contractuel', '2005-10-01', 8 , 2, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
-(2, '0106651A', 'ABDOU', 'HAROUNA', '1980-12-31', 'GOGE/MALBAZA', 'XXX', '1981-01-05', 'GOGE/MALBAZA', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 2, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
-(3, '100942', 'MAHAMADOU', 'ISSA', '1987-02-21', 'Niamey', 'XXXX', '1987-02-28', 'Niamey', 'M', 'Nigérienne', 'Contractuel', '2008-11-01', 8 , 2, '2019-06-02 23:12:44', '2019-06-02 23:14:26', NULL),
-(4, '0106661B', 'ALI', 'INOUSSA', '1981-11-10', 'Tillabéry', 'XXX', '1981-11-25', 'Tillabéry', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 2, '2019-05-30 23:23:32', '2019-05-31 23:23:32', NULL),
-(5, '0104631C', 'ISSAKA', 'Ousmane', '1979-04-15', 'Tahoua', 'XXX', '1979-11-15', 'Tahoua', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 2, '2019-05-31 23:23:32', '2019-05-31 23:23:32', NULL),
-(6, '0102231A', 'ISSIFOU', 'Abdou', '1985-10-01', 'Zinder', 'XXX', '1985-11-13', 'Zinder', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 2, '2019-06-01 23:23:32', '2019-06-03 23:23:32', NULL),
-(7, '0102568D', 'YAHOUZA', 'Mohamed', '1991-08-14', 'Niamey', 'XXX', '1991-11-05', 'Niamey', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 2, '2019-04-20 23:23:32', '2019-05-31 23:23:32', NULL),
-(8, '200852', 'OUSMANE', 'Safia', '1992-11-21', 'Niamey', 'XXXX', '1992-12-28', 'Niamey', 'F', 'Nigérienne', 'Auxiliaire', '2012-10-01' , 8 , 2, '2019-07-01 23:12:44', '2019-07-01 23:14:26', NULL);
+(1, '100859', 'MAMANE', 'Balkissa', '1983-12-21', 'Dosso', 'XXXX', '1983-12-28', 'Dosso', 'F', 'Nigérienne', 'Contractuel', '2005-10-01', 8 , 4, '2019-06-01 23:12:44', '2019-06-01 23:14:26', NULL),
+(2, '0106651A', 'ABDOU', 'HAROUNA', '1980-12-31', 'GOGE/MALBAZA', 'XXX', '1981-01-05', 'GOGE/MALBAZA', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 4, '2019-06-01 23:23:32', '2019-06-01 23:23:32', NULL),
+(3, '100942', 'MAHAMADOU', 'ISSA', '1987-02-21', 'Niamey', 'XXXX', '1987-02-28', 'Niamey', 'M', 'Nigérienne', 'Contractuel', '2008-11-01', 8 , 4, '2019-06-02 23:12:44', '2019-06-02 23:14:26', NULL),
+(4, '0106661B', 'ALI', 'INOUSSA', '1981-11-10', 'Tillabéry', 'XXX', '1981-11-25', 'Tillabéry', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 4, '2019-05-30 23:23:32', '2019-05-31 23:23:32', NULL),
+(5, '0104631C', 'ISSAKA', 'Ousmane', '1979-04-15', 'Tahoua', 'XXX', '1979-11-15', 'Tahoua', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 4, '2019-05-31 23:23:32', '2019-05-31 23:23:32', NULL),
+(6, '0102231A', 'ISSIFOU', 'Abdou', '1985-10-01', 'Zinder', 'XXX', '1985-11-13', 'Zinder', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 4, '2019-06-01 23:23:32', '2019-06-03 23:23:32', NULL),
+(7, '0102568D', 'YAHOUZA', 'Mohamed', '1991-08-14', 'Niamey', 'XXX', '1991-11-05', 'Niamey', 'M', 'Nigérienne', 'Titulaire', NULL, 8 , 4, '2019-04-20 23:23:32', '2019-05-31 23:23:32', NULL),
+(8, '200852', 'OUSMANE', 'Safia', '1992-11-21', 'Niamey', 'XXXX', '1992-12-28', 'Niamey', 'F', 'Nigérienne', 'Auxiliaire', '2012-10-01' , 8 , 4, '2019-07-01 23:12:44', '2019-07-01 23:14:26', NULL);
 -- SET IDENTITY_INSERT agents OFF
 
 -- SET IDENTITY_INSERT grades ON
@@ -1139,6 +1139,6 @@ INSERT INTO conjoints (id, matricule, nom, prenom, date_naiss, ref_acte_naiss, l
 -- SET IDENTITY_INSERT conjoints OFF
 
 INSERT INTO users (name, password, region_id, ministere_id, created_at, updated_at) VALUES
-('admin', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 8, 1 ,NULL, NULL),
-('user1', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 2 ,NULL, NULL),
-('user2', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 2 ,NULL, NULL);
+('admin', '$2y$10$GPIX1QXCQq6cw2Zh6XKd/OOYTg9bzRlLEOWKsdJVdb0dQWnVuFUEW', 8, 4 ,NULL, NULL),
+('user1', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 5 ,NULL, NULL),
+('user2', '$2y$10$U0EQo20mpsEaipKUwCr7de5LJrOGVC71w9hVgScwOP5lmSVwZdV4y', 8, 5 ,NULL, NULL);

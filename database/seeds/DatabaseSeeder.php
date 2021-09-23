@@ -214,15 +214,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Administrateur'
         ]);
         $role->givePermissionTo('ADMINISTRATION');
-
-        \App\User::create([
-            'name'=>'admin',
-            'password'=>Hash::make('adminadmin'),
-            'region_id'=>1,
-            'ministere_id'=>4
-        ]);
-        $user = \App\User::first();
-        $user->assignRole($role);
+        
+        // \App\User::create([
+        //     'name'=>'admin',
+        //     'password'=>Hash::make('adminadmin'),
+        //     'region_id'=>1,
+        //     'ministere_id'=>4
+        // ]);
+        // $user = \App\User::first();
+        // $user->assignRole($role);
 
     }
 }

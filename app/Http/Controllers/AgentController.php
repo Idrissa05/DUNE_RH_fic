@@ -35,6 +35,7 @@ class AgentController extends Controller {
 
     public function index(Request $request)
   {
+   
       if ($request->ajax()) {
           $agent = Agent::orderBy('created_at', 'desc');
           return Datatables::of($agent)

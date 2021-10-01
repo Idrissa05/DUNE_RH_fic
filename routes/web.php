@@ -128,4 +128,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/search-agent/', 'HomeController@searchAgent')->name('agent.search');
     Route::get('get_etablissement/{id}', 'HomeController@getEtablissement')->name('etablissement.get');
     Route::post('/search-etablissement/', 'HomeController@searchEtablissement')->name('etablissement.search');
+    Route::get('/informations/agent', 'AgentController@agent_information')->name('agent_information');
 });

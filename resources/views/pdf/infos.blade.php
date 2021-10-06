@@ -176,7 +176,7 @@
         <tr>
             <th>#</th>
             <th>Date début</th>
-            <th>Date fin</th> '
+            <th>Date fin</th> 
             <th>École de formation</th>
             <th>Diplôme</th>
             <th>Niveau d'étude</th>
@@ -212,7 +212,7 @@
         <tr>
             <th>#</th>
             <th>Organisation</th>
-            <th>Date début</th> '
+            <th>Date début</th> 
             <th>Date fin</th>
             <th>Fonction</th>
             <th>Tâche</th>

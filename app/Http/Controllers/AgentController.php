@@ -37,34 +37,14 @@ class AgentController extends Controller {
     public function agent_information()
     {
         $users = User::all();
-        //dd("Les donnees sont conformes");
         $user = Auth::user();
-        $agent = Agent::where('matricule', '=', 100002)->first();
-        dd($agent);
+        $agent = Agent::where('matricule', '=', $user->name)->first();
+        //dd($agent);
         return view('pages.agents.information_agent', compact('agent', 'user', 'users'));
     }
 
     public function index(Request $request)
   {
-    $user = Auth::user();
-    if ($request->ajax() && $user->roles[0]->name == "Agent") {
-       // dd("Le role agent");
-        $agent = Agent::where('matricule', '=', $user->name)->orderBy('created_at', 'desc');
-        return Datatables::of($agent)
-            ->addColumn('date_naiss', function ($agent){
-                return formaterDate($agent->date_naiss);
-            })
-            ->addColumn('action', function($agent){
-                $html = '';
-                $user = Auth::user();
-                if($user->hasPermissionTo('EDITER_AGENT')){
-                  $html .= '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' ';
-                }
-                    return $html;
-            })
-            ->escapeColumns([])->make(true);
-    }
-
       if ($request->ajax()) {
         $agent = Agent::orderBy('created_at', 'desc');
         return Datatables::of($agent)

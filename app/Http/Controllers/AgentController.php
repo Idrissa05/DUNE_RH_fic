@@ -15,6 +15,7 @@ use App\Models\Auxiliairement;
 use Illuminate\Http\Request;
 use App\Forms\AgentForm;
 use App\Models\Agent;
+use App\User;
 use App\Models\Formation;
 use App\Models\Civicard;
 use App\Models\ServiceCivicad;
@@ -35,36 +36,45 @@ class AgentController extends Controller {
         $this->middleware('permission:SUPPRIMER_AGENT')->only('destroy');
     }
 
+    public function agent_information()
+    {
+        $users = User::all();
+        $user = Auth::user();
+        $agent = Agent::where('matricule', '=', $user->name)->first();
+        //dd($agent);
+        return view('pages.agents.information_agent', compact('agent', 'user', 'users'));
+    }
+
     public function index(Request $request)
   {
    
       if ($request->ajax()) {
-          $agent = Agent::orderBy('created_at', 'desc');
-          return Datatables::of($agent)
-              ->addColumn('date_naiss', function ($agent){
-                  return formaterDate($agent->date_naiss);
-              })
-              ->addColumn('action', function($agent){
-                  $html = '';
-                  $user = Auth::user();
-                  if($user->hasPermissionTo('EDITER_AGENT')){
-                    $html .= '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' ';
-                  }
+        $agent = Agent::orderBy('created_at', 'desc');
+        return Datatables::of($agent)
+            ->addColumn('date_naiss', function ($agent){
+                return formaterDate($agent->date_naiss);
+            })
+            ->addColumn('action', function($agent){
+                $html = '';
+                $user = Auth::user();
+                if($user->hasPermissionTo('EDITER_AGENT')){
+                  $html .= '<a onclick="editData('. $agent->id .')" id="agent'.$agent->id.'" data-route="'.route("agent.update", $agent).'" class="btn btn-sm btn-outline-warning"><i class="mdi mdi-18px mdi-pencil"></i></a> '.' ';
+                }
 
-                  if($user->hasPermissionTo('SUPPRIMER_AGENT')) {
-                  $html .= '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
-                            '.method_field('DELETE').'
-                            '.csrf_field().'
-                            <button class="btn btn-outline-danger btn-sm" type="button"
-                            onclick="myHelpers.deleteConfirmation(\'del'.$agent->id.'\')">
-                                <i class="mdi mdi-18px mdi-trash-can-outline"></i>
-                            </button>
-                      </form>';
-                  }
-                      return $html;
-              })
-              ->escapeColumns([])->make(true);
-      }
+                if($user->hasPermissionTo('SUPPRIMER_AGENT')) {
+                $html .= '<form action="'.route("agent.destroy", $agent).'" id="del'.$agent->id.'" style="display: inline-block;" method="post">
+                          '.method_field('DELETE').'
+                          '.csrf_field().'
+                          <button class="btn btn-outline-danger btn-sm" type="button"
+                          onclick="myHelpers.deleteConfirmation(\'del'.$agent->id.'\')">
+                              <i class="mdi mdi-18px mdi-trash-can-outline"></i>
+                          </button>
+                    </form>';
+                }
+                    return $html;
+            })
+            ->escapeColumns([])->make(true);
+    }
 
       $form = $this->form(AgentEditForm::class, [
           'method' => 'POST',

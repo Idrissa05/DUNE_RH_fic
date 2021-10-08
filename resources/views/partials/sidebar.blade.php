@@ -98,10 +98,13 @@
         </li>
     @endcan
     @can('GENERER_REQUETE')
-        <li> <a class="waves-effect waves-dark" href="{{ route('report.index') }}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Génération de Requêtes</span></a>
+        <li><a class="waves-effect waves-dark" href="{{ route('report.index') }}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Génération de Requêtes</span></a>
     @endcan
     @can('IMPORTER_EXCEL')
             <li> <a class="waves-effect waves-dark" href="{{ route('Imports.create') }}" aria-expanded="false"><i class="mdi mdi-file-import"></i><span class="hide-menu">Importations par lots</span></a>
     @endcan
+    @can('CONSULTER_AGENT')
+        <li><a class="waves-effect waves-dark" href="{{ route('agent_information') }}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Mes informations</span></a>
+    @endcan    
     </ul>
 </nav>

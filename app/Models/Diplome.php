@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Diplome extends Model {
 
-	protected $fillable = array('id','name');
+	protected $fillable = ['id','name', 'equivalence_diplome_id', 'niveau_etude_id'];
 	public $timestamps = false;
 
 	public function formations()
 	{
 		return $this->hasMany('App\Models\Formation');
+	}
+	public function equivalenceDiplome()
+	{
+		return $this->belongsTo('App\Models\EquivalenceDiplome');
+	}
+	public function niveauEtude()
+	{
+		return $this->belongsTo('App\Models\NiveauEtude');
 	}
 
 }

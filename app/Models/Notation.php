@@ -11,7 +11,7 @@ class Notation extends Model {
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = array('date_debut', 'date_fin', 'note', 'responsable', 'observation', 'agent_id');
+	protected $fillable = array('date_debut', 'date_fin', 'note_pedagogique', 'note_adminitratif', 'responsable', 'observation', 'agent_id');
 
 	public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';

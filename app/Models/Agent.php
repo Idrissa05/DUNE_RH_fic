@@ -23,6 +23,7 @@ class Agent extends Model {
 
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
+		'Civicard' => Civicard::class,
         'Titulaire' => Titulaire::class,
         'Auxiliaire' => Auxiliaire::class
     ];
@@ -101,6 +102,11 @@ class Agent extends Model {
 	public function matrimoniales()
 	{
 		return $this->belongsToMany('App\Models\Matrimoniale')->withPivot('date')->withTimestamps();
+	}
+
+	public function type_enseignements()
+	{
+		return $this->belongsToMany('App\Models\TypeEnseignement')->withPivot('date')->withTimestamps();
 	}
 
     public function positions()

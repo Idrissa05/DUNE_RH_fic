@@ -10,9 +10,20 @@ class AffectationForm extends Form
 {
     public function buildForm()
     {
-        $this->add('ref', 'text', [
-            'rules' => 'required|'
-        ])->add('date', 'date', [
+        $this->add('type_ref', 'choice', [
+            'choices' => ['Decision' => 'Decision', 'OPA' => 'Ordre d’Affectation Provisoire'],
+            'choice_options' => [
+                'wrapper' => ['class' => 'choice-wrapper'],
+                'label_attr' => ['class' => 'label-class'],
+            ],
+            'selected' => ['DEC', 'OAP'],
+            'expanded' => true,
+            'multiple' => false
+        ])
+        ->add('ref', 'text', [
+            'rules' => 'required|',
+        ])
+        ->add('date', 'date', [
             'rules' => 'required|date', 'attr' => ['max' => null, 'min' => null],
             'label' => 'Date Affectation'
         ])

@@ -64,6 +64,7 @@
 @section('js')
     <script>
         $(function () {
+            @include('dynamicDropDown');
             @include('dataTableAjax', ['columns' => "[
                 { data: 'id', name: 'id' },
                 { data: 'agent', name: 'agent' },

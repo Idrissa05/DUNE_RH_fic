@@ -24,7 +24,7 @@ class CongeForm extends Form
                     'min' => null
                 ]
             ])
-            ->add('observation', 'text')
+            ->add('observation', 'textarea')
             ->add('agent_id', 'select', [
                 'label' => 'Matricule Agent',
                 'rules' => 'required|integer',

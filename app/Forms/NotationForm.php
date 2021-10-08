@@ -23,7 +23,13 @@ class NotationForm extends Form
                     'max' => null,
                     'min' => null
                 ]
-            ])->add('note', 'number', [
+            ])->add('note_adminitratif', 'number', [
+                'rules' => 'required',
+                'attr' => [
+                    'step' => 0.1,
+
+                ]
+            ])->add('note_pedagogique', 'number', [
                 'rules' => 'required',
                 'attr' => [
                     'step' => 0.1,
@@ -31,7 +37,7 @@ class NotationForm extends Form
                 ]
             ])->add('responsable', 'text', [
                 'rules' => 'required'
-            ])->add('observation', 'text', [
+            ])->add('observation', 'textarea', [
                 'rules' => 'required',
                 'label' => 'Appréciations'
             ])

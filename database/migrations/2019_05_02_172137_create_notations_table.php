@@ -11,7 +11,8 @@ class CreateNotationsTable extends Migration {
 			$table->increments('id');
 			$table->date('date_debut');
 			$table->date('date_fin');
-			$table->float('note');
+			$table->float('note_adminitratif');
+			$table->float('note_pedagogique');
 			$table->string('responsable', 30);
 			$table->string('observation')->nullable();
 			$table->integer('agent_id')->unsigned();

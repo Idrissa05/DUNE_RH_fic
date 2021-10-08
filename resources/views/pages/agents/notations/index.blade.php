@@ -15,7 +15,8 @@
                 <th>#</th>
                 <th>Date début</th> '
                 <th>Date fin</th>
-                <th>Note</th>
+                <th>Note pédagogique</th>
+                <th>Note adminitratif</th>
                 <th>Responsable</th>
                 <th>Observation</th>
                 <th>Agent</th>
@@ -34,7 +35,8 @@
         { data: 'id', name: 'id' },
         { data: 'date_debut', name: 'date_debut' },
         { data: 'date_fin', name: 'date_fin' },
-        { data: 'note', name: 'note' },
+        { data: 'note_pedagogique', name: 'note_pedagogique' },
+        { data: 'note_adminitratif', name: 'note_adminitratif' },
         { data: 'responsable', name: 'responsable' },
         { data: 'observation', name: 'observation' },
         { data: 'agent', name: 'agent' },

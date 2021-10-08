@@ -16,7 +16,7 @@ class DiplomeController extends Controller {
             'url' => route('diplome.store')
         ]);
 
-        $diplomes = Diplome::all();
+        $diplomes = Diplome::with('equivalenceDiplome','niveauEtude')->get();
         return view('configurations.diplomes.index', [
             'form' => $form,
             'diplomes' => $diplomes

@@ -13,5 +13,9 @@ class EquivalenceDiplome extends Model {
 	{
 		return $this->hasMany('App\Models\Formation');
 	}
+	public function diplomes()
+	{
+		return $this->hasMany('App\Models\Diplome');
+	}
 
 }

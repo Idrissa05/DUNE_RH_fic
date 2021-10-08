@@ -10,7 +10,7 @@ class Affectation extends Model {
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = array('ref', 'date', 'date_prise_effet', 'observation', 'agent_id', 'etablissement_id');
+	protected $fillable = array('ref', 'type_ref', 'date', 'date_prise_effet', 'observation', 'agent_id', 'etablissement_id');
 	
 	public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';

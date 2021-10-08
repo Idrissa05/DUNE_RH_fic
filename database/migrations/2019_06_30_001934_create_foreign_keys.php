@@ -182,6 +182,16 @@ class CreateForeignKeys extends Migration {
                 ->onDelete('NO ACTION')
                 ->onUpdate('NO ACTION');
         });
+        Schema::table('diplomes', function(Blueprint $table) {
+            $table->foreign('equivalence_diplome_id')->references('id')->on('equivalence_diplomes')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
+		Schema::table('diplomes', function(Blueprint $table) {
+            $table->foreign('niveau_etude_id')->references('id')->on('niveau_etudes')
+                ->onDelete('NO ACTION')
+                ->onUpdate('NO ACTION');
+        });
         Schema::table('grades', function(Blueprint $table) {
             $table->foreign('echelon_id')->references('id')->on('echelons')
                 ->onDelete('NO ACTION')

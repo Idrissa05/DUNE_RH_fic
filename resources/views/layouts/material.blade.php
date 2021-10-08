@@ -79,10 +79,10 @@
                                                 <h5 class="mt-1">Login : <span class="label label-primary">{{ Auth::user()->name }}</span></h5>
                                                 <h5 class="mt-2">Region : <span class="label label-primary">{{ Auth::user()->region->name }}</span></h5>
                                                 @if(Auth::user()->ministere->abreviation == 'DEPP')
-                                                <h5 class="mt-2">Base 1 : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>
+                                                <h5 class="mt-2">Base : <span class="label label-primary">{{ Auth::user()->ministere->id }}</span></h5>
                                                 @endif
                                                 @if(Auth::user()->ministere->abreviation == 'DESG')
-                                                <h5 class="mt-2">Base 2 : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>
+                                                <h5 class="mt-2">Base : <span class="label label-primary">{{ Auth::user()->ministere->id }}</span></h5>
                                                 @endif
                                                 @if(Auth::user()->ministere->abreviation == 'DGE')
                                                 <h5 class="mt-2">Direction : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>

@@ -10,6 +10,21 @@ $(function () {
             $("#indice_id").val('');
         });
     });
+    $('#diplome_id').on('change', function(e){
+        let diplome_id = $("#diplome_id option:selected").val();
+        $.get('/api_niveau_etude?diplome_id=' + diplome_id,function(data) {
+            $("#niveau_etude_id").val(data.id);
+           
+        });
+    });
+    $('#diplome_id').on('change', function(e){
+        let diplome_id = $("#diplome_id option:selected").val();
+        $.get('/api_equivalence_diplome?diplome_id=' + diplome_id,function(data) {
+            $("#equivalence_diplome_id").val(data.id);
+           
+        });
+    });
+
 
     $('#category_id').on('change', function () {
         $('#classe_id').val('');

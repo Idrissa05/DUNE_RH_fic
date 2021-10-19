@@ -103,8 +103,8 @@
     @can('IMPORTER_EXCEL')
             <li> <a class="waves-effect waves-dark" href="{{ route('Imports.create') }}" aria-expanded="false"><i class="mdi mdi-file-import"></i><span class="hide-menu">Importations par lots</span></a>
     @endcan
-    @can('CONSULTER_AGENT')
+    <!-- @can('ACCES_AGENT')
         <li><a class="waves-effect waves-dark" href="{{ route('agent_information') }}" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Mes informations</span></a>
-    @endcan    
+    @endcan     -->
     </ul>
 </nav>

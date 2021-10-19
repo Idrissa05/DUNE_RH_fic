@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('verifier_login');
             $table->integer('region_id')->unsigned();
             $table->integer('ministere_id')->unsigned();
+            $table->integer('region_id')->unsigned()->nullable();
+            $table->integer('ministere_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps(2);
         });

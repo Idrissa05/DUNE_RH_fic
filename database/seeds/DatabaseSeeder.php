@@ -209,6 +209,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'GENERER_REQUETE'
         ]);
 
+        \Spatie\Permission\Models\Permission::create([
+            'name' => 'ACCES_AGENT'
+        ]);
+
+        $role_agent = \Spatie\Permission\Models\Role::create([
+            'name' => 'Enseignant'
+        ]);
+        $role_agent->givePermissionTo('ACCES_AGENT');
 
         $role = \Spatie\Permission\Models\Role::create([
             'name' => 'Administrateur'
@@ -217,7 +225,7 @@ class DatabaseSeeder extends Seeder
         
         \App\User::create([
             'name'=>'admin',
-            'password'=>Hash::make('adminadmin'),
+            'password'=>Hash::make('admin'),
             'region_id'=>1,
             'ministere_id'=>1
         ]);

@@ -62,8 +62,8 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->role }}</td>
-                        <td>{{ $user->region->name }}</td>
-                        <td>{{ $user->ministere->abreviation }}</td>
+                        <td>{{ $user->region->name ?? '' }}</td>
+                        <td>{{ $user->ministere->abreviation ?? '' }}</td>
                         <td>
                             <button id="user{{ $user->id }}"
                                     data-name="{{ $user->name }}"

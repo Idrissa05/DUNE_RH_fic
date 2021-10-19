@@ -19,14 +19,14 @@ class UsersController extends Controller
         $this->middleware('permission:ADMINISTRATION');
 
     }
-
-
+    
     public function index() {
         $form = $this->form(RegisterForm::class, [
             'method' => 'POST',
             'url' => route('register')
         ]);
         $users = User::all();
+        //dd($users);
         $users = $users->each(function ($user) {
            return  $user->role_id = is_object($user->roles->first()) ? $user->roles->first()->id : null;
         });

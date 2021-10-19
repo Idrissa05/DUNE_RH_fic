@@ -12,6 +12,7 @@ class CreateAgentsTable extends Migration {
             $table->string('matricule', 15)->unique();
 			$table->string('nom', 100);
 			$table->string('prenom', 100)->nullable();
+			$table->string('telephone', 13)->nullable();
 			$table->date('date_naiss');
 			$table->string('lieu_naiss', 30);
             $table->string('ref_acte_naiss', 30);

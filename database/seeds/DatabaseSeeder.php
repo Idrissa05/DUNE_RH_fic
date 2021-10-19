@@ -227,9 +227,8 @@ class DatabaseSeeder extends Seeder
             'name'=>'admin',
             'password'=>Hash::make('admin'),
             'region_id'=>1,
-            'ministere_id'=>4
+            'ministere_id'=>1
         ]);
-        
         $user = \App\User::first();
         $user->assignRole($role);
 

@@ -37,6 +37,9 @@
                 @can('CONSULTER_MATRIMONIALE')
                 <li><a href="{{ route('agent-matrimoniale.index') }}">Matrimoniales</a></li>
                 @endcan
+                <!-- @can('CONSULTER_MATRIMONIALE')
+                <li><a href="{{ route('agent-matrimoniale.index') }}">Enseignement</a></li>
+                @endcan -->
                 @can('CONSULTER_MIGRATION')
                 <li><a href="{{ route('migration.index') }}">Migrations agents</a></li>
                 @endcan
@@ -77,6 +80,7 @@
                 <li><a href="{{ route('niveauetude.index') }}">Niveaux étude</a></li>
                 <li><a href="{{ route('position.index') }}">Positions</a></li>
                 <li><a href="{{ route('secteurPedagogique.index') }}">Secteurs pédagogiques</a></li>
+                <!-- <li><a href="{{ route('type_enseignement.index') }}">Type Enseignement</a></li> -->
                 <li><a href="{{ route('typeetablissement.index') }}">Types d'établissement</a></li>
 
             </ul>

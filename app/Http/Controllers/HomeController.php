@@ -5,6 +5,7 @@ use App\Models\Agent;
 use App\Models\Category;
 use App\Models\CategoryAuxiliaire;
 use App\Models\Corp;
+use App\Models\Diplome;
 use App\Models\Echelon;
 use App\Models\Etablissement;
 use App\Models\Fonction;
@@ -43,6 +44,12 @@ class HomeController extends Controller
 
     public function apiCategory(){
         return response()->json(Corp::find(Input::get('corp_id'))->category);
+    }
+    public function apiEquivalenceDiplome(){
+        return response()->json(Diplome::find(Input::get('diplome_id'))->equivalenceDiplome);
+    }
+    public function apiNiveauEtude(){
+        return response()->json(Diplome::find(Input::get('diplome_id'))->niveauEtude);
     }
 
     public function apiEchelon(){

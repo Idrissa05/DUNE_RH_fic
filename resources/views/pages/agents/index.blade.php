@@ -167,7 +167,9 @@
 @endsection
 
 @section('js')
+
     <script>
+        
         $(document).ready(function () {
             @include('dataTableAjaxAllScrolling', ['columns' => "[
                     {data: 'id', name: 'id'},

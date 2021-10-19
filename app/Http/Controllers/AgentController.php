@@ -17,6 +17,8 @@ use App\Forms\AgentForm;
 use App\Models\Agent;
 use App\User;
 use App\Models\Formation;
+use App\Models\Civicard;
+use App\Models\ServiceCivicad;
 use Illuminate\Support\Facades\DB;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Yajra\DataTables\DataTables;
@@ -45,6 +47,7 @@ class AgentController extends Controller {
 
     public function index(Request $request)
   {
+   
       if ($request->ajax()) {
         $agent = Agent::orderBy('created_at', 'desc');
         return Datatables::of($agent)
@@ -104,6 +107,7 @@ class AgentController extends Controller {
       try {
           DB::beginTransaction();
               // Inserion Agents
+              //dd($form->getRequest());
               if($form->getRequest()->only('type')['type'] == 'Titulaire'){
                   // Inserion Agent Titulaire
                   $agent = Titulaire::create($form->getRequest()->all());
@@ -117,8 +121,18 @@ class AgentController extends Controller {
                   // Insertion Grade
                   $contrat = new Contrat($form->getRequest()->all());
                   $agent->grades()->save($contrat);
+                  //dd($agent);
                   $agent->positions()->attach(1);
-              }elseif($form->getRequest()->only('type')['type'] == 'Auxiliaire') {
+              }elseif($form->getRequest()->only('type')['type'] == 'Civicard') {
+                  //dd("OKEY");
+                // Inserion Agent Civicard
+                $agent = Civicard::create($form->getRequest()->all());
+                // Insertion Grade
+                $civicard = new ServiceCivicad($form->getRequest()->all());
+                $agent->grades()->save($civicard);
+                //dd($agent);
+                $agent->positions()->attach(1);
+            }elseif($form->getRequest()->only('type')['type'] == 'Auxiliaire') {
                   // Inserion Agent Auxiliaire
                   $agent = Auxiliaire::create($form->getRequest()->all());
                   // Insertion Grade
@@ -196,7 +210,6 @@ class AgentController extends Controller {
 
       return redirect()->route('agent.index')->with('success', 'Opération effectuée avec succès !');
   }
-
 
   public function show($id)
   {

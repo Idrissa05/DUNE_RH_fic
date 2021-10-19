@@ -14,6 +14,7 @@
             <tr>
                 <th>#</th>
                 <th>Référence</th>
+                <th>Type référence</th>
                 <th>Date</th> '
                 <th>Date prise effet</th>
                 <th>Observation</th>
@@ -33,6 +34,7 @@
     @include('dataTableAjax', ['columns' => "[
         { data: 'id', name: 'id' },
         { data: 'ref', name: 'ref' },
+        { data: 'type_ref', name: 'type_ref' },
         { data: 'date', name: 'date_debut' },
         { data: 'date_prise_effet', name: 'date_prise_effet' },
         { data: 'observation', name: 'observation' },

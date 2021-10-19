@@ -60,7 +60,7 @@ class AgentForm extends Form
             ])
             ->add('type','select', [
                 'label'=>'Type d\'Agent *', 'rules' => 'required',
-                'choices' => ['Auxiliaire' => 'Auxiliaire','Contractuel' => 'Contractuel', 'Titulaire' => 'Titulaire'],
+                'choices' => ['Auxiliaire' => 'Auxiliaire','Contractuel' => 'Contractuel','Civicard' => 'Civicard', 'Titulaire' => 'Titulaire'],
                 'empty_value' => 'Sélectionner'
             ])
             ->add('date_prise_service','date', [
@@ -163,14 +163,6 @@ class AgentForm extends Form
                 },
                 'empty_value' => 'Sélectionner'
             ])
-            ->add('niveau_etude_id','entity', [
-                'class' => NiveauEtude::class,
-                'label' => 'Niveau Etude *', 'rules' => 'required',
-                'query_builder' => function (NiveauEtude $niveauEtude) {
-                    return $niveauEtude->orderBy('name', 'asc')->pluck('name','id');
-                },
-                'empty_value' => 'Sélectionner'
-            ])
             ->add('diplome_id','entity', [
                 'class' => Diplome::class,
                 'label' => 'Diplôme Obtenu *', 'rules' => 'required',
@@ -179,9 +171,17 @@ class AgentForm extends Form
                 },
                 'empty_value' => 'Sélectionner'
             ])
+            ->add('niveau_etude_id','entity', [
+                'class' => NiveauEtude::class,
+                'label' => 'Niveau Etude *', 'rules' => 'required','attr' => ['disabled' => 'disabled'],
+                'query_builder' => function (NiveauEtude $niveauEtude) {
+                    return $niveauEtude->orderBy('name', 'asc')->pluck('name','id');
+                },
+                'empty_value' => 'Sélectionner'
+            ])
             ->add('equivalence_diplome_id','entity', [
                 'class' => EquivalenceDiplome::class,
-                'label' => 'Equivalence Diplôme *', 'rules' => 'required',
+                'label' => 'Equivalence Diplôme *', 'rules' => 'required', 'attr' => ['disabled' => 'disabled'],
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
                     return $equivalenceDiplome->orderBy('name', 'asc')->pluck('name','id');
                 },

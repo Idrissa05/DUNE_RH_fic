@@ -41,7 +41,7 @@ class AccesAgentController extends Controller
                 Nexmo::message()->send([
                     'to'   => $agent->telephone,
                     'from' => 'DUNE RH',
-                    'text' => 'Code de confirmation :' .$confirmation_code
+                    'text' => 'Votre code de confirmation est de : ' .$confirmation_code
                 ]);
                 
             }

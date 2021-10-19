@@ -162,11 +162,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! form_row($form->niveau_etude_id) !!} </div>
+                                        {!! form_row($form->diplome_id) !!} </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! form_row($form->diplome_id) !!} </div>
+                                        {!! form_row($form->niveau_etude_id) !!} </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">

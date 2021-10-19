@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('equivalencediplome', 'EquivalenceDiplomeController');
         Route::resource('maladie', 'MaladieController');
         Route::resource('matrimoniale', 'MatrimonialeController');
+        Route::resource('type_enseignement', 'TypeEnseignementController');
         Route::resource('corp',  'CorpController', ['only' => ['store', 'index', 'update', 'destroy']]);
         Route::resource('cadre',  'CadreController', ['only' => ['store', 'index', 'update', 'destroy']]);
         Route::resource('fonction',  'FonctionController', ['only' => ['store', 'index', 'update', 'destroy']]);
@@ -88,6 +89,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/api_agent', 'HomeController@apiAgent');
     Route::get('/api_category', 'HomeController@apiCategory');
+    Route::get('/api_niveau_etude', 'HomeController@apiNiveauEtude');
+    Route::get('/api_equivalence_diplome', 'HomeController@apiEquivalenceDiplome');
     Route::get('/api_echelon', 'HomeController@apiEchelon');
     Route::get('/api_indice', 'HomeController@apiIndice');
     Route::get('/api', 'HomeController@api');

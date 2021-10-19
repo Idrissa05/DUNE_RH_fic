@@ -130,7 +130,7 @@
                     { optgroup: 'Agents', id: 'date_etablissement_acte_naiss', label: 'Date Etablissement Acte Naissance', type: 'string' },
                     { optgroup: 'Agents', id: 'lieu_etablissement_acte_naiss', label: 'Lieu Etablissement Acte Naissance', type: 'string' },
                     { optgroup: 'Agents', id: 'nationnalite', label: 'Nationnalité', type: 'string' },
-                    { optgroup: 'Agents', id: 'agents_type', label: 'Type Agent', type: 'string', input: 'select', values: ['Auxiliaire', 'Contractuel', 'Titulaire'], operators: ['equal', 'not_equal'] },
+                    { optgroup: 'Agents', id: 'agents_type', label: 'Type Agent', type: 'string', input: 'select', values: ['Auxiliaire', 'Contractuel', 'Titulaire', 'Civicard'], operators: ['equal', 'not_equal'] },
                     { optgroup: 'Agents', id: 'date_prise_service', label: 'Date Prise Service', type: 'date' },
                     { optgroup: 'Agents', id: 'ministere', label: 'Ministère', type: 'string' },
                     { optgroup: 'Agents', id: 'region', label: 'Région', type: 'string' },
@@ -217,7 +217,7 @@
                     { optgroup: 'Matrimoniales', id: 'date_matrimoiale', label: 'Date', type: 'date' },
 
                     { optgroup: 'Migrations', id: 'old_matricule', label: 'Ancien Code/Matricule Agent', type: 'string' },
-                    { optgroup: 'Migrations', id: 'old_agents_type', label: 'Ancien Type Agent', type: 'string', input: 'select', values: ['Auxiliaire', 'Contractuel', 'Titulaire'], operators: ['equal', 'not_equal'] },
+                    { optgroup: 'Migrations', id: 'old_agents_type', label: 'Ancien Type Agent', type: 'string', input: 'select', values: ['Auxiliaire', 'Contractuel', 'Titulaire', 'Civicard'], operators: ['equal', 'not_equal'] },
 
                     { optgroup: 'Notations', id: 'date_debut_notation', label: 'Date début', type: 'date' },
                     { optgroup: 'Notations', id: 'date_fin_notation', label: 'Date fin', type: 'date' },

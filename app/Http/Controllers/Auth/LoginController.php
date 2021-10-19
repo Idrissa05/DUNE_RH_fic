@@ -6,6 +6,7 @@ use App\Forms\LoginForm;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -22,13 +23,20 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected function authenticated(Request $request, $user){
+        if ($user->roles[0]->name == 'Enseignant'){
+            return redirect()->route('agent_information');
+        }
+
+        return redirect('/home');
+    }
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    //protected $redirectTo = '/home';
     /**
      * Create a new controller instance.
      *

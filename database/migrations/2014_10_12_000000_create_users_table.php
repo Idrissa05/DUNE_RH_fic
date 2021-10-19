@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('password');
-            $table->integer('region_id')->unsigned();
-            $table->integer('ministere_id')->unsigned();
+            $table->integer('region_id')->unsigned()->nullable();
+            $table->integer('ministere_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps(2);
         });

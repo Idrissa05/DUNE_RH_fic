@@ -129,4 +129,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('get_etablissement/{id}', 'HomeController@getEtablissement')->name('etablissement.get');
     Route::post('/search-etablissement/', 'HomeController@searchEtablissement')->name('etablissement.search');
     Route::get('/informations/agent', 'AgentController@agent_information')->name('agent_information');
+
+    // Acces enseignant
+    Route::get('/inscription-agent', 'AccesAgentController@create')->name('inscription.agent');
+    Route::post('/inscription_agent', 'AccesAgentController@store')->name('inscription_agent');
+    Route::post('/chech-confirmation-code', 'AccesAgentController@chech_confirmation_code')->name('chech_confirmation_code');
 });
+
+    
+

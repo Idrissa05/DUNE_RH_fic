@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'DUNE RH') }}</title>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!-- Custom CSS -->
@@ -77,8 +77,12 @@
                                             <div class="u-img"><img src="{{ asset('holder.png') }}" alt="user"></div>
                                             <div class="u-text">
                                                 <h5 class="mt-1">Login : <span class="label label-primary">{{ Auth::user()->name }}</span></h5>
+                                                @if(Auth::user()->region)
                                                 <h5 class="mt-2">Region : <span class="label label-primary">{{ Auth::user()->region->name }}</span></h5>
+                                                @endif
+                                                @if(Auth::user()->ministere)
                                                 <h5 class="mt-2">Ministère : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>
+                                                @endif
                                             </div>
                                         </div>
                                     </li>

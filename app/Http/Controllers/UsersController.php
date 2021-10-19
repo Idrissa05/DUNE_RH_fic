@@ -30,7 +30,6 @@ class UsersController extends Controller
         $users = $users->each(function ($user) {
            return  $user->role_id = is_object($user->roles->first()) ? $user->roles->first()->id : null;
         });
-
         return view('system.users.index', [
             'users' => $users,
             'form' => $form
@@ -42,10 +41,10 @@ class UsersController extends Controller
             'name' => 'required',
             'role_id' => 'required'
         ]);
-
         $user->update([
             'name' => $request->name,
             'region_id' => $request->region_id,
+            'verifier_login' => $request->verifier_login,
             'ministere_id' => $request->ministere_id
         ]);
         $user->syncRoles($request->role_id);

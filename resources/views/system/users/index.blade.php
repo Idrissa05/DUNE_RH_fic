@@ -22,7 +22,6 @@
                         </div>
                         <div class="col-md-6">
                             {!! form_row($form->region_id) !!}
-                           
                             {!! form_row($form->ministere_id) !!}
                             {!! form_row($form->role_id) !!}
                         </div>

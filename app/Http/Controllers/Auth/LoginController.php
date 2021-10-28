@@ -26,9 +26,12 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user){
         if ($user->roles[0]->name == 'Enseignant'){
             return redirect()->route('agent_information');
+        }elseif($user->verifier_login === 0){
+            //dd($user);
+            return redirect()->route('change');
+        }else{
+            return redirect('/home');
         }
-
-        return redirect('/home');
     }
 
     /**

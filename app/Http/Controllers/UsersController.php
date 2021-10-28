@@ -44,7 +44,6 @@ class UsersController extends Controller
         $user->update([
             'name' => $request->name,
             'region_id' => $request->region_id,
-            'verifier_login' => $request->verifier_login,
             'ministere_id' => $request->ministere_id
         ]);
         $user->syncRoles($request->role_id);
@@ -72,4 +71,24 @@ class UsersController extends Controller
         }
         return view('system.users.change');
     }
+    public function change() {
+        return view('system.users.force_change');
+    }
+
+    public function forcheChangePassword(Request $request){
+        $user_connected = Auth::user();
+        $user = User::where('id', '=', $user_connected->id)->first();
+            if(!Hash::check($request->old_password, $user_connected->password)) {
+                return redirect(route('change.password'))->with('danger', 'Le mot de passe est incorrect');
+            }
+            $this->validate($request, [
+                'password' => 'required|min:6|confirmed'
+            ]);
+            //dd($user->update([]));
+            $user->update([
+            'password' => Hash::make($request->password),
+            'verifier_login' => 1]);
+            return redirect('/home');
+    }
+
 }

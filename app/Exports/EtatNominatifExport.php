@@ -137,7 +137,6 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
                 $salbase,
                 $position,
                 $programme
-    
             ];
         }
         return $agents;

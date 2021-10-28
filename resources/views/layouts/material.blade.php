@@ -82,6 +82,7 @@
                                                 @endif
                                                 @if(Auth::user()->ministere)
                                                 <h5 class="mt-2">Ministère : <span class="label label-primary">{{ Auth::user()->ministere->abreviation }}</span></h5>
+                                                @endif
                                                 @if(Auth::user()->ministere->abreviation == 'DEPP')
                                                 <h5 class="mt-2">Base : <span class="label label-primary">{{ Auth::user()->ministere->id }}</span></h5>
                                                 @endif

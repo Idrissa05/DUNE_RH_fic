@@ -8,6 +8,10 @@ class Region extends Model {
 
 	protected $fillable = array('name');
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
 	public function departements()
 	{
 		return $this->hasMany('App\Models\Departement');

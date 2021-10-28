@@ -10,6 +10,10 @@ class Classe extends Model {
 
 	public $timestamps = false;
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     public function echelons()
     {
         return $this->hasMany('App\Models\Echelon');

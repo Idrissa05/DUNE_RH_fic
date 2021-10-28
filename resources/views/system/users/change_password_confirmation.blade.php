@@ -1,4 +1,4 @@
-<html>
+<html></html>
     <head>
         <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
         <script src="{{ asset('jquery.min.js') }}"></script>
@@ -33,10 +33,9 @@
                     border-bottom-left-radius: 10% 50%;
                 }
                 .register-left img{
-                    margin-top: 15%; 
-                    margin-bottom: 5%; 
-                    width: 100%;
-                    height: 30%;
+                    margin-top: 15%;
+                    margin-bottom: 5%;
+                    width: 25%;
                     -webkit-animation: mover 2s infinite  alternate;
                     animation: mover 1s infinite  alternate;
                 }
@@ -109,47 +108,38 @@
             <div class="col-md-3 register-left">
                 <img src="{{ asset('logo.png') }}" width="100px" height="60px" alt="homepage" class="light-logo" />
                 <h3>Bienvenue</h3>
-                <h4>DUNE RH</h4>
-                <h6 >Vous n'avez pas de compte?<a style="color: aqua;" href="{{ route('inscription.agent')}}" class=""> Inscrivez vous ici</a></h6>
-                <div class="new-class">
-                    <img src="{{ asset('dune.gif') }}" style="color: red;" alt="DUNE-RH" class="light-logo"/>
-                </div>
+                    <h4>DUNE RH</h4>
+                    <h6 >Vous avez déja un compte?<a style="color: aqua;" href="{{ route('login')}}" class=""> Connectez vous</a></h6><br>
             </div>
             <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">Authentification</h3>
-                        <form action="{{ route('login') }}" method="post">
+                        <h3 class="register-heading">Confirmation de compte</h3>
+                        <form action="{{ route('check_password_change') }}" method="post">
                             @csrf
                             <div class="row register-form justify-content-center">
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                    <input  type="text" name="matricule" value="{{ $matricule }}" hidden>
+                                    <input  type="text" name="confirmation_code" value="{{ $confirmation_code }}" hidden>
                                     <div class="form-group">
-                                        <input placeholder="Nom d'utilisateur *" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                        @if ($errors->has('name'))
+                                        <input placeholder="Entrez le code de confirmation *" type="text" class="form-control{{ $errors->has('confirmation_code_saisie') ? ' is-invalid' : '' }}" name="confirmation_code_saisie" required autofocus>
+                                        @if ($message = Session::get('error'))
+                                            <div class="alert alert-danger alert-block">
+
+                                                <button type="button" class="close" data-dismiss="alert">×</button>	
+
+                                                    <strong>{{ $message }}</strong>
+
+                                            </div>
+                                        @endif
+                                        @if ($errors->has('confirmation_code'))
                                             <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong>{{ $errors->first('confirmation_code') }}</strong>
                                             </span>
                                         @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="password" placeholder="Mot de passe *" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="gridCheck">Se souvenir de moi</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <a href="{{ route('password.request')}}" id="to-recover" class="text-muted"><i class="mdi mdi-set"></i> Mot de passe oublié ?</a>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                                        <button type="submit" class="btn btn-primary">Confirmer</button>
                                     </div>
                                 </div>
                             </div>

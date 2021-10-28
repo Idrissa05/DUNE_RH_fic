@@ -17,10 +17,6 @@ class Agent extends Model {
 
     protected $fillable = ['id'];
 
-	public function getDateFormat(){
-		return 'Y-m-d H:i:s.u';
-	}
-
     protected $childTypes = [
         'Contractuel' => Contractuel::class,
 		'Civicard' => Civicard::class,
@@ -28,6 +24,10 @@ class Agent extends Model {
         'Auxiliaire' => Auxiliaire::class
     ];
 	protected $dates = ['deleted_at'];
+
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
 
 	public function conges()
 	{

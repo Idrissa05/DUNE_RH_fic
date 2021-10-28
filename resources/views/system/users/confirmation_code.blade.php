@@ -1,4 +1,4 @@
-<html>
+<html></html>
     <head>
         <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
         <script src="{{ asset('jquery.min.js') }}"></script>

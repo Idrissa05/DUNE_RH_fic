@@ -664,6 +664,44 @@
                 </div>
             </div>
             @endif
+            @if($agent->positions == [])
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-outline-inverse">
+                        <div class="card-header">
+                            <h4 class="m-b-0 text-white">Positions</h4>
+                        </div>
+                        <div class="card-body">
+                        <table class="table table table-sm text-center table-striped" style="font-size: 8px;">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Position</th>
+                                <th>Ref decision</th>
+                                <th>Date decision</th>
+                                <th>Date prise effet</th>
+                                <th>Date fin</th> 
+                                <th>Observation</th> 
+                            </tr>
+                            </thead>
+
+                            <tbody class="text-center">
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ $agent->positions->last()->name }}</td>
+                                    <td>{{ $agent->positions->last()->withPivot->ref_decision }}</td>
+                                    <td>{{ $agent->positions->last()->withPivot->date_decision }}</td>
+                                    <td>{{ $agent->positions->last()->withPivot->date_effet }}</td>
+                                    <td>{{ $agent->positions->last()->withPivot->date_fin }}</td>
+                                    <td>{{ $agent->positions->last()->withPivot->observation }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 @endsection

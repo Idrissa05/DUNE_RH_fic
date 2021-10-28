@@ -9,6 +9,10 @@ class Diplome extends Model {
 	protected $fillable = ['id','name', 'equivalence_diplome_id', 'niveau_etude_id'];
 	public $timestamps = false;
 
+	public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
 	public function formations()
 	{
 		return $this->hasMany('App\Models\Formation');

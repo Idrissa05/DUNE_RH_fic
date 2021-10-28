@@ -139,5 +139,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/chech-confirmation-code', 'AccesAgentController@chech_confirmation_code')->name('chech_confirmation_code');
 });
 
-    
 
+    Route::post('/reinitilisation/mot-de-passe', 'UsersController@reinitialiser_password')->name('reinitialiser_password');
+    Route::post('/reinitialisation', 'UsersController@check_password_change')->name('check_password_change');
+    Route::post('/change/password', 'UsersController@change_pasword_store')->name('change_pasword_store');
+    Route::post('/new_password_store', 'UsersController@new_password_store')->name('new_password_store');

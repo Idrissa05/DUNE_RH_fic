@@ -33,10 +33,9 @@
                     border-bottom-left-radius: 10% 50%;
                 }
                 .register-left img{
-                    margin-top: 15%; 
-                    margin-bottom: 5%; 
-                    width: 100%;
-                    height: 30%;
+                    margin-top: 15%;
+                    margin-bottom: 5%;
+                    width: 25%;
                     -webkit-animation: mover 2s infinite  alternate;
                     animation: mover 1s infinite  alternate;
                 }
@@ -111,45 +110,34 @@
                 <h3>Bienvenue</h3>
                 <h4>DUNE RH</h4>
                 <h6 >Vous n'avez pas de compte?<a style="color: aqua;" href="{{ route('inscription.agent')}}" class=""> Inscrivez vous ici</a></h6>
-                <div class="new-class">
-                    <img src="{{ asset('dune.gif') }}" style="color: red;" alt="DUNE-RH" class="light-logo"/>
-                </div>
             </div>
             <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">Authentification</h3>
-                        <form action="{{ route('login') }}" method="post">
+                        <h3 class="register-heading">Changement de mot de passe</h3>
+                        <form action="{{ route('new_password_store') }}" method="post">
                             @csrf
                             <div class="row register-form justify-content-center">
+                            <input  type="text" name="matricule" value="{{ $matricule }}" hidden>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input placeholder="Nom d'utilisateur *" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-                                        @if ($errors->has('name'))
+                                        <input placeholder="Nouveau de mot de passe *" type="password" class="form-control{{ $errors->has('new_password') ? ' is-invalid' : '' }}" name="new_password"  required autofocus>
+                                        @if ($errors->has('new_password'))
                                             <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                    <strong>{{ $errors->first('new_password') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <input id="password" placeholder="Mot de passe *" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                        @if ($errors->has('password'))
+                                        <input id="password" placeholder="Retapez le nouveau mot de passe *" type="password" class="form-control{{ $errors->has('confirmed_new_password') ? ' is-invalid' : '' }}" name="confirmed_new_password" required>
+                                        @if ($errors->has('confirmed_new_password'))
                                             <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                    <strong>{{ $errors->first('confirmed_new_password') }}</strong>
                                             </span>
                                         @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="gridCheck">Se souvenir de moi</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <a href="{{ route('password.request')}}" id="to-recover" class="text-muted"><i class="mdi mdi-set"></i> Mot de passe oublié ?</a>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                                        <button type="submit" class="btn btn-primary">Changer</button>
                                     </div>
                                 </div>
                             </div>

@@ -30,8 +30,7 @@ class AccesAgentController extends Controller
             $password = $request->password;
             $username = $request->name;
             $confirmation_code = mt_rand(1000, 9999);
-            //dd($confirmation_code);
-
+            
             $this->validate($request, [
                 'name' => 'required', 'string', 'max:255',
                 'password' => 'required', 'string', 'min:8', 'confirmed',
@@ -41,7 +40,7 @@ class AccesAgentController extends Controller
                 Nexmo::message()->send([
                     'to'   => $agent->telephone,
                     'from' => 'DUNE RH',
-                    'text' => 'Votre code de confirmation est de : ' .$confirmation_code
+                    'text' => 'Votre code de confirmation est de : ' . $confirmation_code
                 ]);
                 
             }
@@ -58,7 +57,7 @@ class AccesAgentController extends Controller
 
     public function chech_confirmation_code(Request $request){
         //dd($request->confirmation_code_saisie, $request->confirmation_code);
-        if($request->confirmation_code_saisie == $request->confirmation_code){
+        if($request->confirmation_code_saisie === $request->confirmation_code){
             $user = User::create([
                 'name' => $request->name,
                 'password' => Hash::make($request->password)

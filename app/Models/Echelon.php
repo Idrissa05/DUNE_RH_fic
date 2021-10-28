@@ -9,6 +9,10 @@ class Echelon extends Model {
 	protected $fillable = ['name', 'classe_id', 'description'];
 	public $timestamps = false;
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     public function classe()
     {
         return $this->belongsTo('App\Models\Classe');

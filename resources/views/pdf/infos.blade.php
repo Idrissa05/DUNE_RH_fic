@@ -52,7 +52,7 @@
                 <table class="table table-sm">
                     <tr>
                         <td>Situation matrimoniale :</td>
-                        <td>{{ $agent->matrimoniales->last()->name }}</td>
+                        <td>{{ $agent->matrimoniales->last()->name ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Nationalité :</td>
@@ -60,11 +60,11 @@
                     </tr>
                     <tr>
                         <td>Cadre :</td>
-                        <td>{{ $agent->grades->last()->cadre->name }}</td>
+                        <td>{{ $agent->grades->last()->cadre->name ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Corps :</td>
-                        <td>{{ $agent->grades->last()->corp->name }}</td>
+                        <td>{{ $agent->grades->last()->corp->name ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Type :</td>
@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td>Fonction :</td>
-                        <td>{{ $agent->grades->last()->fonction->name }}</td>
+                        <td>{{ $agent->grades->last()->fonction->name ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Date prise de service :</td>
@@ -183,7 +183,6 @@
             <th>Équivalence du diplôme</th>
         </tr>
         </thead>
-
         <tbody class="text-center">
         @php
             $i = 1;
@@ -191,12 +190,12 @@
         @foreach($agent->formations as $formation)
             <tr>
                 <td>{{ $i }}</td>
-                <td>{{ $formation->date_debut->format('d/m/Y') }}</td>
-                <td>{{ $formation->date_fin->format('d/m/Y') }}</td>
-                <td>{{ $formation->ecoleFormation->name }}</td>
-                <td>{{ $formation->diplome->name }}</td>
-                <td>{{ $formation->niveauEtude->name }}</td>
-                <td>{{ $formation->niveauEtude->name }}</td>
+                <td>{{ $formation->date_debut->format('d/m/Y') ?? '' }}</td>
+                <td>{{ $formation->date_fin->format('d/m/Y') ?? '' }}</td>
+                <td>{{ $formation->ecoleFormation->name ?? '' }}</td>
+                <td>{{ $formation->diplome->name ?? '' }}</td>
+                <td>{{ $formation->niveauEtude->name ?? '' }}</td>
+                <td>{{ $formation->niveauEtude->name ?? '' }}</td>
             </tr>
             @php
                 $i++;

@@ -83,6 +83,7 @@ class RegisterController extends Controller
             'region_id' => $data['region_id'],
             'ministere_id' => $data['ministere_id'],
         ]);
+        
         $user->syncRoles($data['role_id']);
         return $user;
     }

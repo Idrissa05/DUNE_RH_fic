@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'DUNE RH') }}</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">

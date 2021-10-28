@@ -38,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getDateFormat(){
+		return 'Y-m-d H:i:s.u';
+	}
+
     protected $with = ['region', 'ministere'];
 
     public function region()

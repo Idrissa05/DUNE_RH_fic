@@ -17,9 +17,6 @@ class RegisterForm extends Form
         ])
             ->add('password', 'password', [
                 'label' => 'Mot de passe'
-            ])->add('verifier_login', 'text', [
-                'value' => '1',
-                'rules' => 'hiddin',
             ])
             ->add('password_confirmation', 'password', [
                 'label' => 'Confirmation de mot de passe'

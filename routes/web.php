@@ -85,7 +85,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('users', 'UsersController', ['only' => ['index', 'update', 'destroy']]);
     Route::get('/change-password', 'UsersController@changePassword')->name('change.password');
+    Route::get('/change', 'UsersController@change')->name('change');
     Route::post('/change-password', 'UsersController@changePassword');
+    Route::post('/force-change-password', 'UsersController@forcheChangePassword')->name('forche_change_password');
 
     Route::get('/api_agent', 'HomeController@apiAgent');
     Route::get('/api_category', 'HomeController@apiCategory');

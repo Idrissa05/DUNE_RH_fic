@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'password' => Hash::make($data['password']),
             'role' => 'Administrateur',
-            'verifier_login' => $data['verifier_login'],
+            'verifier_login' => 0,
             'region_id' => $data['region_id'],
             'ministere_id' => $data['ministere_id'],
         ]);

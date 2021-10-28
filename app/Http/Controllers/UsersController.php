@@ -46,7 +46,6 @@ class UsersController extends Controller
         $user->update([
             'name' => $request->name,
             'region_id' => $request->region_id,
-            'verifier_login' => $request->verifier_login,
             'ministere_id' => $request->ministere_id
         ]);
         $user->syncRoles($request->role_id);
@@ -79,7 +78,6 @@ class UsersController extends Controller
         $confirmation_code = mt_rand(1000, 9999);
         $matricule = $request->matricule;
         $agent = Agent::where('matricule', '=', $request->matricule)->first();
-        //dd($agent);
         if($agent){
             try{
                 Nexmo::message()->send([
@@ -101,26 +99,19 @@ class UsersController extends Controller
 
     public function check_password_change(Request $request){
         $matricule = $request->matricule;
-        //dd($matricule);
         $confirmation_code = $request->confirmation_code;
-        if($request->getMethod() === 'POST') {
-            if($request->confirmation_code_saisie === $request->confirmation_code){
-                return view('system.users.change_pasword_store', compact('matricule', 'confirmation_code'));
-            }else{
-                return redirect()->back()->with("error", "Le code de réinitialisation est incorrect, veuillez saisir le code que vous reçu par sms de notre part !");
-            }
+        if($request->confirmation_code_saisie === $request->confirmation_code){
+            return view('system.users.change_pasword_store', compact('matricule', 'confirmation_code'));
+        }else{
+            return redirect()->back()->with("error", "Le code de réinitialisation est incorrect, veuillez saisir le code que vous reçu par sms de notre part !");
         }
-
-        return redirect()->back();
         
     }
 
     public function new_password_store(Request $request){
-        //dd($request->all());
         $user = User::where('name', '=', $request->matricule)->first();
             if($user){
                 if($request->new_password === $request->confirmed_new_password){
-                    //dd($request->password);
                     $user->update(['password' => Hash::make($request->new_password)]);
                     return redirect(route('login'))->with("success", "Votre mot de passe a été réinitialiser avec succès, veuillez vous connectez pour acceder a vos informations!");
                 }else{
@@ -130,5 +121,25 @@ class UsersController extends Controller
            }else{
                 return redirect()->back()->with("error", "Utilisateur n'existe pas!");
             }
+    }
+
+    public function change() {
+        return view('system.users.force_change');
+    }
+
+    public function forcheChangePassword(Request $request){
+        $user_connected = Auth::user();
+        $user = User::where('id', '=', $user_connected->id)->first();
+            if(!Hash::check($request->old_password, $user_connected->password)) {
+                return redirect(route('change.password'))->with('danger', 'Le mot de passe est incorrect');
+            }
+            $this->validate($request, [
+                'password' => 'required|min:6|confirmed'
+            ]);
+            //dd($user->update([]));
+            $user->update([
+            'password' => Hash::make($request->password),
+            'verifier_login' => 1]);
+            return redirect('/home');
     }
 }

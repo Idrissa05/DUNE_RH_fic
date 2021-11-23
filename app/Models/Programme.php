@@ -8,10 +8,11 @@ class Programme extends Model
 {
     protected $fillable = ['name'];
     
-    //public $timestamps = false;
+    public $timestamps = false;
 
     public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';
+		//return 'Y-m-d H:i';
 	}
 
     public function grades()

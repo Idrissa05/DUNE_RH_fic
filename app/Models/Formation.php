@@ -11,10 +11,11 @@ class Formation extends Model {
 
 	protected $dates = ['deleted_at', 'date_debut', 'date_fin'];
 
-	protected $fillable = array('date_debut', 'date_fin', 'agent_id', 'ecole_formation_id', 'diplome_id', 'niveau_etude_id', 'equivalence_diplome_id');
+	protected $fillable = array('date_debut', 'date_fin', 'agent_id', 'ecole_formation_id', 'diplome_id');
 
 	public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';
+		//return 'Y-m-d H:i';
 	}
 	
 	public function agent()
@@ -31,15 +32,4 @@ class Formation extends Model {
 	{
 		return $this->belongsTo('App\Models\Diplome');
 	}
-
-	public function niveauEtude()
-	{
-		return $this->belongsTo('App\Models\NiveauEtude');
-	}
-
-	public function equivalenceDiplome()
-	{
-		return $this->belongsTo('App\Models\EquivalenceDiplome');
-	}
-
 }

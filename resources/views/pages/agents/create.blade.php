@@ -134,6 +134,10 @@
                                     <div class="form-group">
                                         {!! form_row($form->etablissement_id) !!} </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                    {!!  form_row($form->type_ref) !!} </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         {!! form_row($form->ref) !!} </div>

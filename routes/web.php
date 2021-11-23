@@ -111,6 +111,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/print-historique-avancement', 'PrintController@history')->name('prints.history');
     Route::get('/print-par', 'PrintController@par')->name('prints.par');
 
+    Route::get('/nombreAgentRetraitables', 'PrintController@nombreAgentRetraitables')->name('prints.nombreAgentRetraitables');
+
     /**
      * ACL
      */
@@ -134,14 +136,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('get_etablissement/{id}', 'HomeController@getEtablissement')->name('etablissement.get');
     Route::post('/search-etablissement/', 'HomeController@searchEtablissement')->name('etablissement.search');
     Route::get('/informations/agent', 'AgentController@agent_information')->name('agent_information');
+}); 
 
     // Acces enseignant
     Route::get('/inscription-agent', 'AccesAgentController@create')->name('inscription.agent');
     Route::post('/inscription_agent', 'AccesAgentController@store')->name('inscription_agent');
     Route::post('/chech-confirmation-code', 'AccesAgentController@chech_confirmation_code')->name('chech_confirmation_code');
-});
 
-
+    // changement de mot de passe
     Route::post('/reinitilisation/mot-de-passe', 'UsersController@reinitialiser_password')->name('reinitialiser_password');
     Route::post('/reinitialisation', 'UsersController@check_password_change')->name('check_password_change');
     Route::post('/change/password', 'UsersController@change_pasword_store')->name('change_pasword_store');

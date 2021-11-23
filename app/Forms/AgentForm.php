@@ -173,7 +173,7 @@ class AgentForm extends Form
             ])
             ->add('niveau_etude_id','entity', [
                 'class' => NiveauEtude::class,
-                'label' => 'Niveau Etude *', 'rules' => 'required','attr' => ['disabled' => 'disabled'],
+                'label' => 'Niveau Etude *','attr' => ['disabled' => 'disabled'],
                 'query_builder' => function (NiveauEtude $niveauEtude) {
                     return $niveauEtude->orderBy('name', 'asc')->pluck('name','id');
                 },
@@ -181,7 +181,7 @@ class AgentForm extends Form
             ])
             ->add('equivalence_diplome_id','entity', [
                 'class' => EquivalenceDiplome::class,
-                'label' => 'Equivalence Diplôme *', 'rules' => 'required', 'attr' => ['disabled' => 'disabled'],
+                'label' => 'Equivalence Diplôme *', 'attr' => ['disabled' => 'disabled'],
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {
                     return $equivalenceDiplome->orderBy('name', 'asc')->pluck('name','id');
                 },
@@ -217,6 +217,16 @@ class AgentForm extends Form
                     return $etablissement->orderBy('name', 'asc')->pluck('name','id');
                 },
                 'empty_value' => 'Sélectionner'
+            ])
+            ->add('type_ref', 'choice', [
+                'choices' => ['Decision' => 'Decision', 'OPA' => 'Ordre d’Affectation Provisoire'],
+                'choice_options' => [
+                    'wrapper' => ['class' => 'choice-wrapper'],
+                    'label_attr' => ['class' => 'label-class'],
+                ],
+                'selected' => ['DEC', 'OAP'],
+                'expanded' => true,
+                'multiple' => false
             ])
             ->add('ref','text', [
                 'label'=>'Reférence Affectation *', 'rules' => 'required',

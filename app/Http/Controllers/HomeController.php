@@ -16,6 +16,9 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\Builder;
+use App\Config;
+use Carbon\Carbon; 
 
 class HomeController extends Controller
 {
@@ -31,15 +34,102 @@ class HomeController extends Controller
 
     public function index()
     {
+        $query = Agent::all();
         $categories = Category::orderBy('name')->get()->toArray();
         $categories = array_merge($categories, CategoryAuxiliaire::orderBy('name')->get()->toArray());
-        //$agents = Agent::orderBy('matricule')->take(1000)->get();
         $corps = Corp::orderBy('name')->get();
         $positions = Position::orderBy('name')->get();
         $matrimoniales = Matrimoniale::orderBy('name')->get();
         $fonctions = Fonction::orderBy('name')->get();
         $regions = Region::orderBy('name')->get();
-        return view('home', compact('categories', 'corps', 'positions', 'matrimoniales', 'regions', 'fonctions'));
+        $regionsL = Region::all();
+        $agents = DB::select("SELECT a.type FROM agents a, grades g where a.id = g.agent_id GROUP by a.type");
+        $nombreAgentRetraitable = Agent::nombreRetraitable();
+        $nombres_par_sexe = DB::select("SELECT count(id) as nombre_agent FROM agents group by sexe");
+        $nombres_par_regions = DB::select("SELECT count(id) as nombre_agent FROM agents group by created_by_region_id");
+        $nombre_par_types = DB::select("SELECT count(a.id) as nombre_agent FROM agents a, grades g where a.id = g.agent_id group by a.type");
+        $nombres_agents = [];
+        $nombres_agentsR = [];
+        $nombres_agentsT = [];
+        foreach($nombres_par_sexe as $nombre){
+            $nombres_agents[] = $nombre->nombre_agent;
+        }
+        foreach($nombres_par_regions as $nombre){
+            $nombres_agentsR[] = $nombre->nombre_agent;
+        }
+        $labels = ['Autre', 'Homme', 'Femme'];
+        $labels_regions = [];
+        foreach($regionsL as $region){
+            $labels_regions[] = $region->name;
+        }
+        $labels_types = [];
+        foreach($nombre_par_types as $nombre){
+            $nombres_agentsT[] = $nombre->nombre_agent;
+        }
+        foreach($agents as $agent){
+            $labels_types[] = $agent->type;
+        }
+
+       // SELECT TIMESTAMPDIFF(YEAR, date_naiss, CURDATE()) AS age, id FROM agents
+
+        $age_agents = DB::select("SELECT TIMESTAMPDIFF(YEAR, date_naiss, CURDATE()) AS age, COUNT(id) as nombre FROM agents GROUP BY age;");
+        //dd($age_agents);
+        $premiere_tranche = 0;
+        $deuxieme_tranche = 0;
+        $troisieme_tranche = 0;
+        $quatrieme_tranche = 0;
+        $cinquieme_tranche = 0;
+        $sixieme_tranche = 0;
+        $var1 = 0;
+        $var2 = 0;
+        $var3 = 0;
+        $var4 = 0;
+        $var5 = 0;
+        $var6 = 0;
+        foreach($age_agents as $age){
+            if($age->age <=20){
+                $var1 =  $var1 + $age->nombre;
+            }
+        
+            if($age->age >20 && $age->age <=30){
+                $var2 =  $var2 + $age->nombre;
+            }
+
+            if($age->age >30 && $age->age <=40){
+                $var3 =  $var3 + $age->nombre;
+            }
+
+            if($age->age >40 && $age->age <=50){
+                $var4 =  $var4 + $age->nombre;
+            }
+
+            if($age->age >50 && $age->age <=60){
+                $var5 =  $var5 + $age->nombre;
+            }
+
+            if($age->age >60){
+                $var6 =  $var6 + $age->nombre;
+            }
+        }
+        $premiere_tranche = $var1;
+        $deuxieme_tranche = $var2;
+        $troisieme_tranche = $var3;
+        $quatrieme_tranche = $var4;
+        $cinquieme_tranche = $var5;
+        $sixieme_tranche = $var6;
+        $nombre_agent_tranche_ages = [$premiere_tranche, $deuxieme_tranche, $troisieme_tranche, $quatrieme_tranche, $cinquieme_tranche, $sixieme_tranche];
+        $age_tranche_labels = ['0-20', '20-30', '30-40', '40-50', '50-60', '+60'];
+        //dd($nombre_agent_tranche_ages, $age_tranche_labels);
+        //dd($premiere_tranche, $deuxieme_tranche, $troisieme_tranche, $quatrieme_tranche, $cinquieme_tranche, $sixieme_tranche);
+        
+        
+        return view('home', compact('categories', 'nombre_agent_tranche_ages', 'age_tranche_labels', 'nombres_agentsR', 'nombres_agentsT', 'labels_types', 'labels_regions', 'corps', 'positions', 'matrimoniales', 'regions', 'fonctions', 'nombreAgentRetraitable', 'labels', 'nombres_agents'));
+    }
+
+    public function nombreAgentRetraitables(Builder $query){
+        $months = (Config::first()->age_retraite * 12) - 3;
+	    $days = $months * 30;
+	    return $query->whereRaw("DATEDIFF(CURDATE(), date_naiss) >= $days")->count();
     }
 
     public function apiCategory(){

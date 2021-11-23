@@ -30,7 +30,7 @@ class AffectationForm extends Form
             ->add('date_prise_effet', 'date', [
                 'rules' => 'required|date','attr' => ['max' => null, 'min' => null]
             ])->add('observation', 'text', [
-                'rules' => 'required'
+               
             ])
             ->add('agent_id','select', [
                 //'class' => Agent::class,

@@ -84,7 +84,7 @@ class FormationController extends Controller {
   }
 
   private function getData() {
-      return DataTables::of(Formation::with('agent', 'diplome', 'niveauEtude', 'equivalenceDiplome')
+      return DataTables::of(Formation::with('agent', 'diplome')
           ->orderBy('created_at', 'desc'))
 
           ->addColumn('id', function ($formation){
@@ -106,10 +106,10 @@ class FormationController extends Controller {
               return $formation->diplome->name;
           })
           ->addColumn('niveauEtude', function ($formation){
-              return $formation->niveauEtude->name;
+              return $formation->diplome->niveauEtude->name;
           })
           ->addColumn('equivalenceDiplome', function ($formation){
-              return $formation->equivalenceDiplome->name;
+              return $formation->diplome->equivalenceDiplome->name;
           })
           ->addColumn('actions', function ($formation){
               $html = '<div class="btn-group">';
@@ -120,8 +120,8 @@ class FormationController extends Controller {
                                     data-fin="'.$formation->date_fin->format('Y-m-d').'"
                                     data-ecole="'.$formation->ecole_formation_id.'"
                                     data-diplome="'.$formation->diplome_id.'"
-                                    data-niveau="'.$formation->niveau_etude_id.'"
-                                    data-equivalence="'.$formation->equivalence_diplome_id.'"
+                                    data-niveau="'.$formation->diplome->niveau_etude_id.'"
+                                    data-equivalence="'.$formation->diplome->equivalence_diplome_id.'"
                                     data-agent="'.$formation->agent_id.'"
                                     data-route="'.route("formation.update", $formation).'"
                                     onclick="updateFormation('. $formation->id .')" class="btn btn-sm btn-outline-warning">

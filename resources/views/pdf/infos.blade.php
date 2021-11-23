@@ -194,8 +194,8 @@
                 <td>{{ $formation->date_fin->format('d/m/Y') ?? '' }}</td>
                 <td>{{ $formation->ecoleFormation->name ?? '' }}</td>
                 <td>{{ $formation->diplome->name ?? '' }}</td>
-                <td>{{ $formation->niveauEtude->name ?? '' }}</td>
-                <td>{{ $formation->niveauEtude->name ?? '' }}</td>
+                <td>{{ $formation->diplome->niveauEtude->name ?? '' }}</td>
+                <td>{{ $formation->diplome->equivalenceDiplome->name ?? '' }}</td>
             </tr>
             @php
                 $i++;

@@ -104,10 +104,9 @@ class AgentController extends Controller {
         return redirect()->back()->withErrors($form->getErrors())->withInput();
       }
 
-      try {
+     //try {
           DB::beginTransaction();
               // Inserion Agents
-              //dd($form->getRequest());
               if($form->getRequest()->only('type')['type'] == 'Titulaire'){
                   // Inserion Agent Titulaire
                   $agent = Titulaire::create($form->getRequest()->all());
@@ -147,6 +146,7 @@ class AgentController extends Controller {
               // Insertion Affectations
               $affectation = new Affectation([
                   "ref" => $form->getRequest()->only('ref')['ref'],
+                  "type_ref" => $form->getRequest()->only('type_ref')['type_ref'],
                   "date" => $form->getRequest()->only('date_affectation')['date_affectation'],
                   "date_prise_effet" => $form->getRequest()->only('date_prise_effet')['date_prise_effet'],
                   "observation" => $form->getRequest()->only('observation_affectation')['observation_affectation'],
@@ -202,11 +202,11 @@ class AgentController extends Controller {
               }
 
           DB::commit();
-      }
-      catch (\Exception $e) {
-          DB::rollBack();
-          return redirect()->route('agent.create')->with('danger', 'Opération non effectuée, Erreur technique !');
-      }
+    // }
+    //   catch (\Exception $e) {
+    //       DB::rollBack();
+    //       return redirect()->route('agent.create')->with('danger', 'Opération non effectuée, Erreur technique !');
+    //   }
 
       return redirect()->route('agent.index')->with('success', 'Opération effectuée avec succès !');
   }

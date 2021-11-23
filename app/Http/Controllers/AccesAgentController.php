@@ -16,7 +16,7 @@ use Nexmo\Laravel\Facade\Nexmo;
 class AccesAgentController extends Controller
 {
     // public function __construct(){
-    //     $this->middleware('permission:ACCES_AGENT');
+    //     $this->middleware('permission:ACCES_ENSEIGNANT');
     // }
 
     

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Tightenco\Parental\HasChildren;
+use Carbon\Carbon;
 
 class Agent extends Model {
 
@@ -27,6 +28,7 @@ class Agent extends Model {
 
 	public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';
+		//return 'Y-m-d H:i';
 	}
 
 	public function conges()
@@ -123,5 +125,11 @@ class Agent extends Model {
 	    $months = (Config::first()->age_retraite * 12) - 3;
 	    $days = $months * 30;
 	    return $query->whereRaw("DATEDIFF(CURDATE(), date_naiss) >= $days");
+    }
+
+	public function scopeNombreRetraitable(Builder $query) {
+	    $months = (Config::first()->age_retraite * 12) - 3;
+	    $days = $months * 30;
+	    return $query->whereRaw("DATEDIFF(CURDATE(), date_naiss) >= $days")->count();
     }
 }

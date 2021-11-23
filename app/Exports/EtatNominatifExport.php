@@ -151,7 +151,7 @@ class EtatNominatifExport implements FromCollection, WithHeadings, WithMapping
             return $query->with('category', 'categoryAuxiliaire','category', 'classe', 'indice', 'programme');
         }])->has('grades')->get();
         //$avancement = Avancement::with('agent', 'category', 'classe', 'echelon')->get();
-        dd($agents);
+        //dd($agents);
         return $agents;  
     }
 }

@@ -20,12 +20,72 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h4 class="text-center bg-secondary text-white">{{ ('Nombre agent par sexe') }}</h4>
+                            </div>
+                            <div class="card-block">
+                                <canvas class="card-block" id="myChart_D" data-labels="{{ implode(', ', $labels) }}" data-nombre_agent="{{ implode(', ', $nombres_agents) }}" width="600" height="400">
+                                </canvas>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h4 class="text-center bg-secondary text-white">{{ ('Nombre agent par région') }}</h4>
+                            </div>
+                            <div class="card-block">
+                                <canvas class="card-block" id="myChart_R" data-labelsR="{{ implode(', ', $labels_regions) }}" data-nombre_region="{{ implode(', ', $nombres_agentsR) }}" width="600" height="400">
+                                </canvas>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h4 class="text-center bg-secondary text-white">{{ ('Nombre agent par type') }}</h4>
+                            </div>
+                            <div class="card-block">
+                                <canvas class="card-block" id="myChart_T" data-labelsT="{{ implode(', ', $labels_types) }}" data-nombre_type="{{ implode(', ', $nombres_agentsT) }}" width="600" height="400">
+                                </canvas>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h4 class="text-center bg-secondary text-white">{{ ("Nombre agent par tranche d'age") }}</h4>
+                            </div>
+                            <div class="card-block">
+                                <canvas class="card-block" id="myChart_A" data-labelsA="{{ implode(', ', $age_tranche_labels) }}" data-nombre_age="{{ implode(', ', $nombre_agent_tranche_ages) }}" width="600" height="400">
+                                </canvas>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-header bg-secondary text-white"><i class="mdi mdi-account-multiple-outline mdi-36px"></i></div>
                         <div class="card-body">
                             <p>
-                                Liste des agents probables retraités de l’année en cours.
+                                Liste des agents probables retraités de l’année en cours ({{ $nombreAgentRetraitable }}).
                             </p>
                             <a href="{{ route('prints.retraitables') }}" target="_blank" title="imprimer" class="btn btn-sm btn-themecolor"><i class="mdi mdi-printer mdi-18px"></i> Imprimer</a>
                         </div>
@@ -247,11 +307,200 @@
                     </div>
                 </div>
             </div>
-
-        </div>
+            
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('assets/js/Chart.js') }}"></script>
+    <script src="{{ asset('assets/js/Chart.BarFunnel.js') }}"></script>
+    <script>
+  var ctx = document.getElementById('myChart_D');
+  var libelles = ctx.getAttribute('data-labels')
+  var stocks = ctx.getAttribute('data-nombre_agent')
+  console.log(libelles)
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: libelles.split(', '),
+        datasets: [{
+            label: '# Agents',
+            data: stocks.split(', '),
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
+<script>
+  var ctx = document.getElementById('myChart_T');
+  var libelles = ctx.getAttribute('data-labelsT')
+  var stocks = ctx.getAttribute('data-nombre_type')
+  console.log(libelles)
+ var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: libelles.split(', '),
+        datasets: [{
+            label: '# Agents',
+            data: stocks.split(', '),
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
+<script>
+  var ctx = document.getElementById('myChart_A');
+  var libelles = ctx.getAttribute('data-labelsA')
+  var stocks = ctx.getAttribute('data-nombre_age')
+  console.log(libelles)
+ var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: libelles.split(', '),
+        datasets: [{
+            label: '# Agents',
+            data: stocks.split(', '),
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
+<script>
+  var ctx = document.getElementById('myChart_R');
+  var libelles = ctx.getAttribute('data-labelsR')
+  var stocks = ctx.getAttribute('data-nombre_region')
+  console.log(libelles)
+ var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: libelles.split(', '),
+        datasets: [{
+            label: '# Agents',
+            data: stocks.split(', '),
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
     <script>
         $(function () {
             $('#region_id').on('change', function(e){

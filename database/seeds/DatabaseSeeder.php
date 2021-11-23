@@ -210,13 +210,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \Spatie\Permission\Models\Permission::create([
-            'name' => 'ACCES_AGENT'
+            'name' => 'ACCES_ENSEIGNANT'
         ]);
 
         $role_agent = \Spatie\Permission\Models\Role::create([
             'name' => 'Enseignant'
         ]);
-        $role_agent->givePermissionTo('ACCES_AGENT');
+        $role_agent->givePermissionTo('ACCES_ENSEIGNANT');
 
         $role = \Spatie\Permission\Models\Role::create([
             'name' => 'Administrateur'

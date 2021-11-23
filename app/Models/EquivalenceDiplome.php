@@ -11,6 +11,7 @@ class EquivalenceDiplome extends Model {
 
 	public function getDateFormat(){
 		return 'Y-m-d H:i:s.u';
+		//return 'Y-m-d H:i';
 	}
 
 	public function formations()
@@ -21,10 +22,5 @@ class EquivalenceDiplome extends Model {
 	{
 		return $this->hasMany('App\Models\Diplome');
 	}
-
-	// public function diplomes()
-    // {
-    //     return $this->hasMany('App\Models\Diplome');
-    // }
 
 }

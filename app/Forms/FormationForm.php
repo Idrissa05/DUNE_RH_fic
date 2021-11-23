@@ -63,7 +63,7 @@ class FormationForm extends Form
 
             ->add('niveau_etude_id', 'entity', [
                 'label' => 'Niveu d\'étude',
-                'rules' => 'required|integer','attr' => ['disabled' => 'disabled'],
+                'rules' => 'integer','attr' => ['disabled' => 'disabled'],
                 'class' => NiveauEtude::class,
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (NiveauEtude $niveauEtude) {
@@ -73,7 +73,7 @@ class FormationForm extends Form
 
             ->add('equivalence_diplome_id', 'entity', [
                 'label' => 'Équivalence diplôme',
-                'rules' => 'required|integer',
+                'rules' => 'integer',
                 'class' => EquivalenceDiplome::class,'attr' => ['disabled' => 'disabled'],
                 'empty_value' => 'Sélectionner',
                 'query_builder' => function (EquivalenceDiplome $equivalenceDiplome) {

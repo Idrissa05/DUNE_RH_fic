@@ -48,6 +48,31 @@ class HomeController extends Controller
         $nombres_par_sexe = DB::select("SELECT count(id) as nombre_agent FROM agents group by sexe");
         $nombres_par_regions = DB::select("SELECT count(id) as nombre_agent FROM agents group by created_by_region_id");
         $nombre_par_types = DB::select("SELECT count(a.id) as nombre_agent FROM agents a, grades g where a.id = g.agent_id group by a.type");
+        // $s1 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 1 group by created_by_region_id, sexe");
+        // $s2 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 2 group by created_by_region_id, sexe");
+        // $s3 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 3 group by created_by_region_id, sexe");
+        // $s4 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 4 group by created_by_region_id, sexe");
+        // $s5 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 5 group by created_by_region_id, sexe");
+        // $s6 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 6 group by created_by_region_id, sexe");
+        // $s7 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 7 group by created_by_region_id, sexe");
+        // $s8 = DB::select("SELECT count(id) as nombre_agent, created_by_region_id, sexe FROM agents where created_by_region_id = 8 group by created_by_region_id, sexe");
+        $nombres_par_sexe_regions = DB::select("SELECT count(id) as nombre_agent, sexe, created_by_region_id FROM agents group by sexe, created_by_region_id ORDER by sexe ASC");
+        //dd($nombres_par_sexe_regions);
+        $tableaux1 = [];
+        $donnees1 = [];
+        $donnees2 = [];
+        $donnees3 = [];
+        foreach($nombres_par_sexe_regions as $nombre){
+            $tableaux1[] =  $nombre->nombre_agent;
+        }
+        //dd($tableaux1);
+        $donnees1 = array_slice($tableaux1, 0, 8);
+        $donnees2 = array_slice($tableaux1, 8, 8);
+        $donnees3 = array_slice($tableaux1, 16, 23); 
+        //dd($tableaux1 ,$donnees1, $donnees2, $donnees3);
+
+        
+        $nombres_agents_SR = [];
         $nombres_agents = [];
         $nombres_agentsR = [];
         $nombres_agentsT = [];
@@ -123,7 +148,7 @@ class HomeController extends Controller
         //dd($premiere_tranche, $deuxieme_tranche, $troisieme_tranche, $quatrieme_tranche, $cinquieme_tranche, $sixieme_tranche);
         
         
-        return view('home', compact('categories', 'nombre_agent_tranche_ages', 'age_tranche_labels', 'nombres_agentsR', 'nombres_agentsT', 'labels_types', 'labels_regions', 'corps', 'positions', 'matrimoniales', 'regions', 'fonctions', 'nombreAgentRetraitable', 'labels', 'nombres_agents'));
+        return view('home', compact('categories', 'tableaux1', 'donnees1', 'donnees2', 'donnees3', 'nombres_agents_SR', 'nombre_agent_tranche_ages', 'age_tranche_labels', 'nombres_agentsR', 'nombres_agentsT', 'labels_types', 'labels_regions', 'corps', 'positions', 'matrimoniales', 'regions', 'fonctions', 'nombreAgentRetraitable', 'labels', 'nombres_agents'));
     }
 
     public function nombreAgentRetraitables(Builder $query){

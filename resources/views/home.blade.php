@@ -50,6 +50,22 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <h4 class="text-center bg-secondary text-white">{{ ('Nombre agent par sexe et région') }}</h4>
+                            </div>
+                            <div class="card-block">
+                                <canvas class="card-block" id="myChart_SR" data-label_SR="{{ implode(', ', $labels_regions) }}" data-nombre_agentSR="{{ implode(', ', $tableaux1) }}" width="600" height="400">
+                                </canvas>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
                             <div class="card-header bg-secondary text-white">
@@ -313,6 +329,109 @@
 @section('js')
     <script src="{{ asset('assets/js/Chart.js') }}"></script>
     <script src="{{ asset('assets/js/Chart.BarFunnel.js') }}"></script>
+    <script>
+  var ctx = document.getElementById('myChart_SR');
+  var libelles = ctx.getAttribute('data-label_SR')
+  var stocks = ctx.getAttribute('data-nombre_agentSR')
+  var donnees1 = JSON.parse("{{ json_encode($donnees1) }}");
+  var donnees2 = JSON.parse("{{ json_encode($donnees2) }}");
+  var donnees3 = JSON.parse("{{ json_encode($donnees3) }}");
+  console.log(donnees1, donnees2 ,donnees3)
+  console.log(libelles)
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: libelles.split(', '),
+        datasets: [{
+            label: 'Autre',
+            data: donnees1,
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        },
+        {
+            label: 'Femme',
+            data: donnees3,
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        },
+        {
+            label: 'Homme',
+            data: donnees2,
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.6)',
+                'rgba(173, 255, 47, 0.6)',
+                'rgba(0, 0, 255, 0.6)',
+                'rgba(255, 215, 0, 0.6)',
+                'rgba(139, 0, 0, 0.6)',
+                'rgba(128, 128, 0, 0.6)',
+                'rgba(0, 100, 0, 0.6)',
+                'rgba(139, 69, 19, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(173, 255, 47, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(255, 215, 0, 1)',
+                'rgba(139, 0, 0, 1)',
+                'rgba(128, 128, O, 1)',
+                'rgba(0, 100, 0, 1)',
+                'rgba(139, 69, 19, 1)'
+            ],
+            borderWidth: 1
+        }
+        
+        ]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
     <script>
   var ctx = document.getElementById('myChart_D');
   var libelles = ctx.getAttribute('data-labels')

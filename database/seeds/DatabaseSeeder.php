@@ -223,13 +223,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $role->givePermissionTo('ADMINISTRATION');
         
-        \App\User::create([
+       $user =  \App\User::create([
             'name'=>'admin',
             'password'=>Hash::make('admin'),
             'region_id'=>1,
             'ministere_id'=>1
         ]);
-        $user = \App\User::first();
+        
         $user->assignRole($role);
 
     }
